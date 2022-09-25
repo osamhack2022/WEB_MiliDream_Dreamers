@@ -68,7 +68,7 @@ $ npm run start
  > <팀원>  
  > 김지환, [📩 e-mail](kjhwan0802@naver.com), [@Turtle-Hwan](https://github.com/Turtle-Hwan)  
  > 가수연, [📩 e-mail](bagger3025@gmail.com), [@bagger3025](https://github.com/bagger3025)  
- > 김선우, [📩 e-mail](sunwoo005@naver.com), [@Joraeng](https://github.com/Joraeng)  
+ > 김선우, [📩 e-mail](sunwoo005@naver.com), [@Meoraeng](https://github.com/Meoraeng)  
  > 민진홍, [📩 e-mail](jinhong_min@naver.com), [@jinhongee](https://github.com/jinhongee)  
  > 손현진, [📩 e-mail](thsguswls610@gmail.com), [@sonyrainy](https://github.com/sonyrainy)  
  > 양승모, [📩 e-mail](seungmo2000@gmail.com), [@SeungmoYang](https://github.com/SeungmoYang)  
