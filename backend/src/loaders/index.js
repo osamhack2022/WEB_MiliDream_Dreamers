@@ -4,7 +4,7 @@ import Logger from './logger';
 
 export default async ({expressApp}) => {
     // const mysqlConnection = await mysqlLoader();
-    // console.log('💿DB Initialized📀');
+    // Logger.info('💿DB Initialized📀');
     await expressLoader({ app: expressApp });
     Logger.info('🚅Express Intialized');
 
