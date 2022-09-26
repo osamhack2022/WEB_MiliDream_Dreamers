@@ -1,11 +1,7 @@
-## Express.js 앱 생성 
+## backend 실행 
 
 ```
-$ npx express-generator expressapp
-```
-
-```
-$ cd expressapp 
+$ cd backend
 $ npm install
 $ npm start 
 ```
