@@ -8,7 +8,7 @@ $ npm start
 
 ## Direcotry Structure
 ```
-📂 expressapp
+📂 backend
     📂src
     ├── 📂api
     |   ├── 📂middlewares   
@@ -21,10 +21,13 @@ $ npm start
     |   ├──📄event.js
     |   ├──📄express.js
     |   ├──📄index.js
-    |   ├──📄logger.js
-    ├── 📂 models
-    ├── 📂 services
+    |   └──📄logger.js
+    ├── 📂models
+    ├── 📂services
+    ├── 📂subscribers
     └── 📄 app.js
+    📄 .eslintrc.js
+    📄 .prettierrc.json
     📄 package.json
     📄 README.md
 ```
