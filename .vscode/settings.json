@@ -1,6 +1,9 @@
 {
 	// Set the default
 	"editor.formatOnSave": false,
+	"editor.tabSize": 4,
+	"editor.insertSpaces": false,
+	"editor.detectIndentation": false,
 	// Enable per-language
 	"[javascript]": {
 		"editor.formatOnSave": true

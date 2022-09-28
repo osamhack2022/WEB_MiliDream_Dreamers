@@ -21,12 +21,13 @@ $ npm start
     |   ├──📄event.js
     |   ├──📄express.js
     |   ├──📄index.js
-    |   ├──📄logger.js
+    |   └──📄logger.js
     ├── 📂models
     ├── 📂services
     ├── 📂subscribers
     └── 📄 app.js
     📄 .eslintrc.js
+    📄 .prettierrc.json
     📄 package.json
     📄 README.md
 ```
