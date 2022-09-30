@@ -1,7 +1,7 @@
 import * as express from 'express';
-import * as bodyParser from 'body-parser';
-import * as cors from 'cors';
-import * as methodOverride from 'method-override';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import methodOverride from 'method-override';
 import * as helmet from 'helmet';
 import morgan from 'morgan'
 
