@@ -1,16 +1,18 @@
-import expressLoader from 'express'
+import expressLoader from 'express';
+import mariadbLoader from 'mariadb';
 // import mysqlLoader from ''
 import Logger from './logger';
 
-export default async ({expressApp}) => {
-    // const mysqlConnection = await mysqlLoader();
-    // Logger.info('💿DB Initialized📀');
-    await expressLoader({ app: expressApp });
-    Logger.info('🚅Express Intialized');
+export default async ({ expressApp }) => {
+	const mariaPool = await mariadbLoader;
+	Logger.info('💿DB Loaded and Pool created📀');
 
-    // more loaders
+	await expressLoader({ app: expressApp });
+	Logger.info('🚅Express loaded');
 
-    // ... Initialize agenda.js
-    // ... or Redis, or Whatedver
+	// more loaders
+
+	// ... Initialize agenda.js
+	// ... or Redis, or Whatedver
 
 }
