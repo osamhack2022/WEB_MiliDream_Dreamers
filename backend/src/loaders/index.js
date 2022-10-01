@@ -1,10 +1,9 @@
 import expressLoader from './express';
-import mariadbLoader from './mariadb';
-// import mysqlLoader from ''
+import * as mariadb from './mariadb';
 import Logger from './logger';
 
 export default async ({ expressApp }) => {
-	const mariaPool = await mariadbLoader();
+	const conn = await mariadb.getConnection();
 	Logger.info('💿DB Loaded and Pool created📀');
 
 	await expressLoader({ app: expressApp });
