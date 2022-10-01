@@ -11,6 +11,7 @@ const pool = mariadb.createPool({
 	connectionLimit: 5,
 });
 
+/** callback(err, cnn) { }에서 cnn.query(), cnn.release() 가능 */
 export async function getConnection(callback) {
 	return pool.getConnection(callback);
 }
