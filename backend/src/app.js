@@ -1,6 +1,6 @@
 import loaders from './loaders';
+import Logger from './loaders/logger';
 import express, { application } from 'express';
-import { Logger } from 'winston';
 
 async function startServer() {
 
