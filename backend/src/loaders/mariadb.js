@@ -1,13 +1,11 @@
 import mariadb from 'mariadb';
-import dbInfo from '../config/tmpdbconfig';
-
 
 export default async function () {
 	const pool = mariadb.createPool({ //이 부분을 다른 곳으로 옮겨야 하나
-		host: dbInfo.DB_HOST,
-		port: dbInfo.DB_PORT,
-		user: dbInfo.DB_USER,
-		password: dbInfo.DB_PASS,
+		host: process.env.DB_HOST,
+		port: process.env.DB_PORT,
+		user: process.env.DB_USER,
+		password: process.env.DB_PASS,
 		connectionLimit: 5,
 	});
 
