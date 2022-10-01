@@ -11,8 +11,8 @@ const pool = mariadb.createPool({
 	connectionLimit: 5,
 });
 
-export async function getConnection() {
-	return pool.getConnection();
+export async function getConnection(callback) {
+	return pool.getConnection(callback);
 }
 
 export async function end() { return pool.end(); }
