@@ -6,7 +6,7 @@ $ npm install
 $ npm start 
 ```
 
-## MySQL 실행
+## MariaDB 실행
 ```
 $ sudo apt update
 $ sudo apt install mariadb-server=1:10.3.34-0ubuntu0.20.04.1
@@ -64,11 +64,12 @@ userKey userName        id      passwd  classContent
     |   ├──📄event.js
     |   ├──📄express.js
     |   ├──📄index.js
-    |   └──📄logger.js
+    |   ├──📄logger.js
+	|	└──📄mariadb.js
     ├── 📂models
     ├── 📂services
     ├── 📂subscribers
-    └── 📄 app.js
+    └── 📄app.js
     📄 .eslintrc.js
     📄 .prettierrc.json
     📄 package.json
