@@ -1,4 +1,5 @@
-import { Router } from "express";
+import { Router } from 'express';
+import { generateSigninToken } from '../../services/accounts';
 
 const route = Router();
 
@@ -14,6 +15,8 @@ export default function (app /*Router*/) {
 		return req.status(501).json({ error: "Not Implemented😥" });
 	});
 	route.get('/signup-token', async (res, req) => {
-		return req.status(501).json({ error: "Not Implemented😥", join_token: "tokenHere" });
+		const result = generateSigninToken();
+		return req.status(result.status).json(result);
+		//return req.status(501).json({ error: "Not Implemented😥", join_token: "tokenHere" });
 	});
 }
