@@ -10,13 +10,6 @@ export default async ({ app }) => {
 	app.get('/status', (req, res) => { res.status(200).end(); });
 	app.head('/status', (req, res) => { res.status(200).end(); });
 
-	app.get('/method-test', (req, res) => { return res.send(req.method); });
-	app.post('/method-test', (req, res) => { return res.send(req.method); });
-	app.put('/method-test', (req, res) => { return res.send(req.method); });
-	app.delete('/method-test', (req, res) => { return res.send(req.method); });
-	//app.all('/method-test', (req, res) => { return res.send(req.method); });
-
-
 	app.enable('trust proxy'); // app.get('trust proxy) => true
 
 	// cors Setting => 모든 도메인에서 express 서버 포트로 req,res가 가능하도록
