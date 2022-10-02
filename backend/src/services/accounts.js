@@ -50,6 +50,12 @@ export async function attempt({ token, username, id, passwd }) {
 	return { success: true, status: 200 };
 }
 
+/**
+ * join_token이 사용가능한지 확인합니다.
+ *
+ * @param {string} token join_token
+ * @return {boolean} 
+ */
 function checkToken(token) {
 	const info = tokenStore.get(token);
 	if (info === undefined) return false;
@@ -60,6 +66,12 @@ function checkToken(token) {
 	return true;
 }
 
+/**
+ * 사용가능한 아이디인지 확인합니다.
+ *
+ * @param {string} id 아이디
+ * @return {boolean} 
+ */
 async function checkId(id) {
 	if (!id) return false;
 	if (!accountConfig.userIdRegex.test(id)) return false;
@@ -72,6 +84,12 @@ async function checkId(id) {
 	return result.length == 0;
 }
 
+/**
+ * 사용가능한 닉네임인지 확인합니다.
+ *
+ * @param {string} username 닉네임
+ * @return {boolean} 
+ */
 async function checkUsername(username) {
 	if (!username) return false;
 	if (!accountConfig.userNicknameRegex.test(username)) return false;
