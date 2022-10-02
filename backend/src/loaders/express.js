@@ -25,7 +25,7 @@ export default function (app) {
 	// Transforms the raw string of req.body into json
 	app.use(express.json());
 
-	app.use(routes()); // 추후 EndPoint를 /api 밑에 두기 위해 app.use("/api", routes); 와 같이 변경.
+	app.use(routes); // 추후 EndPoint를 /api 밑에 두기 위해 app.use("/api", routes); 와 같이 변경.
 
 	// morgan Setting => 요청과 응답에 대한 정보를 콘솔에 기록
 	if (process.env.NODE_ENV === "production") {

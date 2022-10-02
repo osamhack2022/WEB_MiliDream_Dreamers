@@ -1,4 +1,4 @@
-import * as mariadb from "../loaders/mariadb";
+import mariadb from "../loaders/mariadb";
 
 export default async function () {
 	const conn = await mariadb.getConnection();
