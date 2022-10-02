@@ -1,7 +1,6 @@
 import expressLoader from "./express";
 import mariadb from "./mariadb";
 import Logger from "./logger";
-import swaggerLoader from "./swagger";
 
 export default async function (app) {
 	try {
@@ -13,8 +12,6 @@ export default async function (app) {
 
 	expressLoader(app);
 	Logger.info("🚅Express loaded");
-
-	swaggerLoader(app);
 
 	// more loaders
 
