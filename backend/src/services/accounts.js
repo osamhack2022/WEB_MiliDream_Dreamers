@@ -41,11 +41,11 @@ export function signup({ token, username, id, passwd }) {
  */
 export async function attempt({ token, username, id, passwd }) {
 	if (!checkToken(token))
-		return { success: false, status: 403, error: "Invalid join_token." };
+		return { success: false, status: 403, error_code: -1, error: "Invalid join_token." };
 	if (!(await checkId(id)))
-		return { success: false, status: 403, error: "UserId Invalid or Duplicates." };
+		return { success: false, status: 403, error_code: -2, error: "UserId Invalid or Duplicates." };
 	if (!(await checkUsername(username)))
-		return { success: false, status: 403, error: "UserName Invalid or Duplicates." };
+		return { success: false, status: 403, error_code: -3, error: "UserName Invalid or Duplicates." };
 
 	return { success: true, status: 200 };
 }
@@ -70,7 +70,7 @@ function checkToken(token) {
  * 사용가능한 아이디인지 확인합니다.
  *
  * @param {string} id 아이디
- * @return {boolean} 
+ * @return {Promise<boolean>} 
  */
 async function checkId(id) {
 	if (!id) return false;
@@ -88,7 +88,7 @@ async function checkId(id) {
  * 사용가능한 닉네임인지 확인합니다.
  *
  * @param {string} username 닉네임
- * @return {boolean} 
+ * @return {Promise<boolean>} 
  */
 async function checkUsername(username) {
 	if (!username) return false;
