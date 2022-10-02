@@ -36,8 +36,14 @@ router
 
 router
 	.route("/board/:typeId/:articleId/comment")
+	.get((req, res) => {
+		res.send(`Getting comment in article ${req.params.articleId}`);
+	})
 	.post((req, res) => {
 		res.send(`Posting comment in article ${req.params.articleId}`);
+	})
+	.put((req, res) => {
+		res.send(`Putting comment in article ${req.params.articleId}`);
 	})
 	.delete((req, res) => {
 		res.send(`Deleting comment in article ${req.params.articleId}`);
