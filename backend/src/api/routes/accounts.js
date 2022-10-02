@@ -16,9 +16,11 @@ route.post("/signup", async (req, res) => {
 	return res.status(501).json({ error: "Not Implemented😥" });
 });
 route.get("/signup-token", async (req, res) => {
-	const result = accounts.generateSigninToken();
+	const agreements = req.body?.agreements;
+	if (!agreements) return res.status(400).json({ error: "agreements list (string[]) required." });
+
+	const result = await accounts.generateSigninToken(agreements);
 	return res.status(result.status).json(result);
-	//return res.status(501).json({ error: "Not Implemented😥", join_token: "tokenHere" });
 });
 route.post("/attempt", async (req, res) => {
 	const { token, nickname: username, id, passwd } = req.body;

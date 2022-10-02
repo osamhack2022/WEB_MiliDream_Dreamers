@@ -1,18 +1,29 @@
 import mariadb from "../loaders/mariadb";
+import crypto from "crypto";
 
-// let tokenStore = new Map();
+let tokenStore = new Map();
 /**
- *회원가입시 사용되는 토큰을 생성합니다
+ * 회원가입용 join_token을 생성합니다.
  *
  * @export
+ * @param {string[]} agreements
+ * @return {Promise<string>} join_token
  */
-export function generateSigninToken() {
-	const error = false; // || "회원가입 토큰을 생성할 수 없습니다.";
+export async function generateSigninToken(agreements) {
+	const expireAfter = 30 * 60 * 1000; // 30 minutes
 
-	// 토큰 생성 로직
+	const token = await (new Promise((resolve, _) => {
+		crypto.randomBytes(16, function (_, buffer) {
+			resolve(buffer.toString('hex'));
+		});
+	}));
 
-	if (error) return { success: false, status: 500, error };
-	return { success: true, status: 200, join_token: "TestToken" };
+	tokenStore.set(token, {
+		expires: Date.now() + expireAfter,
+		agreements
+	});
+
+	return { success: true, status: 200, join_token: token };
 }
 
 export function signup({ token, username, id, passwd }) {
@@ -20,6 +31,13 @@ export function signup({ token, username, id, passwd }) {
 	if (error) return { success: false, status: 500, error };
 }
 
+/**
+ * 회원가입 가능한지 여부를 조회합니다.
+ *
+ * @export
+ * @param {{token: string, username:string, id:string, passwd:string}} { token, username, id, passwd }
+ * @return {Promise<boolean>} 
+ */
 export async function attempt({ token, username, id, passwd }) {
 	if (!checkToken(token))
 		return { success: false, status: 403, error: "Invalid join_token." };
