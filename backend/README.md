@@ -78,10 +78,3 @@ userKey userName        id      passwd  classContent
     📄 package.json
     📄 README.md
 ```
-
-## JSDoc 생성 및 확인
-```shell
-(backend) $ node node_modules/.bin/jsdoc src/app.js
-(backend) $ cd out
-(out) $ python -m http.server # or open index.html directly or any file host server
-```
