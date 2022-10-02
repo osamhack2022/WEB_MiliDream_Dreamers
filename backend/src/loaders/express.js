@@ -6,7 +6,7 @@ import * as helmet from "helmet";
 import morgan from "morgan";
 import routes from "../api";
 
-export default async ({ app }) => {
+export default function (app) {
 	app.get("/status", (req, res) => {
 		res.status(200).end();
 	});
@@ -14,7 +14,7 @@ export default async ({ app }) => {
 		res.status(200).end();
 	});
 
-	app.enable("trust proxy"); // app.get('trust proxy) => true
+	app.enable("trust proxy"); // app.get('trust proxy') => true
 
 	// cors Setting => 모든 도메인에서 express 서버 포트로 req,res가 가능하도록
 	app.use(cors()); // ⚠️배포 시에는 화이트리스트 추가 필요
@@ -39,4 +39,4 @@ export default async ({ app }) => {
 	app.use(bodyParser.urlencoded({ extended: false })); // query string로 data 파싱 (객체 중첩 불가 )
 
 	return app;
-};
+}
