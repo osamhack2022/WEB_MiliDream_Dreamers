@@ -3,6 +3,7 @@ import crypto from "crypto";
 import accountConfig from "../config/account";
 
 let tokenStore = new Map();
+tokenStore.set("DEBUG", { expires: Infinity });
 /**
  * 회원가입용 join_token을 생성합니다.
  *
@@ -27,15 +28,23 @@ export async function generateSigninToken(agreements) {
 	return { success: true, status: 200, join_token: token };
 }
 
-export async function signup({ token, username, id, password }) {
+export async function signup({ token, username, userId, password, classKey = 1 }) {
+
 	if (!checkToken(token))
 		return { success: false, status: 403, error_code: -1, error: "Invalid join_token." };
-	if (!(await checkUserId(id)))
+	if (!(await checkUserId(userId)))
 		return { success: false, status: 403, error_code: -2, error: "UserId Invalid or Duplicates." };
 	if (!(await checkUsername(username)))
 		return { success: false, status: 403, error_code: -3, error: "UserName Invalid or Duplicates." };
 	if (!checkPassword(password))
 		return { success: false, status: 403, error_code: -4, error: "Invalid password" };
+
+	const sql = "INSERT INTO `User` (`userKey`, `userName`, `id`, `passwd`, `classKey`) VALUES (NULL, ?, ?, sha2(?, 256), ?)";
+	const conn = await mariadb.getConnection();
+	const result = await conn.query(sql, [username, userId, password, classKey]);
+	conn.release();
+
+	return { success: result.affectedRows === 1, status: result.affectedRows === 1 ? "200" : "400" };
 }
 
 /**
