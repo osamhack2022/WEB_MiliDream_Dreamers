@@ -1,6 +1,7 @@
-import { Router } from "express";
+import express, { Router } from "express";
 import * as accounts from "../../services/accounts";
 
+const app = express();
 const route = Router();
 
 app.use("/accounts", route);
