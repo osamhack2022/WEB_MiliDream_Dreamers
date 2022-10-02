@@ -11,7 +11,7 @@ route.delete("/signout", async (req, res) => {
 	return res.status(501).json({ error: "Not Implemented😥" });
 });
 route.post("/signup", async (req, res) => {
-	const { token, nickname: username, userId, password } = req.body;
+	const { token, username, userId, password } = req.body;
 	const result = accounts.signup({ token, username, userId, password });
 	return res.status(501).json({ error: "Not Implemented😥" });
 });
@@ -23,8 +23,8 @@ route.get("/signup-token", async (req, res) => {
 	return res.status(result.status).json(result);
 });
 route.post("/attempt", async (req, res) => {
-	const { token, nickname: username, userId, password } = req.body;
-	const result = await accounts.attempt({ token, username, userId, password });
+	const { token, username, userId } = req.body;
+	const result = await accounts.attempt({ token, username, userId });
 	return res.status(result.status).json(result);
 });
 

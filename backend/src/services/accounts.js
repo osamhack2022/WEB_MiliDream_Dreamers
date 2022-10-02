@@ -27,26 +27,31 @@ export async function generateSigninToken(agreements) {
 	return { success: true, status: 200, join_token: token };
 }
 
-export function signup({ token, username, id, passwd }) {
-	const error = false; //||""
-	if (error) return { success: false, status: 500, error };
+export async function signup({ token, username, id, password }) {
+	if (!checkToken(token))
+		return { success: false, status: 403, error_code: -1, error: "Invalid join_token." };
+	if (!(await checkUserId(id)))
+		return { success: false, status: 403, error_code: -2, error: "UserId Invalid or Duplicates." };
+	if (!(await checkUsername(username)))
+		return { success: false, status: 403, error_code: -3, error: "UserName Invalid or Duplicates." };
+	if (!checkPassword(password))
+		return { success: false, status: 403, error_code: -4, error: "Invalid password" };
 }
 
 /**
  * 회원가입 가능한지 여부를 조회합니다.
  *
  * @export
- * @param {{token: string, username:string, id:string, passwd:string}} { token, username, id, passwd }
+ * @param {{token: string, username:string, userId:string}} { token, username, id, passwd }
  * @return {Promise<boolean>} 
  */
-export async function attempt({ token, username, id, passwd }) {
+export async function attempt({ token, username, userId }) {
 	if (!checkToken(token))
 		return { success: false, status: 403, error_code: -1, error: "Invalid join_token." };
-	if (!(await checkId(id)))
+	if (!(await checkUserId(userId)))
 		return { success: false, status: 403, error_code: -2, error: "UserId Invalid or Duplicates." };
 	if (!(await checkUsername(username)))
 		return { success: false, status: 403, error_code: -3, error: "UserName Invalid or Duplicates." };
-
 	return { success: true, status: 200 };
 }
 
@@ -69,16 +74,16 @@ function checkToken(token) {
 /**
  * 사용가능한 아이디인지 확인합니다.
  *
- * @param {string} id 아이디
+ * @param {string} userId 아이디
  * @return {Promise<boolean>} 
  */
-async function checkId(id) {
-	if (!id) return false;
-	if (!accountConfig.userIdRegex.test(id)) return false;
+async function checkUserId(userId) {
+	if (!userId) return false;
+	if (!accountConfig.userIdRegex.test(userId)) return false;
 
 	const sql = 'SELECT 1 FROM `User` WHERE `id` = ?;';
 	const conn = await mariadb.getConnection();
-	const result = await conn.query(sql, [id]);
+	const result = await conn.query(sql, [userId]);
 	conn.release();
 
 	return result.length == 0;
@@ -100,4 +105,10 @@ async function checkUsername(username) {
 	conn.release();
 
 	return result.length == 0;
+}
+async function checkPassword(password) {
+	if (!password) return false;
+	if (!accountConfig.userPwRegex.test(password)) return false;
+
+	return true;
 }
