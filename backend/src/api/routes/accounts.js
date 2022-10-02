@@ -1,10 +1,9 @@
-import express, { Router } from "express";
+import { Router } from "express";
 import * as accounts from "../../services/accounts";
 
-const app = express();
 const route = Router();
 
-app.use("/accounts", route);
+
 route.post("/signin", async (req, res) => {
 	return res.status(501).json({ error: "Not Implemented😥" });
 });
