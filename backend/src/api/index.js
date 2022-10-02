@@ -1,6 +1,6 @@
-import { Router } from 'express';
-import accounts from './routes/accounts';
-import mariadbTest from './routes/mariadbTest';
+import { Router } from "express";
+import accounts from "./routes/accounts";
+import mariadbTest from "./routes/mariadbTest";
 
 export default () => {
 	const app = Router();
@@ -9,4 +9,4 @@ export default () => {
 	accounts(app);
 
 	return app;
-}
+};

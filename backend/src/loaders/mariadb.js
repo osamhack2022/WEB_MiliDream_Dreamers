@@ -1,5 +1,5 @@
-import mariadb from 'mariadb';
-import dotenv from 'dotenv';
+import mariadb from "mariadb";
+import dotenv from "dotenv";
 
 dotenv.config();
 
@@ -15,4 +15,6 @@ export async function getConnection() {
 	return pool.getConnection();
 }
 
-export async function end() { return pool.end(); }
+export async function end() {
+	return pool.end();
+}

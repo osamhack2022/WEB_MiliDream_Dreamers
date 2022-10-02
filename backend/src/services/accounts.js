@@ -13,6 +13,6 @@ export function generateSigninToken() {
 }
 
 export function signup({ token, username, id, passwd }) {
-	const error = false;//||""
+	const error = false; //||""
 	if (error) return { success: false, status: 500, error };
 }

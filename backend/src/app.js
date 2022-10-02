@@ -1,9 +1,8 @@
-import loaders from './loaders';
-import Logger from './loaders/logger';
-import express, { application } from 'express';
+import loaders from "./loaders";
+import Logger from "./loaders/logger";
+import express, { application } from "express";
 
 async function startServer() {
-
 	const PORT = process.env.PORT || 3000;
 
 	const app = express();
