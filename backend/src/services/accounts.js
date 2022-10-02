@@ -1,5 +1,6 @@
 import mariadb from "../loaders/mariadb";
 import crypto from "crypto";
+import accountConfig from "../config/account";
 
 let tokenStore = new Map();
 /**
@@ -42,20 +43,26 @@ export async function attempt({ token, username, id, passwd }) {
 	if (!checkToken(token))
 		return { success: false, status: 403, error: "Invalid join_token." };
 	if (!(await checkId(id)))
-		return { success: false, status: 403, error: "UserId Duplicates." };
+		return { success: false, status: 403, error: "UserId Invalid or Duplicates." };
 	if (!(await checkUsername(username)))
-		return { success: false, status: 403, error: "UserName Duplicates." };
+		return { success: false, status: 403, error: "UserName Invalid or Duplicates." };
 
 	return { success: true, status: 200 };
 }
 
 function checkToken(token) {
+	const info = tokenStore.get(token);
+	if (info === undefined) return false;
+	if (info.expires < Date.now()) { // token expired
+		tokenStore.delete(token);
+		return false;
+	}
 	return true;
 }
 
 async function checkId(id) {
 	if (!id) return false;
-	// TODO: #11 Insert regex guard clause
+	if (!accountConfig.userIdRegex.test(id)) return false;
 
 	const sql = 'SELECT 1 FROM `User` WHERE `id` = ?;';
 	const conn = await mariadb.getConnection();
@@ -67,7 +74,7 @@ async function checkId(id) {
 
 async function checkUsername(username) {
 	if (!username) return false;
-	// TODO: #11 Insert regex guard clause
+	if (!accountConfig.userNicknameRegex.test(username)) return false;
 
 	const sql = 'SELECT 1 FROM `User` WHERE `userName` = ?;';
 	const conn = await mariadb.getConnection();
