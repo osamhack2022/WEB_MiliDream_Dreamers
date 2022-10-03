@@ -1,6 +1,7 @@
 import expressLoader from "./express";
 import mariadb from "./mariadb";
 import Logger from "./logger";
+import passport from "./passport";
 
 export default async function (app) {
 	try {
@@ -14,6 +15,7 @@ export default async function (app) {
 	Logger.info("🚅Express loaded");
 
 	// more loaders
+	passport(app);
 
 	// ... Initialize agenda.js
 	// ... or Redis, or Whatedver
