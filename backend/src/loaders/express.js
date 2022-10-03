@@ -5,6 +5,9 @@ import methodOverride from "method-override";
 import * as helmet from "helmet";
 import morgan from "morgan";
 import routes from "../api";
+import session from "express-session";
+import passport from "passport";
+import LocalStrategy from "passport-local";
 
 export default function (app) {
 	app.get("/status", (req, res) => {
@@ -24,6 +27,11 @@ export default function (app) {
 
 	// Transforms the raw string of req.body into json
 	app.use(express.json());
+
+	// 로그인 세션용 미들웨어 추가
+	app.use(session({ secret: "DEBUGSECRET" /* TODO: 비밀키 지정 */ }));
+	app.use(passport.initialize());
+	app.use(passport.session());
 
 	app.use(routes); // 추후 EndPoint를 /api 밑에 두기 위해 app.use("/api", routes); 와 같이 변경.
 
