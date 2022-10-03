@@ -10,17 +10,24 @@ const Post = function (post) {
 	this.categoryKey = post.categoryKey;
 	this.carrerPostKey = post.carrerPostKey;
 }
-Post.getAll = async function (categoryKey,result) {
+
+// Post.create = async function (newPost) {
+// 	const conn = await mariadb.getConnection();
+// 	const sql = `INSERT INTO Post SET ?`;
+// 	const result = await conn.query(sql);
+
+// 	Logger.info(`Create Post: ${ {...newPost} }`)
+// 	return {...newPost}; 
+// }
+Post.getAll = async function (categoryKey) {
 	const conn = await mariadb.getConnection();
-	const sql = 'SELECT * FROM `Post` WHERE `categoryKey` = ?;';
-	conn.query(sql, [categoryKey], (err, res) => {
-		if (err) {
-			Logger.info(`error: ${err}`);
-			result(err, null);
-			return;
-		}
-		Logger.info(`Posts: `, res);
-		result(null, res);
-	})
+	const sql = `SELECT * FROM Post WHERE categoryKey = ${categoryKey} ;`;
+	const result = await conn.query(sql);
+
 	conn.release();
+
+	return JSON.stringify(result);
 };
+
+
+export default Post;
