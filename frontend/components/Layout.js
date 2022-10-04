@@ -9,7 +9,8 @@ export default function Layout({ children }) {
     //console.log(router.pathname)
     return (
         <>
-            <Seo title={routerObj[router.pathname]} />
+            {/*<Seo title={routerObj[router.pathname]} /> */}
+            <Seo title={router.pathname} />
             <NavBar />
             <div>{children}</div>
         </>
