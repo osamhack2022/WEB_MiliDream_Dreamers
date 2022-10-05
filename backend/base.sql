@@ -1,3 +1,6 @@
+create database milidream_db;
+use milidream_db;
+
 create table Class(
 	classKey INT AUTO_INCREMENT PRIMARY KEY,
 	classContent TEXT /*CHARACTER SET utf8mb4*/ NOT NULL
@@ -24,10 +27,16 @@ create table Post (
 	title TEXT NOT NULL,
 	body TEXT NOT NULL,
 	categoryKey INT NOT NULL,
-	careerPostKey INT,
-	viewCount INT,
-	FOREIGN KEY(categoryKey) REFERENCES Category(categoryKey),
-	FOREIGN KEY(careerPostKey) REFERENCES Post(postKey)
+	viewCount INT DEFAULT 0,
+	FOREIGN KEY(categoryKey) REFERENCES Category(categoryKey)
+);
+
+create table CareerPost(
+	careerPostKey INT AUTO_INCREMENT PRIMARY KEY,
+	mainPostKey INT NOT NULL,
+	subPostKey INT NOT NULL,
+	FOREIGN KEY(mainPostKey) REFERENCES Post(postKey),
+	FOREIGN KEY(subPostKey) REFERENCES Post(postKey)
 );
 
 create table Recommenders(
@@ -60,5 +69,5 @@ select User.userKey, User.userName, User.id, User.passwd, Class.classContent fro
 insert into Category (categoryName) values ("공모전&대회 리스트");
 select * from Category;
 
-insert into Post (userkey, title , body, categoryKey, viewCount) values ("1","테스트용 공모전 제목1", "테스트용 공모전 내용1", "1", "0"), ("2","테스트용 공모전 제목2", "테스트용 공모전 내용2", "1", "0");
+insert into Post (userkey, title , body, categoryKey) values ("1","테스트용 공모전 제목1", "테스트용 공모전 내용1", "1"), ("2","테스트용 공모전 제목2", "테스트용 공모전 내용2", "1");
 select * from Post;
