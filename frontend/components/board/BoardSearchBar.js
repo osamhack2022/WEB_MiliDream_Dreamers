@@ -2,7 +2,7 @@
 
 export default function BoardSearchBar() {
   return (
-    <>
+    <div>
       {/* bootstrap */}
       <nav class="navbar navbar-light bg-light">
         <form class="form-inline">
@@ -10,6 +10,6 @@ export default function BoardSearchBar() {
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
       </nav>
-    </>
+    </div>
   )
 }

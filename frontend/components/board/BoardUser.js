@@ -2,7 +2,7 @@
 
 export default function BoardUser(props) {
   return (
-    <>
+    <div>
       <div className={"box"}>
         <div className={"image"}>이미지</div>
         <div className={"userId"}>유저아이디</div>
@@ -26,6 +26,6 @@ export default function BoardUser(props) {
           
         }
       `}</style>
-    </>
+    </div>
   )
 }

@@ -2,7 +2,7 @@
 
 export default function BoardNavBar() {
   return (
-    <>
+    <div>
       <ul>
         {/*게시물 좌측*/}
         <li>
@@ -67,6 +67,6 @@ export default function BoardNavBar() {
         </li>
 
       </ul>
-    </>
+    </div>
   )
 }

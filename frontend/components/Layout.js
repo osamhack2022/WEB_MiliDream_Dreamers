@@ -8,11 +8,11 @@ export default function Layout({ children }) {
     const routerObj = { '/': 'Home', '/about': 'About' }
     //console.log(router.pathname)
     return (
-        <>
+        <div>
             {/*<Seo title={routerObj[router.pathname]} /> */}
             <Seo title={router.pathname} />
             <NavBar />
             <div>{children}</div>
-        </>
+        </div>
     )
 }

@@ -2,7 +2,7 @@
 
 export default function BoardCenter() {
     return (
-        <>
-        </>
+        <div>
+        </div>
     )
 }

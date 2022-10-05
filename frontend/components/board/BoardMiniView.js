@@ -2,7 +2,7 @@
 
 export default function BoardMiniView(props) {
   return (
-    <>
+    <div>
       {/* type:string 에 따라 백에서 다른 값 받아옴. */}
 
       <table>
@@ -55,7 +55,7 @@ export default function BoardMiniView(props) {
 
       <style jsx>{`
         table {
-          margin: 0px;
+          margin: 10px;
           border: 1px solid purple;
           width: 300px;
         }
@@ -72,6 +72,6 @@ export default function BoardMiniView(props) {
           flex-direction: row;
         }
       `}</style>
-    </>
+    </div>
   )
 }
