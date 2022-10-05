@@ -32,17 +32,17 @@ export default function board() {
           .container {
             display:  grid;
             grid-template-areas:
-              "userInfo header header "
-              "userInfo banner banner "
-              "navBar   miniB   miniB "
-              "navBar   miniB   miniB "
-              "navBar     .       .   "
+              "userInfo header header"
+              "userInfo banner banner"
+              "navBar   miniB  miniB"
+              "navBar   miniB  miniB"
+              "navBar   .      .    "
               "footer   footer  footer";
           }
           .userInfo { grid-area: userInfo; }
           .headerB { grid-area: header; }
-          .banner { grid-area: banner; }
           .navBar { grid-area: navBar; }
+          .banner { grid-area: banner; }
           .BoardMain { grid-area: miniB; }
           .footer { grid-area: footer; }
         `}</style>
