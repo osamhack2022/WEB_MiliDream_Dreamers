@@ -6,51 +6,55 @@ export default function BoardMiniView(props) {
       {/* type:string 에 따라 백에서 다른 값 받아옴. */}
 
       <table>
-        <tr>
-          <th>
-            <h3 className="boardName">{`${props.type} 게시판`}</h3>
-          </th>
-        </tr>
-        <tr>
-          <td>
-            <a>
-              <div>게시글 제목 1</div>
-              <div>n분 전</div>
-            </a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <a>
-              <div>게시글 제목 2</div>
-              <div>n분 전</div>
-            </a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <a>
-              <div>게시글 제목 3</div>
-              <div>n분 전</div>
-            </a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <a>
-              <div>게시글 제목 4</div>
-              <div>n분 전</div>
-            </a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <a>
-              <div>게시글 제목 5</div>
-              <div>n분 전</div>
-            </a>
-          </td>
-        </tr>
+        <thead>
+          <tr>
+            <th>
+              <h3 className="boardName">{`${props.type} 게시판`}</h3>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <a>
+                <div>게시글 제목 1</div>
+                <div>n분 전</div>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a>
+                <div>게시글 제목 2</div>
+                <div>n분 전</div>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a>
+                <div>게시글 제목 3</div>
+                <div>n분 전</div>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a>
+                <div>게시글 제목 4</div>
+                <div>n분 전</div>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a>
+                <div>게시글 제목 5</div>
+                <div>n분 전</div>
+              </a>
+            </td>
+          </tr>
+        </tbody>
       </table>
 
       <style jsx>{`
