@@ -9,7 +9,7 @@ export default function BoardCenter() {
     src={`/board-center/${name}`}
     width="500px" height="300px"
     placeholder="Loading..."/>);
-  console.log(imageComponentList);
+  //console.log(imageComponentList);
 
   return (
     <div>

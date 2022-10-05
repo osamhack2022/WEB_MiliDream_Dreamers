@@ -4,10 +4,10 @@ export default function BoardSearchBar() {
   return (
     <div>
       {/* bootstrap */}
-      <nav class="navbar navbar-light bg-light">
-        <form class="form-inline">
-          <input class="form-control mr-sm-2" type="search" placeholder="게시판 검색" aria-label="Search" />
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <nav className="navbar navbar-light bg-light">
+        <form className="form-inline">
+          <input className="form-control mr-sm-2" type="search" placeholder="게시판 검색" aria-label="Search" />
+          <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
       </nav>
     </div>
