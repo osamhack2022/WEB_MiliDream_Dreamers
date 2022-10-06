@@ -9,7 +9,8 @@ export default function board() {
       <div>
         <div className="container">
           <div className="headerB">
-            <h1>게시판 메인 페이지</h1>
+            <h1>커뮤니티 | 메인</h1>
+            <BoardSearchBar />
           </div>
           <div className="userInfo">          
             <BoardUser />
@@ -38,12 +39,31 @@ export default function board() {
             grid-template-areas:
               "userInfo header header"
               "userInfo banner banner"
+              "navBar   banner banner"
               "navBar   miniB  miniB"
               "navBar   miniB  miniB"
               "navBar   .      .    "
               "footer   footer  footer";
+            grid-gap: 16px;
           }
-          .headerB { grid-area: header; }
+          .headerB { 
+            grid-area: header; 
+            border-top: 3px solid #566270;
+            border-bottom: 3px solid #566270;
+            width: 1000px;
+            display: flex;
+            justify-content: space-between;
+            }
+          .headerB > h1 {
+            color: #A593E0;
+            font-family: 'Noto Sans KR';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 30px;
+            line-height: 43px;
+            display: flex;
+            align-items: center;
+          }
           .banner { grid-area: banner; }
           .userInfo { grid-area: userInfo; }
           .navBar { grid-area: navBar; }
