@@ -9,14 +9,14 @@ export default function BoardUser(props) {
       </div>
       <style jsx>{`
         .box {
-          margin: 30px;
+          margin: 20px;
           border: 1px solid gray;
           padding: 10px;
-          width: 300px;
-          height: 300px;
+          /*width: 300px;
+          height: 300px;*/
         }
         .image {
-          margin: 20px;
+          margin: 10px;
           border: 1px solid black;
           background-color: gray;
           width: 100px;

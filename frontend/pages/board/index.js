@@ -10,13 +10,17 @@ export default function board() {
         <div className="container">
           <div className="headerB">
             <h1>게시판 메인 페이지</h1>
-          </div>          
-          <BoardUser className="userInfo"/>
+          </div>
+          <div className="userInfo">          
+            <BoardUser />
+          </div>
           <div className="navBar">
             <BoardSearchBar />
             <BoardNavBar />
           </div>
-          <BoardCenter className="banner"/>
+          <div className="banner">
+            <BoardCenter />
+          </div>
           <div className="BoardMain">
             <BoardMiniView type="popular" />
             <BoardMiniView type="free" />
@@ -39,10 +43,10 @@ export default function board() {
               "navBar   .      .    "
               "footer   footer  footer";
           }
-          .userInfo { grid-area: userInfo; }
           .headerB { grid-area: header; }
-          .navBar { grid-area: navBar; }
           .banner { grid-area: banner; }
+          .userInfo { grid-area: userInfo; }
+          .navBar { grid-area: navBar; }
           .BoardMain { grid-area: miniB; }
           .footer { grid-area: footer; }
         `}</style>

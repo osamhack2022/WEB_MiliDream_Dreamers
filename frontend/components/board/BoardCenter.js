@@ -8,8 +8,11 @@ export default function BoardCenter() {
     key={name}
     alt={`board center picture ${name}`}
     src={`/board-center/${name}`}
-    width="500px" height="300px"
-    placeholder="Loading..."/>);
+    //sizes="50vw"
+    //width="100vw" height="100vh"
+    width="1000px" height="574px"
+    //layout="responsive"
+    placeholder="Loding..."/>);
   //console.log(imageComponentList);
 
   return (
@@ -55,6 +58,15 @@ export default function BoardCenter() {
         }
         #carouselExampleIndicators:hover > .carousel-control-prev, #carouselExampleIndicators:hover > .carousel-control-next {
           z-index: 1;
+        }
+        #carouselExampleIndicators {
+          width: 1000px;
+          height: 400px;
+          overflow: hidden;
+          /*margin-left: 50px;*/
+        }
+        #carouselExampleIndicators > .carousel-inner .carousel-item.active {
+
         }
         `}</style>
     </div>
