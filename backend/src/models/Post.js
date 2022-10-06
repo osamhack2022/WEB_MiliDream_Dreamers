@@ -26,7 +26,7 @@ Post.getAll = async function (categoryKey) {
 
 	conn.release();
 
-	return JSON.stringify(result);
+	return result;
 };
 
 
