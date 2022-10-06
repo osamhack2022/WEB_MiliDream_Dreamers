@@ -3,7 +3,7 @@ use milidream_db;
 
 create table Class(
 	classKey INT AUTO_INCREMENT PRIMARY KEY,
-	classContent TEXT /*CHARACTER SET utf8mb4*/ NOT NULL
+	classType TEXT /*CHARACTER SET utf8mb4*/ NOT NULL
 );
 
 create table User (
@@ -59,12 +59,12 @@ create table Comment(
 	FOREIGN KEY(parentKey) REFERENCES Comment(commentKey)
 );
 
-insert into Class (classContent) values ("미정"), ("병사"), ("간부"), ("군무원");
+insert into Class (classType) values ("미정"), ("병사"), ("간부"), ("군무원");
 select * from Class;
 insert into User (userName, id, passwd, classKey) values ("username1", "userid1", "1b072274a5bb6d2b1bf1948bad724a13ca2ad51eef2bce42ebb8a1d640cffaaa", 1),		-- userpassword1
 												("username2", "userid2", "4917c2a60a2d898906e16e61c602c4cbccae42b1f89d2da9f6e523031d0d5b3b", 2);		-- userpassword2@
 select * from User;
-select User.userKey, User.userName, User.id, User.passwd, Class.classContent from User, Class where User.classKey=Class.classKey;
+select User.userKey, User.userName, User.id, User.passwd, Class.classType from User, Class where User.classKey=Class.classKey;
 
 insert into Category (categoryName) values ("공모전&대회 리스트");
 select * from Category;
