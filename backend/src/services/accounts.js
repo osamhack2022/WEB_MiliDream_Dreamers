@@ -15,7 +15,7 @@ export function generateSigninToken() {
 	return { success: true, status: 200, join_token: "TestToken" };
 }
 
-export function signup({ token, username, id, passwd }) {
+export function signup({ token, username, id, passwd, classType }) {
 	const error = false; //||""
 	if (error) return { success: false, status: 500, error };
 }
@@ -39,7 +39,7 @@ async function checkId(id) {
 	if (!id) return false;
 	// TODO: #11 Insert regex guard clause
 
-	const sql = 'SELECT 1 FROM `User` WHERE `id` = ?;';
+	const sql = "SELECT 1 FROM `User` WHERE `id` = ?;";
 	const conn = await mariadb.getConnection();
 	const result = await conn.query(sql, [id]);
 	conn.release();
@@ -51,10 +51,10 @@ async function checkUsername(username) {
 	if (!username) return false;
 	// TODO: #11 Insert regex guard clause
 
-	const sql = 'SELECT 1 FROM `User` WHERE `userName` = ?;';
+	const sql = "SELECT 1 FROM `User` WHERE `userName` = ?;";
 	const conn = await mariadb.getConnection();
 	const result = await conn.query(sql, [username]);
 	conn.release();
 
-	return result.length == 0;
+	return result.length === 0;
 }
