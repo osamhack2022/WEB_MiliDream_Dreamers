@@ -1,4 +1,5 @@
 import mariadb from "../loaders/mariadb";
+import Logger from "../loaders/logger";
 
 const User = function (user) {
 	this.user = user;
@@ -13,7 +14,7 @@ const User = function (user) {
 
 /**
  *
- * @param {number} userId key of the User
+ * @param {number} userId User를 구분하는 key
  * @returns {User?} password를 제외한 User의 정보를 담음
  */
 User.getUserInfo = async function (userId) {
@@ -25,6 +26,20 @@ User.getUserInfo = async function (userId) {
 	const { userName, id, classType } = result[0];
 
 	return { userName, id, classType };
+};
+
+/**
+ *
+ * @param {number} userId User를 구분하는 key
+ * @param {{new_password: string}} newInfo User에 갱신될 정보
+ *
+ * @param {boolean} 성공했는지 여부
+ */
+User.putUserInfo = async function (userId, { new_password }) {
+	const sql = "UPDATE User SET passwd=? WHERE userKey=?;";
+	const result = await mariadb.query(sql, [new_password, userId]);
+	Logger.info(`Updated user info, successed: ${result.affectedRows === 1}`);
+	return result.affectedRows === 1;
 };
 
 export default User;

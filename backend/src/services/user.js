@@ -1,6 +1,9 @@
-import mariadb from "../loaders/mariadb";
 import User from "../models/user";
 
-export function getUserInfo(userId) {
-	return User.getUserInfo(userId);
+export async function getUserInfo(userId) {
+	return await User.getUserInfo(userId);
+}
+
+export function putUserInfo(userId, newInfo) {
+	return User.putUserInfo(userId, newInfo);
 }
