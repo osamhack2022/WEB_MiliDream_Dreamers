@@ -9,18 +9,23 @@ export default function BoardUser(props) {
       </div>
       <style jsx>{`
         .box {
-          margin: 20px;
+          /* margin: 20px; */
           border: 1px solid gray;
-          padding: 10px;
-          /*width: 300px;
-          height: 300px;*/
+          padding: 20px;
+          padding-top: 30px;
+          display: flex;
+          justify-content: space-around;
+          width: 300px;
+          height: 300px;
         }
         .image {
-          margin: 10px;
+          /* margin: 10px; */
           border: 1px solid black;
           background-color: gray;
           width: 100px;
           height: 100px;
+          border-radius: 50%;
+          text-align: center;
         }
         .userId {
           
