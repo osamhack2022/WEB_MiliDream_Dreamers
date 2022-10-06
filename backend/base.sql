@@ -22,7 +22,7 @@ create table Category(
 
 create table Post (
 	postKey INT AUTO_INCREMENT PRIMARY KEY,
-	userkey INT NOT NULL,
+	userKey INT NOT NULL,
 	postTime DATETIME DEFAULT CURRENT_TIMESTAMP,
 	title TEXT NOT NULL,
 	body TEXT NOT NULL,
@@ -33,10 +33,10 @@ create table Post (
 
 create table CareerPost(
 	careerPostKey INT AUTO_INCREMENT PRIMARY KEY,
-	mainPostKey INT NOT NULL,
-	subPostKey INT NOT NULL,
-	FOREIGN KEY(mainPostKey) REFERENCES Post(postKey),
-	FOREIGN KEY(subPostKey) REFERENCES Post(postKey)
+	competitionKey INT NOT NULL,
+	recruitKey INT NOT NULL,
+	FOREIGN KEY(competitionKey) REFERENCES Post(postKey),
+	FOREIGN KEY(recruitKey) REFERENCES Post(postKey)
 );
 
 create table Recommenders(
