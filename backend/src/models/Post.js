@@ -11,14 +11,7 @@ const Post = function (post) {
 	this.carrerPostKey = post.carrerPostKey;
 };
 
-// Post.create = async function (newPost) {
-// 	const conn = await mariadb.getConnection();
-// 	const sql = `INSERT INTO Post SET ?`;
-// 	const result = await conn.query(sql);
 
-// 	Logger.info(`Create Post: ${ {...newPost} }`)
-// 	return {...newPost};
-// }
 Post.getAll = async function (categoryKey) {
 	const sql = `SELECT * FROM Post WHERE categoryKey = ${categoryKey} ;`;
 	const result = await mariadb.query(sql);
