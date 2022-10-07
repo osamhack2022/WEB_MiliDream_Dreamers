@@ -1,18 +1,22 @@
 import { Router } from "express";
+import commentService from "../../services/comment";
 
 const router = Router();
 
 router.post("/", (req, res) => {
-	res.send("Posting comment");
+	const result = commentService.postComment();
+	res.json(result);
 });
 
 router
 	.route("/:commentId")
 	.put((req, res) => {
-		res.send(`Fixing comment, commentId is ${req.params.commentId}`);
+		const result = commentService.updateCommentbycommentId();
+		res.status(result ? 200 : 400).end();
 	})
 	.delete((req, res) => {
-		res.send(`Deleting comment, commentId is ${req.params.commentId}`);
+		const result = commentService.deleteCommentbycommentId();
+		res.status(result ? 204 : 400).end();
 	});
 
 export default router;
