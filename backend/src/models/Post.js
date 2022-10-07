@@ -20,10 +20,10 @@ Post.getAll = async function (categoryKey) {
 };
 
 Post.getAllBoards = async function ({ tag }) {
-	const sql = `SELECT * FROM Post, Category WHERE Post.categoryKey=Category.categoryKey`;
+	const sql = `SELECT postKey, userKey, postTime, title, body, Post.categoryKey categoryKey, viewCount, categoryName FROM Post, Category WHERE Post.categoryKey=Category.categoryKey`;
 	const queryValue = [];
 	if (tag) {
-		sql += `AND categoryType=?`;
+		sql += `AND ㅇ=?`;
 		queryValue.push(tag);
 	}
 	const result = await mariadb.query(sql, queryValue);
