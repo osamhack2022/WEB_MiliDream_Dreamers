@@ -26,4 +26,192 @@ Post.getAll = async function (categoryKey) {
 	return result;
 };
 
+Post.getAllBoards = async function ({ tag }) {
+	const sql = `SELECT * FROM Post, Category WHERE Post.categoryKey=Category.categoryKey`;
+	const queryValue = [];
+	if (tag) {
+		sql += `AND categoryType=?`;
+		queryValue.push(tag);
+	}
+	const result = await mariadb.query(sql, queryValue);
+
+	return result;
+};
+
+async function getTagId(tag, conn) {
+	const sql = `SELECT categoryKey FROM Category WHERE categoryName=?`;
+	const result = await conn.query(sql, [tag]);
+	console.log(result);
+	if (!result) {
+	}
+	return result[0].categoryKey;
+}
+
+Post.postBoard = async function ({ tag, title, body, userId }) {
+	const conn = await mariadb.getConnection();
+	const tagId = await getTagId(tag, conn);
+	const sql = `INSERT INTO Post(userKey, title, body, categoryKey) VALUES (?, ?, ?, ?)`;
+	const result = await conn.query(sql, [userId, title, body, tagId]);
+	conn.release();
+	return result;
+};
+
+Post.queryBoard = async function ({ title, username, content, tag }) {
+	const sql = ``;
+	const result = await mariadb.query(sql);
+
+	return result;
+};
+
+Post.getAllTags = async function () {
+	const sql = `SELECT categoryName FROM Category`;
+	const result = await mariadb.query(sql);
+
+	return result;
+};
+
+async function getRecommendersbyBoardId(boardId, conn) {
+	const sql = `SELECT userKey FROM Recommenders WHERE postKey=?`;
+	const result = await conn.query(sql, [boardId]);
+	return result;
+}
+
+async function getCommentsbyBoardId(boardId, conn) {
+	const sql = `SELECT commentKey, userKey, commentTime, content, parentKey FROM Comment WHERE postKey=?`;
+	const result = await conn.query(sql, [boardId]);
+	const childComments = [],
+		parentComments = [];
+	result.map((comment) => {
+		const {
+			commentKey: commentId,
+			userKey: userId,
+			commentTime: time,
+			content: body,
+			parentKey,
+		} = comment;
+		if (comment.parentKey === null) {
+			parentComments.push({
+				commentId,
+				userId,
+				time,
+				body,
+				childComments: [],
+			});
+		} else childComments.push({ commentId, userId, time, body, parentKey });
+	});
+	childComments.forEach((comment) => {
+		parentComments.forEach((parentcomment) => {
+			if (parentcomment.commentKey === comment.parentKey) {
+				delete comment.parentKey;
+				parentcomment.childComments.push(comment);
+			}
+		});
+	});
+	return result;
+}
+
+async function getRecruitPostsbyBoardId(boardId, conn) {
+	const sql = `SELECT recruitKey FROM CareerPost WHERE competitionKey=?`;
+	const result = await conn.query(sql, [boardId]);
+	return result;
+}
+
+async function updateViewCount(boardId, conn) {
+	const sql = `UPDATE Post SET viewCount=viewCount+1 WHERE postKey=?`;
+	const result = await conn.query(sql, [boardId]);
+	console.log(result);
+}
+
+Post.getbyBoardId = async function (boardId) {
+	const sql = `
+		SELECT userKey, postTime, title, body, viewCount, categoryName 
+		FROM Post, Category 
+		WHERE postKey=? AND Post.categoryKey=Category.categoryKey;`;
+
+	const conn = await mariadb.getConnection();
+	const result = await conn.query(sql, [boardId]);
+	const {
+		userKey: userId,
+		postTime: time,
+		title,
+		body,
+		viewCount,
+		postType,
+	} = result[0];
+
+	updateViewCount(boardId, conn);
+
+	const recommenders = await getRecommendersbyBoardId(boardId, conn);
+	const recommenderCount = recommenders.length;
+
+	const comments = await getCommentsbyBoardId(boardId, conn);
+
+	const returnObject = {
+		userId,
+		time,
+		title,
+		body,
+		viewCount,
+		recommenderCount,
+		recommenders,
+		comments,
+		postType,
+	};
+
+	if (postType === "대회") {
+		const recruitPosts = await getRecruitPostsbyBoardId(boardId, conn);
+		conn.release();
+		return {
+			...returnObject,
+			recruitPosts,
+		};
+	}
+	conn.release();
+	return returnObject;
+};
+
+Post.fixbyBoardId = async function (boardId, { title, body }) {
+	let sql = `UPDATE Post SET `;
+	const updateList = [];
+	const updateValue = [];
+	if (title !== undefined) {
+		updateList.push(`title=?`);
+		updateValue.push(title);
+	}
+	if (body !== undefined) {
+		updateList.push(`body=?`);
+		updateValue.push(body);
+	}
+	sql += updateList.join(", ");
+	sql += "WHERE postKey=?;";
+	const result = await mariadb.query(sql, [...updateValue, boardId]);
+
+	return result.affectedRows > 0;
+};
+
+async function deleteRecruit(boardId, conn) {
+	const sql = `SELECT recruitKey FROM CareerPost WHERE competitionKey=?`;
+	const result = await conn.query(sql, [boardId]);
+	if (result.length > 0) {
+		const clauses = [],
+			values = [];
+		result.forEach((ele) => {
+			clauses.push("postKey=?");
+			values.push(ele.recruitKey);
+		});
+		const sql2 = `DELETE FROM Post WHERE ${clauses.join(" OR ")}`;
+		const result2 = await conn.query(sql2, values);
+	}
+}
+
+Post.deletebyBoardId = async function (boardId) {
+	// 만약 대회 게시글이라면 인원 모집 게시글부터 모두 찾고 지운 다음 지우기
+	const conn = await mariadb.getConnection();
+	await deleteRecruit(boardId, conn);
+	const sql = `DELETE FROM Post WHERE postKey=?`;
+	const result = await conn.query(sql, boardId);
+	conn.release();
+	return result.affectedRows === 1;
+};
+
 export default Post;

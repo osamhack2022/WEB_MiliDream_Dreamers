@@ -12,7 +12,7 @@ create table User (
 	id VARCHAR(20) UNIQUE KEY NOT NULL,
 	passwd VARCHAR(64) NOT NULL,
 	classKey INT NOT NULL,
-	FOREIGN KEY(classKey) REFERENCES Class(classKey)
+	FOREIGN KEY(classKey) REFERENCES Class(classKey) ON UPDATE RESTRICT ON DELETE CASCADE
 );
 
 create table Category(
@@ -28,36 +28,37 @@ create table Post (
 	body TEXT NOT NULL,
 	categoryKey INT NOT NULL,
 	viewCount INT DEFAULT 0,
-	FOREIGN KEY(categoryKey) REFERENCES Category(categoryKey)
+	FOREIGN KEY(categoryKey) REFERENCES Category(categoryKey) ON UPDATE RESTRICT ON DELETE CASCADE
 );
 
 create table CareerPost(
 	careerPostKey INT AUTO_INCREMENT PRIMARY KEY,
 	competitionKey INT NOT NULL,
 	recruitKey INT NOT NULL,
-	FOREIGN KEY(competitionKey) REFERENCES Post(postKey),
-	FOREIGN KEY(recruitKey) REFERENCES Post(postKey)
+	FOREIGN KEY(competitionKey) REFERENCES Post(postKey) ON UPDATE RESTRICT ON DELETE CASCADE,
+	FOREIGN KEY(recruitKey) REFERENCES Post(postKey) ON UPDATE RESTRICT ON DELETE CASCADE
 );
 
 create table Recommenders(
 	recommenderKey INT AUTO_INCREMENT PRIMARY KEY,
 	postKey INT NOT NULL,
 	userKey INT NOT NULL,
-	FOREIGN KEY(postKey) REFERENCES Post(postKey),
-	FOREIGN KEY(userKey) REFERENCES User(userKey)
+	FOREIGN KEY(postKey) REFERENCES Post(postKey) ON UPDATE RESTRICT ON DELETE CASCADE,
+	FOREIGN KEY(userKey) REFERENCES User(userKey) ON UPDATE RESTRICT ON DELETE CASCADE
 );
 
 create table Comment(
 	commentKey INT AUTO_INCREMENT PRIMARY KEY,
-	userKey INT NOT NULL,
+	userKey INT,
 	content TEXT NOT NULL,
 	postKey INT NOT NULL,
 	commentTime DATETIME DEFAULT CURRENT_TIMESTAMP,
 	parentKey INT,
-	FOREIGN KEY(userKey) REFERENCES User(userKey),
-	FOREIGN KEY(postKey) REFERENCES Post(postKey),
-	FOREIGN KEY(parentKey) REFERENCES Comment(commentKey)
+	FOREIGN KEY(userKey) REFERENCES User(userKey) ON UPDATE RESTRICT ON DELETE SET NULL,
+	FOREIGN KEY(postKey) REFERENCES Post(postKey) ON UPDATE RESTRICT ON DELETE CASCADE
 );
+
+-- FOREIGN KEY(parentKey) REFERENCES Comment(commentKey) ON UPDATE RESTRICT ON DELETE CASCADE
 
 insert into Class (classType) values ("미정"), ("병사"), ("간부"), ("군무원");
 select * from Class;
@@ -71,3 +72,7 @@ select * from Category;
 
 insert into Post (userkey, title , body, categoryKey) values ("1","테스트용 공모전 제목1", "테스트용 공모전 내용1", "1"), ("2","테스트용 공모전 제목2", "테스트용 공모전 내용2", "1");
 select * from Post;
+
+insert into Comment(userKey, content, postKey, parentKey) values (1, "HIHI", 1, NULL), (2, "HELLO", 1, 1), (2, "BYE", 1, NULL);
+
+insert into CareerPost(competitionKey, recruitKey) values (1, 2);
