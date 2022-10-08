@@ -1,11 +1,12 @@
 import passport from "passport";
 import passportLocal from "passport-local";
 import Account from "../models/Account";
-import Logger from "./logger";
+import session, { MemoryStore } from "express-session";
 
 const LocalStrategy = passportLocal.Strategy;
 
 export default function (app) {
+	app.use(session({ secret: "DEBUGSECRET" /* TODO: 비밀키 지정 */, resave: true, saveUninitialized: true, store: new MemoryStore() }));
 	app.use(passport.initialize());
 	app.use(passport.session());
 
@@ -23,7 +24,9 @@ export default function (app) {
 	passport.serializeUser((user, done) => {
 		done(null, user);
 	});
-
+	passport.deserializeUser(function (id, done) {
+		done(null, id);
+	});
 
 
 	return app;

@@ -64,9 +64,7 @@ export async function attempt({ token, username, userId }) {
 }
 
 export async function remove({ userId }) {
-	if (await checkUserId(userId)) {
-		// TODO: 회원탈퇴 구현
-	}
+	return Account.remove({ userId });
 }
 
 /**

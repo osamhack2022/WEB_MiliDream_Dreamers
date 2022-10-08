@@ -14,11 +14,11 @@ route.post("/sign", passport.authenticate('local'), async (req, res) => {
 
 // DELETE /accounts/sign
 route.delete("/sign", async (req, res) => {
-	req.logout();
+	req.logout(function () { });
 	req.session.save((err) => {
-		Logger.error(err);
+		if (err) Logger.error(err);
 	});
-	return res.status(200);
+	return res.status(200).send();
 });
 
 // POST /accounts/account
@@ -43,9 +43,13 @@ route.get("/signup-token", async (req, res) => {
 // DELETE /accounts/account
 // 회원탈퇴
 route.delete("/account", async (req, res) => {
-	const result = await accounts.remove(req.body?.id);
+	if (req.user && req.user.userId == req.body.id) {
+		await accounts.remove({ userId: req.body.id });
+	} else {
+		return res.status(401).send("Unauthorized");
+	}
 
-	return res.status(501).json({ error: "Not Implemented😥" });
+	return res.status(200).send("");
 });
 
 // POST /accounts/attempt

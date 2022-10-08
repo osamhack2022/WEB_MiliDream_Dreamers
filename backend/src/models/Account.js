@@ -31,6 +31,15 @@ export default class Account {
 		};
 	}
 
+	static async remove({ userId }) {
+		const sql = 'DELETE FROM `User` WHERE `User`.`id` = ?;';
+		const conn = await mariadb.getConnection();
+		const result = await conn.query(sql, [userId]);
+		conn.release();
+
+		return result.affectedRows == 1;
+	}
+
 	static async hasUserId(userId) {
 		const sql = 'SELECT 1 FROM `User` WHERE `id` = ?;';
 		const conn = await mariadb.getConnection();
