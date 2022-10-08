@@ -18,13 +18,14 @@ export default class Account {
 	 * @memberof Account
 	 */
 	static async login({ userId, password }) {
-		const sql = 'SELECT `userName`, `classKey` FROM `User` WHERE `id` = ? AND `passwd` = sha2(?, 256);';
+		const sql = 'SELECT `userKey`, `userName`, `classKey` FROM `User` WHERE `id` = ? AND `passwd` = sha2(?, 256);';
 		const conn = await mariadb.getConnection();
 		const result = await conn.query(sql, [userId, password]);
 		conn.release();
 
 		if (result.length === 0) return false;
 		return {
+			userKey: result[0]["userKey"],
 			userId: userId,
 			userName: result[0]["userName"],
 			userClass: result[0]["classKey"]
