@@ -9,6 +9,28 @@ export default class Account {
 		return result.affectedRows === 1;
 	}
 
+	/**
+	 * 로그인 후 유저 정보를 반환합니다
+	 *
+	 * @static
+	 * @param {*} { userId, password }
+	 * @return {Promise<{userId: string, userName: string, userClass: number}>} 성공시 유저 객체, 실패시 false
+	 * @memberof Account
+	 */
+	static async login({ userId, password }) {
+		const sql = 'SELECT `userName`, `classKey` FROM `User` WHERE `id` = ? AND `passwd` = sha2(?, 256);';
+		const conn = await mariadb.getConnection();
+		const result = await conn.query(sql, [userId, password]);
+		conn.release();
+
+		if (result.length === 0) return false;
+		return {
+			userId: userId,
+			userName: result[0]["userName"],
+			userClass: result[0]["classKey"]
+		};
+	}
+
 	static async hasUserId(userId) {
 		const sql = 'SELECT 1 FROM `User` WHERE `id` = ?;';
 		const conn = await mariadb.getConnection();

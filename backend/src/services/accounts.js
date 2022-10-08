@@ -8,10 +8,10 @@ tokenStore.set("DEBUG", { expires: Infinity });
  * 회원가입용 join_token을 생성합니다.
  *
  * @export
- * @param {string[]} agreements
+ * @param {string} agreements
  * @return {Promise<string>} join_token
  */
-export async function generateSigninToken(agreements) {
+export async function generateSigninToken(agreements = "") {
 	const expireAfter = 30 * 60 * 1000; // 30 minutes
 
 	const token = await (new Promise((resolve, _) => {
@@ -22,13 +22,13 @@ export async function generateSigninToken(agreements) {
 
 	tokenStore.set(token, {
 		expires: Date.now() + expireAfter,
-		agreements
+		agreements: agreements.split(",")
 	});
 
 	return { success: true, status: 200, join_token: token };
 }
 
-export async function signup({ token, username, userId, password, classKey = 1 }) {
+export async function signup({ token, username, userId, password, classType = "미정" }) {
 
 	if (!checkToken(token))
 		return { success: false, status: 403, error_code: -1, error: "Invalid join_token." };
@@ -38,8 +38,10 @@ export async function signup({ token, username, userId, password, classKey = 1 }
 		return { success: false, status: 403, error_code: -3, error: "UserName Invalid or Duplicates." };
 	if (!checkPassword(password))
 		return { success: false, status: 403, error_code: -4, error: "Invalid password" };
+	if (accountConfig.UserClass[classType] == undefined)
+		return { success: false, status: 403, error_code: -5, error: "ClassType Invalid" };
 
-	const success = await Account.create({ username, userId, password, classKey });
+	const success = await Account.create({ username, userId, password, classKey: accountConfig.UserClass[classType] });
 
 	return { success: success, status: success ? "200" : "400" };
 }
@@ -54,11 +56,17 @@ export async function signup({ token, username, userId, password, classKey = 1 }
 export async function attempt({ token, username, userId }) {
 	if (!checkToken(token))
 		return { success: false, status: 403, error_code: -1, error: "Invalid join_token." };
-	if (!(await checkUserId(userId)))
+	if (userId && !(await checkUserId(userId)))
 		return { success: false, status: 403, error_code: -2, error: "UserId Invalid or Duplicates." };
-	if (!(await checkUsername(username)))
+	if (username && !(await checkUsername(username)))
 		return { success: false, status: 403, error_code: -3, error: "UserName Invalid or Duplicates." };
 	return { success: true, status: 200 };
+}
+
+export async function remove({ userId }) {
+	if (await checkUserId(userId)) {
+		// TODO: 회원탈퇴 구현
+	}
 }
 
 /**

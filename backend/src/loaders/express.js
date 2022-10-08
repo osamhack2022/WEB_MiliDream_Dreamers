@@ -5,6 +5,7 @@ import methodOverride from "method-override";
 import * as helmet from "helmet";
 import morgan from "morgan";
 import routes from "../api";
+import session, { MemoryStore } from "express-session";
 
 export default function (app) {
 	app.get("/status", (req, res) => {
@@ -24,6 +25,8 @@ export default function (app) {
 
 	// Transforms the raw string of req.body into json
 	app.use(express.json());
+
+	app.use(session({ secret: "DEBUGSECRET" /* TODO: 비밀키 지정 */, resave: true, saveUninitialized: true, store: new MemoryStore() }));
 
 	app.use(routes); // 추후 EndPoint를 /api 밑에 두기 위해 app.use("/api", routes); 와 같이 변경.
 
