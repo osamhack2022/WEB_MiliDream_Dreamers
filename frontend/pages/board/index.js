@@ -3,14 +3,14 @@ import BoardSearchBar from "../../components/board/BoardSearchBar";
 import BoardNavBar from "../../components/board/BoardNavBar";
 import BoardCenter from "../../components/board/BoardCenter";
 import BoardMiniView from "../../components/board/BoardMiniView";
+import BoardHeader from "../../components/board/BoardHeader";
 
 export default function board() {
   return (
       <div>
         <div className="container">
           <div className="headerB">
-            <h1>커뮤니티 | 메인</h1>
-            <BoardSearchBar />
+            <BoardHeader />
           </div>
           <div className="userInfo">          
             <BoardUser />
@@ -46,24 +46,7 @@ export default function board() {
               "footer   footer  footer";
             grid-gap: 16px;
           }
-          .headerB { 
-            grid-area: header; 
-            border-top: 3px solid #566270;
-            border-bottom: 3px solid #566270;
-            width: 1000px;
-            display: flex;
-            justify-content: space-between;
-            }
-          .headerB > h1 {
-            color: #A593E0;
-            font-family: 'Noto Sans KR';
-            font-style: normal;
-            font-weight: 700;
-            font-size: 30px;
-            line-height: 43px;
-            display: flex;
-            align-items: center;
-          }
+          .headerB { grid-area: header; }
           .banner { grid-area: banner; }
           .userInfo { grid-area: userInfo; }
           .navBar { grid-area: navBar; }
