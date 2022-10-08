@@ -2,7 +2,7 @@ import mariadb from "../loaders/mariadb";
 import Logger from "../loaders/logger";
 
 /** Post 생성자 */
-class Post {
+export default class Post {
 	constructor(post) {
 		this.userkey = post.userkey;
 		this.postTime = post.postTime;
@@ -196,6 +196,3 @@ async function deleteRecruit(boardId, conn) {
 		const result2 = await conn.query(sql2, values);
 	}
 }
-
-
-export default Post;

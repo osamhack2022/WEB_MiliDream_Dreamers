@@ -1,5 +1,5 @@
 import mariadb from "../loaders/mariadb";
-class Comment {
+export default class Comment {
 	constructor(comment) {
 		this.comment = comment;
 	}

@@ -1,7 +1,7 @@
 import mariadb from "../loaders/mariadb";
 import Logger from "../loaders/logger";
 
-class User {
+export default class User {
 	constructor(user) {
 		this.user = user;
 	}
@@ -39,7 +39,3 @@ class User {
 		return result.affectedRows === 1;
 	}
 }
-
-
-
-export default User;

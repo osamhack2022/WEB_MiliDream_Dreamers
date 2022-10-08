@@ -1,6 +1,6 @@
 import mariadb from "../loaders/mariadb";
 
-class Recommend {
+export default class Recommend {
 	constructor(recommend) {
 		this.recommend = recommend;
 	}
@@ -34,5 +34,3 @@ async function recommendExist(boardId, userId, conn) {
 
 	return result.length > 0;
 }
-
-export default Recommend;
