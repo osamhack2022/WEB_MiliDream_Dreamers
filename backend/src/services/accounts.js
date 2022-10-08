@@ -1,6 +1,6 @@
-import mariadb from "../loaders/mariadb";
 import crypto from "crypto";
 import accountConfig from "../config/account";
+import Account from '../models/Account';
 
 let tokenStore = new Map();
 tokenStore.set("DEBUG", { expires: Infinity });
@@ -39,12 +39,9 @@ export async function signup({ token, username, userId, password, classKey = 1 }
 	if (!checkPassword(password))
 		return { success: false, status: 403, error_code: -4, error: "Invalid password" };
 
-	const sql = "INSERT INTO `User` (`userKey`, `userName`, `id`, `passwd`, `classKey`) VALUES (NULL, ?, ?, sha2(?, 256), ?)";
-	const conn = await mariadb.getConnection();
-	const result = await conn.query(sql, [username, userId, password, classKey]);
-	conn.release();
+	const success = await Account.create({ username, userId, password, classKey });
 
-	return { success: result.affectedRows === 1, status: result.affectedRows === 1 ? "200" : "400" };
+	return { success: success, status: success ? "200" : "400" };
 }
 
 /**
@@ -90,12 +87,9 @@ async function checkUserId(userId) {
 	if (!userId) return false;
 	if (!accountConfig.userIdRegex.test(userId)) return false;
 
-	const sql = 'SELECT 1 FROM `User` WHERE `id` = ?;';
-	const conn = await mariadb.getConnection();
-	const result = await conn.query(sql, [userId]);
-	conn.release();
+	const userIdConflict = await Account.hasUserId(userId);
 
-	return result.length == 0;
+	return !userIdConflict;
 }
 
 /**
@@ -108,12 +102,9 @@ async function checkUsername(username) {
 	if (!username) return false;
 	if (!accountConfig.userNicknameRegex.test(username)) return false;
 
-	const sql = 'SELECT 1 FROM `User` WHERE `userName` = ?;';
-	const conn = await mariadb.getConnection();
-	const result = await conn.query(sql, [username]);
-	conn.release();
+	const usernameConflicts = await Account.hasUsername(username);
 
-	return result.length == 0;
+	return !usernameConflicts;
 }
 async function checkPassword(password) {
 	if (!password) return false;
