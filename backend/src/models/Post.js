@@ -12,8 +12,8 @@ class Post {
 		this.carrerPostKey = post.carrerPostKey;
 	}
 	static async getAll(categoryKey) {
-		const sql = `SELECT * FROM Post WHERE categoryKey = ${categoryKey} ;`;
-		const result = await mariadb.query(sql);
+		const sql = `SELECT * FROM Post WHERE categoryKey = ?;`;
+		const result = await mariadb.query(sql, [categoryKey]);
 
 		return result;
 	}
