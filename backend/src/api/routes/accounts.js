@@ -26,6 +26,8 @@ route.delete("/sign", async (req, res) => {
 route.post("/account", async (req, res) => {
 	const { token, username, id: userId, passwd: password, classType } = req.body;
 	const result = await accounts.signup({ token, username, userId, password, classType });
+
+	if (result.success) Logger.info(`[Accounts] ${userId} 유저가 회원가입했습니다.`);
 	return res.status(result.status).json({ ...result, status: undefined });
 });
 
