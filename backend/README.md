@@ -1,12 +1,13 @@
-## backend 실행 
+## backend 실행
 
 ```
 $ cd backend
 $ npm install
-$ npm start 
+$ npm start
 ```
 
 ## MariaDB 실행
+
 ```
 $ sudo apt update
 $ sudo apt install mariadb-server=1:10.3.34-0ubuntu0.20.04.1
@@ -35,6 +36,7 @@ $ sudo mysql -u test -p < backend/base.sql
 만약 있다면 `drop database milidream_db;`
 
 위 명령어를 실행하면 다음과 같이 뜨면 됩니다.
+
 ```
 classKey        classContent
 1       미정
@@ -50,11 +52,12 @@ userKey userName        id      passwd  classContent
 ```
 
 ## Direcotry Structure
+
 ```
 📂 backend
     📂src
     ├── 📂api
-    |   ├── 📂middlewares   
+    |   ├── 📂middlewares
     |   |   └── 📄index.js
     |   ├── 📂routes
     |   └── 📄index.js

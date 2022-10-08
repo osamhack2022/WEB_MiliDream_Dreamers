@@ -1,11 +1,12 @@
-import { Router } from 'express';
-// import routes files here
-import mariadbTest from './routes/mariadbTest';
+import { Router } from "express";
+import { accounts, mariadbTest, board, career } from "./routes";
 
-export default () => {
-	const app = Router();
-	// declare function imported
-	mariadbTest(app);
+const app = Router();
 
-	return app;
-}
+// declare function imported
+app.use("/accounts", accounts);
+app.use("/board", board);
+app.use("/career", career);
+app.use("/", mariadbTest);
+
+export default app;
