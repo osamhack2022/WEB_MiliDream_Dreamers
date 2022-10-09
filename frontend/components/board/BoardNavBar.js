@@ -4,8 +4,8 @@ export default function BoardNavBar() {
   return (
     <div>
       <div className="flex-shrink-0 p-3 bg-white">
-        <a href="/" className="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-          <span className="fs-5 fw-semibold">MILI-DREAM</span>
+        <a href="/board" className="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+          <span className="fs-5 fw-semibold">MILI-DREAM community</span>
         </a>
         <ul className="list-unstyled ps-0">
           <li className="mb-1">
@@ -30,10 +30,10 @@ export default function BoardNavBar() {
             </div>
           </li>
           <li className="mb-1">
-            <button className="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+            <button className="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="true">
               관심사 별 커뮤니티
             </button>
-            <div className="collapse" id="dashboard-collapse">
+            <div className="collapse show" id="dashboard-collapse">
               <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                 <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판1</a></li>
                 <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판2</a></li>
@@ -51,7 +51,7 @@ export default function BoardNavBar() {
           </li>
         </ul>
       </div>
-      <style jsx>{`
+      <style jsx>{` /*bootstrap에서 제공해준 기본 css*/
       body {
         min-height: 100vh;
         min-height: -webkit-fill-available;
@@ -73,10 +73,9 @@ export default function BoardNavBar() {
         color: rgba(0, 0, 0, .65);
         background-color: transparent;
       }
-      .btn-toggle:hover,
-      .btn-toggle:focus {
+      .btn-toggle:hover, .btn-toggle:focus {
         color: rgba(0, 0, 0, .85);
-        background-color: #d2f4ea;
+        background-color: #a593e045;
       }
       .btn-toggle::before {
         width: 1.25em;
@@ -96,14 +95,18 @@ export default function BoardNavBar() {
         margin-top: .125rem;
         margin-left: 1.25rem;
       }
-      .btn-toggle-nav a:hover,
-      .btn-toggle-nav a:focus {
-        background-color: #d2f4ea;
+      .btn-toggle-nav a:hover, .btn-toggle-nav a:focus {
+        background-color: #a593e045;
       }
       .scrollarea {
         overflow-y: auto;
       }
       `}</style>
+      <style jsx>{` /* 추가적으로 작성하는 css */
+        .flex-shrink-0.p-3.bg-white {
+          /*outline: 1px solid #566270;#a593e045*/
+        }
+        `}</style>
     </div>
   )
 }
