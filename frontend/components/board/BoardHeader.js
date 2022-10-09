@@ -4,7 +4,7 @@ export default function BoardHeader() {
   return (
     <div className="headerB">
       <h1>커뮤니티 | 메인</h1>
-      <BoardSearchBar />
+      <BoardSearchBar placeHolder="게시글 검색"/>
       <style jsx>{`
         .headerB { 
           border-top: 3px solid #566270;

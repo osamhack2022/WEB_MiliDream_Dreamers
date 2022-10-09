@@ -16,7 +16,7 @@ export default function board() {
             <BoardUser />
           </div>
           <div className="navBar">
-            <BoardSearchBar />
+            <BoardSearchBar placeHolder="게시판 검색"/>
             <BoardNavBar />
           </div>
           <div className="banner">
