@@ -1,7 +1,7 @@
 import { Router } from "express";
 import passport from "passport";
 import Logger from "../../loaders/logger";
-import * as accounts from "../../services/accounts";
+import * as AccountService from "../../services/accounts";
 
 const route = Router();
 
@@ -25,7 +25,7 @@ route.delete("/sign", async (req, res) => {
 // 회원가입
 route.post("/account", async (req, res) => {
 	const { token, username, id: userId, passwd: password, classType } = req.body;
-	const result = await accounts.signup({ token, username, userId, password, classType });
+	const result = await AccountService.signup({ token, username, userId, password, classType });
 
 	if (result.success) Logger.info(`[Accounts] ${userId} 유저가 회원가입했습니다.`);
 	return res.status(result.status).json({ ...result, status: undefined });
@@ -36,7 +36,7 @@ route.get("/signup-token", async (req, res) => {
 	// const agreements = req.query?.agreements;
 	// if (!agreements) return res.status(400).json({ error: "agreements list string(split by comma(,)) required." });
 
-	const result = await accounts.generateSigninToken();
+	const result = await AccountService.generateSigninToken();
 	return res.status(result.status).json({ ...result, status: undefined });
 });
 
@@ -44,7 +44,7 @@ route.get("/signup-token", async (req, res) => {
 // 회원탈퇴
 route.delete("/account", async (req, res) => {
 	if (req.user && req.user.userId == req.body.id) {
-		await accounts.remove({ userId: req.body.id });
+		await AccountService.remove({ userId: req.body.id });
 	} else {
 		return res.status(401).send("Unauthorized");
 	}
@@ -55,7 +55,7 @@ route.delete("/account", async (req, res) => {
 // POST /accounts/attempt
 route.post("/attempt", async (req, res) => {
 	const { token, username, userId } = req.body;
-	const result = await accounts.attempt({ token, username, userId });
+	const result = await AccountService.attempt({ token, username, userId });
 	return res.status(result.status).json({ ...result, status: undefined });
 });
 
