@@ -3,70 +3,107 @@
 export default function BoardNavBar() {
   return (
     <div>
-      <ul>
-        {/*게시물 좌측*/}
-        <li>
-          <ul>
-            <li>공지사항</li>
-            <li>실시간 인기 게시판</li>
-            <li>자유게시판</li>
-          </ul>
-        </li>
-        {/*게시물 출력 template*/}
-        <li>
-          <div>복무지 별 커뮤니티</div>
-          <ul>
-            <li>커뮤니티1</li>
-            <li>커뮤니티2</li>
-            <li>커뮤니티3</li>
-            <li>커뮤니티4</li>
-            <li>커뮤니티5</li>
-          </ul>
-        </li>
-        <li>
-          <div>관심사 별 커뮤니티</div>
-          <ul>
-            <li>커뮤니티1</li>
-            <li>커뮤니티2</li>
-            <li>커뮤니티3</li>
-            <li>커뮤니티4</li>
-            <li>커뮤니티5</li>
-          </ul>
-        </li>
-        
-        <li>
-          <ul>
-            <li>버그 신고하기</li>
-            <li>건의사항</li>
-          </ul>
-        </li>
-
-        {/*게시판 페이징 template 
-        <li>
-          <div>&lt;</div>
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
-          <div>4</div>
-          <div>5</div>
-          <div>&gt;</div>
-        </li>
-        or 무한 스크롤??*/}
-
-        {/*게시글 검색 기능 - 따로 분리해야 할 듯*/}
-        <li>
-          <div>
-            <select>
-              <option value="All">제목 + 내용</option>
-              <option value="Title">제목</option>
-              <option value="Content">내용</option>
-            </select>
-            <input />
-            <input type="button" value="검색"/>
-          </div>
-        </li>
-
-      </ul>
+      <div className="flex-shrink-0 p-3 bg-white">
+        <a href="/" className="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+          <span className="fs-5 fw-semibold">MILI-DREAM</span>
+        </a>
+        <ul className="list-unstyled ps-0">
+          <li className="mb-1">
+              <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">공지사항</a></li>
+                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">실시간 인기 게시판</a></li>
+                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">자유 게시판</a></li>
+              </ul>
+          </li>
+          <li className="border-top my-3"></li>
+          <li className="mb-1">
+            <button className="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+              복무지 별 커뮤니티
+            </button>
+            <div className="collapse show" id="home-collapse">
+              <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판1</a></li>
+                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판2</a></li>
+                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판3</a></li>
+                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판4</a></li>
+              </ul>
+            </div>
+          </li>
+          <li className="mb-1">
+            <button className="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+              관심사 별 커뮤니티
+            </button>
+            <div className="collapse" id="dashboard-collapse">
+              <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판1</a></li>
+                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판2</a></li>
+                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판3</a></li>
+                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판4</a></li>
+              </ul>
+            </div>
+          </li>
+          <li className="border-top my-3"></li>
+          <li className="mb-1">
+              <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">버그 신고하기</a></li>
+                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">건의사항</a></li>
+              </ul>
+          </li>
+        </ul>
+      </div>
+      <style jsx>{`
+      body {
+        min-height: 100vh;
+        min-height: -webkit-fill-available;
+      }
+      html {
+        height: -webkit-fill-available;
+      }
+      main {
+        height: 100vh;
+        height: -webkit-fill-available;
+        max-height: 100vh;
+        overflow-x: auto;
+        overflow-y: hidden;
+      }
+      .dropdown-toggle { outline: 0; }
+      .btn-toggle {
+        padding: .25rem .5rem;
+        font-weight: 600;
+        color: rgba(0, 0, 0, .65);
+        background-color: transparent;
+      }
+      .btn-toggle:hover,
+      .btn-toggle:focus {
+        color: rgba(0, 0, 0, .85);
+        background-color: #d2f4ea;
+      }
+      .btn-toggle::before {
+        width: 1.25em;
+        line-height: 0;
+        content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+        transition: transform .35s ease;
+        transform-origin: .5em 50%;
+      }
+      .btn-toggle[aria-expanded="true"] {
+        color: rgba(0, 0, 0, .85);
+      }
+      .btn-toggle[aria-expanded="true"]::before {
+        transform: rotate(90deg);
+      }
+      .btn-toggle-nav a {
+        padding: .1875rem .5rem;
+        margin-top: .125rem;
+        margin-left: 1.25rem;
+      }
+      .btn-toggle-nav a:hover,
+      .btn-toggle-nav a:focus {
+        background-color: #d2f4ea;
+      }
+      .scrollarea {
+        overflow-y: auto;
+      }
+      `}</style>
     </div>
   )
 }

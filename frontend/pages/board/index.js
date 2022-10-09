@@ -28,7 +28,7 @@ export default function board() {
             <BoardMiniView type="recommendPlace" />
             <BoardMiniView type="recommendHobby" />
           </div>
-          <div className="footer">footer</div>
+          <div className="footer"></div>
         </div>
         <style jsx>{`
           .BoardMain {
