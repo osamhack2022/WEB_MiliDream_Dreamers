@@ -19,4 +19,7 @@ export default {
 	end: function () {
 		return pool.end();
 	},
+	query: function (sql, values) {
+		return pool.query(sql, values);
+	},
 };
