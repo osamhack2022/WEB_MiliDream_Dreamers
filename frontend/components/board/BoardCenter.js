@@ -12,7 +12,8 @@ export default function BoardCenter() {
     //width="100vw" height="100vh"
     width="1000px" height="574px"
     //layout="responsive"
-    placeholder="Loding..."/>);
+    placeholder="Loding..."
+    priority={true}/>);
   //console.log(imageComponentList);
 
   return (
