@@ -50,7 +50,10 @@ export default function board() {
           .banner { grid-area: banner; }
           .userInfo { grid-area: userInfo; }
           .navBar { grid-area: navBar; }
-          .BoardMain { grid-area: miniB; }
+          .BoardMain { 
+            grid-area: miniB; 
+            display: contents;
+          }
           .footer { grid-area: footer; }
         `}</style>
       </div>
