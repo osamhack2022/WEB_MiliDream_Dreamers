@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { accounts, user, board, comment, carrer } from "./routes";
+import { accounts, user, board, comment } from "./routes";
 
 const app = Router();
 
@@ -8,6 +8,5 @@ app.use("/accounts", accounts);
 app.use("/user", user);
 app.use("/board", board);
 app.use("/comment", comment);
-app.use("/carrer", carrer);
 
 export default app;
