@@ -68,7 +68,7 @@ insert into User (userName, id, passwd, classKey) values ("username1", "userid1"
 select * from User;
 select User.userKey, User.userName, User.id, User.passwd, Class.classType from User, Class where User.classKey=Class.classKey;
 
-insert into Category (categoryName) values ("공모전&대회 리스트");
+insert into Category (categoryName) values ("공모전&대회 리스트"), ("사람모집게시글"), ("코딩");
 select * from Category;
 
 insert into Post (userkey, title , body, categoryKey) values ("1","테스트용 공모전 제목1", "테스트용 공모전 내용1", "1"), ("2","테스트용 공모전 제목2", "테스트용 공모전 내용2", "1");
