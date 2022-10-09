@@ -46,14 +46,14 @@ export default function Service_1() {
           display: flex;
           width: 100%;
           flex-wrap: nowrap;
-          // background-color: tomato;
           text-align: center;
           justify-content: center;
           align-items: center;
           flex-direction: row;
         }
         .ServiceContainer {
-          width: 691px;
+          width: 690px;
+          background-color: #e4e7df;
           display: flex;
           border: 4px solid;
           border-color: #b7a9e6;
@@ -67,6 +67,7 @@ export default function Service_1() {
           flex-direction: row;
           flex-wrap: wrap;
           cursor: pointer;
+          padding: 0px;
         }
 
         .serviceImg_1 {

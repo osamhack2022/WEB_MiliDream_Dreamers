@@ -66,6 +66,7 @@ export default class Slide extends Component {
             h3 {
               font-size: 50px;
             }
+            
           `}
         </style>
       </div>

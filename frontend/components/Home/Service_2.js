@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Component } from "react";
 import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
 
@@ -13,33 +12,31 @@ export default function Service_2() {
         }}
       >
         <div className="serviceImg_2">
-          <img className="community" src="/img/home/community.svg" />
+          <img className="career_service" src="/img/home/community.svg" />
         </div>
         <div className="ServiceContainer">
           <div className="item">
             <img
               className="serviceButton_4"
-              src="/img/home/serviceButton_4.svg"
+              src="/img/home/serviceButton_4.png"
             />
           </div>
           <div className="item">
             <img
               className="serviceButton_5"
-              src="/img/home/serviceButton_5.svg"
+              src="/img/home/serviceButton_5.png"
             />
           </div>
-          <Link href="/board">
-            <div className="item">
-              <img
-                className="serviceButton_6"
-                src="/img/home/serviceButton_6.svg"
-              />
-            </div>
-          </Link>
+          <div className="item">
+            <img
+              className="serviceButton_6"
+              src="/img/home/serviceButton_6.png"
+            />
+          </div>
           <div className="item" style={{ cursor: "default" }}>
             <img
               className="serviceButton_none"
-              src="/img/home/serviceButton_none.svg"
+              src="/img/home/serviceButton_none.png"
             />
           </div>
         </div>
@@ -49,27 +46,28 @@ export default function Service_2() {
           display: flex;
           width: 100%;
           flex-wrap: nowrap;
-          //background-color: tomato;
           text-align: center;
           justify-content: center;
           align-items: center;
           flex-direction: row;
         }
         .ServiceContainer {
-          width: 691px;
+          width: 690px;
+          background-color: #ffffff;
           display: flex;
           border: 4px solid;
           border-color: #c8f1ff;
           padding: 0px;
         }
         .item {
-          border: none;
           background-color: #e4e7df;
           text-align: center;
+          font-size: 30px;
           display: flex;
           flex-direction: row;
           flex-wrap: wrap;
           cursor: pointer;
+          padding: 0px;
         }
 
         .serviceImg_2 {
@@ -82,6 +80,8 @@ export default function Service_2() {
           height: 350px;
           margin-right: 150px;
           text-align: center;
+          font-size: 30px;
+          // padding: 0px 80px;
         }
         div {
           display: flex;

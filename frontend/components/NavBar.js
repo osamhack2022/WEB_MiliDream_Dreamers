@@ -46,9 +46,9 @@ export default function NavBar() {
           className="middleboard"
           style={{
             position: "relative",
-            right: "120px",
+            right: "192px",
             top: "-22px",
-            textAlign: "centor",
+            textAlign: "center",
           }}
         >
           <li>
@@ -118,9 +118,13 @@ export default function NavBar() {
               padding: 0;
               display: flex;
               padding-right: 60px;
+              text-align: center;
+
+              justify-content: center;
+              align-items: center;
             }
             .middleboard a {
-              font-weight: bold;
+              font-weight: 500;
             }
 
             .middleboard a:hover {
@@ -142,7 +146,7 @@ export default function NavBar() {
               margin: 0px 16px;
               width: 30;
               font-size: 18px;
-              font-weight: 318;
+              font-weight: 800;
               line-height: 100px;
               padding-left: 30px;
             }

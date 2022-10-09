@@ -154,10 +154,15 @@ export default function Home() {
             top: "3000px",
             width: "100%",
             backgroundColor: "#566270",
-            height: "205px",
+            height: "96px",
           }}
         >
-          <img src="/img/Footer/Footer(temp).svg" />
+          <img
+            src="/img/Footer/Footer(Simply).svg"
+            style={{
+              backgroundColor: "#566270",
+            }}
+          />
           {/* <a>
             <br /> Copyrightⓒ 2022, Dreamers. All right reserved
           </a> */}
@@ -172,6 +177,9 @@ export default function Home() {
           a {
             font-size: 13px;
             color: #ffffff;
+          }
+          img {
+            border: 0;
           }
         `}</style>
       </footer>
