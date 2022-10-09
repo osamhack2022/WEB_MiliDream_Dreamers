@@ -22,6 +22,7 @@ export default function BoardHeader() {
           line-height: 43px;
           display: flex;
           align-items: center;
+          margin-left: 15px;
         }
       `}</style>
     </div>

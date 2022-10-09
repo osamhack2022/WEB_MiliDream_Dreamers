@@ -30,6 +30,9 @@ export default function BoardSearchBar({ placeHolder }) {
           border-radius: 0px;
           color: #A593E0;
         }
+        .navbar {
+          display: block;
+        }
       `}</style>
     </div>
   )
