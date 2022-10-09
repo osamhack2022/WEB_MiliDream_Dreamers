@@ -93,6 +93,7 @@ async function checkUserId(userId) {
 	if (!userId) return false;
 	if (!accountConfig.userIdRegex.test(userId)) return false;
 
+
 	const userIdConflict = await Account.hasUserId(userId);
 
 	return !userIdConflict;

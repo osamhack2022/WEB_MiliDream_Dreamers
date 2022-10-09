@@ -40,6 +40,7 @@ route.get("/signup-token", async (req, res) => {
 	return res.status(result.status).json({ ...result, status: undefined });
 });
 
+
 // DELETE /accounts/account
 // 회원탈퇴
 route.delete("/account", async (req, res) => {
