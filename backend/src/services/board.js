@@ -1,33 +1,33 @@
 import Post from "../models/Post";
 
 export default class BoardService {
-	constructor() {}
+	constructor() { }
 
-	getAllBoards(info) {
+	static getAllBoards(info) {
 		return Post.getAllBoards(info);
 	}
 
-	postBoard(info) {
+	static postBoard(info) {
 		return Post.postBoard(info);
 	}
 
-	queryBoard(queryInfo) {
+	static queryBoard(queryInfo) {
 		return Post.queryBoard(queryInfo);
 	}
 
-	getAllTags() {
+	static getAllTags() {
 		return Post.getAllTags();
 	}
 
-	getbyBoardId(boardId) {
+	static getbyBoardId(boardId) {
 		return Post.getbyBoardId(boardId);
 	}
 
-	fixbyBoardId(boardId, newInfo) {
+	static fixbyBoardId(boardId, newInfo) {
 		return Post.fixbyBoardId(boardId, newInfo);
 	}
 
-	deletebyBoardId(boardId) {
+	static deletebyBoardId(boardId) {
 		return Post.deletebyBoardId(boardId);
 	}
 }

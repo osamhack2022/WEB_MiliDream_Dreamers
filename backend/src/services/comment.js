@@ -1,17 +1,17 @@
 import * as Comment from "../models/Comment";
 
 export default class commentService {
-	constructor() {}
+	constructor() { }
 
-	postComment(commentInfo) {
+	static postComment(commentInfo) {
 		return Comment.postComment(commentInfo);
 	}
 
-	updateCommentbycommentId(commentId) {
+	static updateCommentbycommentId(commentId) {
 		return Comment.updateCommentbycommentId(commentId);
 	}
 
-	deleteCommentbycommentId(commentId) {
+	static deleteCommentbycommentId(commentId) {
 		return Comment.deleteCommentbycommentId(commentId);
 	}
 }

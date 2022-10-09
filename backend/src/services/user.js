@@ -8,9 +8,9 @@ export default class UserService {
 	/**
 	 *
 	 * @param {number | string} userId
-	 * @returns {User?}
+	 * @returns {Promise<User?>}
 	 */
-	getUserInfo(userId) {
+	static getUserInfo(userId) {
 		return User.getUserInfo(userId);
 	}
 
@@ -20,7 +20,7 @@ export default class UserService {
 	 * @param {{new_password: string}} newInfo
 	 * @returns
 	 */
-	putUserInfo(userId, newInfo) {
+	static putUserInfo(userId, newInfo) {
 		return User.putUserInfo(userId, newInfo);
 	}
 }

@@ -14,7 +14,7 @@ export default class User {
 	/**
 	 *
 	 * @param {number | string} userId User를 구분하는 key
-	 * @returns {User?} password를 제외한 User의 정보를 담음
+	 * @returns {Promise<User?>} password를 제외한 User의 정보를 담음
 	 */
 	static async getUserInfo(userId) {
 		const sql = "SELECT userName, id, classType FROM User, Class WHERE userKey=? AND User.classKey=Class.classKey;";
