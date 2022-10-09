@@ -12,7 +12,8 @@ router
 		res.json(result);
 	})
 	.post(async (req, res) => {
-		const result = await BoardService.postBoard(req.body);
+		const postDTO = req.body;
+		const result = await BoardService.postBoard(postDTO);
 		res.json(result);
 	});
 
@@ -32,11 +33,12 @@ router.get("/tags", async (req, res) => {
 router
 	.route("/:boardId")
 	.get(async (req, res) => {
-		const result = BoardService.getbyBoardId(req.params.boardId);
+		const result = await BoardService.getbyBoardId(req.params.boardId);
 		res.json(result);
 	})
 	.put((req, res) => {
-		BoardService.fixbyBoardId(req.params.boardId);
+		const postDTO = req.body;
+		BoardService.fixbyBoardId(req.params.boardId, postDTO);
 
 		res.send(`Fix board, boardId is ${req.params.boardId}`);
 	})
