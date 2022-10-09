@@ -1,6 +1,7 @@
 import expressLoader from "./express";
 import mariadb from "./mariadb";
 import Logger from "./logger";
+import passport from "./passport";
 
 export default async function (app) {
 	try {
@@ -9,6 +10,9 @@ export default async function (app) {
 	} catch {
 		Logger.error("💣Cannot Load DB and Create Pool");
 	}
+
+
+	passport(app);
 
 	expressLoader(app);
 	Logger.info("🚅Express loaded");

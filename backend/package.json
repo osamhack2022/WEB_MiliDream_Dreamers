@@ -15,6 +15,7 @@
 		"eslint-config-airbnb-base": "^15.0.0",
 		"eslint-plugin-import": "^2.26.0",
 		"express": "~4.16.1",
+		"express-session": "^1.17.3",
 		"helmet": "^6.0.0",
 		"http-errors": "~1.6.3",
 		"jade": "~1.11.0",
@@ -22,10 +23,13 @@
 		"method-override": "^3.0.0",
 		"morgan": "~1.9.1",
 		"nodemon": "^2.0.20",
+		"passport": "^0.6.0",
+		"passport-local": "^1.0.0",
 		"winston": "^3.8.2"
 	},
 	"type": "module",
 	"devDependencies": {
+		"jsdoc": "^3.6.11",
 		"prettier": "2.7.1"
 	}
 }
