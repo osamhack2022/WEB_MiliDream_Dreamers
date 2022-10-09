@@ -1,6 +1,7 @@
 import accounts from "./accounts";
-import mariadbTest from "./mariadbTest";
+import user from "./user";
 import board from "./board";
-import career from "./career";
+import comment from "./comment";
+import carrer from "./career";
 
-export { accounts, mariadbTest, board, career };
+export { accounts, user, board, comment, carrer };
