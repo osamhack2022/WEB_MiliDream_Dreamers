@@ -7,8 +7,6 @@ const app = Router();
 app.use("/accounts", accounts);
 app.use("/user", user);
 app.use("/board", board);
-app.use("/comment", comment);
-
-app.use("/", mariadbTest);
+app.use("/career", career);
 
 export default app;
