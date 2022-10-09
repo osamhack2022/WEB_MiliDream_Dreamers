@@ -4,90 +4,154 @@ import { useRouter } from "next/router";
 
 //만약 로그인된 상태라면 로그아웃을 출력해야 함.
 export default function NavBar() {
-    const router = useRouter();
-    return (
-      <header>
-        <nav>
-          <Link href="/">
-            <img src="/img/logo.png" />
-          </Link>
-          <ul>
-            <li>
-              <Link href="/board">
-                <a>게시판</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/career/contest">
-                <a>career_contest</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/career/survey">
-                <a>career_survey</a>
-              </Link>
-            </li>
+  const router = useRouter();
+  return (
+    <header>
+      <nav>
+        <Link href="/">
+          <img
+            style={{
+              position: "relative",
+              top: "-16px",
+              left: "-30px",
+            }}
+            src="/img/NavBar/logo.svg"
+          />
+        </Link>
 
-            <li>
-              <Link href="/user/accounts">
-                <a>user</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/popup/0">
-                <a>popup</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/map">
-                <a>map</a>
-              </Link>
-            </li>
-          </ul>
+        <ul
+          className="rightboard"
+          style={{
+            position: "relative",
+            top: "-20px",
+          }}
+        >
+          <li>
+            <Link href="/login">
+              <a>로그인</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/signup">
+              <a>회원가입</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/contact">
+              <a>CONTACT</a>
+            </Link>
+          </li>
+        </ul>
+        <ul
+          className="middleboard"
+          style={{
+            position: "relative",
+            right: "120px",
+            top: "-22px",
+            textAlign: "centor",
+          }}
+        >
+          <li>
+            <Link href="/map">
+              <a>진로 설계</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/board">
+              <a>게시판</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/career/contest">
+              <a>career_contest</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/career/survey">
+              <a>career_survey</a>
+            </Link>
+          </li>
 
-          {/*styled jsx 방식 : js 백틱을 이용해 일반 css 코드를 삽입할 수 있다. 하지만 이 css가 적용받는 범위는 함수 내부로 한정된다.*/}
-          <style jsx>
-            {`
-              nav {
-                height: 107px;
-                line-height: 150px;
-              }
-              img {
-                width: 80px;
-                cursor: pointer;
-                padding-left: 50px;
-              }
-              ul {
-                float: right;
-                list-style: none;
-                padding: 0;
-                display: flex;
-                padding-right: 60px;
-              }
-              a {
-                color: #000000;
-                display: block;
-                height: 70px;
-              }
-              a:hover {
-                color: #8a939c;
-                transition-duration: 2ms;
-                transition-delay: 2ms;
-              }
-              li {
-                margin: 0px 16px;
-                width: 30;
-                font-size: 16px;
-                font-weight: 318;
-                line-height: 100px;
-                padding-left: 30px;
-              }
-            `}
-          </style>
-        </nav>
-      </header>
-    );
-  }
-  
-  // li의 line-height는 로그인 등 헤더의 txt 부분 높이 조절
-  // nav의 line-height는 로고 아이콘 부분 높이 조절
+          <li>
+            <Link href="/user/accounts">
+              <a>user</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/popup/0">
+              <a>popup</a>
+            </Link>
+          </li>
+        </ul>
+
+        {/*styled jsx 방식 : js 백틱을 이용해 일반 css 코드를 삽입할 수 있다. 하지만 이 css가 적용받는 범위는 함수 내부로 한정된다.*/}
+        <style jsx>
+          {`
+            nav {
+              height: 107px;
+              line-height: 150px;
+              text-align: centor;
+            }
+            img {
+              width: 210px;
+              cursor: pointer;
+              padding-left: 50px;
+            }
+            .rightboard {
+              float: right;
+              list-style: none;
+              padding: 0;
+              display: flex;
+              padding-right: 60px;
+            }
+            .rightboard li {
+              margin: 0px 8px;
+              width: 30;
+              font-size: 12px;
+              font-weight: 318;
+              line-height: 100px;
+              padding-left: 30px;
+            }
+            .middleboard {
+              float: right;
+              list-style: none;
+              padding: 0;
+              display: flex;
+              padding-right: 60px;
+            }
+            .middleboard a {
+              font-weight: bold;
+            }
+
+            .middleboard a:hover {
+              color: #a593e0;
+              transition-duration: 2ms;
+              transition-delay: 2ms;
+            }
+            a {
+              color: #000000;
+              display: block;
+              height: 70px;
+            }
+            a:hover {
+              opacity: 0.4;
+              transition-duration: 2ms;
+              transition-delay: 2ms;
+            }
+            .middleboard li {
+              margin: 0px 16px;
+              width: 30;
+              font-size: 18px;
+              font-weight: 318;
+              line-height: 100px;
+              padding-left: 30px;
+            }
+          `}
+        </style>
+      </nav>
+    </header>
+  );
+}
+
+// li의 line-height는 로그인 등 헤더의 txt 부분 높이 조절
+// nav의 line-height는 로고 아이콘 부분 높이 조절
