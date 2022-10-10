@@ -3,6 +3,12 @@ import Logger from "../loaders/logger";
 
 const COMPETITION_CATEGORY = "공모전&대회 리스트";
 
+async function getSubComments({ commentKey }, conn) {
+	const sql = `SELECT commentKey, userKey, body, commentTime FROM Comment WHERE parentKey=? ORDER BY commentTime`;
+	const result = await conn.query(sql, [commentKey]);
+	return result;
+}
+
 async function getMainComments({ postKey }, conn) {
 	const sql = `SELECT commentKey, userKey, body, commentTime FROM Comment WHERE parentKey IS NULL AND postKey=? ORDER BY commentTime`;
 	const result = await conn.query(sql, [postKey]);
@@ -37,7 +43,7 @@ async function getRecruitPosts({ postKey, categoryName }, conn) {
 async function getRecommenders({ postKey }, conn) {
 	const sql = `SELECT r.userKey FROM Recommenders as r WHERE r.postKey=?;`;
 	const result = await conn.query(sql, [postKey]);
-	return result;
+	return result.map(({ userKey }) => userKey);
 }
 
 /**
@@ -88,16 +94,16 @@ export default class Post {
 		this.carrerPostKey = post.carrerPostKey;
 	}
 
-	static async getAllBoards({ tag }) {
+	static async getAllBoards({ categoryKey }) {
 		let sql = `
 			SELECT p.postKey, p.userKey, p.categoryKey, c.categoryName, p.postTime, p.title, p.body, p.viewCount
 			FROM Post as p
 			LEFT JOIN Category as c ON c.categoryKey=p.categoryKey
 			`;
 		const queryValue = [];
-		if (tag) {
-			sql += `WHERE c.categoryName=?`;
-			queryValue.push(tag);
+		if (categoryKey) {
+			sql += `WHERE c.categoryKey=?`;
+			queryValue.push(categoryKey);
 		} else {
 			// 1=="공모전&대회 리스트", 2=="사람모집게시글"
 			sql += `WHERE c.categoryKey != 1 AND c.categoryKey != 2`;
