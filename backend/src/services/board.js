@@ -1,8 +1,6 @@
 import Post from "../models/Post";
 
 export default class BoardService {
-	constructor() { }
-
 	static getAllBoards(info) {
 		return Post.getAllBoards(info);
 	}

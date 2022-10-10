@@ -8,8 +8,12 @@ const router = Router();
 router
 	.route("/")
 	.get(async (req, res) => {
-		const result = await BoardService.getAllBoards(req.query);
-		res.json(result);
+		try {
+			const result = await BoardService.getAllBoards(req.query);
+			res.json(result);
+		} catch (err) {
+			res.status(400).json({ err: err.message });
+		}
 	})
 	.post(async (req, res) => {
 		try {
@@ -17,21 +21,27 @@ router
 			const result = await BoardService.postBoard(postDTO);
 			res.json(result);
 		} catch (err) {
-			console.log(err);
 			res.status(400).json({ err: err.message });
 		}
 	});
 
 // 특정 게시글을 가져온다. title과 tags를 query parameter로 받아 검색한다.
 router.get("/query", async (req, res) => {
-	console.log(req.query);
-	const result = await BoardService.queryBoard(req.query);
-	res.json(result);
+	try {
+		const result = await BoardService.queryBoard(req.query);
+		res.json(result);
+	} catch (err) {
+		res.status(400).json({ err: err.message });
+	}
 });
 
 router.get("/tags", async (req, res) => {
-	const result = await BoardService.getAllTags();
-	res.json(result);
+	try {
+		const result = await BoardService.getAllTags();
+		res.json(result);
+	} catch (err) {
+		res.status(400).json({ err: err.message });
+	}
 });
 
 // boardId만 주어진 경우
@@ -42,20 +52,25 @@ router
 			const result = await BoardService.getbyBoardId(req.params.boardId);
 			res.json(result);
 		} catch (err) {
-			console.dir(err);
 			res.status(400).json({ err: err.message });
 		}
 	})
-	.put((req, res) => {
-		const postDTO = req.body;
-		BoardService.fixbyBoardId(req.params.boardId, postDTO);
-
-		res.send(`Fix board, boardId is ${req.params.boardId}`);
+	.put(async (req, res) => {
+		try {
+			const postDTO = req.body;
+			await BoardService.fixbyBoardId(req.params.boardId, postDTO);
+			res.status(200).end();
+		} catch (err) {
+			res.status(400).json({ err: err.message });
+		}
 	})
-	.delete((req, res) => {
-		BoardService.deletebyBoardId(req.params.boardId);
-
-		res.send(`Deleting board, boardId is ${req.params.boardId}`);
+	.delete(async (req, res) => {
+		try {
+			await BoardService.deletebyBoardId(req.params.boardId);
+			res.status(204).end();
+		} catch (err) {
+			res.status(400).json({ err: err.message });
+		}
 	});
 
 router
