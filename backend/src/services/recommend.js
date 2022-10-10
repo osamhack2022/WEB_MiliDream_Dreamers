@@ -1,17 +1,17 @@
 import Recommend from "../models/Recommend";
 
 export default class recommendService {
-	constructor() { }
+	constructor() {}
 
-	static getRecommendbyBoardId(boardId) {
-		return Recommend.getRecommendbyBoardId(boardId);
+	static getRecommendbyBoardId(postKey, userInfo) {
+		return Recommend.getRecommendbyBoardId(postKey, userInfo);
 	}
 
-	static postRecommendbyBoardId(boardId) {
-		return Recommend.postRecommendbyBoardId(boardId);
+	static postRecommendbyBoardId(postKey, userInfo) {
+		return Recommend.postRecommendbyBoardId(postKey, userInfo);
 	}
 
-	static deleteRecommendbyBoardId(boardId) {
-		return Recommend.deleteRecommendbyBoardId(boardId);
+	static deleteRecommendbyBoardId(postKey, userInfo) {
+		return Recommend.deleteRecommendbyBoardId(postKey, userInfo);
 	}
 }
