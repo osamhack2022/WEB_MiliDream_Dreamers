@@ -1,61 +1,69 @@
 import { Router } from "express";
+import BoardService from "../../services/board";
+import RecommendService from "../../services/recommend";
 
 const router = Router();
 
 // 전체 목록을 가져온다.
-router.get("/", (req, res) => {
-	res.send("Show All Boards");
-});
+router
+	.route("/")
+	.get(async (req, res) => {
+		const result = await BoardService.getAllBoards(req.query);
+		res.json(result);
+	})
+	.post(async (req, res) => {
+		const postDTO = req.body;
+		const result = await BoardService.postBoard(postDTO);
+		res.json(result);
+	});
 
 // 특정 게시글을 가져온다. title과 tags를 query parameter로 받아 검색한다.
-router.get("/query", (req, res) => {
+router.get("/query", async (req, res) => {
 	console.log(req.query);
-	res.send(
-		`Send result for the query, which is ${req.query.title} and ${req.query.tags}`
-	);
+	const result = await BoardService.queryBoard(req.query);
+	res.json(result);
+});
+
+router.get("/tags", async (req, res) => {
+	const result = await BoardService.getAllTags();
+	res.json(result);
 });
 
 // boardId만 주어진 경우
 router
 	.route("/:boardId")
-	.get((req, res) => {
-		res.send(`Send back boards, boardId is ${req.params.boardId}`);
+	.get(async (req, res) => {
+		const result = await BoardService.getbyBoardId(req.params.boardId);
+		res.json(result);
 	})
-	.post((req, res) => {
-		res.send(`Posting boards, boardId is ${req.params.boardId}`);
-	});
+	.put((req, res) => {
+		const postDTO = req.body;
+		BoardService.fixbyBoardId(req.params.boardId, postDTO);
 
-// boardId와 postId가 주어진 경우
-router
-	.route("/:boardId/:postId")
-	.get((req, res) => {
-		res.send(
-			`Getting boards, boardId: ${req.params.boardId}, postId: ${req.params.postId}`
-		);
-	})
-	.post((req, res) => {
-		res.send(
-			`Posting boards, boardId: ${req.params.boardId}, postId: ${req.params.postId}`
-		);
+		res.send(`Fix board, boardId is ${req.params.boardId}`);
 	})
 	.delete((req, res) => {
-		res.send(
-			`Deleting boards, boardId: ${req.params.boardId}, postId: ${req.params.postId}`
-		);
+		BoardService.deletebyBoardId(req.params.boardId);
+
+		res.send(`Deleting board, boardId is ${req.params.boardId}`);
 	});
 
-// boardId와 postId에 해당하는 댓글에 대한 처리
 router
-	.route("/:boardId/:postId/comment")
+	.route("/:boardId/recommend")
+	.get((req, res) => {
+		RecommendService.getRecommendbyBoardId(req.params.boardId);
+
+		res.send(`Getting board recommend, boardId is ${req.params.boardId}`);
+	})
 	.post((req, res) => {
-		res.send(
-			`Posting comment, boardId: ${req.params.boardId}, postId: ${req.params.postId}`
-		);
+		RecommendService.postRecommendbyBoardId(req.params.boardId);
+
+		res.send(`Uploading board recommend, boardId is ${req.params.boardId}`);
 	})
 	.delete((req, res) => {
-		res.send(
-			`Deleting comment, boardId: ${req.params.boardId}, postId: ${req.params.postId}`
-		);
+		RecommendService.deleteRecommendbyBoardId(req.params.boardId);
+
+		res.send(`Deleting board recommend, boardId is ${req.params.boardId}`);
 	});
 
 export default router;
