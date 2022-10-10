@@ -1,6 +1,8 @@
 import Link from "next/link";
 //next.js에서 react처럼 페이지 간 이동을 위해서 <Link> 컴포넌트를 꼭 써야 한다.
 import { useRouter } from "next/router";
+import Image from "next/image";
+import logo from "../public/logo.svg";
 
 //만약 로그인된 상태라면 로그아웃을 출력해야 함.
 export default function NavBar() {
@@ -9,7 +11,8 @@ export default function NavBar() {
       <header>
         <nav>
           <Link href="/">
-            <img src="/img/logo.png" />
+            {/*<Image src={logo} width={100} height={100} />*/}
+            <img src="/logo.svg" />
           </Link>
           <ul>
             <li>
@@ -27,7 +30,6 @@ export default function NavBar() {
                 <a>career_survey</a>
               </Link>
             </li>
-
             <li>
               <Link href="/user/accounts">
                 <a>user</a>
@@ -44,7 +46,6 @@ export default function NavBar() {
               </Link>
             </li>
           </ul>
-
           {/*styled jsx 방식 : js 백틱을 이용해 일반 css 코드를 삽입할 수 있다. 하지만 이 css가 적용받는 범위는 함수 내부로 한정된다.*/}
           <style jsx>
             {`
@@ -53,7 +54,7 @@ export default function NavBar() {
                 line-height: 150px;
               }
               img {
-                width: 80px;
+                width: 100px;
                 cursor: pointer;
                 padding-left: 50px;
               }
