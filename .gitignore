@@ -105,3 +105,6 @@ dist
 
 #test image
 /test
+
+# JSDoc output files
+/backend/out
