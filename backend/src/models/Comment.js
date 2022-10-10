@@ -5,7 +5,7 @@ export default class Comment {
 	}
 	static async postComment({ userId, boardId, content, parentId }) {
 		const sql = `INSERT INTO Comment(userKey, content, postKey, parentKey) VALUES (?, ?, ?, ?);`;
-		const result = mariadb.query(sql, [userid, content, boardId, parentId]);
+		const result = mariadb.query(sql, [userId, content, boardId, parentId]);
 
 		return result;
 	}
