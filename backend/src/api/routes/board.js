@@ -12,9 +12,14 @@ router
 		res.json(result);
 	})
 	.post(async (req, res) => {
-		const postDTO = req.body;
-		const result = await BoardService.postBoard(postDTO);
-		res.json(result);
+		try {
+			const postDTO = req.body;
+			const result = await BoardService.postBoard(postDTO);
+			res.json(result);
+		} catch (err) {
+			console.log(err);
+			res.status(400).json({ err: err.message });
+		}
 	});
 
 // 특정 게시글을 가져온다. title과 tags를 query parameter로 받아 검색한다.
@@ -33,8 +38,13 @@ router.get("/tags", async (req, res) => {
 router
 	.route("/:boardId")
 	.get(async (req, res) => {
-		const result = await BoardService.getbyBoardId(req.params.boardId);
-		res.json(result);
+		try {
+			const result = await BoardService.getbyBoardId(req.params.boardId);
+			res.json(result);
+		} catch (err) {
+			console.dir(err);
+			res.status(400).json({ err: err.message });
+		}
 	})
 	.put((req, res) => {
 		const postDTO = req.body;
