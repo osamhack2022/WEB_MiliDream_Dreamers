@@ -3,20 +3,37 @@ import commentService from "../../services/comment";
 
 const router = Router();
 
-router.post("/", (req, res) => {
-	const result = commentService.postComment();
-	res.json(result);
+router.post("/", async (req, res) => {
+	try {
+		const result = await commentService.postComment(req.body);
+		res.status(201).end();
+	} catch (err) {
+		res.status(400).json({ err: err.message });
+	}
 });
 
 router
 	.route("/:commentId")
-	.put((req, res) => {
-		const result = commentService.updateCommentbycommentId();
-		res.status(result ? 200 : 400).end();
+	.put(async (req, res) => {
+		try {
+			const result = await commentService.updateCommentbycommentId(
+				req.params.commentId,
+				req.body
+			);
+			res.status(200).end();
+		} catch (err) {
+			res.status(400).json({ err: err.message });
+		}
 	})
-	.delete((req, res) => {
-		const result = commentService.deleteCommentbycommentId();
-		res.status(result ? 204 : 400).end();
+	.delete(async (req, res) => {
+		try {
+			const result = await commentService.deleteCommentbycommentId(
+				req.params.commentId
+			);
+			res.status(204).end();
+		} catch (err) {
+			res.status(400).json({ err: err.message });
+		}
 	});
 
 export default router;
