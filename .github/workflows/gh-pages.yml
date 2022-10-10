@@ -47,9 +47,9 @@ jobs:
             echo "Unable to determine packager manager"
             exit 1
           fi
-      - run: cd frontend
       - name: Setup Node
         uses: actions/setup-node@v3
+      - run: cd frontend
         with:
           node-version: "16"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
