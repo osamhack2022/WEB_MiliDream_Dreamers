@@ -2,22 +2,23 @@
 import Link from "next/link";
 
 import Image from "next/image";
-import Slide from "../components/Home/Slide";
+import Slide from "../components/Home/Home_Slide";
 import Service_1 from "../components/Home/Service_1";
 import Service_2 from "../components/Home/Service_2";
+import BoardCenter from "../components/Home/slideslide";
 
 export default function Home() {
   return (
     <div className="Home_home">
       <div className="FIRST">
         {/* 가장 위 position으로 전체 위치 조절가능 */}
-        <div style={{ position: "relative", top: "300px", left: "50px" }}>
-          <img class="front" src="/img/home/intro_2.svg" />
+        <div style={{ position: "relative", top: "300px", left: "140px" }}>
+          <img className="front" src="/img/home/intro_2.svg" />
           <div style={{ position: "absolute", top: "-320px", left: "140px" }}>
-            <img class="back" src="/img/home/intro_1.svg" />
+            <img className="back" src="/img/home/intro_1.svg" />
           </div>
-          <div style={{ position: "absolute", top: "170px", left: "350px" }}>
-            <img class="third" src="/img/home/intro_3.svg" />
+          <div style={{ position: "absolute", top: "170px", left: "-50px" }}>
+            <img className="third" src="/img/home/intro_3.svg" />
           </div>
         </div>
         <div>
@@ -25,7 +26,7 @@ export default function Home() {
             style={{
               position: "absolute",
               top: "320px",
-              left: "300px",
+              left: "350px",
               fontSize: "90px",
             }}
           >
@@ -42,10 +43,10 @@ export default function Home() {
         <Link href="/login">
           <button>시작하기</button>
         </Link>
-
         <style jsx>
           {`
-            .Home_home {
+            .FIRST {
+              opacity: 0.9;
             }
             .back {
               top: 50px;
@@ -59,43 +60,42 @@ export default function Home() {
             button {
               position: absolute;
               background-color: #ffffff;
-              color: #a593e0;
+              color: #7a6aad;
               cursor: pointer;
               border-radius: 40px 40px;
-              border-color: #a593e0;
+              border-color: #7a6aad;
               border: solid;
               top: 518px;
-              left: 970px;
+              left: 1070px;
               outline: 0;
               font-weight: bold;
               font-size: 25px;
               width: 180px;
               height: 62px;
               opacity: 1;
+              transition: 1s;
             }
             button:hover {
               // 호버 시 색변환 천천히 주는거 넣을 예정
               background-color: #a593e0;
               color: #ffffff;
-              border-color: #a593e0;
-
-              transition-duration: 2ms;
-              transition-delay: 2ms;
+              border-color: #fff;
+              color: white;
+              transition: 1s;
             }
             .FIRST {
-              width: 100vw;
-              height: 85vh;
+              width: 150vw;
+              height: 80vh;
               background-size: cover;
               background-position: center;
               background-repeat: no-repeat;
               background-color: #a593e0;
-              background: rgb(255, 255, 255);
-              background: linear-gradient(
-                0deg,
-                rgba(255, 255, 255, 1) 0%,
-                rgba(165, 147, 224, 1) 90%
-              );
-              opacity: 0.9; /* 80% 불투명도 */
+              // background: rgb(255, 255, 255);
+              // background: linear-gradient(
+              //   0deg,
+              //   rgba(255, 255, 255, 1) 0%,
+              //   rgba(165, 147, 224, 1) 90%
+              // ); /* 80% 불투명도 */
             }
             h1 {
               color: white;
@@ -104,10 +104,11 @@ export default function Home() {
               color: white;
               position: relative;
               top: -80px;
-              left: 980px;
-              font-size: 20px;
-              font-weight: 400;
-              filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.4));
+              left: 1080px;
+              font-size: 22px;
+              font-weight: Bold;
+              text-shadow: 2px 2px 2px gray;
+
               opacity: 1;
             }
           `}

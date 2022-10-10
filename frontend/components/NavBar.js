@@ -46,7 +46,7 @@ export default function NavBar() {
           className="middleboard"
           style={{
             position: "relative",
-            right: "192px",
+            right: "180px",
             top: "-22px",
             textAlign: "center",
           }}
@@ -103,6 +103,7 @@ export default function NavBar() {
               padding: 0;
               display: flex;
               padding-right: 60px;
+              transition: 0.2s;
             }
             .rightboard li {
               margin: 0px 8px;
@@ -119,28 +120,29 @@ export default function NavBar() {
               display: flex;
               padding-right: 60px;
               text-align: center;
-
               justify-content: center;
               align-items: center;
             }
             .middleboard a {
               font-weight: 500;
+              transition: 0.2s;
             }
 
             .middleboard a:hover {
               color: #a593e0;
-              transition-duration: 2ms;
-              transition-delay: 2ms;
+              // transition-duration: 2ms;
+              // transition-delay: 2ms;
+              transition: 0.25s;
             }
             a {
               color: #000000;
               display: block;
               height: 70px;
+              transition: 0.25s;
             }
             a:hover {
               opacity: 0.4;
-              transition-duration: 2ms;
-              transition-delay: 2ms;
+              transition: 0.2s;
             }
             .middleboard li {
               margin: 0px 16px;
