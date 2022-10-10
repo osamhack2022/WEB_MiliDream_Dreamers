@@ -34,10 +34,7 @@ jobs:
 
       - name: npm Install and Build
         uses: actions/setup-node@v3
-      - run: cd frontend
-      - run: npm install
-      - run: npm run build
-      - run: npm run export
+      - run: cd frontend && npm install && npm run build && npm run export
         env:
           CI: true
           DEPLOY_TARGET: gh-pages
