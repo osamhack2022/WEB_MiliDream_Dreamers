@@ -74,6 +74,7 @@ select * from Category;
 insert into Post (userkey, title , body, categoryKey) values ("1","테스트용 공모전 제목1", "테스트용 공모전 내용1", "1"), ("2","테스트용 공모전 제목2", "테스트용 공모전 내용2", "1");
 select * from Post;
 
-insert into Comment(userKey, body, postKey, parentKey) values (1, "HIHI", 1, NULL), (2, "HELLO", 1, 1), (2, "BYE", 1, NULL);
+insert into Comment(userKey, body, postKey, parentKey, commentTime) values (1, "HIHI", 1, NULL, "2022-10-09  10:47:36 "), (2, "HELLO", 1, 1, "2022-10-09  10:48:21 "), (2, "BYE", 1, NULL, "2022-10-09 10:52:13 ");
+insert into Comment(userKey, body, postKey, parentKey, commentTime) values (1, "HIHI2", 2, NULL, "2022-10-09 15:06:09"), (2, "HELLO2", 2, 1, "2022-10-09 15:36:43"), (2, "BYE2", 1, NULL, "2022-10-09 16:13:41");
 
 insert into CareerPost(competitionKey, recruitKey) values (1, 2);
