@@ -144,6 +144,38 @@ NOT NULL, DEFAULT 0, FOREIGN KEY |
 | parentKey(←Comment) | INT | 답글인 경우 무엇에 대한 답글인지 댓글 표시 | FOREIGN KEY |
 
 # REST API
+
+1. [로그인 관련](#로그인-관련)
+	1. [POST /accounts/account](#post-accountsaccount)
+	2. [DELETE /accounts/account](#delete-accountsaccount)
+	3. [GET /accounts/signup-token](#get-accountssignup-token)
+	4. [POST /accounts/sign](#post-accountssign)
+	5. [DELETE /accounts/sign](#delete-accountssign)
+	6. [POST /accounts/attempt](#post-accountsattempt)
+2. [User 관련](#user-관련)
+	1. [GET /user/:userId](#get-useruserid)
+	2. [PUT /user/:userId](#put-useruserid)
+3. [게시글 관련](#게시글-관련)
+	1. [GET /board](#get-board)
+	2. [POST /board](#post-board)
+	3. [GET /board/query](#get-boardquery)
+	4. [GET /board/tags](#get-boardtags)
+4. [게시글 각각](#게시글-각각)
+	1. [GET /board/:boardId](#get-boardboardid)
+	2. [PUT /board/:boardId](#put-boardboardid)
+	3. [DELETE /board/:boardId](#delete-boardboardid)
+4. [게시글 추천 기능](#게시글-추천-기능)
+	1. [GET /board/:boardId/recommend](#get-boardboardidrecommend)
+	2. [POST /board/:boardId/recommend](#post-boardboardidrecommend)
+	3. [DELETE /board/:boardId/recommend](#delete-boardboardidrecommend)
+5. [댓글](#댓글)
+	1. [POST /comment](#post-comment)
+	2. [PUT /comment/:commentId](#put-commentcommentid)
+	3. [DELETE /comment/:commentId](#delete-commentcommentid)
+
+
+
+
 ## 로그인 관련
 
 이 섹션의 password는 해시값으로 바뀔 수 있음
