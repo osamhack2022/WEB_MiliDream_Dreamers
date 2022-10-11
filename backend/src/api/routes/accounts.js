@@ -5,13 +5,15 @@ import * as AccountService from "../../services/accounts";
 
 const route = Router();
 
+// 로그인
 // POST /accounts/sign
 route.post("/sign", passport.authenticate('local'), async (req, res) => {
 	return res.status(200).json(req.user);
 	// 실패시 자동으로 passport.authenticate('local')에서 401 코드 반환
-	// req.user에 유저 정보 들어감
+	// 성공이후 같은 세션 요청시 req.user에 유저 정보 들어감
 });
 
+// 로그아웃
 // DELETE /accounts/sign
 route.delete("/sign", async (req, res) => {
 	req.logout(function () { });
@@ -21,8 +23,8 @@ route.delete("/sign", async (req, res) => {
 	return res.status(200).send();
 });
 
-// POST /accounts/account
 // 회원가입
+// POST /accounts/account
 route.post("/account", async (req, res) => {
 	const { token, username, id: userId, passwd: password, classType } = req.body;
 	const result = await AccountService.signup({ token, username, userId, password, classType });
@@ -31,6 +33,7 @@ route.post("/account", async (req, res) => {
 	return res.status(result.status).json({ ...result, status: undefined });
 });
 
+// 회원가입 토큰 발행
 // GET /accounts/signup-token
 route.get("/signup-token", async (req, res) => {
 	// const agreements = req.query?.agreements;
@@ -41,8 +44,8 @@ route.get("/signup-token", async (req, res) => {
 });
 
 
-// DELETE /accounts/account
 // 회원탈퇴
+// DELETE /accounts/account
 route.delete("/account", async (req, res) => {
 	if (req.user && req.user.userId == req.body.id) {
 		await AccountService.remove({ userId: req.body.id });
@@ -53,6 +56,7 @@ route.delete("/account", async (req, res) => {
 	return res.status(200).send("");
 });
 
+// 회원가입 폼 입력값 확인
 // POST /accounts/attempt
 route.post("/attempt", async (req, res) => {
 	const { token, username, userId } = req.body;
