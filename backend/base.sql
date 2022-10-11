@@ -50,7 +50,7 @@ create table Recommenders(
 
 create table Comment(
 	commentKey INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	userKey INT NOT NULL,
+	userKey INT,
 	body TEXT NOT NULL,
 	postKey INT NOT NULL,
 	commentTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
