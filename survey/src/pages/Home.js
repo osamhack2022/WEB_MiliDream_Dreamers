@@ -1,36 +1,46 @@
 import React from "react";
+import {Link} from 'react-router-dom'
 import '../css/default.css'
 import '../css/main.css'
 import '../css/qna.css'
 import '../css/animation.css'
 import '../css/result.css'
-import qnaList from '../data/question.js'
-import infoList from '../data/answer.js'
+import qnaList from '../data/newQuestion.js'
+import infoList from '../data/newAnswer.js'
 
 const endPoint = 12;
-const select = [0,0,0,0,0,0,0,0,0,0,0,0];
+const select = [0,0,0,0,0,0,0];
+const subject = [0,0,0,0,0,0];
 
 
-const cal = () => {
-  let result = select.indexOf(Math.max(...select));
-  console.log(result);
+const cal = (num) => {
+  let result = 0;
+  if(num===1){
+    result = select.indexOf(Math.max(...select));
+  } else {
+    result = subject.indexOf(Math.max(...subject));
+  }
   return result;
 }
 
-
 const setResult = () => {
-  let point = cal();
+  console.log(select, subject);
+  let point = cal(1);
+  let rec = cal(0)
   const resultName = document.querySelector('.resultName');
   resultName.innerHTML = infoList[point].name;
   
   let resultImg = document.createElement('img');
   const imgDiv = document.querySelector('#resultImg');
-  let imgURL = `${process.env.PUBLIC_URL}/img/image-${point}.png`;
+  let imgURL = `${process.env.PUBLIC_URL}/img_new/image-${point}.png`;
   console.log(imgURL);
   resultImg.src = (imgURL);
   resultImg.alt = point;
   resultImg.classList.add('img-fluid');
   imgDiv.appendChild(resultImg);
+  
+  let resultInterest = document.querySelector('.interest');
+  resultInterest.innerHTML = rec;
   
   const resultDesc = document.querySelector('.resultDesc');
   resultDesc.innerHTML = infoList[point].desc;
@@ -75,7 +85,14 @@ const addAnswer = (answerText, qID, index) => {
     setTimeout(() => {
       let target = qnaList[qID].a[index].type;
       for(let i=0; i<target.length; i++){
-        select[target[i]] += 1
+        if(target[i]==='6'){
+          let value = qnaList[qID].a[index].diff;
+          for(let j=0; j<value.length; j++){
+            subject[value[j]] += 1
+          }
+        } else {
+          select[target[i]] += 1
+        }
       }
       
       for(let i=0; i<children.length; i++){
@@ -126,9 +143,9 @@ const Home = () => {
       <section id="main" className="mx-auto mt-5 py-5 px-3">
         <h1>성격유형 알아보기</h1>
         <div className="col-lg-6 col-md-8 col-sm-10 col-12 mx-auto">
-          <img src={process.env.PUBLIC_URL + './img/main.png'} alt="mainImage" className="img-fluid" />
+          <img id="logo" src={process.env.PUBLIC_URL + './img/logo.png'} alt="logoImage" className="img-fluid" />
         </div>
-        <p>
+        <p id="intro">
           Milidream MBTI Test<br/>
           아래 Start 버튼을 눌러 검사를 시작해주세요.
         </p>
@@ -140,23 +157,29 @@ const Home = () => {
       </section>
       <section id="qna">
         <div className="status mx-auto mt-5">
+          <p className="name mx-auto">Milidream</p>
           <div className="statusBar">
           </div>
         </div>
-        <div className="qBox my-5 py-3 mx-auto">
+        <div className="qBox py-3 mx-auto">
         </div>
         <div className="aBox">
         </div>
       </section>
-      <section id="result" className="mx-auto mt-5 py-5 px-3">
-        <h1>당신의 결과는...?!</h1>
+      <section id="result" className="mx-auto my-5 py-5 px-3">
+        <h1 className="resultTitle">당신의 결과는...?!</h1>
         <div className="resultName">
         </div>
         <div id="resultImg" className="my-3 col-lg-6 col-md-8 col-sm-10 col-12 mx-auto">
         </div>
         <div className="resultDesc">
         </div>
-        <button type="button" className="kakao mt-3 px-3 py-2">공유하기</button>
+        <div className="interest">
+        </div>
+        <Link to="/result">
+          <button type="button" className="kakao mt-3 px-3 py-2">사이트로 돌아가기</button>
+        </Link>
+        
       </section>
     </div>
   );

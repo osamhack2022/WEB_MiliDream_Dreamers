@@ -1,28 +1,39 @@
 #result{
   display: none;
-  background-color: whitesmoke;
+  background-color: white;
   width: 80%;
   text-align: center;
   border-radius: 20px;
 }
 
+.resultTitle{
+  font-weight: bold;
+}
+
 .resultName{
   font-size: 26px;
+  margin-top: 40px;
+}
+
+#resultImg{
+  padding-top: 20px;
+  padding-bottom: 25px;
 }
 
 .resultDesc{
   font-size: 20px;
+  padding-bottom: 30px;
 }
 
 .kakao{
   color: white;
-  background-color: #FEE500;
+  background-color: #E1BFFF;
   font-size: 20px;
   border: 0px;
   border-radius: 20px;
 }
 
 .kakao:hover, .kakao:focus{
-  background-color: whitesmoke;
-  color: #FEE500;
+  background-color: #FBA58C;
+  color: black;
 }
