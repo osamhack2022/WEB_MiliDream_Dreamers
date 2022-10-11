@@ -3,6 +3,12 @@ import UserService from "../../services/user";
 import { checkUserId } from "../middlewares";
 
 const router = Router();
+
+router.all("/", (req, res)=>{
+	if (!req?.user.userKey) return res.status(401).send();
+	return res.redirect(`./${req.user.userKey}`);
+});
+
 router
 	.route("/:userId")
 	.all(checkUserId)
