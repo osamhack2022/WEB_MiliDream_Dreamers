@@ -2,6 +2,7 @@ import expressLoader from "./express";
 import mariadb from "./mariadb";
 import Logger from "./logger";
 import passport from "./passport";
+import multer from "./multer";
 
 export default async function (app) {
 	try {
@@ -13,7 +14,7 @@ export default async function (app) {
 
 
 	passport(app);
-
+	multer(app);
 	expressLoader(app);
 	Logger.info("🚅Express loaded");
 

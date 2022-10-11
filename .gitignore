@@ -105,3 +105,6 @@ dist
 
 # JSDoc output files
 /backend/out
+
+# Uploaded image files
+/backend/public/images
