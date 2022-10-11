@@ -20,7 +20,7 @@ router
 	.put(async (req, res) => {
 		const new_password = req.body.new_password;
 		if (!new_password) {
-			next(new Error("new_password is not valid"));
+			new Error("new_password is not valid");
 		}
 		const result = await UserService.putUserInfo(req.params.userId, {
 			new_password,
