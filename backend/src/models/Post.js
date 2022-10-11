@@ -129,6 +129,7 @@ export default class Post {
 				result = await getRecommendersForAllResult(result, conn);
 			}
 			delete result.meta;
+			await conn.release();
 			return result;
 		} catch (err) {
 			throw err;
@@ -188,6 +189,7 @@ export default class Post {
 			result = await getRecommendersForAllResult(result, conn);
 			delete result.meta;
 			await updateViewCount(postKey, conn);
+			await conn.release();
 			return result;
 		} catch (err) {
 			throw err;
@@ -234,6 +236,7 @@ export default class Post {
 			if (result.affectedRows === 0) {
 				throw Error(`postKey="${boardId}"인 게시글이 없습니다`);
 			}
+			await conn.release();
 			return;
 		} catch (err) {
 			throw err;
