@@ -7,10 +7,12 @@ import '../css/animation.css'
 import '../css/result.css'
 import qnaList from '../data/newQuestion.js'
 import infoList from '../data/newAnswer.js'
+import studyList from '../data/newStudy.js'
+
 
 const endPoint = 12;
 const select = [0,0,0,0,0,0,0];
-const subject = [0,0,0,0,0,0];
+const subject = [0,0,0,0,0,0,0,0,0,0,0];
 
 
 const cal = (num) => {
@@ -28,7 +30,7 @@ const setResult = () => {
   let point = cal(1);
   let rec = cal(0)
   const resultName = document.querySelector('.resultName');
-  resultName.innerHTML = infoList[point].name;
+  resultName.innerHTML = `[ ${infoList[point].name} ]`;
   
   let resultImg = document.createElement('img');
   const imgDiv = document.querySelector('#resultImg');
@@ -39,8 +41,14 @@ const setResult = () => {
   resultImg.classList.add('img-fluid');
   imgDiv.appendChild(resultImg);
   
-  let resultInterest = document.querySelector('.interest');
-  resultInterest.innerHTML = rec;
+  let int_Name = document.querySelector('.int_Name');
+  int_Name.innerHTML = `[ ${studyList[rec].name} ]`;
+  
+  let int_Desc1 = document.querySelector('.int_Desc1');
+  int_Desc1.innerHTML = studyList[rec].desc1;
+  
+  let int_Desc2 = document.querySelector('.int_Desc2');
+  int_Desc2.innerHTML = studyList[rec].desc2;
   
   const resultDesc1 = document.querySelector('.resultDesc1');
   resultDesc1.innerHTML = infoList[point].desc1;
@@ -184,10 +192,14 @@ const Home = () => {
         </div>
         <div className="text resultDesc3">
         </div>
-        <div className="interest">
+        <div className="summary int_Name">
+        </div>
+        <div className="text int_Desc1">
+        </div>
+        <div className="text int_Desc2">
         </div>
         <Link to="/result">
-          <button type="button" className="kakao mt-3 px-3 py-2">사이트로 돌아가기</button>
+          <button type="button" className="goBack mt-3 px-3 py-2">사이트로 돌아가기</button>
         </Link>
         
       </section>
