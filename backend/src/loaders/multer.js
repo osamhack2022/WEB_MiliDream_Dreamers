@@ -8,6 +8,7 @@ dotenv.config();
 
 const IMAGE_PATH = path.resolve('./public/images');
 
+// 디렉토리가 없을 경우 경로에 새로운 디렉토리 추가
 try {
 	fs.readdirSync(IMAGE_PATH);
 } catch (error) {
@@ -15,7 +16,9 @@ try {
 	fs.mkdirSync(IMAGE_PATH, { recursive: true });
 }
 
-
+/**
+ * 파일의 저장경로 및 파일이름 생성 규칙 정의
+ */
 const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
 		cb(null, IMAGE_PATH);
