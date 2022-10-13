@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { accounts, mariadbTest, board, career } from "./routes";
+import { accounts, mariadbTest, board, career, image } from "./routes";
 
 const app = Router();
 
@@ -8,5 +8,6 @@ app.use("/accounts", accounts);
 app.use("/board", board);
 app.use("/career", career);
 app.use("/", mariadbTest);
+app.use("/image", image);
 
 export default app;
