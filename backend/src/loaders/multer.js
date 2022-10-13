@@ -39,4 +39,4 @@ const multerAvatar = multer({
 	}.single('file')
 });
 
-export const uploadAvatar = multerAvatar.single('avatar'); // 'avatar'는  front에서 받아오는 feild 명
+export const uploadAvatar = multerAvatar.single('avatar'); // 'avatar'는  front에서 받아오는 field 명
