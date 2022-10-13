@@ -42,8 +42,14 @@ const setResult = () => {
   let resultInterest = document.querySelector('.interest');
   resultInterest.innerHTML = rec;
   
-  const resultDesc = document.querySelector('.resultDesc');
-  resultDesc.innerHTML = infoList[point].desc;
+  const resultDesc1 = document.querySelector('.resultDesc1');
+  resultDesc1.innerHTML = infoList[point].desc1;
+  
+  const resultDesc2 = document.querySelector('.resultDesc2');
+  resultDesc2.innerHTML = infoList[point].desc2;
+  
+  const resultDesc3 = document.querySelector('.resultDesc3');
+  resultDesc3.innerHTML = infoList[point].desc3;
 }
 
 
@@ -143,7 +149,7 @@ const Home = () => {
       <section id="main" className="mx-auto mt-5 py-5 px-3">
         <h1>성격유형 알아보기</h1>
         <div className="col-lg-6 col-md-8 col-sm-10 col-12 mx-auto">
-          <img id="logo" src={process.env.PUBLIC_URL + './img/logo.png'} alt="logoImage" className="img-fluid" />
+          <img id="logo" src={process.env.PUBLIC_URL + './img_new/logo.png'} alt="logoImage" className="img-fluid" />
         </div>
         <p id="intro">
           Milidream MBTI Test<br/>
@@ -172,7 +178,11 @@ const Home = () => {
         </div>
         <div id="resultImg" className="my-3 col-lg-6 col-md-8 col-sm-10 col-12 mx-auto">
         </div>
-        <div className="resultDesc">
+        <div className="text resultDesc1">
+        </div>
+        <div className="text resultDesc2">
+        </div>
+        <div className="text resultDesc3">
         </div>
         <div className="interest">
         </div>
