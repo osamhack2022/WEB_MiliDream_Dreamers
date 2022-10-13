@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { uploadAvatar, uploadPostImage } from "../../loaders/multer";
+import { upload } from "../../loaders/multer";
 
 const router = Router();
 
 // POST /image/upload-avatar
 // Content-Type: multipart/form-data
 // Requires field(name=avatar) with image data
-router.post("/upload-avatar", uploadAvatar, (req, res) => {
+router.post("/upload-avatar", upload.single('avatar'), (req, res) => {
     const { fieldname, originalname, encoding, mimetype, destination, filename, path, size } = req.file;
 
     res.json({ path: `/public/${filename}` });
@@ -14,8 +14,8 @@ router.post("/upload-avatar", uploadAvatar, (req, res) => {
 
 // POST /image/upload
 // Content-Type: multipart/form-data
-// Requires field(name=image) with image data
-router.post("/upload", uploadPostImage, (req, res) => {
+// Requires field(name=postImages) with image data
+router.post("/upload", upload.array('postImages'), (req, res) => {
     const { fieldname, originalname, encoding, mimetype, destination, filename, path, size } = req.file;
 
     res.json({ path: `/public/${filename}` });

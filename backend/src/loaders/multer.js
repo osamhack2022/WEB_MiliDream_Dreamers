@@ -29,9 +29,9 @@ const storage = multer.diskStorage({
 	}
 })
 /**
- * 유저 프로필 사진 업로드에 대한 multer 세팅
+ * 이미지 파일 업로드에 대한 multer 세팅
  */
-const multerAvatar = multer({
+export const upload = multer({
 	storage: storage,
 	limits: { fileSize: 5 * 1024 * 1024 }, // 파일 크기 5MB 제한
 	fileFilter: function (req, file, done) { // 이미지 형식 파일만 필터링
@@ -43,19 +43,3 @@ const multerAvatar = multer({
 	},
 
 });
-
-const multerPostImage = multer({
-	storage: storage,
-	limits: { fileSize: 5 * 1024 * 1024 }, // 파일 크기 5MB 제한
-	fileFilter: function (req, file, done) { // 이미지 형식 파일만 필터링
-		if (file.mimetype.includes("image")) {
-			done(null, true); // 파일 허용
-		} else {
-			done(null, false); // 파일 거부
-		}
-	},
-
-});
-
-export const uploadAvatar = multerAvatar.single('avatar'); // 'avatar'는  front에서 받아오는 field 명
-export const uploadPostImage = multerPostImage.single('image'); // 'image'는 front에서 받아오는 field 명
