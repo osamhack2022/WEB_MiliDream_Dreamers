@@ -13,29 +13,37 @@
 .resultName{
   font-size: 26px;
   margin-top: 40px;
+  font-weight: bold;
 }
 
 #resultImg{
   padding-top: 20px;
   padding-bottom: 25px;
-  width: 
 }
 
-.text{
+.text, .summary{
   font-size: 20px;
-  padding: 30px;
-  padding-bottom: 10px;
+  padding: 30px 40px 10px 40px;
 }
 
-.kakao{
+.summary{
+  font-weight: bold;
+}
+
+.int_Desc2, .resultDesc3{
+  padding-bottom: 25px;
+}
+
+.goBack{
   color: white;
   background-color: #E1BFFF;
+  padding-top: 30px;
   font-size: 20px;
   border: 0px;
   border-radius: 20px;
 }
 
-.kakao:hover, .kakao:focus{
+.goBack:hover, .goBack:focus{
   background-color: #FBA58C;
   color: black;
 }
