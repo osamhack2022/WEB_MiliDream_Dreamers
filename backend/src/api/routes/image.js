@@ -9,7 +9,7 @@ const router = Router();
 router.post("/upload", upload.single('img'), (req, res) => {
     const { fieldname, originalname, encoding, mimetype, destination, filename, path, size } = req.file;
 
-    res.json({ path: `/public/images/${filename}` });
+    res.json({ path: `/images/${filename}` });
 });
 
 export default router;
