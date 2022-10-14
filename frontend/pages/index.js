@@ -148,7 +148,7 @@ export default function Home() {
         }
       </div>
 
-      <footer clasName="footer">
+      <footer className="footer">
         <div
           style={{
             position: "absolute",
