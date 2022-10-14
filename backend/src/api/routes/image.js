@@ -15,7 +15,7 @@ router.post("/upload-avatar", upload.single('avatar'), (req, res) => {
 // POST /image/upload
 // Content-Type: multipart/form-data
 // Requires field(name=postImages) with image data
-router.post("/upload", upload.array('postImages'), (req, res) => {
+router.post("/upload", upload.single('postImages'), (req, res) => {
     const { fieldname, originalname, encoding, mimetype, destination, filename, path, size } = req.file;
 
     res.json({ path: `/public/${filename}` });
