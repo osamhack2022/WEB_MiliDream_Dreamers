@@ -1,7 +1,7 @@
 import { Router } from "express";
 import passport from "passport";
-import Logger from "../../loaders/logger";
-import * as AccountService from "../../services/accounts";
+import Logger from "../../loaders/logger.js";
+import * as AccountService from "../../services/accounts.js";
 
 const route = Router();
 

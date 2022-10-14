@@ -1,5 +1,5 @@
 import { Router } from "express";
-import commentService from "../../services/comment";
+import commentService from "../../services/comment.js";
 
 const router = Router();
 

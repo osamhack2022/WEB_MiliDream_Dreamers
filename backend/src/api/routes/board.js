@@ -1,6 +1,6 @@
 import { Router } from "express";
-import BoardService from "../../services/board";
-import RecommendService from "../../services/recommend";
+import BoardService from "../../services/board.js";
+import RecommendService from "../../services/recommend.js";
 
 const router = Router();
 

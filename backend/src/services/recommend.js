@@ -1,4 +1,4 @@
-import Recommend from "../models/Recommend";
+import Recommend from "../models/Recommend.js";
 
 export default class recommendService {
 	constructor() {}

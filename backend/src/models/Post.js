@@ -1,5 +1,5 @@
-import mariadb from "../loaders/mariadb";
-import Logger from "../loaders/logger";
+import mariadb from "../loaders/mariadb.js";
+import Logger from "../loaders/logger.js";
 
 const COMPETITION_CATEGORY = "공모전&대회 리스트";
 
