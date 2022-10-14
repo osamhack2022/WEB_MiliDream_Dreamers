@@ -103,8 +103,8 @@ dist
 # TernJS port file
 .tern-port
 
-#test image
-/test
-
 # JSDoc output files
 /backend/out
+
+#test image
+/test
