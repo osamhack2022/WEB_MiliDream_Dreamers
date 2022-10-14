@@ -8,7 +8,6 @@ const app = Router();
 app.use("/accounts", accounts);
 app.use("/user", user);
 app.use("/board", board);
-app.use("/", mariadbTest);
 app.use(serveStatic("public"));
 app.use("/image", image);
 app.use("/comment", comment);
