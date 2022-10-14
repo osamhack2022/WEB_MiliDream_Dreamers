@@ -1,7 +1,9 @@
 import { Router } from "express";
 import BoardService from "../../services/board";
 import RecommendService from "../../services/recommend";
-
+/**
+ * @todo multer 머지 후 app.post에 upload.array('postImages') 적용
+ */
 const router = Router();
 
 // 전체 목록을 가져온다.
