@@ -30,6 +30,11 @@ const storage = multer.diskStorage({
 })
 /**
  * 이미지 파일 업로드에 대한 multer 세팅
+ * @param {Object} storage 저장할 공간에 대한 정보
+ * @param {Object} limits 파일 개수나 파일 사이즈를 제한 ex) 5*1024*1024 => 5MB
+ * @param {function} fileFilter 어떤 형식의 파일을 받을지 정의
+ * @return {Object} 여러 미들웨어 존재, 업로드 방식에 따라 `single`, `array`, `fields` 사용
+ * @param {string} propertyName 미들웨어들의 인수는 form data의 속성명 or 태그 input의 name
  */
 export const upload = multer({
 	storage: storage,
