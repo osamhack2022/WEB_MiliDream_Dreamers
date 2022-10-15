@@ -5,6 +5,13 @@ import * as AccountService from "../../services/accounts";
 
 const route = Router();
 
+// GET /accounts/sign
+route.get("/sign", async (req,res)=>{
+	if (!req.user) return res.status(401).send();
+
+	return res.status(200).json(req.user);
+});
+
 // POST /accounts/sign
 route.post("/sign", passport.authenticate('local'), async (req, res) => {
 	return res.status(200).json(req.user);
