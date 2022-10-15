@@ -42,17 +42,34 @@ $ sudo mysql -u test -p < backend/base.sql
     |   ├── 📂middlewares
     |   |   └── 📄index.js
     |   ├── 📂routes
+    |   |	├── 📄accounts.js
+    |   |	├── 📄board.js
+    |   |	├── 📄comment.js
+    |   |	├── 📄index.js
+    |   |	└── 📄user.js
     |   └── 📄index.js
     ├── 📂conifg
+    |   ├── 📄account.js
     |   └── 📄index.js
     ├── 📂loaders
     |   ├──📄event.js
     |   ├──📄express.js
     |   ├──📄index.js
     |   ├──📄logger.js
-	|	└──📄mariadb.js
+	|	├──📄mariadb.js
+	|	└──📄passport.js
     ├── 📂models
+	|	├──📄Account.js
+	|	├──📄Comment.js
+	|	├──📄Post.js
+	|	├──📄Recommend.js
+	|	└──📄user.js
     ├── 📂services
+	|	├──📄account.js
+	|	├──📄board.js
+	|	├──📄comment.js
+	|	├──📄recommend.js
+	|	└──📄user.js
     ├── 📂subscribers
     └── 📄app.js
     📄 .eslintrc.js

@@ -1,6 +1,8 @@
-import accounts from "./accounts.js";
-import user from "./user.js";
-import board from "./board.js";
-import comment from "./comment.js";
+import accounts from "./accounts";
+import user from "./user";
+import board from "./board";
+import image from "./image";
+import comment from "./comment";
 
-export { accounts, user, board, comment };
+export { accounts, user, board, comment, image };
+

@@ -13,7 +13,6 @@ export default async function (app) {
 
 
 	passport(app);
-
 	expressLoader(app);
 	Logger.info("🚅Express loaded");
 
