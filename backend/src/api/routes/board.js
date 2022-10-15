@@ -20,8 +20,9 @@ router
 	})
 	.post(async (req, res) => {
 		try {
-			if (!req.user) res.status(401).json({ err: REQUIRE_SESSION_MSG });
-			const postDTO = { ...req.body, userKey: req.user.userId };
+			/** @todo 유저 인증 추후 활성화 */
+			// if (!req.user) res.status(401).json({ err: REQUIRE_SESSION_MSG });
+			const postDTO = { ...req.body, userKey: req.user.userId || 1 };
 			const result = await BoardService.postBoard(postDTO);
 			res.json(result);
 		} catch (err) {
