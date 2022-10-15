@@ -1,4 +1,4 @@
-import mariadb from "../loaders/mariadb";
+import mariadb from "../loaders/mariadb.js";
 
 export default class Account {
 	static async create({ username, userId, password, classKey }) {
