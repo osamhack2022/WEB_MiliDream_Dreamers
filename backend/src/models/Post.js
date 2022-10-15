@@ -95,9 +95,6 @@ async function deleteRecruit(boardId, conn) {
 	const sql2 = `DELETE FROM Post WHERE ${clauses.join(" OR ")};`;
 	const result2 = await conn.query(sql2, values);
 }
-/**
- * @todo multer 도입 후 수정된 base.sql에 맞춰 스키마 수정
- */
 export default class Post {
 	constructor(post) {
 		this.userkey = post.userkey;
@@ -139,9 +136,6 @@ export default class Post {
 			await conn.release();
 		}
 	}
-	/**
-	 * @todo multer 머지되면 imageUrl 데이터도 다루도록 수정
-	 */
 	static async postBoard({ categoryKey, title, body, userKey }) {
 		const cleanTitle = sanitizeHTML(title, { allowedTags: [] });
 		const cleanBody = sanitizeHTML(body, {
