@@ -120,7 +120,7 @@ export default class Post {
 			queryValue.push(categoryKey);
 		} else {
 			// 1=="공모전&대회 리스트", 2=="사람모집게시글"
-			sql += `WHERE c.categoryKey != 1 AND c.categoryKey != 2`;
+			sql += `WHERE c.categoryKey NOT IN (1, 2)`;
 		}
 
 		const conn = await mariadb.getConnection();
