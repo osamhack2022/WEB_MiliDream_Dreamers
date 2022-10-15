@@ -1,5 +1,6 @@
 import mariadb from "../loaders/mariadb";
 import Logger from "../loaders/logger";
+import sanitizeHTML from "sanitize-html";
 
 const COMPETITION_CATEGORY = "공모전&대회 리스트";
 
@@ -142,12 +143,19 @@ export default class Post {
 	 * @todo multer 머지되면 imageUrl 데이터도 다루도록 수정
 	 */
 	static async postBoard({ categoryKey, title, body, userKey }) {
+		const cleanTitle = sanitizeHTML(title, { allowedTags: [] });
+		const cleanBody = sanitizeHTML(body, {
+			allowedTags: ["h1", "h2", "h3", "p", "img", "blockquote", "strong", "em", "s", "u", "br"],
+			allowedAttributes: {
+				img: ["src"]
+			},
+		});
 		const sql = `INSERT INTO Post(userKey, title, body, categoryKey) VALUES (?, ?, ?, ?);`;
 		try {
 			const result = await mariadb.query(sql, [
 				userKey,
-				title,
-				body,
+				cleanTitle,
+				cleanBody,
 				categoryKey,
 			]);
 			if (result.affectedRows === 0) {
