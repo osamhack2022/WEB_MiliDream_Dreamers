@@ -11,13 +11,12 @@ export default class Recommend {
 		return result;
 	}
 	static async postRecommendbyBoardId(boardId, userId) {
-		const conn = mariadb.getConnection();
-		if (recommendExist(boardId, userId, conn)) {
+		if (recommendExist(boardId, userId)) {
 			return false;
 		}
 		const sql = `INSERT INTO Recommenders(postKey, userKey) VALUES (?, ?);`;
 		const result = mariadb.query(sql, [boardId, userId]);
-
+	
 		return result;
 	}
 	static async deleteRecommendbyBoardId(boardId, userId) {
@@ -28,9 +27,9 @@ export default class Recommend {
 	}
 }
 
-async function recommendExist(boardId, userId, conn) {
+async function recommendExist(boardId, userId) {
 	const sql = `SELECT 1 FROM Recommenders WHERE postKey=? AND userKey=?;`;
-	const result = conn.query(sql, [boardId, userId]);
+	const result = mariadb.query(sql, [boardId, userId]);
 
 	return result.length > 0;
 }
