@@ -6,6 +6,7 @@ import RecommendService from "../../services/recommend";
  */
 const router = Router();
 
+const REQUIRE_SESSION_MSG = "Method requires authentication.";
 // 전체 목록을 가져온다.
 router
 	.route("/")
@@ -19,7 +20,8 @@ router
 	})
 	.post(async (req, res) => {
 		try {
-			const postDTO = req.body;
+			if (!req.user) res.status(401).json({ err: REQUIRE_SESSION_MSG });
+			const postDTO = { ...req.body, userKey: req.user.userId };
 			const result = await BoardService.postBoard(postDTO);
 			res.json(result);
 		} catch (err) {
