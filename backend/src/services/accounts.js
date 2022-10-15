@@ -1,6 +1,6 @@
 import crypto from "crypto";
-import accountConfig from "../config/account";
-import Account from '../models/Account';
+import accountConfig from "../config/account.js";
+import Account from '../models/Account.js';
 
 let tokenStore = new Map();
 tokenStore.set("DEBUG", { expires: Infinity });

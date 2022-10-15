@@ -1,5 +1,4 @@
 import { Router, static as serveStatic } from "express";
-import express from "../loaders/express";
 import { accounts, user, board, comment, image } from "./routes";
 
 const app = Router();
