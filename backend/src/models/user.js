@@ -38,4 +38,11 @@ export default class User {
 		Logger.info(`Updated user info, successed: ${result.affectedRows === 1}`);
 		return result.affectedRows === 1;
 	}
+
+	static async putUserAvatarInfo(userId, { imageURL}) {
+		const sql = "UPDATE User SET imgUrl=? WHERE userKey=?;";
+		const result = await mariadb.query(sql, [imageURL, userId]);
+
+		return result.affectedRows === 1;
+	}
 }
