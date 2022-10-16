@@ -54,6 +54,15 @@ create table Comment(
 	FOREIGN KEY(postKey) REFERENCES Post(postKey) ON UPDATE RESTRICT ON DELETE CASCADE
 );
 
+create table Purpose(
+	purposeKey INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	userKey INT NOT NULL,
+	title TEXT NOT NULL,
+	progress VARCHAR(5) NOT NULL,
+	explanation  TEXT NOT NULL,
+	FOREIGN KEY(userKey) REFERENCES User(userKey) ON UPDATE RESTRICT ON DELETE CASCADE
+);
+
 -- FOREIGN KEY(parentKey) REFERENCES Comment(commentKey) ON UPDATE RESTRICT ON DELETE CASCADE
 
 insert into Class (classContent) values ("미정"), ("병사"), ("간부"), ("군무원");
