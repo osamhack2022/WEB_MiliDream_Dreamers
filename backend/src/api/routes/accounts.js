@@ -1,26 +1,39 @@
 import { Router } from "express";
 import passport from "passport";
-import Logger from "../../loaders/logger";
-import * as AccountService from "../../services/accounts";
+import Logger from "../../loaders/logger.js";
+import * as AccountService from "../../services/accounts.js";
 
 const route = Router();
 
 // 로그인
-// POST /accounts/sign
+// GET /accounts/sign
+route.get("/sign", async (req,res)=>{
+	if (!req.user) return res.status(401).end();
+
+	return res.status(200).json(req.user);
+});
+
+// POST /accounts/sign (application/json)
+// {
+//   id: string,
+//   password: string
+// }
 route.post("/sign", passport.authenticate('local'), async (req, res) => {
 	return res.status(200).json(req.user);
-	// 실패시 자동으로 passport.authenticate('local')에서 401 코드 반환
+	// 폼 형식 불일치시 400 코드 반환
+	// 실패시 401 코드 반환
+	// 성공시 200 코드 반환 &&
 	// 성공이후 같은 세션 요청시 req.user에 유저 정보 들어감
 });
 
 // 로그아웃
 // DELETE /accounts/sign
 route.delete("/sign", async (req, res) => {
-	req.logout(function () { });
+	req.logout();
 	req.session.save((err) => {
 		if (err) Logger.error(err);
 	});
-	return res.status(200).send();
+	return res.status(200).end();
 });
 
 // 회원가입

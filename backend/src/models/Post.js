@@ -1,5 +1,5 @@
-import mariadb from "../loaders/mariadb";
-import Logger from "../loaders/logger";
+import mariadb from "../loaders/mariadb.js";
+import Logger from "../loaders/logger.js";
 import sanitizeHTML from "sanitize-html";
 
 const COMPETITION_CATEGORY = "공모전&대회 리스트";
@@ -160,10 +160,34 @@ export default class Post {
 			throw err;
 		}
 	}
-	static async queryBoard({ title, username, content, tag }) {
-		const sql = ``;
-		const result = await mariadb.query(sql);
+	static async queryBoard(condition /*{ title, username, content, tag }*/) {
+		const { title, username, content, tag } = condition;
+		let sql = "SELECT * FROM `Post` ";
+		const queryValue = [];
 
+		for (let c in condition) if (c) { sql += "WHERE "; break; } // if any of condition has value
+		for (let cond in condition) {
+			if (condition[cond] == undefined) continue;
+			if (cond == "title") {
+				sql += "`title` LIKE CONCAT('%', ? '%') AND ";
+				queryValue.push(title);
+			}
+			if (cond == "username") {
+				sql += "`userKey` in (SELECT `userKey` FROM `User` WHERE `User`.`userName` LIKE CONCAT('%', ? '%')) AND ";
+				queryValue.push(username);
+			}
+			if (cond == "content") {
+				sql += "`body` LIKE CONCAT('%', ? '%') AND ";
+				queryValue.push(content);
+			}
+			// if (cond == "tag"){
+			// 	sql += "`tag` LIKE CONCAT('%', ? '%') ";
+			// 	queryValue.push(title);
+			// }
+		}
+		for (let c in condition) if (c) { sql += "TRUE;"; break; } // if any of condition has value
+
+		const result = await mariadb.query(sql, queryValue);
 		return result;
 	}
 	static async getAllTags() {

@@ -1,0 +1,50 @@
+# Sample workflow for building and deploying a Next.js site to GitHub Pages
+#
+# To get started with Next.js see: https://nextjs.org/docs/getting-started
+#
+name: Deploy Next.js site to Pages
+
+on:
+  # Runs on pushes targeting the default branch and it runs only file change in frontend path
+  push:
+    paths: ["frontend/**"]
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: npm Install and Build
+        uses: actions/setup-node@v3
+      - run: cd frontend && npm install && npm run build && npm run export
+        env:
+          CI: true
+          DEPLOY_TARGET: gh-pages
+      - run: touch frontend/out/.nojekyll
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.PAGES_DEPLOY_TOKEN }}
+          BRANCH: gh-pages  # 배포될 브랜치
+          FOLDER: frontend/out # 이 폴더에 있는 파일을 배포
+#          CLEAN: true # 배포 브랜치에 있는 파일들을 자동으로 삭제

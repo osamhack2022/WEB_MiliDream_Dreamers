@@ -1,6 +1,6 @@
 import { Router } from "express";
-import BoardService from "../../services/board";
-import RecommendService from "../../services/recommend";
+import BoardService from "../../services/board.js";
+import RecommendService from "../../services/recommend.js";
 /**
  * @todo multer 머지 후 app.post에 upload.array('postImages') 적용
  */
@@ -80,20 +80,38 @@ router
 
 router
 	.route("/:boardId/recommend")
-	.get((req, res) => {
-		RecommendService.getRecommendbyBoardId(req.params.boardId);
-
-		res.send(`Getting board recommend, boardId is ${req.params.boardId}`);
+	.get(async (req, res) => {
+		try {
+			const result = await RecommendService.getRecommendbyBoardId(
+				req.params.boardId,
+				req.query
+			);
+			res.status(200).json(result);
+		} catch (err) {
+			res.status(400).json({ err: err.message });
+		}
 	})
-	.post((req, res) => {
-		RecommendService.postRecommendbyBoardId(req.params.boardId);
-
-		res.send(`Uploading board recommend, boardId is ${req.params.boardId}`);
+	.post(async (req, res) => {
+		try {
+			await RecommendService.postRecommendbyBoardId(
+				req.params.boardId,
+				req.body
+			);
+			res.status(201).end();
+		} catch (err) {
+			res.status(400).json({ err: err.message });
+		}
 	})
-	.delete((req, res) => {
-		RecommendService.deleteRecommendbyBoardId(req.params.boardId);
-
-		res.send(`Deleting board recommend, boardId is ${req.params.boardId}`);
+	.delete(async (req, res) => {
+		try {
+			await RecommendService.deleteRecommendbyBoardId(
+				req.params.boardId,
+				req.body
+			);
+			res.status(204).end();
+		} catch (err) {
+			res.status(400).json({ err: err.message });
+		}
 	});
 
 export default router;
