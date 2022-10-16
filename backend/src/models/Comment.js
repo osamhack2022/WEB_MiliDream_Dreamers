@@ -1,14 +1,7 @@
 import mariadb from "../loaders/mariadb.js";
 export default class Comment {
-	constructor(comment) {
-		this.comment = comment;
-	}
 	static async postComment({ userKey, postKey, body, parentKey }) {
-		if (
-			userKey === undefined ||
-			postKey === undefined ||
-			body === undefined
-		) {
+		if (!userKey || !postKey || !body) {
 			throw Error(
 				`입력값이 충분하지 않음, userKey="${userKey}", postKey="${postKey}", body="${body}"`
 			);
@@ -18,7 +11,7 @@ export default class Comment {
 			userKey,
 			body,
 			postKey,
-			parentKey === undefined ? null : parentKey,
+			parentKey ?? null,
 		]);
 
 		if (result.affectedRows === 0) {
@@ -44,6 +37,7 @@ export default class Comment {
 		if (result.affectedRows === 0) {
 			throw Error(`commentKey="${commentKey}"에 해당하는 댓글 없음`);
 		}
+		
 		return;
 	}
 }

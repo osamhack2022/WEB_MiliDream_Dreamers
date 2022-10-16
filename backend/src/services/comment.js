@@ -1,8 +1,6 @@
 import Comment from "../models/Comment.js";
 
 export default class commentService {
-	constructor() {}
-
 	static postComment(commentInfo) {
 		return Comment.postComment(commentInfo);
 	}
