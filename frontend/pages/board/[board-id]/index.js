@@ -4,14 +4,18 @@ import BoardNavBar from "../../../components/board/BoardNavBar";
 import BoardCenter from "../../../components/board/BoardCenter";
 import BoardWriteView from "../../../components/board/board-id/BoardWriteView";
 import BoardHeader from "../../../components/board/BoardHeader";
+import { useRouter } from "next/router";
 
 export default function board_id() {
   //이전 페이지 (BoardMiniView 등)에서 넘어올 때 Link query로 다음 인자를 받아와야 한다. { type, boardId };;
+  const router = useRouter();
+  const boardId = router.query["board-id"];
+  const type = router.query["type"];
   return (
     <div>
       <div className="container">
         <div className="headerB">
-          <BoardHeader />
+          <BoardHeader type={type} boardId={boardId}/>
         </div>
         <div className="userInfo">
           <BoardUser />
