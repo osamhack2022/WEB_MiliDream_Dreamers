@@ -16,32 +16,43 @@ create table User (userKey INT AUTO_INCREMENT PRIMARY KEY,
 
 create table Category(categoryKey INT AUTO_INCREMENT PRIMARY KEY, categoryName TEXT NOT NULL);
 
-create table Post (postKey INT AUTO_INCREMENT PRIMARY KEY, 
-				userkey INT NOT NULL, 
-				postTime DATETIME DEFAULT CURRENT_TIMESTAMP, 
-				title TEXT NOT NULL, 
-				body TEXT NOT NULL, 
-				imgUrl VARCHAR(200),
-				categoryKey INT NOT NULL, 
-				careerPostKey INT, 
-				FOREIGN KEY(categoryKey) REFERENCES Category(categoryKey), 
-				FOREIGN KEY(careerPostKey) REFERENCES Post(postKey));
+create table Post (
+	postKey INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	userKey INT NOT NULL,
+	postTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	title TEXT NOT NULL,
+	body TEXT NOT NULL,
+	categoryKey INT NOT NULL,
+	viewCount INT NOT NULL DEFAULT 0,
+	FOREIGN KEY(categoryKey) REFERENCES Category(categoryKey) ON UPDATE RESTRICT ON DELETE CASCADE
+);
 
-create table Comment(commentKey INT AUTO_INCREMENT PRIMARY KEY,
-					userKey INT NOT NULL,
-					content TEXT NOT NULL,
-					postKey INT NOT NULL,
-					commentTime DATETIME DEFAULT CURRENT_TIMESTAMP,
-					parentKey INT,
-					FOREIGN KEY(userKey) REFERENCES User(userKey),
-					FOREIGN KEY(postKey) REFERENCES Post(postKey),
-					FOREIGN KEY(parentKey) REFERENCES Comment(commentKey));
+create table CareerPost(
+	careerPostKey INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	competitionKey INT NOT NULL,
+	recruitKey INT NOT NULL,
+	FOREIGN KEY(competitionKey) REFERENCES Post(postKey) ON UPDATE RESTRICT ON DELETE CASCADE,
+	FOREIGN KEY(recruitKey) REFERENCES Post(postKey) ON UPDATE RESTRICT ON DELETE CASCADE
+);
 
-create table MBTI(mbtiKEY INT AUTO_INCREMENT PRIMARY KEY,
-				mbtiType TEXT NOT NULL,
-				mbtiContent TEXT NOT NULL);
+create table Recommenders(
+	recommenderKey INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	postKey INT NOT NULL,
+	userKey INT NOT NULL,
+	FOREIGN KEY(postKey) REFERENCES Post(postKey) ON UPDATE RESTRICT ON DELETE CASCADE,
+	FOREIGN KEY(userKey) REFERENCES User(userKey) ON UPDATE RESTRICT ON DELETE CASCADE
+);
 
-
+create table Comment(
+	commentKey INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	userKey INT,
+	body TEXT NOT NULL,
+	postKey INT NOT NULL,
+	commentTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	parentKey INT,
+	FOREIGN KEY(userKey) REFERENCES User(userKey) ON UPDATE RESTRICT ON DELETE SET NULL,
+	FOREIGN KEY(postKey) REFERENCES Post(postKey) ON UPDATE RESTRICT ON DELETE CASCADE
+);
 
 -- FOREIGN KEY(parentKey) REFERENCES Comment(commentKey) ON UPDATE RESTRICT ON DELETE CASCADE
 
