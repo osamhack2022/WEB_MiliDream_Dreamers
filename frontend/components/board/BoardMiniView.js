@@ -1,11 +1,11 @@
 //id별 네모네모하게 제목이랑 안에 글들 보여주는 것
 
-export default function BoardMiniView(props) {
+export default function BoardMiniView({ type, boardId }) {
   
   return (
     <div className="list-group">
-      <a href="#" className="list-group-item list-group-item-action active" aria-current="true">
-        {`${props.type} 게시판`}
+      <a href={`board/${boardId}`} className="list-group-item list-group-item-action active" aria-current="true">
+        {`${boardId} 게시판`}
       </a>
       <div className="list-group-item">
         <ul className="list-group list-group-flush">
