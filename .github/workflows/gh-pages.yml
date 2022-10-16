@@ -35,6 +35,11 @@ jobs:
 
       - name: npm Install and Build
         uses: actions/setup-node@v3
+      # Github Repository Secrets를 통해 환경 변수 파일을 생성합니다.
+      - name: Generate Environment Variables File for Production
+        run: |
+          echo "DESTINATION_URL=$DESTINATION_URL" >> .env.production
+          echo "SOURCE_PATH=$SOURCE_PATH" >> .env.production
       - run: cd frontend && npm install && npm run build && npm run export
         env:
           CI: true
