@@ -1,6 +1,6 @@
 import passport from "passport";
 import passportLocal from "passport-local";
-import Account from "../models/Account";
+import Account from "../models/Account.js";
 import session, { MemoryStore } from "express-session";
 import dotenv from "dotenv";
 

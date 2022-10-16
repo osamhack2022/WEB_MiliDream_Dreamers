@@ -1,5 +1,4 @@
-import mariadb from "../loaders/mariadb";
-
+import mariadb from "../loaders/mariadb.js";
 export default class Comment {
 	static async postComment({ userKey, postKey, body, parentKey }) {
 		if (!userKey || !postKey || !body) {

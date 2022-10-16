@@ -1,4 +1,4 @@
-import Comment from "../models/Comment";
+import Comment from "../models/Comment.js";
 
 export default class commentService {
 	static postComment(commentInfo) {

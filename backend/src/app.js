@@ -1,5 +1,5 @@
-import loaders from "./loaders";
-import Logger from "./loaders/logger";
+import loaders from "./loaders/index.js";
+import Logger from "./loaders/logger.js";
 import express, { application } from "express";
 
 const app = express();
