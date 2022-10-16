@@ -2,6 +2,14 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  async rewrites() {
+    return [
+      {
+          destination: process.env.DESTINATION_URL,
+          source: process.env.SOURCE_PATH,
+      },
+  ];
+  }
 
   assetPrefix:
 	process.env.NODE_ENV === 'production'
