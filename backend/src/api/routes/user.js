@@ -11,6 +11,9 @@ router
 		res.json(result);
 		// res.send(`Send back user info, userId is ${req.params.userId}`);
 	})
+	/**
+	 * @todo 유저의 Avtar image URL 받아와서 작업 (req.file)
+	 */
 	.put(async (req, res) => {
 		const new_password = req.body.new_password;
 		if (!new_password) {
