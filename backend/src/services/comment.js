@@ -1,14 +1,12 @@
-import * as Comment from "../models/Comment";
+import Comment from "../models/Comment.js";
 
 export default class commentService {
-	constructor() { }
-
 	static postComment(commentInfo) {
 		return Comment.postComment(commentInfo);
 	}
 
-	static updateCommentbycommentId(commentId) {
-		return Comment.updateCommentbycommentId(commentId);
+	static updateCommentbycommentId(commentId, commentInfo) {
+		return Comment.updateCommentbycommentId(commentId, commentInfo);
 	}
 
 	static deleteCommentbycommentId(commentId) {

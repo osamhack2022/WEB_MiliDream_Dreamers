@@ -1,5 +1,7 @@
-import mariadb from "../loaders/mariadb";
-
+import mariadb from "../loaders/mariadb.js";
+/**
+ * @todo 추가된 유저 정보(군종, 소속, 입대일)에 맞춰  base.sql 수정 + 입력받는 로직 수정
+ */
 export default class Account {
 	static async create({ username, userId, password, classKey }) {
 		const sql = "INSERT INTO `User` (`userKey`, `userName`, `id`, `passwd`, `classKey`) VALUES (NULL, ?, ?, sha2(?, 256), ?)";
