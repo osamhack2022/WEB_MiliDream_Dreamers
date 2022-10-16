@@ -23,4 +23,8 @@ export default class UserService {
 	static putUserInfo(userId, newInfo) {
 		return User.putUserInfo(userId, newInfo);
 	}
+
+	static putUserAvatarInfo(userId, newInfo){
+		return User.putUserAvatarInfo(userId, newInfo);
+	}
 }
