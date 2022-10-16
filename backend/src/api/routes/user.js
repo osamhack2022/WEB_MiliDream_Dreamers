@@ -1,8 +1,14 @@
 import { Router } from "express";
-import UserService from "../../services/user";
-import { checkUserId } from "../middlewares";
+import UserService from "../../services/user.js";
+import { checkUserId } from "../middlewares/index.js";
 
 const router = Router();
+
+router.all("/", (req, res)=>{
+	if (!req?.user.userKey) return res.status(401).send();
+	return res.redirect(`./${req.user.userKey}`);
+});
+
 router
 	.route("/:userId")
 	.all(checkUserId)
@@ -17,7 +23,7 @@ router
 	.put(async (req, res) => {
 		const new_password = req.body.new_password;
 		if (!new_password) {
-			next(new Error("new_password is not valid"));
+			new Error("new_password is not valid");
 		}
 		const result = await UserService.putUserInfo(req.params.userId, {
 			new_password,
