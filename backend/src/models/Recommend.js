@@ -5,7 +5,7 @@ export default class Recommend {
 		const sql = `SELECT userKey FROM Recommenders WHERE postKey=?;`;
 		const result = await mariadb.query(sql, [postKey]);
 
-		if (userKey === undefined) {
+		if (!userKey) {
 			return { recommenderList: result };
 		}
 
@@ -14,28 +14,25 @@ export default class Recommend {
 	}
 
 	static async postRecommendbyBoardId(postKey, { userKey }) {
-		if (userKey === undefined) {
+		const sql = `INSERT INTO Recommenders(postKey, userKey) VALUES (?, ?);`;
+		if (!userKey) {
 			throw Error("userKey가 주어지지 않았습니다");
 		}
 		const conn = await mariadb.getConnection();
-		if (await recommendExist(postKey, userKey, conn)) {
-			await conn.release();
-			throw Error(`userKey="${userKey}"는 이미 추천했습니다`);
-		}
-		const sql = `INSERT INTO Recommenders(postKey, userKey) VALUES (?, ?);`;
 		try {
+			if (await recommendExist(postKey, userKey, conn)) {
+				throw Error(`userKey="${userKey}"는 이미 추천했습니다`);
+			}
 			const result = await conn.query(sql, [postKey, userKey]);
+			if (result.affectedRows === 0) throw Error("추천하지 못했습니다");
+			return;
 		} catch (err) {
-			await conn.release();
 			throw err;
+		} finally {
+			await conn.release();
 		}
-		await conn.release();
-		if (result.affectedRows === 0) {
-			throw Error("추천하지 못했습니다");
-		}
-
-		return;
 	}
+
 	static async deleteRecommendbyBoardId(postKey, { userKey }) {
 		if (userKey === undefined) {
 			throw Error("userKey가 주어지지 않았습니다");

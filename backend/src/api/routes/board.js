@@ -1,9 +1,12 @@
 import { Router } from "express";
 import BoardService from "../../services/board.js";
 import RecommendService from "../../services/recommend.js";
-
+/**
+ * @todo multer 머지 후 app.post에 upload.array('postImages') 적용
+ */
 const router = Router();
 
+const REQUIRE_SESSION_MSG = "Method requires authentication.";
 // 전체 목록을 가져온다.
 router
 	.route("/")
@@ -17,7 +20,9 @@ router
 	})
 	.post(async (req, res) => {
 		try {
-			const postDTO = req.body;
+			/** @todo 유저 인증 추후 활성화 */
+			// if (!req.user) res.status(401).json({ err: REQUIRE_SESSION_MSG });
+			const postDTO = { ...req.body, userKey: req.user.userId || 1 };
 			const result = await BoardService.postBoard(postDTO);
 			res.json(result);
 		} catch (err) {
