@@ -3,11 +3,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 //만약 로그인된 상태라면 로그아웃을 출력해야 함.
+//회원가입은 정보수정 정도로 하면 괜찮을 듯
 export default function NavBar() {
   const router = useRouter();
   return (
     <header>
-      <nav>
+      <nav> 
         <Link href="/">
           <img
             style={{
@@ -73,7 +74,7 @@ export default function NavBar() {
           </li>
 
           <li>
-            <Link href="/user/accounts">
+            <Link href="/user/$[id]">
               <a>user</a>
             </Link>
           </li>

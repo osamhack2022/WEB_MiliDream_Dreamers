@@ -12,7 +12,7 @@ export default class Slide extends Component {
       slidesToShow: 1,
       slidesToScroll: 1,
       autoplay: true,
-      autoplaySpeed: 4000,
+      autoplaySpeed: 2000,
       dots: false,
       arrows: false,
       fade: true,
