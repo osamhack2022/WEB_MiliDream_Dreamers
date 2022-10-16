@@ -1,5 +1,6 @@
 import mariadb from "../loaders/mariadb.js";
 import Logger from "../loaders/logger.js";
+import sanitizeHTML from "sanitize-html";
 
 const COMPETITION_CATEGORY = "공모전&대회 리스트";
 
@@ -94,7 +95,6 @@ async function deleteRecruit(boardId, conn) {
 	const sql2 = `DELETE FROM Post WHERE ${clauses.join(" OR ")};`;
 	const result2 = await conn.query(sql2, values);
 }
-
 export default class Post {
 	constructor(post) {
 		this.userkey = post.userkey;
@@ -117,7 +117,7 @@ export default class Post {
 			queryValue.push(categoryKey);
 		} else {
 			// 1=="공모전&대회 리스트", 2=="사람모집게시글"
-			sql += `WHERE c.categoryKey != 1 AND c.categoryKey != 2`;
+			sql += `WHERE c.categoryKey NOT IN (1, 2)`;
 		}
 
 		const conn = await mariadb.getConnection();
@@ -137,12 +137,19 @@ export default class Post {
 		}
 	}
 	static async postBoard({ categoryKey, title, body, userKey }) {
+		const cleanTitle = sanitizeHTML(title, { allowedTags: [] });
+		const cleanBody = sanitizeHTML(body, {
+			allowedTags: ["h1", "h2", "h3", "p", "img", "blockquote", "strong", "em", "s", "u", "br"],
+			allowedAttributes: {
+				img: ["src"]
+			},
+		});
 		const sql = `INSERT INTO Post(userKey, title, body, categoryKey) VALUES (?, ?, ?, ?);`;
 		try {
 			const result = await mariadb.query(sql, [
 				userKey,
-				title,
-				body,
+				cleanTitle,
+				cleanBody,
 				categoryKey,
 			]);
 			if (result.affectedRows === 0) {
@@ -153,10 +160,34 @@ export default class Post {
 			throw err;
 		}
 	}
-	static async queryBoard({ title, username, content, tag }) {
-		const sql = ``;
-		const result = await mariadb.query(sql);
+	static async queryBoard(condition /*{ title, username, content, tag }*/) {
+		const { title, username, content, tag } = condition;
+		let sql = "SELECT * FROM `Post` ";
+		const queryValue = [];
 
+		for (let c in condition) if (c) { sql += "WHERE "; break; } // if any of condition has value
+		for (let cond in condition) {
+			if (condition[cond] == undefined) continue;
+			if (cond == "title") {
+				sql += "`title` LIKE CONCAT('%', ? '%') AND ";
+				queryValue.push(title);
+			}
+			if (cond == "username") {
+				sql += "`userKey` in (SELECT `userKey` FROM `User` WHERE `User`.`userName` LIKE CONCAT('%', ? '%')) AND ";
+				queryValue.push(username);
+			}
+			if (cond == "content") {
+				sql += "`body` LIKE CONCAT('%', ? '%') AND ";
+				queryValue.push(content);
+			}
+			// if (cond == "tag"){
+			// 	sql += "`tag` LIKE CONCAT('%', ? '%') ";
+			// 	queryValue.push(title);
+			// }
+		}
+		for (let c in condition) if (c) { sql += "TRUE;"; break; } // if any of condition has value
+
+		const result = await mariadb.query(sql, queryValue);
 		return result;
 	}
 	static async getAllTags() {
