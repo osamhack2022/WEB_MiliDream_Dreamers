@@ -85,3 +85,4 @@ insert into Comment(userKey, body, postKey, parentKey, commentTime) values (1, "
 insert into CareerPost(competitionKey, recruitKey) values (1, 2);
 
 insert into Purpose(userKey, tltle, progress, explanation) values (1, "목표 테스트", "진행중", "목표 테스트 설명");
+select * from Purpose;
