@@ -83,3 +83,5 @@ insert into Comment(userKey, body, postKey, parentKey, commentTime) values (1, "
 insert into Comment(userKey, body, postKey, parentKey, commentTime) values (1, "HIHI2", 2, NULL, "2022-10-09 15:06:09"), (2, "HELLO2", 2, 1, "2022-10-09 15:36:43"), (2, "BYE2", 1, NULL, "2022-10-09 16:13:41");
 
 insert into CareerPost(competitionKey, recruitKey) values (1, 2);
+
+insert into Purpose(userKey, tltle, progress, explanation) values (1, "목표 테스트", "진행중", "목표 테스트 설명");
