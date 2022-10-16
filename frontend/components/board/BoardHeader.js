@@ -1,6 +1,6 @@
 import BoardSearchBar from "./BoardSearchBar";
 
-export default function BoardHeader() {
+export default function BoardHeader({ type, boardId }) {
   return (
     <div className="headerB">
       <h1>커뮤니티 | 메인</h1>
