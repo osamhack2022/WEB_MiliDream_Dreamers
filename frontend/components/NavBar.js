@@ -1,6 +1,8 @@
 import Link from "next/link";
 //next.js에서 react처럼 페이지 간 이동을 위해서 <Link> 컴포넌트를 꼭 써야 한다.
 import { useRouter } from "next/router";
+import Image from "next/image";
+import logo from "../public/logo.svg";
 
 //만약 로그인된 상태라면 로그아웃을 출력해야 함.
 export default function NavBar() {
