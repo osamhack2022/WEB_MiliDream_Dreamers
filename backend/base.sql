@@ -54,7 +54,7 @@ create table Comment(
 	FOREIGN KEY(postKey) REFERENCES Post(postKey) ON UPDATE RESTRICT ON DELETE CASCADE
 );
 
-create table Objectives(
+create table Objective(
 	objectiveKey INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	userKey INT NOT NULL,
 	title TEXT NOT NULL,

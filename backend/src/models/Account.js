@@ -1,4 +1,4 @@
-import mariadb from "../loaders/mariadb.js";
+import mariadb from "../loaders/mariadb";
 /**
  * @todo 추가된 유저 정보(군종, 소속, 입대일)에 맞춰  base.sql 수정 + 입력받는 로직 수정
  */
