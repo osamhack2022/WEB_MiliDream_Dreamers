@@ -91,7 +91,7 @@ export default class Objective {
 			updateValue.push(prgoress);
 		}
 		sql += updateList.join(","); // 배열의 values를 합치며 구분자는 콤마(,)
-		sql += `WHERE objectiveKey=?`;
+		sql += `WHERE objectiveKey=?;`;
 
 		const conn = await mariadb.conn();
 		try {
@@ -102,5 +102,19 @@ export default class Objective {
 			return
 		} catch (err) { throw err }
 		finally { conn.release() };
+	}
+	static async deleteObjectiveById(objectiveKey){
+		const conn = await mariadb.conn();
+		const sql = `DELETE FROM Objective WHERE ObjectiveKey = ?;`;
+
+		try {
+			const result = await conn.query(sql, [objectiveKey])
+			if(result.affectedRows === 0){
+				throw Error(`commentKey="${objectiveKey}"에 해당하는 목표가 없습니다`)
+			}
+			return
+		}catch(err) {throw err}
+		finally{conn.release()};
+
 	}
 }
