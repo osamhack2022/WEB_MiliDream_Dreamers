@@ -38,8 +38,8 @@ jobs:
       # Github Repository Secrets를 통해 환경 변수 파일을 생성합니다.
       - name: Generate Environment Variables File for Production
         run: |
-          echo "DESTINATION_URL=$DESTINATION_URL" >> .env.production
-          echo "SOURCE_PATH=$SOURCE_PATH" >> .env.production
+          echo "DESTINATION_URL=$DESTINATION_URL" >> ./frontend/.env.production
+          echo "SOURCE_PATH=$SOURCE_PATH" >> ./frontend/.env.production
       - run: cd frontend && npm install && npm run build && npm run export
         env:
           CI: true
