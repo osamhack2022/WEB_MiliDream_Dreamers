@@ -20,8 +20,14 @@
 
 ## 기술 스택 (Technique Used) 
 ### Server(back-end)
- -  npm v8.15.0
- -  nodejs v16.17.0 
+<img alt="javascript" src ="https://img.shields.io/badge/javascript-F7DF1E.svg?&style=flat&logo=javascript&logoColor=black"/> 
+<img alt="nodejs" src ="https://img.shields.io/badge/nodejs%20v16.17.0-339933.svg?&style=flat&logo=Node.js&logoColor=white"/> 
+<img alt="mariadb" src ="https://img.shields.io/badge/mariadb-003545.svg?&style=flat&logo=MariaDB&logoColor=white"/> 
+<img alt="express" src ="https://img.shields.io/badge/express%20v4.16.1-000000.svg?&style=flat&logo=Express&logoColor=white"/> 
+
+ - Node.js v16.17.0
+ - express
+ - MariaDB
 
 <!--
  - express, laravel, sptring boot 등 사용한 프레임워크 
@@ -68,7 +74,7 @@ $ npm run start
  > <팀원>  
  > 김지환, [📩 e-mail](kjhwan0802@naver.com), [@Turtle-Hwan](https://github.com/Turtle-Hwan)  
  > 가수연, [📩 e-mail](bagger3025@gmail.com), [@bagger3025](https://github.com/bagger3025)  
- > 김선우, [📩 e-mail](sunwoo005@naver.com), [@Joraeng](https://github.com/Joraeng)  
+ > 김선우, [📩 e-mail](sunwoo005@naver.com), [@Meoraeng](https://github.com/Meoraeng)  
  > 민진홍, [📩 e-mail](jinhong_min@naver.com), [@jinhongee](https://github.com/jinhongee)  
  > 손현진, [📩 e-mail](thsguswls610@gmail.com), [@sonyrainy](https://github.com/sonyrainy)  
  > 양승모, [📩 e-mail](seungmo2000@gmail.com), [@SeungmoYang](https://github.com/SeungmoYang)  
