@@ -7,7 +7,7 @@ const route = Router();
 
 // 로그인
 // GET /accounts/sign
-route.get("/sign", async (req,res)=>{
+route.get("/sign", async (req, res) => {
 	if (!req.user) return res.status(401).end();
 
 	return res.status(200).json(req.user);
@@ -18,7 +18,7 @@ route.get("/sign", async (req,res)=>{
 //   id: string,
 //   password: string
 // }
-route.post("/sign", passport.authenticate('local'), async (req, res) => {
+route.post("/sign", passport.authenticate("local"), async (req, res) => {
 	return res.status(200).json(req.user);
 	// 폼 형식 불일치시 400 코드 반환
 	// 실패시 401 코드 반환
@@ -39,10 +39,23 @@ route.delete("/sign", async (req, res) => {
 // 회원가입
 // POST /accounts/account
 route.post("/account", async (req, res) => {
-	const { token, username, id: userId, passwd: password, classType } = req.body;
-	const result = await AccountService.signup({ token, username, userId, password, classType });
+	const {
+		token,
+		username,
+		id: userId,
+		passwd: password,
+		classType,
+	} = req.body;
+	const result = await AccountService.signup({
+		token,
+		username,
+		userId,
+		password,
+		classType,
+	});
 
-	if (result.success) Logger.info(`[Accounts] ${userId} 유저가 회원가입했습니다.`);
+	if (result.success)
+		Logger.info(`[Accounts] ${userId} 유저가 회원가입했습니다.`);
 	return res.status(result.status).json({ ...result, status: undefined });
 });
 
@@ -55,7 +68,6 @@ route.get("/signup-token", async (req, res) => {
 	const result = await AccountService.generateSigninToken();
 	return res.status(result.status).json({ ...result, status: undefined });
 });
-
 
 // 회원탈퇴
 // DELETE /accounts/account
