@@ -17,10 +17,10 @@ const nextConfig = withPlugins([
 				},
 			];
 		},
-		assetPrefix: isProduction ? '/WEB_MiliDream_Dreamers/' : '',
+		assetPrefix: isProduction ? 'https://osamhack2022.github.io/WEB_MiliDream_Dreamers/' : '',
 		images: {
 			loader: 'imgix',
-			path: '/WEB_MiliDream_Dreamers/',
+			path: 'https://osamhack2022.github.io/WEB_MiliDream_Dreamers/',
 		},
 		basePath: '/WEB_MiliDream_Dreamers',
 	}
