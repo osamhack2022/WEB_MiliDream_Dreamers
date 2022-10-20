@@ -40,6 +40,7 @@ jobs:
         run: |
           echo "DESTINATION_URL=$DESTINATION_URL" >> ./frontend/.env
           echo "SOURCE_PATH=$SOURCE_PATH" >> ./frontend/.env
+          echo "DEPLOY_METHOD=gh-page" >> ./frontend/.env
         env:
           DESTINATION_URL: ${{ secrets.DESTINATION_URL }}
           SOURCE_PATH: ${{ secrets.SOURCE_PATH }}
