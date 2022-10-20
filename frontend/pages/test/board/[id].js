@@ -13,6 +13,7 @@ function Comment({ comment, user }) {
 }
 
 export default function postBoardId({ post }) {
+	console.log("post:", post)
 	const { user, getUserFromAPI, userLoading } = useContext(myContext)
 	const router = useRouter();
 	useEffect(() => {
@@ -118,8 +119,8 @@ export default function postBoardId({ post }) {
 			<ul>
 				{myPost.comments.map(ele => {
 					console.log(ele)
-					return <div>
-						<Comment key={ele.commentKey} comment={ele} user={user} />
+					return <div key={ele.commentKey}>
+						<Comment comment={ele} user={user} />
 						{ele.childComments.map(childEle => {
 							return <Comment key={ele.commentKey} comment={childEle} user={user} />
 						})}
