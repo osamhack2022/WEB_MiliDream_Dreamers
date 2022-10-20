@@ -80,26 +80,19 @@ route
 		 * @returns
 		 */
 		async (req, res) => {
-			const {
-				token,
-				username,
-				id: userId,
-				passwd: password,
-				classType,
-			} = req.body;
-			const result = await AccountService.signup({
-				token,
-				username,
-				userId,
-				password,
-				classType,
-			});
+			const { userId } = req.body;
+			try {
+				const result = await AccountService.signup(req.body);
 
-			if (result.success)
-				Logger.info(`[Accounts] ${userId} 유저가 회원가입했습니다.`);
-			return res
-				.status(result.status)
-				.json({ ...result, status: undefined });
+				if (result.success)
+					Logger.info(
+						`[Accounts] ${userId} 유저가 회원가입했습니다.`
+					);
+
+				return res.status(result.status).end();
+			} catch (err) {
+				res.status(400).json({ err: err.message });
+			}
 		}
 	)
 	.delete(
@@ -111,18 +104,17 @@ route
 		 * @returns
 		 */
 		async (req, res) => {
-			if (req.user) {
-				req.logOut(async (err) => {
-					if (err) {
-						res.status(400).json({ err: "Error!" });
-					}
-					await AccountService.remove({ userId: req.user.userId });
-				});
-			} else {
+			if (!req.user) {
 				return res.status(401).json({ err: "Unauthorized" });
 			}
 
-			return res.status(200).end();
+			req.logOut(async (err) => {
+				if (err) {
+					res.status(400).json({ err: "Error while logOut!" });
+				}
+				await AccountService.remove({ userId: req.user.userId });
+				res.status(200).end();
+			});
 		}
 	);
 
@@ -143,9 +135,9 @@ route.get("/signup-token", async (req, res) => {
  * 회원가입 폼 입력값 확인
  */
 route.post("/attempt", async (req, res) => {
-	const { token, username, userId } = req.body;
-	const result = await AccountService.attempt({ token, username, userId });
-	return res.status(result.status).json({ ...result, status: undefined });
+	const { token, userName, userId } = req.body;
+	const result = await AccountService.attempt({ token, userName, userId });
+	return res.status(result.status).end();
 });
 
 export default route;

@@ -28,13 +28,7 @@ export async function generateSigninToken(agreements = "") {
 	return { success: true, status: 200, join_token: token };
 }
 
-export async function signup({
-	token,
-	username,
-	userId,
-	password,
-	classType = "미정",
-}) {
+export async function signup({ userId, password, userName, userClass, token }) {
 	if (!checkToken(token))
 		return {
 			success: false,
@@ -49,7 +43,7 @@ export async function signup({
 			error_code: -2,
 			error: "UserId Invalid or Duplicates.",
 		};
-	if (!(await checkUsername(username)))
+	if (!(await checkUsername(userName)))
 		return {
 			success: false,
 			status: 403,
@@ -63,7 +57,7 @@ export async function signup({
 			error_code: -4,
 			error: "Invalid password",
 		};
-	if (accountConfig.UserClass[classType] == undefined)
+	if (accountConfig.UserClass[userClass] == undefined)
 		return {
 			success: false,
 			status: 403,
@@ -72,10 +66,10 @@ export async function signup({
 		};
 
 	const success = await Account.create({
-		username,
+		userName,
 		userId,
 		password,
-		classKey: accountConfig.UserClass[classType],
+		userClass,
 	});
 
 	return { success: success, status: success ? "200" : "400" };
