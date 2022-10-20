@@ -7,7 +7,7 @@ name: Deploy Next.js site to Pages
 on:
   # Runs on pushes targeting the default branch and it runs only file change in frontend path
   push:
-    paths: ["frontend/**"]
+    paths: ["frontend/**", ".github/workflows/gh-pages.yml"]
     branches: ["main"]
 
   # Allows you to run this workflow manually from the Actions tab
@@ -35,6 +35,14 @@ jobs:
 
       - name: npm Install and Build
         uses: actions/setup-node@v3
+      # Github Repository Secrets를 통해 환경 변수 파일을 생성합니다.
+      - name: Generate Environment Variables File for Production
+        run: |
+          echo "DESTINATION_URL=$DESTINATION_URL" >> ./frontend/.env
+          echo "SOURCE_PATH=$SOURCE_PATH" >> ./frontend/.env
+        env:
+          DESTINATION_URL: ${{ secrets.DESTINATION_URL }}
+          SOURCE_PATH: ${{ secrets.SOURCE_PATH }}
       - run: cd frontend && npm install && npm run build && npm run export
         env:
           CI: true
