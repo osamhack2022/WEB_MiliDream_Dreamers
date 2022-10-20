@@ -79,11 +79,6 @@ export default function NavBar() {
               <a>user</a>
             </Link>
           </li>
-          <li>
-            <Link href="/popup/0">
-              <a>popup</a>
-            </Link>
-          </li>
         </ul>
 
         {/*styled jsx 방식 : js 백틱을 이용해 일반 css 코드를 삽입할 수 있다. 하지만 이 css가 적용받는 범위는 함수 내부로 한정된다.*/}
