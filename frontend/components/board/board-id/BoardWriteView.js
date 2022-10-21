@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 function displayedAt(createdAt) {
 	const milliSeconds = Date.parse(new Date()) - Date.parse(createdAt)
@@ -20,19 +21,26 @@ function displayedAt(createdAt) {
 }
 
 function ContentRow({ article }) {
-	//console.log(article)
-	//console.log(article.viewCount)
-	//console.log(displayedAt(article.postTime))
-	//console.log(Date.parse(new Date()) - Date.parse(article.postTime))
+	const router = useRouter();
 	return (
-		<tr>
-			<th scope="row" className="count content">{article.postKey}</th>
-			<td className="title content">{article.title}</td>
-			<td className="writeUser content">{article.userKey}</td>
-			<td className="time content gray">{displayedAt(article.postTime)}</td>
-			<td className="viewCount content gray">{article.viewCount}</td>
-			<td className="heart content gray">{Math.ceil(article.viewCount / 10)}</td>
-		</tr>
+		<Link href={`/board/${router.query["board-id"]}/${article.postKey}`}>
+			<a>
+				<tr>
+					<th scope="row" className="count content">{article.postKey}</th>
+					<td className="title content">{article.title}</td>
+					<td className="writeUser content">{article.userKey}</td>
+					<td className="time content gray">{displayedAt(article.postTime)}</td>
+					<td className="viewCount content gray">{article.viewCount}</td>
+					<td className="heart content gray">{Math.ceil(article.viewCount / 10)}</td>
+					<style jsx>{`
+					.title.content:after {
+						content: "[${article.comments.length}]";
+						margin-left: .5em;
+					}
+					`}</style>
+				</tr>
+			</a>
+		</Link>
 	)
 }
 
@@ -50,9 +58,8 @@ export default function BoardWriteView() {
 
 	board && board.map((article) => {
 		const articleId = article['postKey'];
-		//console.log(article.postKey);
+		//console.log(article.comments);
 	})
-
 
 	return (
 		<div className="table-box">
@@ -68,7 +75,7 @@ export default function BoardWriteView() {
 					</tr>
 				</thead>
 				<tbody className="table-group-divider">
-					{board && board.map((article) => <ContentRow article={article} />)}
+					{board && board.slice(0).reverse().map((article) => <ContentRow article={article} />)}
 				</tbody>
 			</table>
 			<nav aria-label="Page navigation example">
@@ -91,8 +98,14 @@ export default function BoardWriteView() {
 				</ul>
 			</nav>
 			<style global jsx>{`
+			a {
+				color: transparent;
+			}
+			a:hover {
+				color: transparent;
+			}
         .table-box {
-          border: 1px solid #A593E0;
+			border: 1px solid #A593E0;
         }
         .table {
           --bs-table-color: #A593E0;
@@ -118,11 +131,11 @@ export default function BoardWriteView() {
         .gray {
           color: #A7A7A7;
         }
-        tbody {
+        tbody > a{
           display: flex;
           flex-direction: column;
         }
-        tbody > tr:after {
+        tbody > a:after {
           content: "";
           display: block;
           width: 970px;
@@ -132,7 +145,7 @@ export default function BoardWriteView() {
         thead > tr {
           height: 45px;
         }
-        tbody > tr {
+        tbody > a  {
           height: 40px;
         }
         .count { width: 95px; }
@@ -143,10 +156,6 @@ export default function BoardWriteView() {
         .heart { width: 85px; }
         .title.content {
           text-align: start;
-        }
-        .title.content:after {
-          content: "[5]";
-          margin-left: .5em;
         }
         /*위까지는 table 관련 css 작업 // 아래부터는 pagenation botton css 작업*/
         nav {

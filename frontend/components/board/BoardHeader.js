@@ -1,7 +1,7 @@
 import BoardSearchBar from "./BoardSearchBar";
 
 export default function BoardHeader({ type, boardId }) {
-  console.log(type, boardId);
+  //console.log(type, boardId);
   if (boardId === "MAIN") {
     return (
       <div className="headerB">
