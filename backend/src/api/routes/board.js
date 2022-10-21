@@ -82,32 +82,33 @@ router
 	.get(async (req, res) => {
 		try {
 			const result = await RecommendService.getRecommendbyBoardId(
-				req.params.boardId,
-				req.query
+				req.params.boardId
 			);
 			res.status(200).json(result);
 		} catch (err) {
 			res.status(400).json({ err: err.message });
 		}
 	})
-	.post(async (req, res) => {
+	.post(checkUserExist, async (req, res) => {
 		try {
-			await RecommendService.postRecommendbyBoardId(
-				req.params.boardId,
-				req.body
-			);
-			res.status(201).end();
+			const { recommendCount } =
+				await RecommendService.postRecommendbyBoardId(
+					req.params.boardId,
+					req.user.userKey
+				);
+			res.status(200).json({ recommendCount });
 		} catch (err) {
 			res.status(400).json({ err: err.message });
 		}
 	})
-	.delete(async (req, res) => {
+	.delete(checkUserExist, async (req, res) => {
 		try {
-			await RecommendService.deleteRecommendbyBoardId(
-				req.params.boardId,
-				req.body
-			);
-			res.status(204).end();
+			const { recommendCount } =
+				await RecommendService.deleteRecommendbyBoardId(
+					req.params.boardId,
+					req.user.userKey
+				);
+			res.status(200).json({ recommendCount });
 		} catch (err) {
 			res.status(400).json({ err: err.message });
 		}
