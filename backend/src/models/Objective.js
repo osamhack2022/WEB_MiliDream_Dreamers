@@ -1,22 +1,17 @@
 import mariadb from "../loaders/mariadb"
 
 export default class Objective {
-	constructor(newObjective) {
-		this.purposeKey = newObjective.purposeKey;
-		this.userKey = newObjective.userKey;
-		this.title = newObjective.title;
-		this.progress = newObjective.progress;
-		this.explain = newObjective.explain;
-	}
 	static async getAllobjective() {
 		const conn = await mariadb.conn();
 		const sql = `SELECT o.objectiveKey, o.userKey, o.title, o.progress, o.explain
 					 FROM Objective as o , User as u
 					 WHERE o.userKey = u.userKey;`;
-		try { const result = await conn.query(sql); }
+		try {
+			const result = await conn.query(sql);
+			return result;
+		}
 		catch (err) { throw err }
-		finally { conn.release() };
-		return result;
+		finally { conn.release(); }
 	}
 	/**
 	 * 요청받은 진행상태에 해동되는 목표 데이터만 긁어 모은다
@@ -28,10 +23,12 @@ export default class Objective {
 					 FROM Objective as o, User as u
 					 WHERE o.userKey = u.userkey
 					 AND o.progress=?;`
-		try { const result = await conn.query(sql, [progress]) }
+		try {
+			const result = await conn.query(sql, [progress]);
+			return result;
+		}
 		catch (err) { throw err }
-		finally { conn.release() };
-		return result;
+		finally { conn.release(); }
 	}
 	/**
 	 * id를 통해 목표데이터를 특정하여 세부정보를 확인
@@ -45,12 +42,12 @@ export default class Objective {
 					 LEFT JOIN User as u ON o.userKey = u.userKey
 					 WHERE o.objectiveKey=?;`
 		try {
-			const result = await conn.query(sql, [objectiveKey])
-			if (result.length === 0) throw new Error(`objectiveKey = "${objectiveKey}"에 해당하는 목표 데이터가 없습니다.`)
+			const result = await conn.query(sql, [objectiveKey]);
+			if (result.length === 0) throw new Error(`objectiveKey = "${objectiveKey}"에 해당하는 목표 데이터가 없습니다.`);
 			return result;
 		}
 		catch (err) { throw err }
-		finally { conn.release() };
+		finally { conn.release(); }
 	}
 	static async createObjective({ title, progress, explain, userKey }) {
 		const conn = await mariadb.conn();
@@ -59,11 +56,12 @@ export default class Objective {
 		try {
 			const result = await conn.query(sql, [
 				title,
-				prgoress,
+				progress,
 				explain,
-				userKey])
+				userKey]);
+			/** @TODO handle result */
 		} catch (err) { throw err }
-		finally { conn.release() };
+		finally { conn.release(); }
 	}
 	static async updateOnlyProgrerssById(objectiveKey, { progress }) {
 		const conn = await mariadb.conn();
@@ -74,7 +72,7 @@ export default class Objective {
 		return
 	}
 	static async updateObjectiveById(objectiveKey, { progress, title, explain }) {
-		let sql = `UPDATE Objective SET`
+		let sql = `UPDATE Objective SET `
 		const updateList = []; // SET 뒤에 오는 값, 어떤 속성에 대해 수정을 할 것인지 결정
 		const updateValue = []; // ?에 실제로 대입할 값, query메소드 두번째 인자의 배열[]에 들어감
 
@@ -88,10 +86,14 @@ export default class Objective {
 		}
 		if (progress !== undefined) {
 			updateList.push(`prgoress=?`);
-			updateValue.push(prgoress);
+			updateValue.push(progress);
 		}
 		sql += updateList.join(","); // 배열의 values를 합치며 구분자는 콤마(,)
-		sql += `WHERE objectiveKey=?;`;
+		sql += ` WHERE objectiveKey=?;`;
+
+		if (!updateList.length) {
+			throw new Error(`목표 정보를 받지 못했습니다. requires LEAST 1 parameter of [progress, title, explain]`);
+		}
 
 		const conn = await mariadb.conn();
 		try {
