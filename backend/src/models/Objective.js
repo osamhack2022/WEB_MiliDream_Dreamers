@@ -86,7 +86,7 @@ export default class Objective {
 			updateList.push(`explain=?`);
 			updateValue.push(explain);
 		}
-		if (prgoress !== undefined) {
+		if (progress !== undefined) {
 			updateList.push(`prgoress=?`);
 			updateValue.push(prgoress);
 		}
@@ -103,18 +103,18 @@ export default class Objective {
 		} catch (err) { throw err }
 		finally { conn.release() };
 	}
-	static async deleteObjectiveById(objectiveKey){
+	static async deleteObjectiveById(objectiveKey) {
 		const conn = await mariadb.conn();
 		const sql = `DELETE FROM Objective WHERE ObjectiveKey = ?;`;
 
 		try {
 			const result = await conn.query(sql, [objectiveKey])
-			if(result.affectedRows === 0){
+			if (result.affectedRows === 0) {
 				throw Error(`commentKey="${objectiveKey}"에 해당하는 목표가 없습니다`)
 			}
 			return
-		}catch(err) {throw err}
-		finally{conn.release()};
+		} catch (err) { throw err }
+		finally { conn.release() };
 
 	}
 }
