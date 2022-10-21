@@ -81,7 +81,7 @@ async function getRecommendersForAllResult(result, conn) {
 }
 
 async function updateViewCount(postKey, conn) {
-	const sql = `UPDATE Post SET viewCount=viewCount+1 WHERE postKey=?`;
+	const sql = `UPDATE Post SET viewCount=viewCount+1 WHERE postKey=?;`;
 	await conn.query(sql, [postKey]);
 }
 
@@ -93,7 +93,7 @@ async function deleteRecruit(boardId, conn) {
 	const clauses = result.map((_) => "postKey=?"),
 		values = result.map((ele) => ele.recruitKey);
 	const sql2 = `DELETE FROM Post WHERE ${clauses.join(" OR ")};`;
-	const result2 = await conn.query(sql2, values);
+	await conn.query(sql2, values);
 }
 
 async function processAllPosts(result, conn) {
@@ -108,14 +108,15 @@ export default class Post {
 		let sql = `
 			SELECT p.postKey, p.userKey, p.categoryKey, c.categoryName, p.postTime, p.title, p.body, p.viewCount
 			FROM Post as p
-			LEFT JOIN Category as c ON c.categoryKey=p.categoryKey`;
+			LEFT JOIN Category as c ON c.categoryKey=p.categoryKey
+			`;
 		const queryValue = [];
 		if (categoryKey) {
-			sql += `WHERE c.categoryKey=?`;
+			sql += `WHERE c.categoryKey=?;`;
 			queryValue.push(categoryKey);
 		} else {
 			// 1=="공모전&대회 리스트", 2=="사람모집게시글"
-			sql += `WHERE c.categoryKey NOT IN (1, 2)`;
+			sql += `WHERE c.categoryKey NOT IN (1, 2);`;
 		}
 
 		const conn = await mariadb.getConnection();
@@ -173,7 +174,7 @@ export default class Post {
 			SELECT p.postKey, p.userKey, p.categoryKey, c.categoryName, p.postTime, p.title, p.body, p.viewCount
 			FROM Post as p
 			LEFT JOIN Category as c ON c.categoryKey=p.categoryKey
-			WHERE`;
+			WHERE `;
 		const queryValue = [];
 
 		if (title) {
@@ -226,8 +227,7 @@ export default class Post {
 			SELECT p.postKey, p.userKey, p.categoryKey, c.categoryName, p.postTime, p.title, p.body, p.viewCount
 			FROM Post as p
 			LEFT JOIN Category as c ON c.categoryKey=p.categoryKey
-			WHERE p.postKey=?
-			`;
+			WHERE p.postKey=?;`;
 		const conn = await mariadb.getConnection();
 		try {
 			let result = await conn.query(sql, [postKey]);
