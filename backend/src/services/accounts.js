@@ -25,54 +25,25 @@ export async function generateSigninToken(agreements = "") {
 		agreements: agreements.split(","),
 	});
 
-	return { success: true, status: 200, join_token: token };
+	return token;
 }
 
 export async function signup({ userId, password, userName, userClass, token }) {
-	if (!checkToken(token))
-		return {
-			success: false,
-			status: 403,
-			error_code: -1,
-			error: "Invalid join_token.",
-		};
+	if (!checkToken(token)) throw Error("Invalid join_token.");
 	if (!(await checkUserId(userId)))
-		return {
-			success: false,
-			status: 403,
-			error_code: -2,
-			error: "UserId Invalid or Duplicates.",
-		};
+		throw Error("UserId Invalid or Duplicates.");
 	if (!(await checkUsername(userName)))
-		return {
-			success: false,
-			status: 403,
-			error_code: -3,
-			error: "UserName Invalid or Duplicates.",
-		};
-	if (!checkPassword(password))
-		return {
-			success: false,
-			status: 403,
-			error_code: -4,
-			error: "Invalid password",
-		};
+		throw Error("UserName Invalid or Duplicates.");
+	if (!checkPassword(password)) throw Error("Invalid password");
 	if (accountConfig.UserClass[userClass] == undefined)
-		return {
-			success: false,
-			status: 403,
-			error_code: -5,
-			error: "ClassType Invalid",
-		};
+		throw Error("ClassType Invalid");
 
-	const success = await Account.create({
+	return Account.create({
 		userName,
 		userId,
 		password,
 		userClass,
 	});
-
-	return { success: success, status: success ? "200" : "400" };
 }
 
 /**
@@ -80,35 +51,22 @@ export async function signup({ userId, password, userName, userClass, token }) {
  *
  * @export
  * @param {{token: string, username:string, userId:string}} { token, username, id, passwd }
- * @return {Promise<boolean>}
+ * @return {Promise<void>}
  */
 export async function attempt({ token, username, userId }) {
-	if (!checkToken(token))
-		return {
-			success: false,
-			status: 403,
-			error_code: -1,
-			error: "Invalid join_token.",
-		};
+	if (!checkToken(token)) throw Error("Invalid join_token.");
+
 	if (userId && !(await checkUserId(userId)))
-		return {
-			success: false,
-			status: 403,
-			error_code: -2,
-			error: "UserId Invalid or Duplicates.",
-		};
+		throw Error("UserId Invalid or Duplicates.");
+
 	if (username && !(await checkUsername(username)))
-		return {
-			success: false,
-			status: 403,
-			error_code: -3,
-			error: "UserName Invalid or Duplicates.",
-		};
-	return { success: true, status: 200 };
+		throw Error("UserName Invalid or Duplicates.");
+
+	return;
 }
 
-export async function remove({ userId }) {
-	return Account.remove({ userId });
+export async function remove(userInfo) {
+	return Account.remove(userInfo);
 }
 
 /**
@@ -159,7 +117,5 @@ async function checkUsername(username) {
 }
 async function checkPassword(password) {
 	if (!password) return false;
-	if (!accountConfig.userPwRegex.test(password)) return false;
-
-	return true;
+	return accountConfig.userPwRegex.test(password);
 }

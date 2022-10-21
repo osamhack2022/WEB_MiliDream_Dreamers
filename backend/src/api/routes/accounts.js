@@ -17,8 +17,9 @@ route
 		 * @param {*} res
 		 * @returns
 		 */
-		async (req, res) => {
-			if (!req.user) return res.status(401).end();
+		(req, res) => {
+			if (!req.user)
+				return res.status(401).json({ err: "User not Exist!" });
 
 			return res.status(200).json(req.user);
 		}
@@ -51,7 +52,7 @@ route
 		 * @param {*} res
 		 * @returns
 		 */
-		async (req, res) => {
+		(req, res) => {
 			if (!req.user) {
 				req.status(400).json({ err: "user가 로그인되어 있지 않음" });
 			}
@@ -74,6 +75,7 @@ route
 	.post(
 		/**
 		 * API: POST /accounts/account
+		 * req.body = {userId, password, userName, userClass, token}
 		 * 회원가입
 		 * @param {*} req
 		 * @param {*} res
@@ -82,14 +84,9 @@ route
 		async (req, res) => {
 			const { userId } = req.body;
 			try {
-				const result = await AccountService.signup(req.body);
-
-				if (result.success)
-					Logger.info(
-						`[Accounts] ${userId} 유저가 회원가입했습니다.`
-					);
-
-				return res.status(result.status).end();
+				await AccountService.signup(req.body);
+				Logger.info(`[Accounts] ${userId} 유저가 회원가입했습니다.`);
+				return res.status(200).end();
 			} catch (err) {
 				res.status(400).json({ err: err.message });
 			}
@@ -112,7 +109,7 @@ route
 				if (err) {
 					res.status(400).json({ err: "Error while logOut!" });
 				}
-				await AccountService.remove({ userId: req.user.userId });
+				await AccountService.remove({ userKey: req.user.userKey });
 				res.status(200).end();
 			});
 		}
@@ -126,8 +123,8 @@ route.get("/signup-token", async (req, res) => {
 	// const agreements = req.query?.agreements;
 	// if (!agreements) return res.status(400).json({ error: "agreements list string(split by comma(,)) required." });
 
-	const result = await AccountService.generateSigninToken();
-	return res.status(result.status).json({ ...result, status: undefined });
+	const token = await AccountService.generateSigninToken();
+	return res.status(200).json({ token });
 });
 
 /**
@@ -136,8 +133,12 @@ route.get("/signup-token", async (req, res) => {
  */
 route.post("/attempt", async (req, res) => {
 	const { token, userName, userId } = req.body;
-	const result = await AccountService.attempt({ token, userName, userId });
-	return res.status(result.status).end();
+	try {
+		await AccountService.attempt({ token, userName, userId });
+		return res.status(200).end();
+	} catch (err) {
+		res.status(400).json({ err: err.message });
+	}
 });
 
 export default route;

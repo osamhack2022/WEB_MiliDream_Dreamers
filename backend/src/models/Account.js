@@ -5,15 +5,19 @@ import mariadb from "../loaders/mariadb.js";
 export default class Account {
 	static async create({ userName, userId, password, userClass }) {
 		const sql =
-			"INSERT INTO `User` (`userKey`, `userName`, `id`, `passwd`, `classKey`) VALUES (NULL, ?, ?, sha2(?, 256), ?)";
+			"INSERT INTO User (userKey, userName, id, passwd, classKey) VALUES (NULL, ?, ?, sha2(?, 256), ?)";
 		try {
-			const result = await maraidb.query(sql, [
+			const result = await mariadb.query(sql, [
 				userName,
 				userId,
 				password,
 				userClass,
 			]);
-			return result.affectedRows === 1;
+
+			if (result.affectedRows !== 1) {
+				throw Error("Could not insert");
+			}
+			return;
 		} catch (err) {
 			throw err;
 		}
@@ -24,7 +28,7 @@ export default class Account {
 	 *
 	 * @static
 	 * @param {*} { userId, password }
-	 * @return {Promise<{userId: string, userName: string, userClass: number}>} 성공시 유저 객체, 실패시 false
+	 * @return {Promise<{userId: string, userName: string, userClass: number} | boolean>} 성공시 유저 객체, 실패시 false
 	 * @memberof Account
 	 */
 	static async login({ userId, password }) {
@@ -40,12 +44,14 @@ export default class Account {
 		}
 	}
 
-	static async remove({ userId }) {
-		const sql = "DELETE FROM User WHERE id = ?;";
+	static async remove({ userKey }) {
+		const sql = "DELETE FROM User WHERE userKey = ?;";
 		try {
-			const result = await mariadb.query(sql, [userId]);
-
-			return result.affectedRows == 1;
+			const result = await mariadb.query(sql, [userKey]);
+			if (result.affectedRows !== 1) {
+				throw Error("Could not delete user!");
+			}
+			return;
 		} catch (err) {
 			throw err;
 		}
