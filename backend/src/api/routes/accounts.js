@@ -123,7 +123,7 @@ route.get("/signup-token", async (req, res) => {
 	// const agreements = req.query?.agreements;
 	// if (!agreements) return res.status(400).json({ error: "agreements list string(split by comma(,)) required." });
 
-	const { token } = await AccountService.generateSigninToken();
+	const token = await AccountService.generateSigninToken();
 	return res.status(200).json({ token });
 });
 
