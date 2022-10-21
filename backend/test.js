@@ -1,10 +1,14 @@
 import { config } from "dotenv";
 import axios from "axios";
+import { wrapper } from "axios-cookiejar-support";
+import tough from "tough-cookie";
 import crypto from "crypto";
 config();
 const PORT = process.env.PORT || 3000;
 const baseUrl = `http://127.0.0.1:${PORT}/`;
-const axiosConfig = { validateStatus: false };
+const cookieJar = new tough.CookieJar();
+const axiosConfig = { validateStatus: false, jar: cookieJar };
+const client = wrapper(axios.create(axiosConfig));
 let testData = {};
 
 async function test() {
@@ -13,8 +17,8 @@ async function test() {
 
 async function test_accounts() {
 	let lastToken = "";
-	try {
-		let tokenRequest = await axios.get(baseUrl + "accounts/signup-token", axiosConfig);
+	try { // 토큰
+		let tokenRequest = await client.get(baseUrl + "accounts/signup-token");
 		expect(tokenRequest.status).toBe(200);
 
 		let responseData = tokenRequest.data;
@@ -25,14 +29,15 @@ async function test_accounts() {
 		console.log("[GET /accounts/signup-token] Success");
 	}
 	catch (ex) { console.error(ex.message); }
-	try {
+
+	try { // 회원가입 시도
 		testData.userId = await randomText(5);
 		testData.userName = await randomText(5);
 		testData.password = await randomText(20);
 		console.log(testData);
-		let attemptRequest = await axios.post(baseUrl + "accounts/attempt",
-			{ userId: testData.userId, userName: testData.userName, token: testData.token },
-			axiosConfig
+		let attemptRequest = await client.post(baseUrl + "accounts/attempt",
+			{ userId: testData.userId, userName: testData.userName, token: testData.token }
+
 		);
 		let responseData = attemptRequest.data;
 		console.log(responseData);
@@ -42,10 +47,11 @@ async function test_accounts() {
 		console.log("[POST /accounts/attempt] Success");
 	}
 	catch (ex) { console.error(ex.message) }
-	try {
-		let registerRequest = await axios.post(baseUrl + "accounts/account",
-			{ userId: testData.userId, password: testData.password, userName: testData.userName, userClass: 1, token: testData.token },
-			axiosConfig
+
+	try { // 회원가입
+		let registerRequest = await client.post(baseUrl + "accounts/account",
+			{ userId: testData.userId, password: testData.password, userName: testData.userName, userClass: 1, token: testData.token }
+
 		);
 		let responseData = registerRequest.data;
 		console.log(responseData);
@@ -53,7 +59,54 @@ async function test_accounts() {
 
 		console.log("[POST /accounts/account] Success");
 	}
-	catch (ex) { console.error(ex.message) }
+	catch (ex) { console.error(ex.message); }
+
+	try {
+		let loginRequest = await client.post(baseUrl + "accounts/sign",
+			{ id: testData.userId, password: testData.password }
+
+		);
+		let responseData = loginRequest.data;
+		console.log(responseData);
+		expect(loginRequest.status).toBe(200);
+
+
+		console.log("[POST /accounts/sign] Success");
+	}
+	catch (ex) { console.error(ex.message); }
+
+	try {
+		let getUserRequest = await client.get(baseUrl + "accounts/sign");
+		let responseData = getUserRequest.data;
+		console.log(responseData);
+		expect(getUserRequest.status).toBe(200);
+
+
+		console.log("[GET /accounts/sign] Success");
+	}
+	catch (ex) { console.error(ex.message); }
+
+	try { // 로그아웃 200
+		let logoutRequest = await client.delete(baseUrl + "accounts/sign");
+		let responseData = logoutRequest.data;
+		console.log(responseData);
+		expect(logoutRequest.status).toBe(200);
+
+
+		console.log("[DELETE /accounts/sign] Success");
+	}
+	catch (ex) { console.error(ex.message); }
+
+	try { // 로그아웃 400
+		let logoutRequest = await client.delete(baseUrl + "accounts/sign");
+		let responseData = logoutRequest.data;
+		console.log(responseData);
+		expect(logoutRequest.status).toBe(200);
+
+
+		console.log("[DELETE /accounts/sign] Success");
+	}
+	catch (ex) { console.error(ex.message); }
 }
 
 function expect(result) {
