@@ -1,6 +1,7 @@
 import { Router } from "express";
 import BoardService from "../../services/board.js";
 import RecommendService from "../../services/recommend.js";
+import { checkUserExist } from "../middlewares/index.js";
 /**
  * @todo multer 머지 후 app.post에 upload.array('postImages') 적용
  */
@@ -13,18 +14,16 @@ router
 	.get(async (req, res) => {
 		try {
 			const result = await BoardService.getAllBoards(req.query);
-			res.json(result);
+			res.status(200).json(result);
 		} catch (err) {
 			res.status(400).json({ err: err.message });
 		}
 	})
-	.post(async (req, res) => {
+	.post(checkUserExist, async (req, res) => {
 		try {
-			/** @todo 유저 인증 추후 활성화 */
-			// if (!req.user) res.status(401).json({ err: REQUIRE_SESSION_MSG });
-			const postDTO = { ...req.body, userKey: req.user.userId || 1 };
+			const postDTO = { ...req.body, userKey: req.user.userKey };
 			const result = await BoardService.postBoard(postDTO);
-			res.json(result);
+			res.status(200).json(result);
 		} catch (err) {
 			res.status(400).json({ err: err.message });
 		}
@@ -40,10 +39,10 @@ router.get("/query", async (req, res) => {
 	}
 });
 
-router.get("/tags", async (req, res) => {
+router.get("/category", async (req, res) => {
 	try {
-		const result = await BoardService.getAllTags();
-		res.json(result);
+		const result = await BoardService.getAllCategories();
+		res.status(200).json(result);
 	} catch (err) {
 		res.status(400).json({ err: err.message });
 	}
@@ -55,7 +54,7 @@ router
 	.get(async (req, res) => {
 		try {
 			const result = await BoardService.getbyBoardId(req.params.boardId);
-			res.json(result);
+			res.status(200).json(result);
 		} catch (err) {
 			res.status(400).json({ err: err.message });
 		}
@@ -72,7 +71,7 @@ router
 	.delete(async (req, res) => {
 		try {
 			await BoardService.deletebyBoardId(req.params.boardId);
-			res.status(204).end();
+			res.status(200).end();
 		} catch (err) {
 			res.status(400).json({ err: err.message });
 		}
