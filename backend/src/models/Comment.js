@@ -1,6 +1,6 @@
 import mariadb from "../loaders/mariadb.js";
 export default class Comment {
-	static async postComment({ userKey, postKey, body, parentKey }) {
+	static async postComment(userKey, { postKey, body, parentKey }) {
 		if (!userKey || !postKey || !body) {
 			throw Error(
 				`입력값이 충분하지 않음, userKey="${userKey}", postKey="${postKey}", body="${body}"`
@@ -20,9 +20,9 @@ export default class Comment {
 
 		return;
 	}
-	static async updateCommentbycommentId(commentKey, { body }) {
-		const sql = `UPDATE Comment SET body=? WHERE commentKey=?;`;
-		const result = await mariadb.query(sql, [body, commentKey]);
+	static async updateCommentbycommentId(commentKey, userKey, { body }) {
+		const sql = `UPDATE Comment SET body=? WHERE commentKey=? AND userKey=?;`;
+		const result = await mariadb.query(sql, [body, commentKey, userKey]);
 		if (result.affectedRows === 0) {
 			throw Error(
 				`commentKey="${commentKey}"인 댓글 업데이트 할 수 없음`
@@ -31,13 +31,13 @@ export default class Comment {
 
 		return;
 	}
-	static async deleteCommentbycommentId(commentKey) {
-		const sql = `DELETE FROM Comment WHERE commentKey=?;`;
-		const result = await mariadb.query(sql, [commentKey]);
+	static async deleteCommentbycommentId(commentKey, userKey) {
+		const sql = `DELETE FROM Comment WHERE commentKey=? AND userKey = ?;`;
+		const result = await mariadb.query(sql, [commentKey, userKey]);
 		if (result.affectedRows === 0) {
 			throw Error(`commentKey="${commentKey}"에 해당하는 댓글 없음`);
 		}
-		
+
 		return;
 	}
 }
