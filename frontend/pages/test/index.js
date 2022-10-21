@@ -1,52 +1,51 @@
-import { TestNavBar, Posting } from "./_component"
+import { TestNavBar, Posting } from "./_component";
 import { useContext, useEffect } from "react";
-import { myContext } from "./_hook"
+import { myContext } from "./_hook";
 import Link from "next/link";
 
-function showLoggedIn(user) {
-	console.log("user is ", user)
-	if (user)
-		return <div>
-			You are logged in as {user.userName}
-		</div>
-	else
-		return <div>
-			You are not logged in!
-		</div>
+function ShowLoggedIn({ user }) {
+	if (user) return <div>You are logged in as {user.userName}</div>;
+	else return <div>You are not logged in!</div>;
+}
+
+function ShowPostList({ post }) {
+	return (
+		<>
+			<p>PostList:</p>
+			<ul>
+				{post.map((ele) => {
+					return (
+						<li key={ele.postKey}>
+							<Link href={`/test/board/${ele.postKey}`}>
+								<a>{ele.title}</a>
+							</Link>
+						</li>
+					);
+				})}
+			</ul>
+		</>
+	);
 }
 
 export default function testMain() {
-	const { user, post, getPostFromAPI, setUser, canAPI, careerPost, getUserFromAPI } = useContext(myContext)
+	const { user, post, getPostFromAPI, careerPost, getUserFromAPI } =
+		useContext(myContext);
 	useEffect(() => {
 		(async () => {
 			getPostFromAPI();
 			getUserFromAPI();
 		})();
-	}, [])
+	}, []);
 
-	return <>
-		<TestNavBar></TestNavBar>
-		{showLoggedIn(user)}
+	return (
+		<>
+			<TestNavBar></TestNavBar>
+			<ShowLoggedIn user={user} />
 
-		<p>PostList:</p>
-		<ul>
-			{post.map(ele => {
-				return <li key={ele.postKey}>
-					<Link href={`/test/board/${ele.postKey}`}><a>{ele.title}</a></Link>
-				</li>
-			})}
-		</ul>
+			<ShowPostList title={"PostList:"} post={post} />
+			<ShowPostList title={"CareerPost List:"} post={careerPost} />
 
-		<p>CareerPost List:</p>
-		<ul>
-			{careerPost.map(ele => {
-				return <li key={ele.postKey}>
-					<Link href={`/test/board/${ele.postKey}`}><a>{ele.title}</a></Link>
-				</li>
-			})}
-		</ul>
-
-		{Posting()}
-
-	</>
+			{user ? <Posting /> : <></>}
+		</>
+	);
 }
