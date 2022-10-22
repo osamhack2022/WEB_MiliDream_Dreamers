@@ -2,29 +2,27 @@ import { Router } from "express";
 import passport from "passport";
 import Logger from "../../loaders/logger.js";
 import * as AccountService from "../../services/accounts.js";
+import { checkUserExist } from "../middlewares/index.js";
 
 const route = Router();
 
 route
 	.route("/sign")
 	.get(
+		checkUserExist,
 		/**
-		 * API 경로: GET /accounts/sign
+		 * API: GET /accounts/sign
 		 *
 		 * req의 쿠키와 세션으로 user의 정보를 반환함
 		 */
 		(req, res) => {
-			if (!req.user)
-				return res.status(401).json({ err: "User not Exist!" });
-
 			return res.status(200).json(req.user);
 		}
 	)
 	.post(
 		passport.authenticate("local"),
 		/**
-		 * API 경로: POST /accounts/sign
-		 *
+		 * API: POST /accounts/sign
 		 * body: {id, password}
 		 *
 		 * id와 password를 이용해 유저를 로그인시킴
@@ -37,14 +35,12 @@ route
 		}
 	)
 	.delete(
+		checkUserExist,
 		/**
 		 * API: DELETE /accounts/sign
 		 * 로그아웃함
 		 */
 		(req, res) => {
-			if (!req.user) {
-				res.status(400).json({ err: "user가 로그인되어 있지 않음" });
-			}
 			req.logout(() => {
 				req.session.save((err) => {
 					if (err) {
@@ -79,27 +75,24 @@ route
 		}
 	)
 	.delete(
+		checkUserExist,
 		/**
 		 * API: DELETE /accounts/account
 		 * 회원탈퇴
 		 */
 		async (req, res) => {
-			if (!req.user) {
-				return res.status(401).json({ err: "Unauthorized" });
+			try {
+				await AccountService.remove({ userKey: req.user.userKey });
+			} catch (err) {
+				res.status(400).json({ err: err.message });
 			}
 
-			AccountService.remove({ userKey: req.user.userKey }).then(() => {
-				req.logOut(async (err) => {
-					if (err) {
-						res.status(400).json({ err: "Error while logOut!" }).end();
-					}
-					res.status(200).end();
-				});
-			}).catch(() => {
-				res.status(400).json({ err: "Error while removing account!" }).end();
+			req.logOut((err) => {
+				if (err) {
+					res.status(400).json({ err: err.message });
+				}
+				res.status(200).end();
 			});
-
-
 		}
 	);
 
