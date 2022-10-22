@@ -13,8 +13,8 @@ router
 	.route("/")
 	.get(async (req, res) => {
 		try {
-			const result = await BoardService.getAllBoards(req.query);
-			res.status(200).json(result);
+			const boards = await BoardService.getAllBoards(req.query);
+			res.status(200).json({ boards });
 		} catch (err) {
 			res.status(400).json({ err: err.message });
 		}
@@ -22,8 +22,8 @@ router
 	.post(checkUserExist, async (req, res) => {
 		try {
 			const postDTO = { ...req.body, userKey: req.user.userKey };
-			const result = await BoardService.postBoard(postDTO);
-			res.status(200).json(result);
+			const postKey = await BoardService.postBoard(postDTO);
+			res.status(200).json({ postKey });
 		} catch (err) {
 			res.status(400).json({ err: err.message });
 		}
@@ -32,8 +32,8 @@ router
 // 특정 게시글을 가져온다. title과 tags를 query parameter로 받아 검색한다.
 router.get("/query", async (req, res) => {
 	try {
-		const result = await BoardService.queryBoard(req.query);
-		res.json(result);
+		const boards = await BoardService.queryBoard(req.query);
+		res.status(200).json({ boards });
 	} catch (err) {
 		res.status(400).json({ err: err.message });
 	}
@@ -41,8 +41,8 @@ router.get("/query", async (req, res) => {
 
 router.get("/category", async (req, res) => {
 	try {
-		const result = await BoardService.getAllCategories();
-		res.status(200).json(result);
+		const category = await BoardService.getAllCategories();
+		res.status(200).json({ category });
 	} catch (err) {
 		res.status(400).json({ err: err.message });
 	}
@@ -53,8 +53,8 @@ router
 	.route("/:boardId")
 	.get(async (req, res) => {
 		try {
-			const result = await BoardService.getbyBoardId(req.params.boardId);
-			res.status(200).json(result);
+			const board = await BoardService.getbyBoardId(req.params.boardId);
+			res.status(200).json({ board });
 		} catch (err) {
 			res.status(400).json({ err: err.message });
 		}
