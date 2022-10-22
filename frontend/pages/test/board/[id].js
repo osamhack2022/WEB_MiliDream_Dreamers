@@ -32,7 +32,7 @@ function RecommendButton({ postKey, myPost, user, setPost }) {
 	else return <button onClick={doRecommend}>추천!</button>;
 }
 
-const onSubmit = async (e, parent, postKey, setPost, commentBody) => {
+const onSubmit = async (e, parent, postKey, setPost, commentBody, setDap) => {
 	e.preventDefault();
 
 	const response = await fetch("/api/comment", {
@@ -47,6 +47,7 @@ const onSubmit = async (e, parent, postKey, setPost, commentBody) => {
 	if (response.ok) {
 		commentBody.current.value = "";
 		await getPost(postKey, setPost);
+		if (parent) setDap(false);
 	}
 };
 
@@ -93,6 +94,7 @@ export default function postBoardId() {
 				dapSt={dapSt}
 				postKey={postKey}
 				setPost={setPost}
+				setDap={setDap}
 			/>
 		);
 	};
@@ -109,7 +111,7 @@ export default function postBoardId() {
 		);
 	};
 
-	const CommentParent = ({ comment, dap, dapSt, postKey, setPost }) => {
+	const CommentParent = ({ comment, dap, dapSt, postKey, setPost, setDap }) => {
 		const [isFix, setFix] = useState(false);
 		const fixBody = useRef();
 
@@ -130,7 +132,9 @@ export default function postBoardId() {
 						>
 							수정 취소
 						</button>
-						<button onClick={() => putComment(setFix, postKey, setPost)}>수정 완료</button>
+						<button onClick={() => putComment(setFix, postKey, setPost)}>
+							수정 완료
+						</button>
 					</>
 				);
 			} else {
@@ -148,7 +152,9 @@ export default function postBoardId() {
 			return (
 				<>
 					{FixButton}
-					<button onClick={() => deleteComment(comment.commentKey, postKey, setPost)}>
+					<button
+						onClick={() => deleteComment(comment.commentKey, postKey, setPost)}
+					>
 						삭제
 					</button>
 				</>
@@ -197,6 +203,7 @@ export default function postBoardId() {
 						parent={comment.commentKey}
 						postKey={postKey}
 						setPost={setPost}
+						setDap={setDap}
 					/>
 				) : (
 					<></>
@@ -205,11 +212,13 @@ export default function postBoardId() {
 		);
 	};
 
-	const PostCommentForm = ({ parent, postKey, setPost }) => {
+	const PostCommentForm = ({ parent, postKey, setPost, setDap }) => {
 		const commentBody = useRef();
 		return (
 			<form
-				onSubmit={(e) => onSubmit(e, parent, postKey, setPost, commentBody)}
+				onSubmit={(e) =>
+					onSubmit(e, parent, postKey, setPost, commentBody, setDap)
+				}
 			>
 				<label>
 					<span>CommentBody</span>
@@ -273,7 +282,7 @@ export default function postBoardId() {
 	};
 
 	const SmallPost = ({ initialPost }) => {
-		console.log(initialPost)
+		console.log(initialPost);
 		const [smallPost, setSmallPost] = useState(initialPost);
 
 		if (!smallPost) {
