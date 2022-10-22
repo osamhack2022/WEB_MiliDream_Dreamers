@@ -8,7 +8,7 @@ export default function NavBar() {
   const router = useRouter();
   return (
     <header>
-      <nav> 
+      <nav>
         <Link href="/">
           <img
             style={{
@@ -64,23 +64,18 @@ export default function NavBar() {
           </li>
           <li>
             <Link href="/career/contest">
-              <a>career_contest</a>
+              <a>공모전</a>
             </Link>
           </li>
           <li>
             <Link href="/career/survey">
-              <a>career_survey</a>
+              <a>유형 조사</a>
             </Link>
           </li>
 
           <li>
             <Link href="/user/$[id]">
-              <a>user</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/popup/0">
-              <a>popup</a>
+              <a>유저페이지</a>
             </Link>
           </li>
         </ul>
@@ -110,7 +105,7 @@ export default function NavBar() {
               margin: 0px 8px;
               width: 30;
               font-size: 12px;
-              font-weight: 318;
+              font-weight: 400;
               line-height: 100px;
               padding-left: 30px;
             }
@@ -119,13 +114,13 @@ export default function NavBar() {
               list-style: none;
               padding: 0;
               display: flex;
-              padding-right: 60px;
+              padding-right: 150px;
               text-align: center;
               justify-content: center;
               align-items: center;
             }
             .middleboard a {
-              font-weight: 500;
+              font-weight: 600;
               transition: 0.2s;
             }
 

@@ -25,7 +25,7 @@ export default function Home() {
           <h1
             style={{
               position: "absolute",
-              top: "320px",
+              top: "330px",
               left: "350px",
               fontSize: "90px",
             }}
