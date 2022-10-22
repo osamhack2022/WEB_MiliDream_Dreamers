@@ -195,7 +195,7 @@ export default class Post {
 					conn
 				);
 			}
-			return { postKey: Number(result.insertId) };
+			return Number(result.insertId);
 		} catch (err) {
 			throw err;
 		} finally {
