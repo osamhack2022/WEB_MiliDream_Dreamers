@@ -12,9 +12,10 @@ const client = wrapper(axios.create(axiosConfig));
 let testData = {};
 
 async function test() {
-	await test_accounts();
+	// await test_accounts();
 	const testAccount = await getTestAccount();
-	await test_user();
+	// await test_user();
+	test_board();
 	await deleteTestAccount();
 }
 
@@ -53,6 +54,14 @@ async function getTestAccount() {
 	}
 	catch (ex) { console.error(ex.message); }
 	return undefined;
+}
+
+async function deleteTestAccount() {
+	try { // 회원탈퇴
+		let removeAccountRequest = await client.delete(baseUrl + "accounts/account");
+		expect(removeAccountRequest.status).toBe(200);
+	}
+	catch (ex) { console.error(ex.message); }
 }
 
 async function test_accounts() {
@@ -174,14 +183,6 @@ async function test_accounts() {
 	catch (ex) { console.error(ex.message); }
 }
 
-async function deleteTestAccount() {
-	try { // 회원탈퇴
-		let removeAccountRequest = await client.delete(baseUrl + "accounts/account");
-		expect(removeAccountRequest.status).toBe(200);
-	}
-	catch (ex) { console.error(ex.message); }
-}
-
 async function test_user() {
 	const dataLogEnabled = true;
 	let userId;
@@ -221,6 +222,31 @@ async function test_user() {
 	catch (ex) { console.error(ex.message); }
 
 	/** @TODO test avatar upload */
+}
+
+async function test_board() {
+	// GET /board?categoryKey={int?}
+	// POST /board
+	// GET /board/query?title={string?}&userName={string?}&content={string?}&tag={string?}
+	// GET /board/category
+}
+
+async function test_board_article() {
+	// GET /board/:boardId
+	// PUT /board/:boardId
+	// DELETE /board/:boardId
+}
+
+async function test_recommend() {
+	// GET /board/:boardId/recommend
+	// POST /board/:boardId/recommend
+	// DELETE /board/:boardId/recommend
+}
+
+async function test_comment() {
+	// POST /comment
+	// PUT /comment/:commentId
+	// DELETE /comment/:commentId
 }
 
 function expect(result) {
