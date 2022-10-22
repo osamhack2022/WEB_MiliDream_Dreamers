@@ -10,6 +10,7 @@ export function checkUserId(req, res, next) {
 export function checkUserExist(req, res, next) {
 	if (!req.user) {
 		res.status(401).json({ err: "Unauthorized!" });
+		return;
 	}
 	next();
 }
