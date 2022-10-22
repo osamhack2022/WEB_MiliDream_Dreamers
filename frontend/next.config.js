@@ -2,7 +2,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 const isGhPage = process.env.DEPLOY_METHOD === 'gh-page';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	reactStrictMode: true,
+	reactStrictMode: false,
 	swcMinify: true,
 	async rewrites() {
 		return [
