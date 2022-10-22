@@ -41,8 +41,9 @@ export default class Recommend {
 
 	static async deleteRecommendbyBoardId(postKey, userKey) {
 		const sql = `DELETE FROM Recommenders WHERE postKey=? AND userKey=?;`;
+		const conn = await mariadb.getConnection();
 		try {
-			const result = await mariadb.query(sql, [postKey, userKey]);
+			const result = await conn.query(sql, [postKey, userKey]);
 			if (result.affectedRows === 0) {
 				throw Error(
 					`userKey="${userKey}"는 postKey="${postKey}"에 추천하지 않았습니다`
@@ -52,6 +53,8 @@ export default class Recommend {
 			return { recommendCount: await countRecommenders(postKey, conn) };
 		} catch (err) {
 			throw err;
+		} finally {
+			await conn.release();
 		}
 	}
 }

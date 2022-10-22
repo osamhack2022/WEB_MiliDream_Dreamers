@@ -1,4 +1,11 @@
 import mariadb from "../loaders/mariadb.js";
+
+async function getCommentbyCommentKey(commentKey) {
+	const sql = `SELECT commentKey, userKey, body, commentTime FROM Comment WHERE commentKey=?`;
+	const result = await mariadb.query(sql, [commentKey]);
+	return result[0];
+}
+
 export default class Comment {
 	static async postComment(userKey, { postKey, body, parentKey }) {
 		if (!userKey || !postKey || !body) {
@@ -18,7 +25,7 @@ export default class Comment {
 			throw Error(`댓글을 입력할 수 없음`);
 		}
 
-		return;
+		return getCommentbyCommentKey(Number(result.insertId));
 	}
 	static async updateCommentbycommentId(commentKey, userKey, { body }) {
 		const sql = `UPDATE Comment SET body=? WHERE commentKey=? AND userKey=?;`;
