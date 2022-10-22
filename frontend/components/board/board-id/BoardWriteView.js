@@ -73,7 +73,7 @@ export default function BoardWriteView() {
 						<th scope="col title" className="title titleBar">글 제목</th>
 						<th scope="col writeUser" className="writeUser titleBar">작성자</th>
 						<th scope="col time" className="time titleBar">시간</th>
-						<th scope="col veiwCount" className="veiwCount titleBar">조회수</th>
+						<th scope="col viewCount" className="veiwCount titleBar">조회수</th>
 						<th scope="col heart" className="heart titleBar">공감</th>
 					</tr>
 				</thead>
