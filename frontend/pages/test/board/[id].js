@@ -32,6 +32,33 @@ function RecommendButton({ postKey, myPost, user, setPost }) {
 	else return <button onClick={doRecommend}>추천!</button>;
 }
 
+async function deletePost(postKey, router) {
+	const response = await fetch(`/api/board/${postKey}`, {
+		method: "DELETE",
+	});
+	if (!response.ok) {
+		const data = await response.json();
+		console.log("delete error:", data);
+	} else {
+		router.push("/test");
+	}
+}
+
+async function fixPost(postKey, router, postTitle, postBody, setPost) {
+	const response = await fetch(`/api/board/${postKey}`, {
+		method: "PUT",
+		body: JSON.stringify({
+			title: postTitle.current.value,
+			body: postBody.current.value,
+		}),
+		headers: { "Content-Type": "application/json" },
+	});
+	if (response.ok) {
+		getPost(postKey, setPost);
+		router.push(`/test/board/${postKey}`);
+	}
+}
+
 const onSubmit = async (e, parent, postKey, setPost, commentBody, setDap) => {
 	e.preventDefault();
 
@@ -50,6 +77,57 @@ const onSubmit = async (e, parent, postKey, setPost, commentBody, setDap) => {
 		if (parent) setDap(false);
 	}
 };
+
+function PostDeleteButton({ post, router, user }) {
+	if (post.userKey === user.userKey)
+		return (
+			<button onClick={() => deletePost(post.postKey, router)}>
+				게시글 삭제
+			</button>
+		);
+}
+
+function PostFixButton({ post, router, user, isFix, setFix, setPost }) {
+	const postbody = useRef();
+	const postTitle = useRef();
+
+	if (post.userKey === user.userKey)
+		return isFix ? (
+			<>
+				<button
+					onClick={() => {
+						setFix(false);
+						postbody.current.value = post.body;
+					}}
+				>
+					게시글 수정 취소
+				</button>
+				<button
+					onClick={() =>
+						fixPost(post.postKey, router, postTitle, postbody, setPost)
+					}
+				>
+					게시글 수정 확인
+				</button>
+				<br></br>
+				<input
+					tyoe={"text"}
+					ref={postTitle}
+					name="postTitle"
+					defaultValue={post.title}
+				></input>
+				<textarea
+					ref={postbody}
+					defaultValue={post.body}
+					name="postBody"
+				></textarea>
+				<br />
+			</>
+		) : (
+			<button onClick={() => setFix(true)}>게시글 수정</button>
+		);
+	return <></>;
+}
 
 export default function postBoardId() {
 	const [myPost, setPost] = useState(undefined);
@@ -247,6 +325,7 @@ export default function postBoardId() {
 	}, [user, userLoading]);
 
 	const BigPost = () => {
+		const [isFix, setFix] = useState(false);
 		if (!myPost) {
 			return (
 				<>
@@ -256,10 +335,23 @@ export default function postBoardId() {
 		}
 		return (
 			<>
-				<h1>{myPost.title}</h1>
-
-				<p>{myPost.body}</p>
-
+				<PostDeleteButton post={myPost} router={router} user={user} />
+				<PostFixButton
+					post={myPost}
+					router={router}
+					user={user}
+					isFix={isFix}
+					setFix={setFix}
+					setPost={setPost}
+				/>
+				{isFix ? (
+					<></>
+				) : (
+					<>
+						<h1>{myPost.title}</h1>
+						<p>{myPost.body}</p>
+					</>
+				)}
 				<h3>Comments</h3>
 				<CommentArea
 					myPost={myPost}
@@ -282,8 +374,8 @@ export default function postBoardId() {
 	};
 
 	const SmallPost = ({ initialPost }) => {
-		console.log(initialPost);
 		const [smallPost, setSmallPost] = useState(initialPost);
+		const [isFix, setFix] = useState(false);
 
 		if (!smallPost) {
 			return (
@@ -294,10 +386,24 @@ export default function postBoardId() {
 		}
 		return (
 			<>
-				<h1>{smallPost.title}</h1>
+				<PostDeleteButton post={initialPost} router={router} user={user} />
+				<PostFixButton
+					post={initialPost}
+					router={router}
+					user={user}
+					isFix={isFix}
+					setFix={setFix}
+					setPost={setSmallPost}
+				/>
+				{isFix ? (
+					<></>
+				) : (
+					<>
+						<h1>{smallPost.title}</h1>
 
-				<p>{smallPost.body}</p>
-
+						<p>{smallPost.body}</p>
+					</>
+				)}
 				<h3>Comments</h3>
 				<CommentArea
 					myPost={smallPost}
@@ -305,7 +411,6 @@ export default function postBoardId() {
 					postKey={initialPost.postKey}
 					setPost={setSmallPost}
 				/>
-
 				<p>Recommend: {smallPost.recommenders.length}</p>
 				<RecommendButton
 					postKey={initialPost.postKey}
@@ -313,7 +418,6 @@ export default function postBoardId() {
 					user={user}
 					setPost={setSmallPost}
 				/>
-
 				<PostCommentForm
 					parent={undefined}
 					postKey={initialPost.postKey}
