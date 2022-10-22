@@ -12,10 +12,6 @@ route
 		 * API 경로: GET /accounts/sign
 		 *
 		 * req의 쿠키와 세션으로 user의 정보를 반환함
-		 *
-		 * @param {*} req
-		 * @param {*} res
-		 * @returns
 		 */
 		(req, res) => {
 			if (!req.user)
@@ -35,10 +31,6 @@ route
 		 * 폼 형식 불일치 시 400 코드 반환
 		 * 실패 시 401, 성공 시 200 코드와 유저 정보 반환
 		 * 성공 시 같은 세션 요청하면 req.user에 유저 정보 들어감
-		 *
-		 * @param {*} req
-		 * @param {*} res
-		 * @returns
 		 */
 		(req, res) => {
 			return res.status(200).json(req.user);
@@ -48,13 +40,10 @@ route
 		/**
 		 * API: DELETE /accounts/sign
 		 * 로그아웃함
-		 * @param {*} req
-		 * @param {*} res
-		 * @returns
 		 */
 		(req, res) => {
 			if (!req.user) {
-				req.status(400).json({ err: "user가 로그인되어 있지 않음" });
+				res.status(400).json({ err: "user가 로그인되어 있지 않음" });
 			}
 			req.logout(() => {
 				req.session.save((err) => {
@@ -77,9 +66,6 @@ route
 		 * API: POST /accounts/account
 		 * req.body = {userId, password, userName, userClass, token}
 		 * 회원가입
-		 * @param {*} req
-		 * @param {*} res
-		 * @returns
 		 */
 		async (req, res) => {
 			const { userId } = req.body;
@@ -96,22 +82,24 @@ route
 		/**
 		 * API: DELETE /accounts/account
 		 * 회원탈퇴
-		 * @param {*} req
-		 * @param {*} res
-		 * @returns
 		 */
 		async (req, res) => {
 			if (!req.user) {
 				return res.status(401).json({ err: "Unauthorized" });
 			}
 
-			req.logOut(async (err) => {
-				if (err) {
-					res.status(400).json({ err: "Error while logOut!" });
-				}
-				await AccountService.remove({ userKey: req.user.userKey });
-				res.status(200).end();
+			AccountService.remove({ userKey: req.user.userKey }).then(() => {
+				req.logOut(async (err) => {
+					if (err) {
+						res.status(400).json({ err: "Error while logOut!" }).end();
+					}
+					res.status(200).end();
+				});
+			}).catch(() => {
+				res.status(400).json({ err: "Error while removing account!" }).end();
 			});
+
+
 		}
 	);
 
