@@ -51,9 +51,13 @@ router.get("/category", async (req, res) => {
 // boardId만 주어진 경우
 router
 	.route("/:boardId")
+	.use(checkUserExist)
 	.get(async (req, res) => {
 		try {
-			const board = await BoardService.getbyBoardId(req.params.boardId);
+			const board = await BoardService.getbyBoardId(
+				req.params.boardId,
+				req.user.userKey
+			);
 			res.status(200).json({ board });
 		} catch (err) {
 			res.status(400).json({ err: err.message });
@@ -62,7 +66,10 @@ router
 	.put(async (req, res) => {
 		try {
 			const postDTO = req.body;
-			await BoardService.fixbyBoardId(req.params.boardId, postDTO);
+			await BoardService.fixbyBoardId(req.params.boardId, {
+				...postDTO,
+				userKey: req.user.userKey,
+			});
 			res.status(200).end();
 		} catch (err) {
 			res.status(400).json({ err: err.message });
@@ -70,7 +77,10 @@ router
 	})
 	.delete(async (req, res) => {
 		try {
-			await BoardService.deletebyBoardId(req.params.boardId);
+			await BoardService.deletebyBoardId(
+				req.params.boardId,
+				req.user.userKey
+			);
 			res.status(200).end();
 		} catch (err) {
 			res.status(400).json({ err: err.message });
