@@ -39,7 +39,9 @@ async function register(submitEvent) {
 	const response = await axios.post("/api/accounts/account", data, { validateStatus: false });
 	const result = response.data;
 	if (result.success) {
-		location.href = "/login";
+		const registeredData = { id: data.id, password: data.password };
+		await axios.post("/api/accounts/sign", registeredData, { validateStatus: false });
+		location.reload();
 	} else {
 		console.error(result);
 	}
