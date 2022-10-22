@@ -38,7 +38,7 @@ async function getRecruitPosts({ postKey, categoryName }, conn) {
 		`;
 	const result = await conn.query(sql, [postKey]);
 	const posts = await getMainCommentsForAllResult(result, conn);
-	return posts;
+	return getRecommendersForAllResult(posts, conn);
 }
 
 async function getRecommenders({ postKey }, conn) {
