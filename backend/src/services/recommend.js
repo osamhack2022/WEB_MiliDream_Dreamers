@@ -3,15 +3,15 @@ import Recommend from "../models/Recommend.js";
 export default class recommendService {
 	constructor() {}
 
-	static getRecommendbyBoardId(postKey, userInfo) {
-		return Recommend.getRecommendbyBoardId(postKey, userInfo);
+	static getRecommendbyBoardId(postKey) {
+		return Recommend.getRecommendbyBoardId(postKey);
 	}
 
-	static postRecommendbyBoardId(postKey, userInfo) {
-		return Recommend.postRecommendbyBoardId(postKey, userInfo);
+	static postRecommendbyBoardId(postKey, userKey) {
+		return Recommend.postRecommendbyBoardId(postKey, userKey);
 	}
 
-	static deleteRecommendbyBoardId(postKey, userInfo) {
-		return Recommend.deleteRecommendbyBoardId(postKey, userInfo);
+	static deleteRecommendbyBoardId(postKey, userKey) {
+		return Recommend.deleteRecommendbyBoardId(postKey, userKey);
 	}
 }
