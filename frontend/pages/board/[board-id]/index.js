@@ -29,7 +29,7 @@ export default function board_id(props) {
 					<BoardCenter />
 				</div>
 				<div className="BoardMain">
-					<BoardWriteView boardId={boardId} />
+					<BoardWriteView />
 				</div>
 				<div className="footer"></div>
 			</div>

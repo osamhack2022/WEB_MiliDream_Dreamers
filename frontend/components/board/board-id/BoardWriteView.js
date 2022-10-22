@@ -1,32 +1,69 @@
-function ContentRow({ props }) {
-	console.log(props);
-	const { postKey, count, title, writeUser, time, viewCount, recommend, boardId } = props;
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
+
+function displayedAt(createdAt) {
+	const milliSeconds = Date.parse(new Date()) - Date.parse(createdAt)
+	const seconds = milliSeconds / 1000
+	if (seconds < 60) return `방금 전`
+	const minutes = seconds / 60
+	if (minutes < 60) return `${Math.floor(minutes)}분 전`
+	const hours = minutes / 60
+	if (hours < 24) return `${Math.floor(hours)}시간 전`
+	const days = hours / 24
+	if (days < 7) return `${Math.floor(days)}일 전`
+	const weeks = days / 7
+	if (weeks < 5) return `${Math.floor(weeks)}주 전`
+	const months = days / 30
+	if (months < 12) return `${Math.floor(months)}개월 전`
+	const years = days / 365
+	return `${Math.floor(years)}년 전`
+}
+
+function ContentRow({ article }) {
+	console.log(article);
+	const router = useRouter();
 	return (
-		<tr>
-			<th scope="row" className="count content">{count}</th>
-			<td onClick={() => location.href = `/board/${boardId}/${postKey}`} className="title content">{title}</td>
-			<td className="writeUser content">{writeUser}</td>
-			<td className="time content gray">{time}</td>
-			<td className="veiwCount content gray">{viewCount}</td>
-			<td className="heart content gray">{recommend}</td>
-		</tr>
+		<Link href={`/board/${router.query["board-id"]}/${article.postKey}`}>
+			<a>
+				<tr>
+					<th scope="row" className="count content">{article.postKey}</th>
+					<td className="title content">{article.title}</td>
+					<td className="writeUser content">{article.userKey}</td>
+					<td className="time content gray">{displayedAt(article.postTime)}</td>
+					<td className="viewCount content gray">{article.viewCount}</td>
+					<td className="heart content gray">{article.recommend}</td>
+					<style jsx>{`
+					.title.content:after {
+						content: "[${article.comments.length}]";
+						margin-left: .5em;
+					}
+					`}</style>
+					{//<td onClick={() => location.href = `/board/${boardId}/${postKey}`} className="title content">{title}</td>
+					}
+				</tr>
+			</a>
+		</Link>
 	)
 }
 
-export default function BoardWriteView({ boardId }) {
-	const dummyContent = {
-		postKey: "1",
-		count: "15",
-		title: "제목입니다",
-		writeUser: "username",
-		time: "05:30:45",
-		viewCount: "100",
-		recommend: "1",
-		boardId
-	}
+export default function BoardWriteView() {
 	function pagenation() {
 		console.log("hi");
 	}
+	const [board, setBoard] = useState();
+	useEffect(() => {
+		(async () => {
+			const results = await (await fetch(`/api/board?categoryKey=1`, { method: 'GET' })).json();
+			setBoard(results.boards);
+		})();
+	}, []);
+	console.log(board);
+
+	// if (board) board.map((article) => {
+	// 	const articleId = article['postKey'];
+	// 	//console.log(article.postKey);
+	// })
 	return (
 		<div className="table-box">
 			<table className="table">
@@ -41,16 +78,7 @@ export default function BoardWriteView({ boardId }) {
 					</tr>
 				</thead>
 				<tbody className="table-group-divider">
-					<ContentRow props={dummyContent} />
-					<ContentRow props={dummyContent} />
-					<ContentRow props={dummyContent} />
-					<ContentRow props={dummyContent} />
-					<ContentRow props={dummyContent} />
-					<ContentRow props={dummyContent} />
-					<ContentRow props={dummyContent} />
-					<ContentRow props={dummyContent} />
-					<ContentRow props={dummyContent} />
-					<ContentRow props={dummyContent} />
+					{board && board.slice(0).reverse().map((article) => <ContentRow article={article} />)}
 				</tbody>
 			</table>
 			<nav aria-label="Page navigation example">
@@ -73,6 +101,12 @@ export default function BoardWriteView({ boardId }) {
 				</ul>
 			</nav>
 			<style global jsx>{`
+		a {
+			color: transparent;
+		}
+		a:hover {
+			color: transparent;
+		}
         .table-box {
           border: 1px solid #A593E0;
         }
@@ -100,11 +134,11 @@ export default function BoardWriteView({ boardId }) {
         .gray {
           color: #A7A7A7;
         }
-        tbody {
+        tbody > a {
           display: flex;
           flex-direction: column;
         }
-        tbody > tr:after {
+        tbody > a:after {
           content: "";
           display: block;
           width: 970px;
@@ -114,14 +148,14 @@ export default function BoardWriteView({ boardId }) {
         thead > tr {
           height: 45px;
         }
-        tbody > tr {
+        tbody > a {
           height: 40px;
         }
         .count { width: 95px; }
         .title { width: 540px; }
         .writeUser { width: 125px; }
         .time { width: 85px; }
-        .veiwCount { width: 70px; }
+        .viewCount { width: 70px; }
         .heart { width: 85px; }
         .title.content {
           text-align: start;
@@ -130,6 +164,10 @@ export default function BoardWriteView({ boardId }) {
           content: "[5]";
           margin-left: .5em;
         }
+		.title.content:after {
+			content: "[5]";
+			margin-left: .5em;
+		  }
         /*위까지는 table 관련 css 작업 // 아래부터는 pagenation botton css 작업*/
         nav {
           display: flex;
