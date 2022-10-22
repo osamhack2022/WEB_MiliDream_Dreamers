@@ -75,7 +75,7 @@ export default function NavBar() {
 
           <li>
             <Link href="/user/$[id]">
-              <a>유저페이지</a>
+              <a>프로필</a>
             </Link>
           </li>
         </ul>
