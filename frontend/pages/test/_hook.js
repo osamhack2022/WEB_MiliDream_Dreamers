@@ -17,7 +17,7 @@ export const MyContextProvider = ({ children }) => {
 		const response = await fetch("/api/board");
 		if (response.ok) {
 			const data = await response.json();
-			setPost(data);
+			setPost(data.boards);
 		} else {
 			const data = await response.json();
 			console.log("post error,", data);
@@ -26,7 +26,7 @@ export const MyContextProvider = ({ children }) => {
 		const careerResponse = await fetch("/api/board?categoryKey=1");
 		if (careerResponse.ok) {
 			const data = await careerResponse.json();
-			setCareerPost(data);
+			setCareerPost(data.boards);
 		} else {
 			const data = await careerResponse.json();
 			console.log("post error,", data);

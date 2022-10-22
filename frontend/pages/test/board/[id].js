@@ -130,7 +130,7 @@ export default function postBoardId() {
 						>
 							수정 취소
 						</button>
-						<button onClick={() => putComment(setFix)}>수정 완료</button>
+						<button onClick={() => putComment(setFix, postKey, setPost)}>수정 완료</button>
 					</>
 				);
 			} else {
@@ -148,14 +148,14 @@ export default function postBoardId() {
 			return (
 				<>
 					{FixButton}
-					<button onClick={() => deleteComment(comment.commentKey)}>
+					<button onClick={() => deleteComment(comment.commentKey, postKey, setPost)}>
 						삭제
 					</button>
 				</>
 			);
 		};
 
-		const putComment = async (setFix) => {
+		const putComment = async (setFix, postKey, setPost) => {
 			const response = await fetch(`/api/comment/${comment.commentKey}`, {
 				method: "PUT",
 				body: JSON.stringify({ body: fixBody.current.value }),
@@ -163,16 +163,16 @@ export default function postBoardId() {
 			});
 			if (response.ok) {
 				setFix(false);
-				await getPost(id, setPost);
+				await getPost(postKey, setPost);
 			}
 		};
 
-		const deleteComment = async (commentKey) => {
+		const deleteComment = async (commentKey, postKey, setPost) => {
 			const response = await fetch(`/api/comment/${commentKey}`, {
 				method: "DELETE",
 			});
 			if (response.ok) {
-				await getPost(id, setPost);
+				await getPost(postKey, setPost);
 			}
 		};
 
@@ -272,11 +272,10 @@ export default function postBoardId() {
 		);
 	};
 
-	const SmallPost = ({ postKey }) => {
-		const [smallPost, setSmallPost] = useState(undefined);
-		useEffect(() => {
-			getPost(postKey, setSmallPost);
-		}, []);
+	const SmallPost = ({ initialPost }) => {
+		console.log(initialPost)
+		const [smallPost, setSmallPost] = useState(initialPost);
+
 		if (!smallPost) {
 			return (
 				<>
@@ -294,13 +293,13 @@ export default function postBoardId() {
 				<CommentArea
 					myPost={smallPost}
 					user={user}
-					postKey={postKey}
+					postKey={initialPost.postKey}
 					setPost={setSmallPost}
 				/>
 
-				<p>Recommend: {myPost.recommenders.length}</p>
+				<p>Recommend: {smallPost.recommenders.length}</p>
 				<RecommendButton
-					postKey={postKey}
+					postKey={initialPost.postKey}
 					myPost={smallPost}
 					user={user}
 					setPost={setSmallPost}
@@ -308,7 +307,7 @@ export default function postBoardId() {
 
 				<PostCommentForm
 					parent={undefined}
-					postKey={postKey}
+					postKey={initialPost.postKey}
 					setPost={setSmallPost}
 				/>
 			</>
@@ -326,7 +325,7 @@ export default function postBoardId() {
 				<h2>Get People!</h2>
 				{myPost.recruitPosts.map((ele) => {
 					console.log("smallpostele:", ele);
-					return <SmallPost key={ele.postKey} postKey={ele.postKey} />;
+					return <SmallPost key={ele.postKey} initialPost={ele} />;
 				})}
 				<Posting careerPostKey={id} reloadPost={reloadPost} />
 			</>
@@ -352,6 +351,6 @@ export default function postBoardId() {
 async function getPost(id, setPost) {
 	const response = await fetch(`/api/board/${id}`);
 	const data = await response.json();
-	setPost(data);
-	return data;
+	setPost(data.board);
+	return data.board;
 }
