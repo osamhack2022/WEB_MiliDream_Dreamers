@@ -6,8 +6,8 @@ import url from "url";
 const router = Router();
 
 router.all("/", (req, res) => {
-	if (!req?.user.userKey) return res.status(401).send();
-	return res.redirect(`./${req.user.userKey}`);
+	if (!req.user?.userKey) return res.status(401).send();
+	return res.redirect(`./user/${req.user.userKey}`);
 });
 
 router
