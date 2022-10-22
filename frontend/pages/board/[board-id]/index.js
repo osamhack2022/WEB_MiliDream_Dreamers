@@ -6,33 +6,34 @@ import BoardWriteView from "../../../components/board/board-id/BoardWriteView";
 import BoardHeader from "../../../components/board/BoardHeader";
 import { useRouter } from "next/router";
 
-export default function board_id() {
-  //이전 페이지 (BoardMiniView 등)에서 넘어올 때 Link query로 다음 인자를 받아와야 한다. { type, boardId };;
-  const router = useRouter();
-  const boardId = router.query["board-id"];
-  const type = router.query["type"];
-  return (
-    <div>
-      <div className="container">
-        <div className="headerB">
-          <BoardHeader type={type} boardId={boardId}/>
-        </div>
-        <div className="userInfo">
-          <BoardUser />
-        </div>
-        <div className="navBar">
-          <BoardSearchBar placeHolder="게시판 검색" />
-          <BoardNavBar />
-        </div>
-        <div className="banner">
-          <BoardCenter />
-        </div>
-        <div className="BoardMain">
-          <BoardWriteView />
-        </div>
-        <div className="footer"></div>
-      </div>
-      <style jsx>{`
+export default function board_id(props) {
+	//이전 페이지 (BoardMiniView 등)에서 넘어올 때 Link query로 다음 인자를 받아와야 한다. { type, boardId };;
+	const router = useRouter();
+	const boardId = router.query["board-id"];
+	const type = router.query["type"];
+	const category = props?.boards;
+	return (
+		<div>
+			<div className="container">
+				<div className="headerB">
+					<BoardHeader type={type} boardId={boardId} />
+				</div>
+				<div className="userInfo">
+					<BoardUser />
+				</div>
+				<div className="navBar">
+					<BoardSearchBar placeHolder="게시판 검색" />
+					<BoardNavBar props={category} />
+				</div>
+				<div className="banner">
+					<BoardCenter />
+				</div>
+				<div className="BoardMain">
+					<BoardWriteView />
+				</div>
+				<div className="footer"></div>
+			</div>
+			<style jsx>{`
           .BoardMain {
             display: flex;
           }
@@ -58,6 +59,24 @@ export default function board_id() {
             }
             .footer { grid-area: footer; }
             `}</style>
-    </div>
-  )
+		</div>
+	)
+}
+
+export const getServerSideProps = async () => {
+	try {
+		const response = await fetch("http://milidream.ml/api/board/category");
+		const boards = await response.json();
+		return {
+			props: {
+				boards
+			}
+		}
+	} catch {
+		return {
+			props: {
+				boards: { category: [] }
+			}
+		}
+	}
 }

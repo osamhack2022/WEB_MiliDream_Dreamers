@@ -21,6 +21,7 @@ function displayedAt(createdAt) {
 }
 
 function ContentRow({ article }) {
+	console.log(article);
 	const router = useRouter();
 	return (
 		<Link href={`/board/${router.query["board-id"]}/${article.postKey}`}>
@@ -31,13 +32,15 @@ function ContentRow({ article }) {
 					<td className="writeUser content">{article.userKey}</td>
 					<td className="time content gray">{displayedAt(article.postTime)}</td>
 					<td className="viewCount content gray">{article.viewCount}</td>
-					<td className="heart content gray">{Math.ceil(article.viewCount / 10)}</td>
+					<td className="heart content gray">{article.recommend}</td>
 					<style jsx>{`
 					.title.content:after {
 						content: "[${article.comments.length}]";
 						margin-left: .5em;
 					}
 					`}</style>
+					{//<td onClick={() => location.href = `/board/${boardId}/${postKey}`} className="title content">{title}</td>
+					}
 				</tr>
 			</a>
 		</Link>
@@ -51,16 +54,16 @@ export default function BoardWriteView() {
 	const [board, setBoard] = useState();
 	useEffect(() => {
 		(async () => {
-			const results = await (await fetch(`/api/board`, { method: 'GET' })).json();
-			setBoard(results);
+			const results = await (await fetch(`/api/board?categoryKey=1`, { method: 'GET' })).json();
+			setBoard(results.boards);
 		})();
 	}, []);
+	console.log(board);
 
-	board && board.map((article) => {
-		const articleId = article['postKey'];
-		//console.log(article.comments);
-	})
-
+	// if (board) board.map((article) => {
+	// 	const articleId = article['postKey'];
+	// 	//console.log(article.postKey);
+	// })
 	return (
 		<div className="table-box">
 			<table className="table">
@@ -70,7 +73,7 @@ export default function BoardWriteView() {
 						<th scope="col title" className="title titleBar">글 제목</th>
 						<th scope="col writeUser" className="writeUser titleBar">작성자</th>
 						<th scope="col time" className="time titleBar">시간</th>
-						<th scope="col viewCount" className="viewCount titleBar">조회수</th>
+						<th scope="col viewCount" className="veiwCount titleBar">조회수</th>
 						<th scope="col heart" className="heart titleBar">공감</th>
 					</tr>
 				</thead>
@@ -98,14 +101,14 @@ export default function BoardWriteView() {
 				</ul>
 			</nav>
 			<style global jsx>{`
-			a {
-				color: transparent;
-			}
-			a:hover {
-				color: transparent;
-			}
+		a {
+			color: transparent;
+		}
+		a:hover {
+			color: transparent;
+		}
         .table-box {
-			border: 1px solid #A593E0;
+          border: 1px solid #A593E0;
         }
         .table {
           --bs-table-color: #A593E0;
@@ -131,7 +134,7 @@ export default function BoardWriteView() {
         .gray {
           color: #A7A7A7;
         }
-        tbody > a{
+        tbody > a {
           display: flex;
           flex-direction: column;
         }
@@ -145,7 +148,7 @@ export default function BoardWriteView() {
         thead > tr {
           height: 45px;
         }
-        tbody > a  {
+        tbody > a {
           height: 40px;
         }
         .count { width: 95px; }
@@ -157,6 +160,14 @@ export default function BoardWriteView() {
         .title.content {
           text-align: start;
         }
+        .title.content:after {
+          content: "[5]";
+          margin-left: .5em;
+        }
+		.title.content:after {
+			content: "[5]";
+			margin-left: .5em;
+		  }
         /*위까지는 table 관련 css 작업 // 아래부터는 pagenation botton css 작업*/
         nav {
           display: flex;
