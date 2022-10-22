@@ -72,5 +72,3 @@ select * from Post;
 
 insert into Comment(userKey, body, postKey, parentKey, commentTime) values (1, "HIHI", 1, NULL, "2022-10-09  10:47:36 "), (2, "HELLO", 1, 1, "2022-10-09  10:48:21 "), (2, "BYE", 1, NULL, "2022-10-09 10:52:13 ");
 insert into Comment(userKey, body, postKey, parentKey, commentTime) values (1, "HIHI2", 2, NULL, "2022-10-09 15:06:09"), (2, "HELLO2", 2, 1, "2022-10-09 15:36:43"), (2, "BYE2", 1, NULL, "2022-10-09 16:13:41");
-
-insert into CareerPost(competitionKey, recruitKey) values (1, 2);
