@@ -125,15 +125,15 @@ export default class Post {
 			SELECT p.postKey, p.userKey, p.categoryKey, c.categoryName, p.postTime, p.title, p.body, p.viewCount, count(*) as recommend
 			FROM Post as p
 			LEFT JOIN Category as c ON c.categoryKey=p.categoryKey
-			LEFT JOIN Recommenders as r ON r.postkey=p.postKey
+			LEFT OUTER JOIN Recommenders as r ON r.postkey=p.postKey
 			`;
 		const queryValue = [];
 		if (categoryKey) {
-			sql += `WHERE c.categoryKey=?;`;
+			sql += `WHERE c.categoryKey=?`;
 			queryValue.push(categoryKey);
 		} else {
 			// 1=="공모전&대회 리스트", 2=="사람모집게시글"
-			sql += `WHERE c.categoryKey NOT IN (1, 2);`;
+			sql += `WHERE c.categoryKey NOT IN (1, 2)`;
 		}
 		sql += ` GROUP BY postKey`;
 
