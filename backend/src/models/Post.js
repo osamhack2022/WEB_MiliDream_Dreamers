@@ -122,9 +122,10 @@ async function addCareerPost(careerPostKey, recruitKey, conn) {
 export default class Post {
 	static async getAllBoards({ categoryKey }) {
 		let sql = `
-			SELECT p.postKey, p.userKey, p.categoryKey, c.categoryName, p.postTime, p.title, p.body, p.viewCount
+			SELECT p.postKey, p.userKey, p.categoryKey, c.categoryName, p.postTime, p.title, p.body, p.viewCount, count(*) as recommend
 			FROM Post as p
 			LEFT JOIN Category as c ON c.categoryKey=p.categoryKey
+			LEFT JOIN Recommenders as r ON r.postkey=p.postKey
 			`;
 		const queryValue = [];
 		if (categoryKey) {
@@ -134,11 +135,18 @@ export default class Post {
 			// 1=="공모전&대회 리스트", 2=="사람모집게시글"
 			sql += `WHERE c.categoryKey NOT IN (1, 2);`;
 		}
+		sql += ` GROUP BY postKey`;
 
 		const conn = await mariadb.getConnection();
 		try {
-			const result = await conn.query(sql, queryValue);
-			return processAllPosts(result, conn);
+			let result = await conn.query(sql, queryValue);
+			if (result.length !== 0) {
+				result = await getMainCommentsForAllResult(result, conn);
+				result = await getRecruitPostsForAllResult(result, conn);
+				//result = await getRecommendersForAllResult(result, conn);
+			}
+			delete result.meta;
+			return result;
 		} catch (err) {
 			throw err;
 		} finally {
