@@ -12,7 +12,7 @@ const client = wrapper(axios.create(axiosConfig));
 let testData = {};
 
 async function test() {
-	//await test_accounts();
+	await test_accounts();
 	const testAccount = await getTestAccount();
 	await test_user();
 	await deleteTestAccount();
@@ -137,14 +137,14 @@ async function test_accounts() {
 	}
 	catch (ex) { console.error(ex.message); }
 
-	try { // 로그아웃 400
+	try { // 로그아웃 401
 		let logoutRequest = await client.delete(baseUrl + "accounts/sign");
 		let responseData = logoutRequest.data;
 		dataLogEnabled && console.log(responseData);
-		expect(logoutRequest.status).toBe(400);
+		expect(logoutRequest.status).toBe(401);
 
 
-		console.log("[DELETE /accounts/sign 400] Success");
+		console.log("[DELETE /accounts/sign 401] Success");
 	}
 	catch (ex) { console.error(ex.message); }
 
