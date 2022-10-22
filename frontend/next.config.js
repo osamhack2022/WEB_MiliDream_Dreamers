@@ -9,8 +9,7 @@ const nextConfig = {
           source: process.env.SOURCE_PATH,
       },
   ];
-  }
-
+  },
   assetPrefix:
 	process.env.NODE_ENV === 'production'
 		? 'https://osamhack2022.github.io/WEB_MiliDream_Dreamers/' : '',
