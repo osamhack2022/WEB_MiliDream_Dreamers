@@ -1,20 +1,16 @@
 import { useRouter } from "next/router";
-import { useContext } from "react";
 import { TestNavBar } from "./_component";
-import { myContext } from "./_hook";
 
 async function getToken() {
 	const response = await fetch("/api/accounts/signup-token");
 	if (response.ok) {
 		const data = await response.json();
-		return data.join_token;
+		return data.token;
 	}
 	return null;
 }
 
 export default function SignupPage() {
-	const { canAPI, addUser } = useContext(myContext);
-
 	const router = useRouter();
 	const onSubmit = async (e) => {
 		e.preventDefault();
@@ -26,23 +22,20 @@ export default function SignupPage() {
 			userClass: 1,
 		};
 
-		if (canAPI) {
-			const token = await getToken();
-			console.log("token:", token);
-			const response = await fetch("/api/accounts/account", {
-				method: "POST",
-				body: JSON.stringify({
-					...body,
-					token,
-				}),
-				headers: { "Content-Type": "application/json" },
-			});
+		const token = await getToken();
+		const response = await fetch("/api/accounts/account", {
+			method: "POST",
+			body: JSON.stringify({
+				...body,
+				token,
+			}),
+			headers: { "Content-Type": "application/json" },
+		});
 
-			if (!response.ok) {
-				return;
-			}
-		} else {
-			addUser(body);
+		if (!response.ok) {
+			const data = await response.json();
+			console.log("err:", data);
+			return;
 		}
 
 		router.push("/test");

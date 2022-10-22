@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useContext, useRef } from "react";
-import { myContext } from "./_hook";
+import { useRef } from "react";
+import { useMyContext } from "./_hook";
 
 export function TestNavBar() {
-	const { user, canAPI, setUser } = useContext(myContext);
+	const { user, canAPI, setUser } = useMyContext();
 	const router = useRouter();
 
 	const handleLogout = async (e) => {
@@ -59,8 +59,8 @@ export function TestNavBar() {
 	);
 }
 
-export function Posting() {
-	const { user, getPostFromAPI } = useContext(myContext);
+export function Posting({ careerPostKey, reloadPost }) {
+	const { getPostFromAPI } = useMyContext();
 	const categoryKey = useRef();
 	const title = useRef();
 	const body = useRef();
@@ -70,7 +70,7 @@ export function Posting() {
 			categoryKey: categoryKey.current.value,
 			title: title.current.value,
 			body: body.current.value,
-			userKey: user.userKey,
+			careerPostKey,
 		};
 
 		const response = await fetch("/api/board", {
@@ -83,14 +83,35 @@ export function Posting() {
 			categoryKey.current.value = "";
 			title.current.value = "";
 			body.current.value = "";
-			getPostFromAPI();
+			if (!careerPostKey) {
+				getPostFromAPI();
+			} else {
+				reloadPost();
+			}
+		} else {
+			const data = await response.json();
+			console.log("err:", data);
+		}
+	};
+
+	const handleCategoryKey = () => {
+		if (careerPostKey) {
+			categoryKey.current.value = "2";
+		} else if (categoryKey.current.value === "2") {
+			categoryKey.current.value = "3";
 		}
 	};
 	return (
 		<form onSubmit={onSubmit}>
 			<label>
 				<span>CategoryKey</span>
-				<input type="number" name="CategoryKey" ref={categoryKey} required />
+				<input
+					type="number"
+					name="CategoryKey"
+					ref={categoryKey}
+					required
+					onChange={handleCategoryKey}
+				/>
 			</label>
 			<label>
 				<span>Title</span>

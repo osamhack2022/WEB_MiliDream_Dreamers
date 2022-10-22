@@ -1,6 +1,6 @@
 import { TestNavBar, Posting } from "./_component";
-import { useContext, useEffect } from "react";
-import { myContext } from "./_hook";
+import { useEffect } from "react";
+import { useMyContext } from "./_hook";
 import Link from "next/link";
 
 function ShowLoggedIn({ user }) {
@@ -29,7 +29,7 @@ function ShowPostList({ post }) {
 
 export default function testMain() {
 	const { user, post, getPostFromAPI, careerPost, getUserFromAPI } =
-		useContext(myContext);
+		useMyContext();
 	useEffect(() => {
 		(async () => {
 			getPostFromAPI();

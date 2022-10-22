@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-
-const canAPI = true;
+import React, { useContext, useState } from "react";
 
 function getNewKey(db) {
 	if (db.length === 0) return 1;
 	return db[db.length - 1].userKey + 1;
 }
 
-export const myContext = React.createContext();
+const myContext = React.createContext();
+export const useMyContext = () => useContext(myContext);
 export const MyContextProvider = ({ children }) => {
 	const [user, setUser] = useState();
 	const [userLoading, setUserLoading] = useState(true);
@@ -15,30 +14,34 @@ export const MyContextProvider = ({ children }) => {
 	const [careerPost, setCareerPost] = useState([]);
 	const [db, setdb] = useState([]);
 	const getPostFromAPI = async () => {
-		if (canAPI) {
-			const response = await fetch("/api/board");
-			if (response.ok) {
-				const data = await response.json();
-				setPost(data);
-			}
+		const response = await fetch("/api/board");
+		if (response.ok) {
+			const data = await response.json();
+			setPost(data);
+		} else {
+			const data = await response.json();
+			console.log("post error,", data);
+		}
 
-			const careerResponse = await fetch("/api/board?categoryKey=1");
-			if (careerResponse.ok) {
-				const data = await careerResponse.json();
-				setCareerPost(data);
-			}
+		const careerResponse = await fetch("/api/board?categoryKey=1");
+		if (careerResponse.ok) {
+			const data = await careerResponse.json();
+			setCareerPost(data);
+		} else {
+			const data = await careerResponse.json();
+			console.log("post error,", data);
 		}
 	};
 	const getUserFromAPI = async () => {
-		if (canAPI) {
-			const response = await fetch("/api/accounts/sign");
-			if (response.ok) {
-				const data = await response.json();
-				setUser(data);
-				setUserLoading(false);
-			} else {
-				setUserLoading(false);
-			}
+		if (!userLoading) return;
+		const response = await fetch("/api/accounts/sign");
+		if (response.ok) {
+			const data = await response.json();
+			console.log("data:", data);
+			setUser(data);
+			setUserLoading(false);
+		} else {
+			setUserLoading(false);
 		}
 	};
 	const addUser = ({ userId, password, userName, userClass }) => {
@@ -56,7 +59,6 @@ export const MyContextProvider = ({ children }) => {
 			value={{
 				user,
 				setUser,
-				canAPI,
 				addUser,
 				deleteUser,
 				post,

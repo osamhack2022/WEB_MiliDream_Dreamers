@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
-import { useContext, useEffect } from "react";
-import { myContext } from "./_hook";
+import { useEffect } from "react";
+import { useMyContext } from "./_hook";
 import { TestNavBar } from "./_component";
 
-function showInfo(user) {
+function ShowInfo({ user }) {
 	if (!user) return <></>;
 	return (
 		<>
@@ -18,9 +18,9 @@ function showInfo(user) {
 }
 
 export default function profilePage() {
-	const { user, canAPI, setUser, deleteUser, userLoading } =
-		useContext(myContext);
+	const { user, setUser, deleteUser, userLoading } = useMyContext();
 	const router = useRouter();
+
 	useEffect(() => {
 		if (!userLoading && !user) {
 			router.push("/test");
@@ -28,19 +28,14 @@ export default function profilePage() {
 	}, [user, userLoading]);
 
 	const handleExit = async () => {
-		if (canAPI) {
-			const response = await fetch("/api/accounts/account", {
-				method: "DELETE",
-				body: JSON.stringify({
-					id: user.userId,
-				}),
-				headers: { "Content-Type": "application/json" },
-			});
-			if (response.ok) {
-				setUser(undefined);
-				deleteUser(user);
-			}
-		} else {
+		const response = await fetch("/api/accounts/account", {
+			method: "DELETE",
+			body: JSON.stringify({
+				id: user.userId,
+			}),
+			headers: { "Content-Type": "application/json" },
+		});
+		if (response.ok) {
 			setUser(undefined);
 			deleteUser(user);
 		}
@@ -49,7 +44,7 @@ export default function profilePage() {
 	return (
 		<>
 			<TestNavBar></TestNavBar>
-			<showInfo user={user} />
+			<ShowInfo user={user} />
 			<button onClick={handleExit}>회원탈퇴</button>
 		</>
 	);
