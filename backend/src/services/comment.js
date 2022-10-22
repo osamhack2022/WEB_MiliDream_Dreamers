@@ -1,15 +1,19 @@
 import Comment from "../models/Comment.js";
 
 export default class commentService {
-	static postComment(commentInfo) {
-		return Comment.postComment(commentInfo);
+	static postComment(userKey, commentInfo) {
+		return Comment.postComment(userKey, commentInfo);
 	}
 
-	static updateCommentbycommentId(commentId, commentInfo) {
-		return Comment.updateCommentbycommentId(commentId, commentInfo);
+	static updateCommentbycommentId(commentId, userKey, commentInfo) {
+		return Comment.updateCommentbycommentId(
+			commentId,
+			userKey,
+			commentInfo
+		);
 	}
 
-	static deleteCommentbycommentId(commentId) {
-		return Comment.deleteCommentbycommentId(commentId);
+	static deleteCommentbycommentId(commentId, userKey) {
+		return Comment.deleteCommentbycommentId(commentId, userKey);
 	}
 }

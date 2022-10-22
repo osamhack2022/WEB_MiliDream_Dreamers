@@ -6,8 +6,8 @@ import url from "url";
 const router = Router();
 
 router.all("/", (req, res) => {
-	if (!req?.user.userKey) return res.status(401).send();
-	return res.redirect(`./${req.user.userKey}`);
+	if (!req.user?.userKey) return res.status(401).send();
+	return res.redirect(`./user/${req.user.userKey}`);
 });
 
 router
@@ -34,10 +34,10 @@ router
 		} else if (imageURL) {
 			const parsedURL = url.parse(imageURL);
 			console.log(parsedURL.pathname); // 도메인 달라질 수 있으므로 디비에는 경로만 저장
-			const result =  await UserService.putUserAvatarInfo(req.params.userId, {
-				imageURL: parsedURL
+			const result = await UserService.putUserAvatarInfo(req.params.userId, {
+				imageURL: parsedURL.pathname
 			});
-			res.status(result?200:400).send(
+			res.status(result ? 200 : 400).send(
 				`Fix user avatar info, userId is ${req.params.userId}, successed: ${result}`
 			);
 		} else {

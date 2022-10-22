@@ -13,8 +13,8 @@ export default class BoardService {
 		return Post.queryBoard(queryInfo);
 	}
 
-	static getAllTags() {
-		return Post.getAllTags();
+	static getAllCategories() {
+		return Post.getAllCategories();
 	}
 
 	static getbyBoardId(boardId) {
