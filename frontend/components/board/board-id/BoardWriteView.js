@@ -52,13 +52,14 @@ export default function BoardWriteView() {
 		console.log("hi");
 	}
 	const [board, setBoard] = useState();
+	const router = useRouter();
 	useEffect(() => {
 		(async () => {
-			const results = await (await fetch(`/api/board?categoryKey=1`, { method: 'GET' })).json();
-			setBoard(results.boards);
+			const results = await (await fetch(`/api/board?categoryKey=` + router.query["board-id"], { method: 'GET' })).json();
+			setBoard(results);
 		})();
 	}, []);
-	console.log(board);
+	// console.log(board);
 
 	// if (board) board.map((article) => {
 	// 	const articleId = article['postKey'];
