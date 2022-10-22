@@ -21,10 +21,12 @@ function displayedAt(createdAt) {
 }
 
 function ContentRow({ article }) {
-	console.log(article);
+	//console.log(article);
 	const router = useRouter();
 	return (
-		<Link href={`/board/${router.query["board-id"]}/${article.postKey}`}>
+		<Link href={{
+			pathname: `/board/${router.query["board-id"]}/${article.postKey}`,
+		}}>
 			<a>
 				<tr>
 					<th scope="row" className="count content">{article.postKey}</th>
@@ -49,7 +51,7 @@ function ContentRow({ article }) {
 
 export default function BoardWriteView() {
 	function pagenation() {
-		console.log("hi");
+		console.log("아직 페이지 버튼 눌럿을 때 페이지 이동하는거 미완성입니다아아아아아");
 	}
 	const [board, setBoard] = useState();
 	useEffect(() => {
@@ -58,12 +60,8 @@ export default function BoardWriteView() {
 			setBoard(results.boards);
 		})();
 	}, []);
-	console.log(board);
+	//console.log(board);
 
-	// if (board) board.map((article) => {
-	// 	const articleId = article['postKey'];
-	// 	//console.log(article.postKey);
-	// })
 	return (
 		<div className="table-box">
 			<table className="table">
@@ -78,7 +76,7 @@ export default function BoardWriteView() {
 					</tr>
 				</thead>
 				<tbody className="table-group-divider">
-					{board && board.slice(0).reverse().map((article) => <ContentRow article={article} />)}
+					{board && board.slice(0).reverse().map((article) => <ContentRow key={article.postKey} article={article} />)}
 				</tbody>
 			</table>
 			<nav aria-label="Page navigation example">
