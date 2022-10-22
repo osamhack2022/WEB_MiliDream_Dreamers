@@ -4,7 +4,8 @@
 	"private": true,
 	"scripts": {
 		"start": "node ./src/app.js",
-		"nodemon": "nodemon ./src/app.js"
+		"nodemon": "nodemon ./src/app.js",
+		"test": "node ./test.js"
 	},
 	"dependencies": {
 		"cookie-parser": "~1.4.4",
