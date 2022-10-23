@@ -9,16 +9,16 @@ import { useRouter } from "next/router";
 export default function board_id(props) {
 	//이전 페이지 (BoardMiniView 등)에서 넘어올 때 Link query로 다음 인자를 받아와야 한다. { type, boardId };;
 	const router = useRouter();
-	const boardId = router.query["boardId"];
+	const boardId = router.query["board-id"];
 	const type = router.query["type"];
 	const category = props?.boards;
-	console.log("props", props)
-	console.log("category, query", category, router.query)
+	// console.log("props", props)
+	// console.log("category, query", category, router.query)
 	return (
 		<div>
 			<div className="container">
 				<div className="headerB">
-					<BoardHeader type={type} boardId={boardId} />
+					<BoardHeader type={type} boardId={category.category[boardId - 1].categoryName} />
 				</div>
 				<div className="userInfo">
 					<BoardUser />
