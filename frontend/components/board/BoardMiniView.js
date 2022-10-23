@@ -1,29 +1,39 @@
 //id별 네모네모하게 제목이랑 안에 글들 보여주는 것
 import Link from 'next/link';
+import { useEffect, useState } from "react";
 
-export default function BoardMiniView({ link, type, boardId }) {
-
+export default function BoardMiniView({ link, article, type }) {
+	//console.log(article)
+	const [articleTitle, setarticleTitle] = useState();
+	useEffect(() => {
+		(async () => {
+			const results = await (await fetch(`/api/board?categoryKey=${link}`, { method: 'GET' })).json();
+			setarticleTitle(results.boards);
+		})();
+	}, []);
+	//console.log(articleTitle)
 	return (
 		<div className="list-group">
 			<Link href={{
 				pathname: `board/${link}`,
 				query: {
 					'type': `${type}`,
-					'boardId': `${boardId}`
+					'boardId': `${article.categoryName}`
 				},	//현재로서는 query가 boardWriteview로 넘어가지 않음.....
 			}}
-				as={`board/${boardId}`}>
+				as={`board/${link}`}>
 				<a className="list-group-item list-group-item-action active" aria-current="true">
-					{`${boardId}`}
+					{`${article.categoryName}`}
 				</a>
 			</Link>
 			<div className="list-group-item">
 				<ul className="list-group list-group-flush">
-					<a href="#" className="list-group-item list-group-item-action">게시글 제목 1</a>
+					{articleTitle && articleTitle.slice(0).reverse().map((article) => <a href={`board/${link}/${article.postKey}`} className="list-group-item list-group-item-action" key={article.postKey}>{article.title}</a>)}
+					{/* <a href="#" className="list-group-item list-group-item-action">{article.title}</a>
 					<a href="#" className="list-group-item list-group-item-action">게시글 제목 2</a>
 					<a href="#" className="list-group-item list-group-item-action">게시글 제목 3</a>
 					<a href="#" className="list-group-item list-group-item-action">게시글 제목 4</a>
-					<a href="#" className="list-group-item list-group-item-action">게시글 제목 5</a>
+					<a href="#" className="list-group-item list-group-item-action">게시글 제목 5</a> */}
 				</ul>
 			</div>
 			<style jsx>{`
