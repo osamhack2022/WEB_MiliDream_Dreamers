@@ -1,6 +1,8 @@
 //board 전용 네비게이션 바 / 좌측바 - 네이버 카페 처럼.
 
-export default function BoardNavBar() {
+
+export default function BoardNavBar({ props }) {
+  const { category } = props;
   return (
     <div>
       <div className="flex-shrink-0 p-3 bg-white">
@@ -9,11 +11,19 @@ export default function BoardNavBar() {
         </a>
         <ul className="list-unstyled ps-0">
           <li className="mb-1">
-              <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">공지사항</a></li>
-                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">실시간 인기 게시판</a></li>
-                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">자유 게시판</a></li>
-              </ul>
+            <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              {
+                category.map(category => (<li key={category.categoryKey}><a href={"/board/" + category.categoryKey} className="link-dark d-inline-flex text-decoration-none rounded">{category.categoryName}</a></li>))
+              }
+            </ul>
+          </li>
+          <li className="border-top my-3"></li>
+          <li className="mb-1">
+            <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">공지사항</a></li>
+              <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">실시간 인기 게시판</a></li>
+              <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">자유 게시판</a></li>
+            </ul>
           </li>
           <li className="border-top my-3"></li>
           <li className="mb-1">
@@ -44,10 +54,10 @@ export default function BoardNavBar() {
           </li>
           <li className="border-top my-3"></li>
           <li className="mb-1">
-              <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">버그 신고하기</a></li>
-                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">건의사항</a></li>
-              </ul>
+            <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">버그 신고하기</a></li>
+              <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">건의사항</a></li>
+            </ul>
           </li>
         </ul>
       </div>
