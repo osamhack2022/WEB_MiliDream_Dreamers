@@ -4,6 +4,7 @@ import BoardNavBar from "../../components/board/BoardNavBar";
 import BoardCenter from "../../components/board/BoardCenter";
 import BoardMiniView from "../../components/board/BoardMiniView";
 import BoardHeader from "../../components/board/BoardHeader";
+import config from "../../config";
 
 export default function board(props) {
 	const category = props?.boards;
@@ -65,23 +66,12 @@ export default function board(props) {
 }
 
 export const getServerSideProps = async () => {
-	const response = await fetch("http://milidream.ml/api/board/category");
-	//console.log(response.status)
-	if (response.status >= 500) {
-		const response = await fetch("http://20.249.6.135:8080/board/category")
-		const boards = await response.json();
-		return {
-			props: {
-				boards
-			}
-		}
-	}
-	else {
-		const boards = await response.json();
-		return {
-			props: {
-				boards
-			}
+	const response = await fetch(config.API_ENDPOINT + "/api/board/category");
+	console.log(response);
+	const boards = await response.json();
+	return {
+		props: {
+			boards
 		}
 	}
 }
