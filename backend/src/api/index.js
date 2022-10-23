@@ -1,5 +1,5 @@
 import { Router, static as serveStatic } from "express";
-import { accounts, user, board, comment, image } from "./routes";
+import { accounts, user, board, comment, image } from "./routes/index.js";
 
 const app = Router();
 
@@ -10,6 +10,5 @@ app.use("/board", board);
 app.use(serveStatic("public"));
 app.use("/image", image);
 app.use("/comment", comment);
-
 
 export default app;
