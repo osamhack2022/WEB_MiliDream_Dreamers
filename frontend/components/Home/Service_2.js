@@ -52,7 +52,7 @@ export default function Service_2() {
           flex-direction: row;
         }
         .ServiceContainer {
-          width: 690px;
+          width: 698px;
           background-color: #ffffff;
           display: flex;
           border: 4px solid;
