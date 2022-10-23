@@ -3,87 +3,113 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import logo from "../public/logo.svg";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 //만약 로그인된 상태라면 로그아웃을 출력해야 함.
 export default function NavBar() {
-  const router = useRouter();
-  return (
-    <header>
-      <nav>
-        <Link href="/">
-          <img
-            style={{
-              position: "relative",
-              top: "-16px",
-              left: "-30px",
-            }}
-            src="/img/NavBar/logo.svg"
-          />
-        </Link>
+	//const router = useRouter();
+	const [logon, setLogon] = useState(false);
+	useEffect(() => { //fetch session state
+		fetch(`/api/accounts/sign`, { method: 'GET' })
+			.then(resp => { setLogon(resp.ok) });
+	}, []);
+	const logout = async () => { await axios.delete("/api/accounts/sign"); location.reload(); }
 
-        <ul
-          className="rightboard"
-          style={{
-            position: "relative",
-            top: "-20px",
-          }}
-        >
-          <li>
-            <Link href="/login">
-              <a>로그인</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/signup">
-              <a>회원가입</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/contact">
-              <a>CONTACT</a>
-            </Link>
-          </li>
-        </ul>
-        <ul
-          className="middleboard"
-          style={{
-            position: "relative",
-            right: "180px",
-            top: "-22px",
-            textAlign: "center",
-          }}
-        >
-          <li>
-            <Link href="/map">
-              <a>진로 설계</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/board">
-              <a>게시판</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/career/contest">
-              <a>career_contest</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/career/survey">
-              <a>career_survey</a>
-            </Link>
-          </li>
+	return (
+		<header>
+			<nav>
+				<Link href="/">
+					<img
+						style={{
+							position: "relative",
+							top: "-16px",
+							left: "-30px",
+						}}
+						src="/img/NavBar/logo.svg"
+					/>
+				</Link>
 
-          <li>
-            <Link href="/user/accounts">
-              <a>user</a>
-            </Link>
-          </li>
-        </ul>
+				<ul
+					className="rightboard"
+					style={{
+						position: "relative",
+						top: "-20px",
+					}}
+				>
+					{logon ?
+						<>
+							<li>
+								<Link href="#" >
+									<a onClick={logout}>로그아웃</a>
+								</Link>
+							</li>
+						</>
+						:
+						<>
+							<li>
+								<Link href="/login">
+									<a>로그인</a>
+								</Link>
+							</li>
+							<li>
+								<Link href="/signup">
+									<a>회원가입</a>
+								</Link>
+							</li>
+						</>
+					}
+					<li>
+						<Link href="/contact">
+							<a>CONTACT</a>
+						</Link>
+					</li>
+				</ul>
+				<ul
+					className="middleboard"
+					style={{
+						position: "relative",
+						right: "180px",
+						top: "-22px",
+						textAlign: "center",
+					}}
+				>
+					<li>
+						<Link href="/map">
+							<a>진로 설계</a>
+						</Link>
+					</li>
+					<li>
+						<Link href="/board">
+							<a>게시판</a>
+						</Link>
+					</li>
+					<li>
+						<Link href="/career/contest">
+							<a>career_contest</a>
+						</Link>
+					</li>
+					<li>
+						<Link href="/career/survey">
+							<a>career_survey</a>
+						</Link>
+					</li>
 
-        {/*styled jsx 방식 : js 백틱을 이용해 일반 css 코드를 삽입할 수 있다. 하지만 이 css가 적용받는 범위는 함수 내부로 한정된다.*/}
-        <style jsx>
-          {`
+					<li>
+						<Link href="/user/accounts">
+							<a>user</a>
+						</Link>
+					</li>
+					<li>
+						<Link href="/popup/0">
+							<a>popup</a>
+						</Link>
+					</li>
+				</ul>
+
+				{/*styled jsx 방식 : js 백틱을 이용해 일반 css 코드를 삽입할 수 있다. 하지만 이 css가 적용받는 범위는 함수 내부로 한정된다.*/}
+				<style jsx>
+					{`
             nav {
               height: 107px;
               line-height: 150px;
@@ -150,10 +176,10 @@ export default function NavBar() {
               padding-left: 30px;
             }
           `}
-        </style>
-      </nav>
-    </header>
-  );
+				</style>
+			</nav>
+		</header>
+	);
 }
 
 // li의 line-height는 로그인 등 헤더의 txt 부분 높이 조절

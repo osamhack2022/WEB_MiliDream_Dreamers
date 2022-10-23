@@ -5,32 +5,34 @@ import BoardCenter from "../../components/board/BoardCenter";
 import BoardMiniView from "../../components/board/BoardMiniView";
 import BoardHeader from "../../components/board/BoardHeader";
 
-export default function board() {
+export default function board(props) {
+  const category = props?.boards;
   return (
-      <div>
-        <div className="container">
-          <div className="headerB">
-            <BoardHeader />
-          </div>
-          <div className="userInfo">          
-            <BoardUser />
-          </div>
-          <div className="navBar">
-            <BoardSearchBar placeHolder="게시판 검색"/>
-            <BoardNavBar />
-          </div>
-          <div className="banner">
-            <BoardCenter />
-          </div>
-          <div className="BoardMain">
-            <BoardMiniView type="popular" />
-            <BoardMiniView type="free" />
-            <BoardMiniView type="recommendPlace" />
-            <BoardMiniView type="recommendHobby" />
-          </div>
-          <div className="footer"></div>
+    <div>
+      <div className="container">
+        <div className="headerB">
+          <BoardHeader type="main" boardId="MAIN" />
         </div>
-        <style jsx>{`
+        <div className="userInfo">
+          <BoardUser />
+        </div>
+        <div className="navBar">
+          <BoardSearchBar placeHolder="게시판 검색" />
+          <BoardNavBar props={category} />
+        </div>
+        <div className="banner">
+          <BoardCenter />
+        </div>
+        <div className="BoardMain">
+          <BoardMiniView type="hobby" boardId="인기 게시판" />
+          <BoardMiniView type="hobby" boardId="자유 게시판" />
+          <BoardMiniView type="hobby" boardId="추천 복무지 게시판" />
+          <BoardMiniView type="hobby" boardId="추천 관심사 게시판" />
+          <BoardMiniView type="place" boardId="56사단" />
+        </div>
+        <div className="footer"></div>
+      </div>
+      <style jsx>{`
           .BoardMain {
             display: flex;
           }
@@ -56,6 +58,16 @@ export default function board() {
           }
           .footer { grid-area: footer; }
         `}</style>
-      </div>
+    </div>
   )
+}
+
+export const getServerSideProps = async () => {
+  const response = await fetch("http://milidream.ml/api/board/category");
+  const boards = await response.json();
+  return {
+    props: {
+      boards
+    }
+  }
 }
