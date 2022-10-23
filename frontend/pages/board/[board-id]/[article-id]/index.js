@@ -1,7 +1,7 @@
 import BoardUser from "../../../../components/board/BoardUser";
 import BoardSearchBar from "../../../../components/board/BoardSearchBar";
 import BoardNavBar from "../../../../components/board/BoardNavBar";
-import BoardCenter from "../../../../components/board/BoardCenter";
+import ArticleWriteView from "../../../../components/board/board-id/article-id/ArticleWriteView";
 import BoardHeader from "../../../../components/board/BoardHeader";
 import { useRouter } from "next/router";
 
@@ -13,7 +13,7 @@ export default function article_id(props) {
 	const type = router.query["type"];
 	const category = props?.boards;
 	console.log(props)
-	console.log(category.category[boardId - 1].categoryName)
+	//console.log(category.category[boardId - 1].categoryName)
 	return (
 		<div>
 			<div className="container">
@@ -27,11 +27,8 @@ export default function article_id(props) {
 					<BoardSearchBar placeHolder="게시판 검색" />
 					<BoardNavBar props={category} />
 				</div>
-				<div className="banner">
-					<BoardCenter />
-				</div>
 				<div className="BoardMain">
-
+					<ArticleWriteView articleId={articleId} />
 				</div>
 				<div className="footer"></div>
 			</div>
@@ -43,13 +40,13 @@ export default function article_id(props) {
             display:  grid;
             grid-template-areas:
             "userInfo header header"
-            "userInfo banner banner"
-            "navBar   banner banner"
+            "userInfo miniB  miniB"
             "navBar   miniB  miniB"
-              "navBar   miniB  miniB"
-              "navBar   .      .    "
-              "footer   footer  footer";
-              grid-gap: 16px;
+            "navBar   miniB  miniB"
+            "navBar   miniB  miniB"
+            "navBar   .      .    "
+            "footer   footer  footer";
+            grid-gap: 16px;
             }
             .headerB { grid-area: header; }
             .banner { grid-area: banner; }
