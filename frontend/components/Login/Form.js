@@ -74,6 +74,10 @@ export default function LoginForm() {
             src={"/img/Login/image_10.jpg"}
             height="415"
             width="353"
+			style={{
+				borderRadius: "20px",
+				filter: "brightness(0.65)"
+			}}
           ></Image>
         </div>
       </div>
@@ -81,9 +85,11 @@ export default function LoginForm() {
         .login.wrapper {
           position: absolute;
           top: 200px;
+		  margin: 0 67px;
         }
         .login.left {
           float: left;
+		  width: 387px;
         }
         .login.right {
           display: inline-block;
