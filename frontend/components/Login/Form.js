@@ -54,11 +54,14 @@ export default function LoginForm() {
                 <a>기억이 안나시나요?</a>
               </Link>
             </div>
-            <a>
+			<Link href="#" onClick={()=>{$('.loginForm').trigger("submit");}}>
+			<a>
               <div className="login-btn">
                 <span>로그인</span>
               </div>
             </a>
+			</Link>
+            
             <input type="submit" value="로그인"></input>
             <a>
               <div className="signup-btn">
@@ -74,10 +77,10 @@ export default function LoginForm() {
             src={"/img/Login/image_10.jpg"}
             height="415"
             width="353"
-			style={{
-				borderRadius: "20px",
-				filter: "brightness(0.65)"
-			}}
+            style={{
+              borderRadius: "20px",
+              filter: "brightness(0.65)",
+            }}
           ></Image>
         </div>
       </div>
@@ -85,11 +88,11 @@ export default function LoginForm() {
         .login.wrapper {
           position: absolute;
           top: 200px;
-		  margin: 0 67px;
+          margin: 0 67px;
         }
         .login.left {
           float: left;
-		  width: 387px;
+          width: 387px;
         }
         .login.right {
           display: inline-block;
@@ -159,13 +162,18 @@ export default function LoginForm() {
 
           background: linear-gradient(90deg, #c8f1ff 0%, #a593e0 97.67%);
           border-radius: 50px;
+          font-family: "Noto Sans";
+          font-style: normal;
+          font-weight: 400;
+          font-size: 12px;
+          color: white;
         }
         .signup-btn {
           position: absolute;
           border: 1.5px solid transparent;
           border-radius: 50%;
-          background-image: linear-gradient(#fff , #fff ),
-		  linear-gradient(90deg, #c8f1ff 0%, #a593e0 97.67%);
+          background-image: linear-gradient(#fff, #fff),
+            linear-gradient(90deg, #c8f1ff 0%, #a593e0 97.67%);
           background-origin: border-box;
           background-clip: content-box, border-box;
           width: 253px;
@@ -175,6 +183,11 @@ export default function LoginForm() {
           left: 67px;
           top: 359px;
           border-radius: 50px;
+          font-family: "Noto Sans";
+          font-style: normal;
+          font-weight: 400;
+          font-size: 12px;
+          color: #b6c2ef;
         }
       `}</style>
     </Fragment>
