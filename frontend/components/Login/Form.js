@@ -54,17 +54,17 @@ export default function LoginForm() {
                 <a>기억이 안나시나요?</a>
               </Link>
             </div>
-			<a>
-				<div className="login-btn">
-					<span>로그인</span>
-				</div>
-			</a>
+            <a>
+              <div className="login-btn">
+                <span>로그인</span>
+              </div>
+            </a>
             <input type="submit" value="로그인"></input>
-			<a>
-				<div className="login-btn">
-					<span>회원가입</span>
-				</div>
-			</a>
+            <a>
+              <div className="signup-btn">
+                <span>회원가입</span>
+              </div>
+            </a>
             {/* <button>회원가입</button> */}
             {/* SSO 로그인?? */}
           </form>
@@ -119,7 +119,7 @@ export default function LoginForm() {
           font-weight: 600;
           font-size: 24px;
           line-height: 33px;
-		  display: block;
+          display: block;
         }
         .login-hint-text {
           font-family: "Noto Sans";
@@ -127,7 +127,7 @@ export default function LoginForm() {
           font-weight: 400;
           font-size: 12px;
           line-height: 16px;
-		  display: block;
+          display: block;
           color: #d9d9d9;
         }
         .loginForm label {
@@ -139,6 +139,36 @@ export default function LoginForm() {
         }
         .loginForm .text-input-box {
           width: 253px;
+        }
+        .login-btn {
+          box-sizing: border-box;
+
+          position: absolute;
+          width: 253px;
+          height: 38px;
+          line-height: 38px;
+          text-align: center;
+          left: 67px;
+          top: 306px;
+
+          background: linear-gradient(90deg, #c8f1ff 0%, #a593e0 97.67%);
+          border-radius: 50px;
+        }
+        .signup-btn {
+          position: absolute;
+          border: 1.5px solid transparent;
+          border-radius: 50%;
+          background-image: linear-gradient(#fff , #fff ),
+		  linear-gradient(90deg, #c8f1ff 0%, #a593e0 97.67%);
+          background-origin: border-box;
+          background-clip: content-box, border-box;
+          width: 253px;
+          height: 38px;
+          line-height: 38px;
+          text-align: center;
+          left: 67px;
+          top: 359px;
+          border-radius: 50px;
         }
       `}</style>
     </Fragment>
