@@ -20,7 +20,7 @@ const style = css`
     position: absolute;
     width: 1200px;
     text-align: center;
-    margin-left : 40px;
+    margin-left : 20px;
     height: 50px;
     border: 3px solid #000000;
     border-radius: 30px;
@@ -106,14 +106,18 @@ class ProgressBar extends Component {
             <span
               className="progress"
               style={{
+                display: "inline-block",
                 position: "absolute",
+                height: "30px",
+                marginTop: "10px",
                 zIndex: "100",
+                textAlign: "center",
                 color: "#000000",
                 fontSize: "17px",
-                marginTop: "15px",
                 fontWeight: "Bold",
-                // justify-content: center;
-                // align-items: center
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "transparent",
               }}
             >
               {progress}%
