@@ -9,9 +9,11 @@ import { useRouter } from "next/router";
 export default function board_id(props) {
 	//이전 페이지 (BoardMiniView 등)에서 넘어올 때 Link query로 다음 인자를 받아와야 한다. { type, boardId };;
 	const router = useRouter();
-	const boardId = router.query["board-id"];
+	const boardId = router.query["boardId"];
 	const type = router.query["type"];
 	const category = props?.boards;
+	console.log("props", props)
+	console.log("category, query", category, router.query)
 	return (
 		<div>
 			<div className="container">
@@ -66,6 +68,7 @@ export default function board_id(props) {
 export const getServerSideProps = async () => {
 	try {
 		const response = await fetch("http://milidream.ml/api/board/category");
+		//ISSUE : https://yceffort.kr/2021/10/get-absolute-url-in-nextjs 참고하여 추후 각 실행 환경마다 바뀌는 절대경로에 대한 처리 필요.
 		const boards = await response.json();
 		return {
 			props: {
