@@ -58,10 +58,10 @@ export default function BoardWriteView() {
 	useEffect(() => {
 		(async () => {
 			const results = await (await fetch(`/api/board?categoryKey=` + router.query["board-id"], { method: 'GET' })).json();
-			setBoard(results);
+			setBoard(results.boards);
 		})();
 	}, []);
-	// console.log(board);
+	//console.log(board);
 
 	return (
 		<div className="table-box">
