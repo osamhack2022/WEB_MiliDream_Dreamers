@@ -54,13 +54,14 @@ export default function BoardWriteView() {
 		console.log("아직 페이지 버튼 눌럿을 때 페이지 이동하는거 미완성입니다아아아아아");
 	}
 	const [board, setBoard] = useState();
+	const router = useRouter();
 	useEffect(() => {
 		(async () => {
-			const results = await (await fetch(`/api/board?categoryKey=1`, { method: 'GET' })).json();
-			setBoard(results.boards);
+			const results = await (await fetch(`/api/board?categoryKey=` + router.query["board-id"], { method: 'GET' })).json();
+			setBoard(results);
 		})();
 	}, []);
-	//console.log(board);
+	// console.log(board);
 
 	return (
 		<div className="table-box">
