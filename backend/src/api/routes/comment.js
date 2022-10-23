@@ -1,22 +1,47 @@
 import { Router } from "express";
-import commentService from "../../services/comment";
+import commentService from "../../services/comment.js";
+import { checkUserExist } from "../middlewares/index.js";
 
 const router = Router();
 
-router.post("/", (req, res) => {
-	const result = commentService.postComment();
-	res.json(result);
+router.use(checkUserExist);
+
+router.post("/", async (req, res) => {
+	try {
+		const comment = await commentService.postComment(
+			req.user.userKey,
+			req.body
+		);
+		res.status(200).json({ comment });
+	} catch (err) {
+		res.status(400).json({ err: err.message });
+	}
 });
 
 router
 	.route("/:commentId")
-	.put((req, res) => {
-		const result = commentService.updateCommentbycommentId();
-		res.status(result ? 200 : 400).end();
+	.put(async (req, res) => {
+		try {
+			await commentService.updateCommentbycommentId(
+				req.params.commentId,
+				req.user.userKey,
+				req.body
+			);
+			res.status(200).end();
+		} catch (err) {
+			res.status(400).json({ err: err.message });
+		}
 	})
-	.delete((req, res) => {
-		const result = commentService.deleteCommentbycommentId();
-		res.status(result ? 204 : 400).end();
+	.delete(async (req, res) => {
+		try {
+			await commentService.deleteCommentbycommentId(
+				req.params.commentId,
+				req.user.userKey
+			);
+			res.status(200).end();
+		} catch (err) {
+			res.status(400).json({ err: err.message });
+		}
 	});
 
 export default router;

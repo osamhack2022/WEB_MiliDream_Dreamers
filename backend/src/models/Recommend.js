@@ -1,35 +1,64 @@
-import mariadb from "../loaders/mariadb";
+import mariadb from "../loaders/mariadb.js";
+
+async function countRecommenders(postKey, conn) {
+	const sql = `SELECT 1 FROM Recommenders as r WHERE r.postKey=?;`;
+	const result = conn.query(sql, [postKey]);
+	return result.length;
+}
 
 export default class Recommend {
-	constructor(recommend) {
-		this.recommend = recommend;
-	}
-	static async getRecommendbyBoardId(boardId) {
+	static async getRecommendbyBoardId(postKey) {
 		const sql = `SELECT userKey FROM Recommenders WHERE postKey=?;`;
-		const result = mariadb.query(sql, [boardId]);
+		try {
+			const result = await mariadb.query(sql, [postKey]);
 
-		return result;
-	}
-	static async postRecommendbyBoardId(boardId, userId) {
-		if (recommendExist(boardId, userId)) {
-			return false;
+			return { recommenderList: result };
+		} catch (err) {
+			throw err;
 		}
-		const sql = `INSERT INTO Recommenders(postKey, userKey) VALUES (?, ?);`;
-		const result = mariadb.query(sql, [boardId, userId]);
-	
-		return result;
 	}
-	static async deleteRecommendbyBoardId(boardId, userId) {
-		const sql = `DELETE FROM Recommenders WHERE postKey=? AND userKey=?`;
-		const result = mariadb.query(sql, [boardId, userId]);
 
-		return result;
+	static async postRecommendbyBoardId(postKey, userKey) {
+		const sql = `INSERT INTO Recommenders(postKey, userKey) VALUES (?, ?);`;
+		if (!userKey) {
+			throw Error("userKey가 주어지지 않았습니다");
+		}
+		const conn = await mariadb.getConnection();
+		try {
+			if (await recommendExist(postKey, userKey, conn)) {
+				throw Error(`userKey="${userKey}"는 이미 추천했습니다`);
+			}
+			const result = await conn.query(sql, [postKey, userKey]);
+			if (result.affectedRows === 0) throw Error("추천하지 못했습니다");
+
+			return { recommendCount: await countRecommenders(postKey, conn) };
+		} catch (err) {
+			throw err;
+		} finally {
+			await conn.release();
+		}
+	}
+
+	static async deleteRecommendbyBoardId(postKey, userKey) {
+		const sql = `DELETE FROM Recommenders WHERE postKey=? AND userKey=?;`;
+		try {
+			const result = await mariadb.query(sql, [postKey, userKey]);
+			if (result.affectedRows === 0) {
+				throw Error(
+					`userKey="${userKey}"는 postKey="${postKey}"에 추천하지 않았습니다`
+				);
+			}
+
+			return { recommendCount: await countRecommenders(postKey, conn) };
+		} catch (err) {
+			throw err;
+		}
 	}
 }
 
-async function recommendExist(boardId, userId) {
+async function recommendExist(postKey, userKey, conn) {
 	const sql = `SELECT 1 FROM Recommenders WHERE postKey=? AND userKey=?;`;
-	const result = mariadb.query(sql, [boardId, userId]);
+	const result = await conn.query(sql, [postKey, userKey]);
 
 	return result.length > 0;
 }

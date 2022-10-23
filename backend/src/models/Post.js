@@ -1,5 +1,5 @@
-import mariadb from "../loaders/mariadb";
-import Logger from "../loaders/logger";
+import mariadb from "../loaders/mariadb.js";
+import Logger from "../loaders/logger.js";
 import sanitizeHTML from "sanitize-html";
 
 const COMPETITION_CATEGORY = "공모전&대회 리스트";
@@ -38,7 +38,7 @@ async function getRecruitPosts({ postKey, categoryName }, conn) {
 		`;
 	const result = await conn.query(sql, [postKey]);
 	const posts = await getMainCommentsForAllResult(result, conn);
-	return posts;
+	return getRecommendersForAllResult(posts, conn);
 }
 
 async function getRecommenders({ postKey }, conn) {
@@ -73,16 +73,22 @@ async function getRecruitPostsForAllResult(result, conn) {
 	return result;
 }
 
-async function getRecommendersForAllResult(result, conn) {
+async function getRecommendersForAllResult(result, conn, userKey) {
 	for (let i = 0; i < result.length; i++) {
-		result[i].recommenders = await getRecommenders(result[i], conn);
+		const recommenderList = await getRecommenders(result[i], conn);
+		result[i].recommenderCount = recommenderList.length;
+		if (userKey) {
+			result[i].didRecommend = recommenderList.some(
+				(ele) => ele === userKey
+			);
+		}
 	}
 	return result;
 }
 
 async function updateViewCount(postKey, conn) {
-	const sql = `UPDATE Post SET viewCount=viewCount+1 WHERE postKey=?`;
-	const result = await conn.query(sql, [postKey]);
+	const sql = `UPDATE Post SET viewCount=viewCount+1 WHERE postKey=?;`;
+	await conn.query(sql, [postKey]);
 }
 
 async function deleteRecruit(boardId, conn) {
@@ -93,23 +99,39 @@ async function deleteRecruit(boardId, conn) {
 	const clauses = result.map((_) => "postKey=?"),
 		values = result.map((ele) => ele.recruitKey);
 	const sql2 = `DELETE FROM Post WHERE ${clauses.join(" OR ")};`;
-	const result2 = await conn.query(sql2, values);
+	await conn.query(sql2, values);
+}
+
+async function processAllPosts(result, conn, userKey) {
+	if (result.length === 0) return result;
+	result = await getMainCommentsForAllResult(result, conn);
+	result = await getRecruitPostsForAllResult(result, conn);
+	result = await getRecommendersForAllResult(result, conn, userKey);
+	return result;
+}
+
+async function addCareerPost(careerPostKey, recruitKey, conn) {
+	const sql =
+		"INSERT INTO CareerPost(competitionKey, recruitKey) VALUES (?, ?);";
+	try {
+		const result = await conn.query(sql, [careerPostKey, recruitKey]);
+		if (result.affectedRows !== 1) {
+			throw Error("could not update career Post!");
+		}
+		return;
+	} catch (err) {
+		const deletesql = `DELETE FROM Post WHERE postKey=?;`;
+		await conn.query(deletesql, [recruitKey]);
+		throw err;
+	}
 }
 export default class Post {
-	constructor(post) {
-		this.userkey = post.userkey;
-		this.postTime = post.postTime;
-		this.title = post.title;
-		this.body = post.body;
-		this.categoryKey = post.categoryKey;
-		this.carrerPostKey = post.carrerPostKey;
-	}
-
 	static async getAllBoards({ categoryKey }) {
 		let sql = `
-			SELECT p.postKey, p.userKey, p.categoryKey, c.categoryName, p.postTime, p.title, p.body, p.viewCount
+			SELECT p.postKey, p.userKey, p.categoryKey, c.categoryName, p.postTime, p.title, p.body, p.viewCount, count(*) as recommend
 			FROM Post as p
 			LEFT JOIN Category as c ON c.categoryKey=p.categoryKey
+			LEFT OUTER JOIN Recommenders as r ON r.postkey=p.postKey
 			`;
 		const queryValue = [];
 		if (categoryKey) {
@@ -119,16 +141,12 @@ export default class Post {
 			// 1=="공모전&대회 리스트", 2=="사람모집게시글"
 			sql += `WHERE c.categoryKey NOT IN (1, 2)`;
 		}
+		sql += ` GROUP BY postKey`;
 
 		const conn = await mariadb.getConnection();
 		try {
 			let result = await conn.query(sql, queryValue);
-			if (result.length !== 0) {
-				result = await getMainCommentsForAllResult(result, conn);
-				result = await getRecruitPostsForAllResult(result, conn);
-				result = await getRecommendersForAllResult(result, conn);
-			}
-			delete result.meta;
+			result = await processAllPosts(result, conn);
 			return result;
 		} catch (err) {
 			throw err;
@@ -136,17 +154,41 @@ export default class Post {
 			await conn.release();
 		}
 	}
-	static async postBoard({ categoryKey, title, body, userKey }) {
+
+	static async postBoard({
+		categoryKey,
+		title,
+		body,
+		userKey,
+		careerPostKey,
+	}) {
+		if (categoryKey === "2" && !careerPostKey)
+			throw Error("careerPostKey가 세팅되지 않음");
+		else if (categoryKey !== "2" && careerPostKey)
+			throw Error("careerPostKey가 세팅됨");
 		const cleanTitle = sanitizeHTML(title, { allowedTags: [] });
 		const cleanBody = sanitizeHTML(body, {
-			allowedTags: ["h1", "h2", "h3", "p", "img", "blockquote", "strong", "em", "s", "u", "br"],
+			allowedTags: [
+				"h1",
+				"h2",
+				"h3",
+				"p",
+				"img",
+				"blockquote",
+				"strong",
+				"em",
+				"s",
+				"u",
+				"br",
+			],
 			allowedAttributes: {
-				img: ["src"]
+				img: ["src"],
 			},
 		});
 		const sql = `INSERT INTO Post(userKey, title, body, categoryKey) VALUES (?, ?, ?, ?);`;
+		const conn = await mariadb.getConnection();
 		try {
-			const result = await mariadb.query(sql, [
+			const result = await conn.query(sql, [
 				userKey,
 				cleanTitle,
 				cleanBody,
@@ -155,47 +197,14 @@ export default class Post {
 			if (result.affectedRows === 0) {
 				throw new Error("Could not post!");
 			}
-			return { postKey: Number(result.insertId) };
-		} catch (err) {
-			throw err;
-		}
-	}
-	static async queryBoard({ title, username, content, tag }) {
-		const sql = ``;
-		const result = await mariadb.query(sql);
-
-		return result;
-	}
-	static async getAllTags() {
-		const sql = `SELECT categoryName FROM Category;`;
-		try {
-			const result = await mariadb.query(sql);
-			return result;
-		} catch (err) {
-			throw err;
-		}
-	}
-	static async getbyBoardId(postKey) {
-		if (postKey === undefined) throw new Error("postKey가 존재해야 합니다");
-		let sql = `
-			SELECT p.postKey, p.userKey, p.categoryKey, c.categoryName, p.postTime, p.title, p.body, p.viewCount
-			FROM Post as p
-			LEFT JOIN Category as c ON c.categoryKey=p.categoryKey
-			WHERE p.postKey=?
-			`;
-		const conn = await mariadb.getConnection();
-		try {
-			let result = await conn.query(sql, [postKey]);
-			if (result.length === 0)
-				throw new Error(
-					`postKey="${postKey}"에 해당하는 게시글이 없습니다`
+			if (careerPostKey) {
+				await addCareerPost(
+					careerPostKey,
+					Number(result.insertId),
+					conn
 				);
-			result = await getMainCommentsForAllResult(result, conn);
-			result = await getRecruitPostsForAllResult(result, conn);
-			result = await getRecommendersForAllResult(result, conn);
-			delete result.meta;
-			await updateViewCount(postKey, conn);
-			return result;
+			}
+			return Number(result.insertId);
 		} catch (err) {
 			throw err;
 		} finally {
@@ -203,43 +212,114 @@ export default class Post {
 		}
 	}
 
-	static async fixbyBoardId(boardId, { title, body }) {
-		let sql = `UPDATE Post SET `;
-		const updateList = [];
-		const updateValue = [];
-		if (title !== undefined) {
-			updateList.push(`title=?`);
-			updateValue.push(title);
+	static async queryBoard({ title, userName, content, tag }) {
+		if (!title && !userName && !content && !tag)
+			throw Error("should give at least one");
+		let sql = `
+			SELECT p.postKey, p.userKey, p.categoryKey, c.categoryName, p.postTime, p.title, p.body, p.viewCount
+			FROM Post as p
+			LEFT JOIN Category as c ON c.categoryKey=p.categoryKey
+			WHERE `;
+		const queryValue = [];
+
+		if (title) {
+			sql += "title LIKE CONCAT('%', ? '%') AND ";
+			queryValue.push(title);
 		}
-		if (body !== undefined) {
-			updateList.push(`body=?`);
-			updateValue.push(body);
+
+		if (userName) {
+			sql +=
+				"userKey in (SELECT userKey FROM User WHERE User.userName LIKE CONCAT('%', ? '%')) AND ";
+			queryValue.push(username);
 		}
-		if (updateValue.length === 0) {
-			throw new Error("there is nothing to update");
+
+		if (content) {
+			sql += "body LIKE CONCAT('%', ? '%') AND ";
+			queryValue.push(content);
 		}
-		sql += updateList.join(", ");
-		sql += "WHERE postKey=?;";
+
+		// if (tag){
+		// 	sql += "`tag` LIKE CONCAT('%', ? '%') ";
+		// 	queryValue.push(tag);
+		// }
+
+		sql += "TRUE;";
+
+		const conn = mariadb.getConnection();
 		try {
-			const result = await mariadb.query(sql, [...updateValue, boardId]);
+			const result = await conn.query(sql, queryValue);
+			return processAllPosts(result, conn);
+		} catch (err) {
+			throw err;
+		} finally {
+			await conn.release();
+		}
+	}
+
+	static async getAllCategories() {
+		const sql = `SELECT categoryKey, categoryName FROM Category;`;
+		try {
+			const result = await mariadb.query(sql);
+			return result;
+		} catch (err) {
+			throw err;
+		}
+	}
+
+	static async getbyBoardId(postKey, userKey) {
+		if (postKey === undefined) throw new Error("postKey가 존재해야 합니다");
+		let sql = `
+			SELECT p.postKey, p.userKey, p.categoryKey, c.categoryName, p.postTime, p.title, p.body, p.viewCount
+			FROM Post as p
+			LEFT JOIN Category as c ON c.categoryKey=p.categoryKey
+			WHERE p.postKey=?;`;
+		const conn = await mariadb.getConnection();
+		try {
+			let result = await conn.query(sql, [postKey]);
+			if (result.length === 0)
+				throw new Error(
+					`postKey="${postKey}"에 해당하는 게시글이 없습니다`
+				);
+			result = await processAllPosts(result, conn, userKey);
+			await updateViewCount(postKey, conn);
+			return result[0];
+		} catch (err) {
+			throw err;
+		} finally {
+			await conn.release();
+		}
+	}
+
+	static async fixbyBoardId(postKey, { title, body, userKey }) {
+		if (!title || !body) throw Error("title or body is undefined");
+
+		const sql = `UPDATE Post SET title=?, body=? WHERE postKey=? AND userKey=?;`;
+		try {
+			const result = await mariadb.query(sql, [
+				title,
+				body,
+				postKey,
+				userKey,
+			]);
 			if (result.affectedRows === 0)
 				throw new Error(
-					`postKey="${boardId}"인 게시글을 업데이트하지 못했습니다`
+					`postKey="${postKey}"인 게시글을 업데이트하지 못했습니다`
 				);
 			return;
 		} catch (err) {
 			throw err;
 		}
 	}
-	static async deletebyBoardId(boardId) {
+
+	static async deletebyBoardId(postKey, userKey) {
 		const conn = await mariadb.getConnection();
 		try {
 			// 만약 대회 게시글이라면 인원 모집 게시글부터 모두 찾고 지운 다음 지우기
-			await deleteRecruit(boardId, conn);
-			const sql = `DELETE FROM Post WHERE postKey=?;`;
-			const result = await conn.query(sql, boardId);
+			await deleteRecruit(postKey, conn);
+			const sql = `DELETE FROM Post WHERE postKey=? AND userKey=?;`;
+			const result = await conn.query(sql, [postKey, userKey]);
 			if (result.affectedRows === 0) {
-				throw Error(`postKey="${boardId}"인 게시글이 없습니다`);
+				throw Error(`postKey="${postKey}"인 게시글이 없습니다`);
 			}
 			return;
 		} catch (err) {
