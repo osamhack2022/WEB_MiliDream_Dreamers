@@ -13,7 +13,7 @@ export default function board_id(props) {
 	const type = router.query["type"];
 	const category = props?.boards;
 	// console.log("props", props)
-	// console.log("category, query", category, router.query)
+	//console.log("category, query", category, router.query)
 	return (
 		<div>
 			<div className="container">
@@ -69,7 +69,7 @@ export const getServerSideProps = async () => {
 	try {
 		const response = await fetch("http://milidream.ml/api/board/category");
 		//ISSUE : https://yceffort.kr/2021/10/get-absolute-url-in-nextjs 참고하여 추후 각 실행 환경마다 바뀌는 절대경로에 대한 처리 필요.
-		if (response.status >= 500) {
+		if (response.status >= 400) {
 			const response = await fetch("http://20.249.6.135:8080/board/category")
 			const boards = await response.json();
 			return {
