@@ -4,72 +4,69 @@ import styled, { keyframes } from "styled-components";
 import { css } from "styled-components";
 
 const style = css`
-  body {
-    background-color: #fff;
-    color: #000000;
-  }
+body {
+  background-color: #fff;
+  color: #000000;
+}
 
-  .container_bar {
-    max-width: 1300px;
-    width : 130%;
-    h1 {
-      text-align: center;
-    }
-  }            
-  .progressbar-container {
-    position: absolute;
-    width: 1200px;
+.container_bar {
+  max-width: 1300px;
+  width: 130%;
+  h1 {
     text-align: center;
-    margin-left : 40px;
-    height: 50px;
-    border: 3px solid #000000;
-    border-radius: 30px;
-    border-color : #A7A7A7;
-    display: block;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+  }
+}
+.progressbar-container {
+  position: absolute;
+  width: 1200px;
+  text-align: center;
+  margin-left: 40px;
+  height: 50px;
+  border: 3px solid #000000;
+  border-radius: 30px;
+  border-color: #a7a7a7;
+  display: block;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 .progressbar-complete {
-     position: absolute;
-     left: 0;
-     top: 0px;
-     height: 100%;
-     background-color: #FBA58C;
-     border-radius: 10px;
-     animation: g 2500ms infinite ease-in-out;
-     z-index: 2;
-    }
+  position: absolute;
+  left: 0;
+  top: 0px;
+  height: 100%;
+  background-color: #fba58c;
+  border-radius: 10px;
+  animation: g 2500ms infinite ease-in-out;
+  z-index: 2;
+}
 
 .progressbar-liquid {
-z-index: 3;
-width: 60px;
-height: 70px;
-animation: g 2500ms infinite ease-in-out,
-r 3000ms infinite cubic-bezier(0.5, 0.5, 0.5, 0.5);
-position: absolute;
-right: -5px;
-top: -10px;
-background-color: #FBA58C;
-border-radius: 40%;
+  z-index: 3;
+  width: 60px;
+  height: 70px;
+  animation: g 2500ms infinite ease-in-out,
+    r 3000ms infinite cubic-bezier(0.5, 0.5, 0.5, 0.5);
+  position: absolute;
+  right: -5px;
+  top: -10px;
+  background-color: #fba58c;
+  border-radius: 40%;
 }
-}
+
 .progress {
-}
-}
 }
 
 @keyframes g {
-
 }
 
 @keyframes r {
-from {
-transform: rotate(0deg);
-}
-from {
-transform: rotate(360deg);
-}
+  from {
+    transform: rotate(0deg);
+  }
+  from {
+    transform: rotate(360deg);
+  }
 }
 `;
 
