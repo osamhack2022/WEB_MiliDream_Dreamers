@@ -8,43 +8,43 @@ import Service_2 from "../components/Home/Service_2";
 import BoardCenter from "../components/Home/slideslide";
 
 export default function Home() {
-  return (
-    <div className="Home_home">
-      <div className="FIRST">
-        {/* 가장 위 position으로 전체 위치 조절가능 */}
-        <div style={{ position: "relative", top: "300px", left: "140px" }}>
-          <img className="front" src="/img/home/intro_2.svg" />
-          <div style={{ position: "absolute", top: "-320px", left: "140px" }}>
-            <img className="back" src="/img/home/intro_1.svg" />
-          </div>
-          <div style={{ position: "absolute", top: "170px", left: "-50px" }}>
-            <img className="third" src="/img/home/intro_3.svg" />
-          </div>
-        </div>
-        <div>
-          <h1
-            style={{
-              position: "absolute",
-              top: "320px",
-              left: "350px",
-              fontSize: "90px",
-            }}
-          >
-            MILI-<br></br>DREAM
-          </h1>
-        </div>
-        <div>
-          <p>
-            본인만의 군생활 유형으로 꿈을 설계해보세요.<br></br>군 장병
-            여러분들의 MILI-DREAM을 이루시길 응원합니다!
-          </p>
-        </div>
+	return (
+		<div className="Home_home">
+			<div className="FIRST">
+				{/* 가장 위 position으로 전체 위치 조절가능 */}
+				<div style={{ position: "relative", top: "300px", left: "140px" }}>
+					<img className="front" src="/img/home/intro_2.svg" />
+					<div style={{ position: "absolute", top: "-320px", left: "140px" }}>
+						<img className="back" src="/img/home/intro_1.svg" />
+					</div>
+					<div style={{ position: "absolute", top: "170px", left: "-50px" }}>
+						<img className="third" src="/img/home/intro_3.svg" />
+					</div>
+				</div>
+				<div>
+					<h1
+						style={{
+							position: "absolute",
+							top: "330px",
+							left: "350px",
+							fontSize: "90px",
+						}}
+					>
+						MILI-<br></br>DREAM
+					</h1>
+				</div>
+				<div>
+					<p>
+						본인만의 군생활 유형으로 꿈을 설계해보세요.<br></br>군 장병
+						여러분들의 MILI-DREAM을 이루시길 응원합니다!
+					</p>
+				</div>
 
-        <Link href="/login">
-          <button>시작하기</button>
-        </Link>
-        <style jsx>
-          {`
+				<Link href="/login">
+					<button>시작하기</button>
+				</Link>
+				<style jsx>
+					{`
             .FIRST {
               opacity: 0.9;
             }
@@ -112,63 +112,63 @@ export default function Home() {
               opacity: 1;
             }
           `}
-        </style>
-      </div>
+				</style>
+			</div>
 
-      <div className="SECOND">
-        {
-          <div>
-            <Slide></Slide>
-          </div>
-        }
-      </div>
+			<div className="SECOND">
+				{
+					<div>
+						<Slide></Slide>
+					</div>
+				}
+			</div>
 
-      <div className="THIRD">
-        {
-          <div
-            style={{
-              position: "absolute",
-              top: "100px",
-              width: "100%",
-            }}
-          >
-            <Service_1></Service_1>
-          </div>
-        }
-        {
-          <div
-            style={{
-              position: "absolute",
-              top: "500px",
-              width: "100%",
-            }}
-          >
-            <Service_2></Service_2>
-          </div>
-        }
-      </div>
+			<div className="THIRD">
+				{
+					<div
+						style={{
+							position: "absolute",
+							top: "100px",
+							width: "100%",
+						}}
+					>
+						<Service_1></Service_1>
+					</div>
+				}
+				{
+					<div
+						style={{
+							position: "absolute",
+							top: "500px",
+							width: "100%",
+						}}
+					>
+						<Service_2></Service_2>
+					</div>
+				}
+			</div>
 
-      <footer className="footer">
-        <div
-          style={{
-            position: "absolute",
-            top: "3000px",
-            width: "100%",
-            backgroundColor: "#566270",
-            height: "96px",
-          }}
-        >
-          <img
-            src="/img/Footer/Footer(Simply).svg"
-            style={{
-              backgroundColor: "#566270",
-            }}
-          />
-          {/* <a>
+			<footer className="footer">
+				<div
+					style={{
+						position: "absolute",
+						top: "3000px",
+						width: "100%",
+						backgroundColor: "#566270",
+						height: "96px",
+					}}
+				>
+					<img
+						src="/img/Footer/Footer(Simply).svg"
+						style={{
+							backgroundColor: "#566270",
+						}}
+					/>
+					{/* <a>
             <br /> Copyrightⓒ 2022, Dreamers. All right reserved
           </a> */}
-        </div>
-        <style jsx>{`
+				</div>
+				<style jsx>{`
           .footer {
           }
           div {
@@ -183,9 +183,9 @@ export default function Home() {
             border: 0;
           }
         `}</style>
-      </footer>
-    </div>
-  );
+			</footer>
+		</div>
+	);
 }
 
 //STYLE JSX 써서 HOME 이미지 넣는다.
@@ -196,11 +196,11 @@ export default function Home() {
  */
 /*
 export async function getServerSideProps() {
-    const { results } = await (await fetch(``)).json();
-    return {
-        props: {
-            results,
-        }
-    }
+	const { results } = await (await fetch(``)).json();
+	return {
+		props: {
+			results,
+		}
+	}
 }
 */
