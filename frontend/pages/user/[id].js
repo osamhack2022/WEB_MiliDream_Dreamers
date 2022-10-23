@@ -383,8 +383,22 @@ export default function user_id() {
                         fontWeight: "500",
                       }}
                     >
-                      자기계발
+                      {"자기계발"}형
                     </span>
+                    <a
+                      href="http://www.naver.com"
+                      target={"_blank"}
+                      style={{
+                        fontSize: "18px",
+                        marginLeft: "30px",
+                        color: "#A593E0",
+                        cursor: "pointer",
+                        textDecoration: "underline",
+                        textUnderlinePosition: "under",
+                      }}
+                    >
+                      더 알아보기{">"}
+                    </a>
                   </div>
                   <br></br>
                   <span
