@@ -25,7 +25,7 @@ export default function board(props) {
 					<BoardCenter />
 				</div>
 				<div className="BoardMain">
-					{category.category && category.category.slice(0).reverse().map((article) => <BoardMiniView key={article.categoryKey} link={article.categoryKey} type="hobby" boardId={article.categoryName} />)}
+					{category.category && category.category.slice(0).reverse().map((article) => <BoardMiniView key={article.categoryKey} link={article.categoryKey} article={article} type="원래는 복무지/취미 구분하려던 props" />)}
 					{/* <BoardMiniView type="hobby" boardId="인기 게시판" />
 					<BoardMiniView type="hobby" boardId="자유 게시판" />
 					<BoardMiniView type="hobby" boardId="추천 복무지 게시판" />
