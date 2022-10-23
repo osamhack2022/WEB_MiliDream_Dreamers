@@ -69,10 +69,21 @@ export const getServerSideProps = async () => {
 	try {
 		const response = await fetch("http://milidream.ml/api/board/category");
 		//ISSUE : https://yceffort.kr/2021/10/get-absolute-url-in-nextjs 참고하여 추후 각 실행 환경마다 바뀌는 절대경로에 대한 처리 필요.
-		const boards = await response.json();
-		return {
-			props: {
-				boards
+		if (response.status >= 500) {
+			const response = await fetch("http://20.249.6.135:8080/board/category")
+			const boards = await response.json();
+			return {
+				props: {
+					boards
+				}
+			}
+		}
+		else {
+			const boards = await response.json();
+			return {
+				props: {
+					boards
+				}
 			}
 		}
 	} catch {
@@ -83,3 +94,4 @@ export const getServerSideProps = async () => {
 		}
 	}
 }
+
