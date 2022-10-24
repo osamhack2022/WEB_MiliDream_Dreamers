@@ -30,17 +30,21 @@ async function register(submitEvent) {
 	if (!form) return false;
 
 	const data = {
-		id: form?.id.value,
+		userId: form?.id.value,
 		password: form?.password.value,
 		token: form?.token.value,
 		userName: form?.userName.value,
 		userClass: form?.userClass.value
 	};
 	const response = await axios.post("/api/accounts/account", data, { validateStatus: false });
-	const result = response.data;
-	if (result.success) {
-		location.href = "/login";
+	debugger;
+	if (response.status == 200) {
+		const registeredData = { id: data.userId, password: data.password };
+		await axios.post("/api/accounts/sign", registeredData, { validateStatus: false });
+		// TODO: 회원가입 성공 메시지 출력?
+		location.href = "/";
 	} else {
-		console.error(result);
+		console.error(response.data);
+
 	}
 }
