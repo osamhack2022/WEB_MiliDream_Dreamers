@@ -4,6 +4,30 @@ import { useEffect, useState } from "react";
 import { displayedAt } from "../../../../utils/strings";
 import Image from "next/image";
 
+function reportModal(e) {
+	e.preventDefault();
+	console.log('ggggg');
+	return (
+		<div className="modal fade" id="reportModalDiv" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div className="modal-dialog">
+				<div className="modal-content">
+					<div className="modal-header">
+						<h1 className="modal-title fs-5" id="exampleModalLabel">게시글 신고</h1>
+						<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div className="modal-body">
+						게시글 신고 요청이 접수되었습니다.
+					</div>
+					<div className="modal-footer">
+						<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						<button type="button" className="btn btn-primary">Save changes</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	)
+}
+
 function ContentRow({ comment }) {
 	//const router = useRouter();
 	//console.log(comment)
@@ -43,6 +67,57 @@ export default function ArticleWriteView({ post, articleId }) {
 	//console.log(post)
 	return (
 		<div>
+			<div className="modal fade" id="reportModalDiv" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div className="modal-dialog">
+					<div className="modal-content">
+						<div className="modal-header">
+							<h1 className="modal-title fs-5" id="exampleModalLabel">게시글 신고</h1>
+							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div className="modal-body">
+							게시글 신고 요청이 접수되었습니다.
+						</div>
+						<div className="modal-footer">
+							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							{/* <button type="button" className="btn btn-primary">Save changes</button> */}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div className="modal fade" id="recommendModalDiv" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div className="modal-dialog">
+					<div className="modal-content">
+						<div className="modal-header">
+							<h1 className="modal-title fs-5" id="exampleModalLabel">게시글 공감</h1>
+							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div className="modal-body">
+							게시글에 공감하셨습니다!
+						</div>
+						<div className="modal-footer">
+							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							{/* <button type="button" className="btn btn-primary">Save changes</button> */}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div className="modal fade" id="commentModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div className="modal-dialog">
+					<div className="modal-content">
+						<div className="modal-header">
+							<h1 className="modal-title fs-5" id="exampleModalLabel">게시글 댓글</h1>
+							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div className="modal-body">
+							댓글 달기 완료!
+						</div>
+						<div className="modal-footer">
+							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							{/* <button type="button" className="btn btn-primary">Save changes</button> */}
+						</div>
+					</div>
+				</div>
+			</div>
 			<div className="table-box">
 				<table className="table">
 					<tbody>
@@ -58,17 +133,23 @@ export default function ArticleWriteView({ post, articleId }) {
 							</td>
 						</tr>
 						<tr className="mainBody">
-							<th scope="col count" className="count titleBar">{post?.body}//내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가</th>
+							<th scope="col count" className="count titleBar">{post?.body}//Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</th>
 							<td className="body">
-								<Image src={`/article/recommendBtn.png`} width="131px" height="50px" />
-								<Image src={`/article/reportBtn.png`} width="131px" height="50px" />
+								<a type="button" data-bs-toggle="modal" data-bs-target="#recommendModalDiv">
+									<Image src={`/article/recommendBtn.png`} width="131px" height="50px" />
+								</a>
+								<a type="button" data-bs-toggle="modal" data-bs-target="#reportModalDiv">
+									<Image src={`/article/reportBtn.png`} width="131px" height="50px" />
+								</a>
 							</td>
 							{/* <td scope="col time" className="time titleBar">익명댓글달기 버튼</td> */}
 							<td className="writeComment">
 								<div className="mb-3">
-									{/* <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label> */}
+									{/* <label for="exampleFormControlTextarea1" className="form-label">Example textarea</label> */}
 									<textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="댓글을 입력해 주세요"></textarea>
-									<div className="heart titleBar">등록 버튼</div>
+									<button type="button" data-bs-toggle="modal" data-bs-target="#commentModal">
+										등록
+									</button>
 								</div>
 							</td>
 						</tr>
@@ -133,16 +214,32 @@ export default function ArticleWriteView({ post, articleId }) {
 				.mb-3 {
 					display: flex;
 				}
+				.mb-3 > button {
+					border: transparent;
+					background: #A593E0;
+					box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+					border-radius: 5px;
+					cursor: pointer;
+					font-family: 'Noto Sans KR';
+					font-style: normal;
+					font-weight: 400;
+					font-size: 15px;
+					line-height: 22px;
+					text-align: center;
+					color: #FFFFFF;
+					margin-left: 10px;
+					width: 60px;
+				}
 				.comment {
 					display: flex;
 					flex-direction: column;
 				}
 				.content1 {
-					padding: 0px;
 					display: flex;
+					justify-content: space-between;
 				}
 				.content2 {
-					padding: 0px;
+					text-align: left;
 				}
 				//아래는 table 기본 속성
 				.table-box {
