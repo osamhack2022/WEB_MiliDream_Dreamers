@@ -1,12 +1,13 @@
 # REST API
 
 1. [로그인 관련](#로그인-관련)
-	1. [POST /accounts/account](#post-accountsaccount)
-	2. [DELETE /accounts/account](#delete-accountsaccount)
-	3. [GET /accounts/signup-token](#get-accountssignup-token)
-	4. [POST /accounts/sign](#post-accountssign)
-	5. [DELETE /accounts/sign](#delete-accountssign)
-	6. [POST /accounts/attempt](#post-accountsattempt)
+	1. [GET /accounts/sign](#get-accountssign)
+	2. [POST /accounts/sign](#post-accountssign)
+	3. [DELETE /accounts/sign](#delete-accountssign)
+	4. [POST /accounts/account](#post-accountsaccount)
+	5. [DELETE /accounts/account](#delete-accountsaccount)
+	6. [GET /accounts/signup-token](#get-accountssignup-token)
+	7. [POST /accounts/attempt](#post-accountsattempt)
 2. [User 관련](#user-관련)
 	1. [GET /user](#get-user)
 	2. [GET /user/:userId](#get-useruserid)
@@ -15,7 +16,7 @@
 	1. [GET /board](#get-board)
 	2. [POST /board](#post-board)
 	3. [GET /board/query](#get-boardquery)
-	4. [GET /board/tags](#get-boardtags)
+	4. [GET /board/category](#get-boardcategory)
 4. [게시글 각각](#게시글-각각)
 	1. [GET /board/:boardId](#get-boardboardid)
 	2. [PUT /board/:boardId](#put-boardboardid)
@@ -28,8 +29,8 @@
 	1. [POST /comment](#post-comment)
 	2. [PUT /comment/:commentId](#put-commentcommentid)
 	3. [DELETE /comment/:commentId](#delete-commentcommentid)
-
-
+6. [이미지](#이미지)
+	1. [POST /image/upload](#post-imageupload)
 
 
 # 로그인 관련
@@ -189,7 +190,18 @@ id, username 등 조건을 충족하는지를 점검한다.
 
 ## GET /user
 
+로그인 되어 있어야 한다.
+
+본인의 userKey로 /user/:userKey한 결과를 반환한다.
+
 redirect /user/[signed userId]
+
+### Status Code
+
+|  | Status Code | 형식 | 설명 |
+| --- | --- | --- | --- |
+| 성공 |  |  | Redirect |
+| 실패 | 401 | JSON |  |
 
 ## GET /user/:userId
 
@@ -205,13 +217,22 @@ user의 정보를 얻어온다. password는 얻어오지 않는다.
 
 | 키 | 타입 | 설명 |
 | --- | --- | --- |
+| userKey | number | 유저를 구분하는 고유숫자 |
 | userName | string | 유저가 설정한 이름/닉네임 |
-| id | string | 유저가 로그인할 때 사용하는 id |
-| classType | string | [미정, 병사, 간부, 군무원] 중 하나 |
+| userId | string | 유저가 로그인할 때 사용하는 id |
+| userClass | int | 클래스를 나타내는 숫자 |
+| classType | string | userClass에 따른 클래스 이름 |
+
+### Status Code
+
+|  | Status Code | 형식 | 설명 |
+| --- | --- | --- | --- |
+| 성공 | 200 | JSON |  |
+| 실패 | 400 | JSON |  |
 
 ## PUT /user/:userId
 
-User의 password 등 정보를 바꾼다.
+User의 password 등 정보를 수정한다.
 
 ### Path Parameters
 
@@ -223,17 +244,22 @@ User의 password 등 정보를 바꾼다.
 
 | 키 | 필수인가? | 타입 | 설명 |
 | --- | --- | --- | --- |
-| new_password | O | string | 유저가 입력한 새로운 password |
+| new_password | X | string | 유저가 입력한 새로운 password |
+| imageURL | X | string |  |
 
-### Return
+두 정보 모두 없다면 실패
 
-| 키 | 타입 | 설명 |
-| --- | --- | --- |
+### Status Code
+
+|  | Status Code | 형식 | 설명 |
+| --- | --- | --- | --- |
+| 성공 | 200 | NULL |  |
+| 실패 | 400 | JSON |  |
 
 # 게시글 관련
 
 ```tsx
-type board = {
+type boardType = {
 	postKey: number;
 	userKey: number;
 	categoryKey: number;
@@ -248,11 +274,11 @@ type board = {
 	recruitPosts: board[];
 }
 
-type board_detail = board & {
+type boardDetail = board & {
 	didRecommend: boolean;
 }
 
-type category = {
+type categoryType = {
 	categoryKey: number;
 	categoryName: string;
 }
@@ -273,7 +299,7 @@ postboard의 모든 게시글**(대회 게시판, 인원 모집 게시판은 제
 
 | 키 | 타입 | 설명 |
 | --- | --- | --- |
-| boards | board[] | 게시글 목록 |
+| boards | boardType[] | 게시글 목록 |
 
 ### Status Code
 
@@ -328,7 +354,7 @@ query에 해당하는 게시글을 가져옴
 
 | 키 | 타입 | 설명 |
 | --- | --- | --- |
-| boards | board[] | 게시글 목록 |
+| boards | boardType[] | 게시글 목록 |
 
 ### Status Code
 
@@ -345,7 +371,7 @@ query에 해당하는 게시글을 가져옴
 
 | 키 | 타입 | 설명 |
 | --- | --- | --- |
-| category | category[] | 카테고리 목록 |
+| category | categoryType[] | 카테고리 목록 |
 
 ### Status Code
 
@@ -366,13 +392,13 @@ boardId가 id인 게시글을 가져옴, viewCount도 올린다.
 
 | 키 | 타입 | 설명 |
 | --- | --- | --- |
-| boardId | int | board를 구분하는 key |
+| boardId | int | board를 구분하는 Key |
 
 ### Return
 
 | 키 | 타입 | 설명 |
 | --- | --- | --- |
-| board | board_detail | 게시글, 댓글은 시간순으로 정렬되어있음 |
+| board | boardDetail | 게시글, 댓글은 시간순으로 정렬되어있음 |
 
 ### Status Code
 
@@ -391,7 +417,7 @@ boardId인 게시글을 수정
 
 | 키 | 타입 | 설명 |
 | --- | --- | --- |
-| boardId | int | board를 구분하는 id |
+| boardId | int | board를 구분하는 Key |
 
 ### JSON Body Parameters
 
@@ -417,7 +443,7 @@ boardId인 게시글을 삭제
 
 | 키 | 타입 | 설명 |
 | --- | --- | --- |
-| boardId | int | board를 구분하는 id |
+| boardId | int | board를 구분하는 Key |
 
 ### Status Code
 
@@ -511,7 +537,7 @@ type childcomment = {
 	body: string;
 }
 
-type comment = childcomment & {
+type commentType = childcomment & {
 	childComments: childcomment[];
 }
 ```
@@ -534,9 +560,7 @@ postKey인 게시글에 댓글 추가
 
 | 키 | 타입 | 설명 |
 | --- | --- | --- |
-| comment | childcomment | 올린 댓글을 반환
-
-childComments 필드는 없는 childcomment type임에 유의 |
+| comment | childcomment | 올린 댓글을 반환, childComments 필드는 없는 childcomment type임에 유의 |
 
 ### Status Code
 
@@ -555,7 +579,7 @@ commentId인 댓글을 수정
 
 | 키 | 타입 | 설명 |
 | --- | --- | --- |
-| commentId | int | comment를 구분하는 id |
+| commentId | int | comment를 구분하는 Key |
 
 ### JSON Body Parameters
 
@@ -580,7 +604,7 @@ commentId인 댓글을 삭제
 
 | 키 | 타입 | 설명 |
 | --- | --- | --- |
-| commentKey | int | comment를 구분하는 id |
+| commentId | int | comment를 구분하는 Key |
 
 ### Status Code
 
@@ -588,3 +612,36 @@ commentId인 댓글을 삭제
 | --- | --- | --- | --- |
 | 성공 | 200 | NULL |  |
 | 실패 | 400, 401 | JSON |  |
+
+# 이미지
+
+## POST /image/upload
+
+파일을 올립니다.
+
+Content-Type: multipart/form-data
+
+```html
+<form action="/api/image/upload" method="post" enctype="multipart/form-data">
+  <input type="file" name="img" />
+</form>
+```
+
+### JSON Body Parameters
+
+| 키 | 필수인가? | 타입 | 설명 |
+| --- | --- | --- | --- |
+| img | O | file | 이미지 파일 |
+
+### Return
+
+| 키 | 타입 | 설명 |
+| --- | --- | --- |
+| path | string | 파일을 올린 경로를 반환합니다. |
+
+### Status Code
+
+|  | Status Code | 형식 | 설명 |
+| --- | --- | --- | --- |
+| 성공 | 200 | JSON |  |
+| 실패 | 400 | JSON |  |
