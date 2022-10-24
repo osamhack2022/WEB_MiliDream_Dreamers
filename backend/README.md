@@ -1,12 +1,16 @@
 ## backend 실행
 
+`.env.example`파일을 이용해 `.env`파일을 만들어주세요!
+
+MariaDB를 설치 및 실행한 후 아래 명령어로 실행하면 됩니다.
+
 ```
 $ cd backend
 $ npm install
 $ npm start
 ```
 
-## MariaDB 실행
+## MariaDB 설치 및 실행
 
 ```
 $ sudo apt update
