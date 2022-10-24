@@ -14,10 +14,10 @@ const nextConfig = {
 	},
 	assetPrefix: isGhPage ? 'https://osamhack2022.github.io/WEB_MiliDream_Dreamers/' : '',
 
-	images: {
+	images: isGhPage ? {
 		loader: 'imgix',
 		path: 'https://osamhack2022.github.io/WEB_MiliDream_Dreamers/',
-	},
+	} : undefined,
 	basePath: isGhPage ? '/WEB_MiliDream_Dreamers' : ''
 }
 
