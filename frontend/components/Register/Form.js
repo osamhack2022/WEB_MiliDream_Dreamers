@@ -31,6 +31,7 @@ async function register(submitEvent) {
 
 	const data = {
 		id: form?.id.value,
+		userId: form?.id.value,
 		password: form?.password.value,
 		token: form?.token.value,
 		userName: form?.userName.value,
@@ -38,7 +39,8 @@ async function register(submitEvent) {
 	};
 	const response = await axios.post("/api/accounts/account", data, { validateStatus: false });
 	const result = response.data;
-	if (result.success) {
+	debugger;
+	if (response.status == 200) {
 		location.href = "/login";
 	} else {
 		console.error(result);

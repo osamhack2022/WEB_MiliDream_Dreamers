@@ -54,16 +54,14 @@ export default function LoginForm() {
                 <a>기억이 안나시나요?</a>
               </Link>
             </div>
-			<Link href="#" onClick={()=>{$('.loginForm').trigger("submit");}}>
-			<a>
+            <a
+              onClick={login}
+            >
               <div className="login-btn">
                 <span>로그인</span>
               </div>
             </a>
-			</Link>
-            
-            <input type="submit" value="로그인"></input>
-            <a>
+            <a onClick={()=>location.href="/signup"}>
               <div className="signup-btn">
                 <span>회원가입</span>
               </div>
@@ -197,10 +195,9 @@ export default function LoginForm() {
 /**
  * @param {SyntheticBaseEvent} event
  */
-async function login(submitEvent) {
-  submitEvent.preventDefault();
-  const form = submitEvent.target;
-  if (!form) return false;
+async function login(event) {
+  if (event) event.preventDefault();
+  const form = document.querySelector("form.loginForm");
 
   const data = { id: form?.id.value, password: form?.password.value };
   const response = await axios.post("/api/accounts/sign", data, {
