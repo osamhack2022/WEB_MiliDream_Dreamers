@@ -1,30 +1,15 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
-function displayedAt(createdAt) {
-	const milliSeconds = Date.parse(new Date()) - Date.parse(createdAt)
-	const seconds = milliSeconds / 1000
-	if (seconds < 60) return `방금 전`
-	const minutes = seconds / 60
-	if (minutes < 60) return `${Math.floor(minutes)}분 전`
-	const hours = minutes / 60
-	if (hours < 24) return `${Math.floor(hours)}시간 전`
-	const days = hours / 24
-	if (days < 7) return `${Math.floor(days)}일 전`
-	const weeks = days / 7
-	if (weeks < 5) return `${Math.floor(weeks)}주 전`
-	const months = days / 30
-	if (months < 12) return `${Math.floor(months)}개월 전`
-	const years = days / 365
-	return `${Math.floor(years)}년 전`
-}
+import { displayedAt } from "../../../utils/strings";
 
 function ContentRow({ article }) {
-	console.log(article);
+	//console.log(article);
 	const router = useRouter();
 	return (
-		<Link href={`/board/${router.query["board-id"]}/${article.postKey}`}>
+		<Link href={{
+			pathname: `/board/${router.query["board-id"]}/${article.postKey}`,
+		}}>
 			<a>
 				<tr>
 					<th scope="row" className="count content">{article.postKey}</th>
@@ -49,21 +34,18 @@ function ContentRow({ article }) {
 
 export default function BoardWriteView() {
 	function pagenation() {
-		console.log("hi");
+		console.log("아직 페이지 버튼 눌럿을 때 페이지 이동하는거 미완성입니다아아아아아");
 	}
 	const [board, setBoard] = useState();
+	const router = useRouter();
 	useEffect(() => {
 		(async () => {
-			const results = await (await fetch(`/api/board?categoryKey=1`, { method: 'GET' })).json();
+			const results = await (await fetch(`/api/board?categoryKey=` + router.query["board-id"], { method: 'GET' })).json();
 			setBoard(results.boards);
 		})();
 	}, []);
-	console.log(board);
+	//console.log(board);
 
-	// if (board) board.map((article) => {
-	// 	const articleId = article['postKey'];
-	// 	//console.log(article.postKey);
-	// })
 	return (
 		<div className="table-box">
 			<table className="table">
@@ -78,7 +60,7 @@ export default function BoardWriteView() {
 					</tr>
 				</thead>
 				<tbody className="table-group-divider">
-					{board && board.slice(0).reverse().map((article) => <ContentRow article={article} />)}
+					{board && board.slice(0).reverse().map((article) => <ContentRow key={article.postKey} article={article} />)}
 				</tbody>
 			</table>
 			<nav aria-label="Page navigation example">

@@ -93,7 +93,7 @@ export default function LoginForm() {
         .login.wrapper {
           position: relative;
           margin: 0 auto;
-		  width: 740px;
+          width: 740px;
         }
         .login.left {
           float: left;
@@ -101,9 +101,9 @@ export default function LoginForm() {
         }
         .login.right {
           display: inline-block;
-		  height: 415px;
+          height: 415px;
         }
-		
+
         .login.right .rect {
           position: relative;
           width: 279px;
@@ -131,7 +131,7 @@ export default function LoginForm() {
           text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         }
         .loginForm {
-			width: 277px;
+          width: 277px;
         }
         .ellipse {
           z-index: 1;
@@ -152,7 +152,7 @@ export default function LoginForm() {
           width: 10px;
           height: 11px;
           position: absolute;
-          left: 4.5px;
+          left: 5px;
           top: -2px;
           z-index: 10;
         }
@@ -171,7 +171,7 @@ export default function LoginForm() {
           font-size: 12px;
           line-height: 16px;
           display: block;
-          color: #d9d9d9;
+          color: #999;
         }
         .loginForm label {
           font-family: "Noto Sans";
@@ -193,7 +193,7 @@ export default function LoginForm() {
           font-style: normal;
           font-weight: 400;
           font-size: 9px;
-          line-height: 12px;
+          line-height: 24px;
           text-decoration-line: underline;
 
           color: #a593e0;

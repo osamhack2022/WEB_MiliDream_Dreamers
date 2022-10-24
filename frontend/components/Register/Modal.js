@@ -1,9 +1,9 @@
 import LoginForm from "./Form";
 
-export default function LoginModal() {
+export default function RegisterModal() {
 	return (
 		<>
-			<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+			<div class="modal fade" id="registerloginModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
 				<div class="modal-dialog modal-xl" style={{
 					"--bs-modal-width": "830px"
 				}}>
