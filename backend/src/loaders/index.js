@@ -11,7 +11,6 @@ export default async function (app) {
 		Logger.error("💣Cannot Load DB and Create Pool");
 	}
 
-
 	passport(app);
 	expressLoader(app);
 	Logger.info("🚅Express loaded");

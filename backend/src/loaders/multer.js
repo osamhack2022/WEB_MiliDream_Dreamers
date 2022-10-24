@@ -1,3 +1,5 @@
+// @ts-check
+
 import multer from "multer";
 import path from "path";
 import dotenv from "dotenv";
@@ -35,17 +37,19 @@ const storage = multer.diskStorage({
 		);
 	},
 });
+
 /**
  * 이미지 파일 업로드에 대한 multer 세팅
- * @param {Object} storage 저장할 공간에 대한 정보
- * @param {Object} limits 파일 개수나 파일 사이즈를 제한 ex) 5*1024*1024 => 5MB
- * @param {function} fileFilter 어떤 형식의 파일을 받을지 정의
- * @return {Object} 여러 미들웨어 존재, 업로드 방식에 따라 `single`, `array`, `fields` 사용
- * @param {string} propertyName 미들웨어들의 인수는 form data의 속성명 or 태그 input의 name
+ * 여러 미들웨어 존재, 업로드 방식에 따라 `single`, `array`, `fields` 사용
  */
 export const upload = multer({
+	//저장할 공간에 대한 정보
 	storage: storage,
-	limits: { fileSize: 5 * 1024 * 1024 }, // 파일 크기 5MB 제한
+
+	// 파일 개수나 파일 사이즈를 제한, 5*1024*1024 => 5MB
+	limits: { fileSize: 5 * 1024 * 1024 },
+
+	// 어떤 형식의 파일을 받을지 정의
 	fileFilter: function (req, file, done) {
 		// 이미지 형식 파일만 필터링
 		if (file.mimetype.includes("image")) {
