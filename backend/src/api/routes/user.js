@@ -22,7 +22,7 @@ router.all(
 	 */
 	(req, res) => {
 		// @ts-ignore
-		return res.redirect(`./user/${req.user.userKey}`);
+		return res.redirect(`./user/${req.user?.userKey}`);
 	}
 );
 
@@ -62,21 +62,31 @@ router
 		 * @param {import("express").Response} res
 		 */
 		async (req, res) => {
-			/** @type {{new_password?: string, imageURL?: string}} */
-			const { new_password, imageURL } = req.body;
+			/** @type {{new_password?: string, imageURL?: string, enlistment?: string, belong?: string, servant?: string, introduce?: string}} */
+			const {
+				new_password,
+				imageURL,
+				enlistment,
+				belong,
+				servant,
+				introduce,
+			} = req.body;
 
 			try {
-				// 정보가 모두 없으면 적어도 하나 보내야 한다고 에러를 보냅니다.
-				if (!new_password && !imageURL) {
-					throw Error(
-						"Request Requires either new_password OR imageURL"
-					);
-				}
-
-				if (new_password) {
+				if (
+					new_password ||
+					enlistment ||
+					belong ||
+					servant ||
+					introduce
+				) {
 					// @ts-ignore
 					await UserService.putUserInfo(req.params.userId, {
 						new_password,
+						enlistment,
+						belong,
+						servant,
+						introduce,
 					});
 				}
 				if (imageURL) {
@@ -89,6 +99,7 @@ router
 						});
 					}
 				}
+
 				return res.status(200).end();
 			} catch (err) {
 				return res.status(400).json({ err: err.message });

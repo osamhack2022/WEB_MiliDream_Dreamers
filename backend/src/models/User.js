@@ -7,6 +7,11 @@ import Logger from "../loaders/logger.js";
  * @property {number} userKey
  * @property {string} userName User의 이름
  * @property {string} userId 로그인할 때 사용하는 id
+ * @property {string} imgUrl 이미지 경로
+ * @property {string} enlistment 입대 날짜
+ * @property {string} belong 소속 부대
+ * @property {string} servant 육해공 구분
+ * @property {string} introduce 소개글
  * @property {number} userClass User가 어떤 클래스에 속하는지
  * @property {string} classType
  */
@@ -19,9 +24,9 @@ export default class User {
 	 * @throws {Error}
 	 */
 	static async getUserInfo(userKey) {
-		const sql = `SELECT userKey, userName, id as userId, User.classKey as userClass, Class.classContent as classType 
-			FROM User, Class 
-			WHERE userKey=? AND User.classKey=Class.classKey;`;
+		const sql = `SELECT u.userKey, u.userName, u.id as userId, u.imgUrl, u.enlistment, u.belong, u.servant, u.introduce, u.classKey as userClass, c.classContent as classType 
+			FROM User as u, Class as c 
+			WHERE u.userKey=? AND u.classKey=c.classKey;`;
 		try {
 			/** @type {UserType[]} */
 			const result = await mariadb.query(sql, [userKey]);
@@ -36,15 +41,51 @@ export default class User {
 	 * `newInfo`를 바탕으로 사용자 정보를 수정합니다.
 	 *
 	 * @param {number | string} userKey User를 구분하는 key
-	 * @param {{new_password: string}} newInfo User에 갱신될 정보
+	 * @param {{new_password?: string, enlistment?: string, belong?: string, servant?: string, introduce?: string}} newInfo User에 갱신될 정보
 	 * @returns
 	 * @throws {Error}
 	 */
-	static async putUserInfo(userKey, { new_password }) {
-		const sql = "UPDATE User SET passwd=? WHERE userKey=?;";
+	static async putUserInfo(
+		userKey,
+		{ new_password, enlistment, belong, servant, introduce }
+	) {
+		let sql = "UPDATE User SET ";
+
+		const updateSQL = [],
+			updateVal = [];
+
+		if (new_password) {
+			updateSQL.push("passwd=?");
+			updateVal.push(new_password);
+		}
+		if (enlistment) {
+			updateSQL.push("enlistment=?");
+			updateVal.push(enlistment);
+		}
+
+		if (belong) {
+			updateSQL.push("belong=?");
+			updateVal.push(belong);
+		}
+
+		if (servant) {
+			updateSQL.push("servant=?");
+			updateVal.push(servant);
+		}
+
+		if (introduce) {
+			updateSQL.push("introduce=?");
+			updateVal.push(introduce);
+		}
+
+		if (updateSQL.length === 0) return;
+
+		sql += updateSQL.join(", ") + " WHERE userKey=?;";
+		updateVal.push(userKey);
+
 		try {
 			/** @type {writeResultSet} */
-			const result = await mariadb.query(sql, [new_password, userKey]);
+			const result = await mariadb.query(sql, updateVal);
 			if (result.affectedRows !== 1) {
 				throw Error("Couldn't update the userInfo");
 			}
