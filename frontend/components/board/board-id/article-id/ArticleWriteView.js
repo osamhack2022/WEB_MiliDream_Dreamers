@@ -2,6 +2,25 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { displayedAt } from "../../../../utils/strings";
+import Image from "next/image";
+
+function displayedAt(createdAt) {
+	const milliSeconds = Date.parse(new Date()) - Date.parse(createdAt)
+	const seconds = milliSeconds / 1000
+	if (seconds < 60) return `방금 전`
+	const minutes = seconds / 60
+	if (minutes < 60) return `${Math.floor(minutes)}분 전`
+	const hours = minutes / 60
+	if (hours < 24) return `${Math.floor(hours)}시간 전`
+	const days = hours / 24
+	if (days < 7) return `${Math.floor(days)}일 전`
+	const weeks = days / 7
+	if (weeks < 5) return `${Math.floor(weeks)}주 전`
+	const months = days / 30
+	if (months < 12) return `${Math.floor(months)}개월 전`
+	const years = days / 365
+	return `${Math.floor(years)}년 전`
+}
 
 function ContentRow({ comment }) {
 	//const router = useRouter();
@@ -57,6 +76,8 @@ export default function ArticleWriteView({ post, articleId }) {
 						<tr className="mainBody">
 							<th scope="col count" className="count titleBar">{post?.body}//내용이 너무 너무 짧아요 \n 짧다짧아</th>
 							<div className="body">
+								<Image src={`/article/recommendBtn.png`} width="131px" height="50px"/>
+								<Image src={`/article/reportBtn.png`} width="131px" height="50px"/>
 								<td scope="col title" className="title titleBar">{post?.recommend} 공감 버튼</td>
 								<td scope="col writeUser" className="writeUser titleBar">신고 버튼</td>
 							</div>
@@ -103,8 +124,12 @@ export default function ArticleWriteView({ post, articleId }) {
 				}
 
 				//아래부터 body 내용. 위는 title
+				.mainBody {
+					height: max-content;
+				}
 				.mainBody > th {
-					height : 300px;
+					min-height : 300px;
+					text-align: left;
 					margin-left: 15px;
 					display: block;
 					font-family: 'Noto Sans KR';
@@ -122,50 +147,52 @@ export default function ArticleWriteView({ post, articleId }) {
 				}
 
 				//아래는 table 기본 속성
-        .table-box {
-          border: 2px solid #A7A7A7;
-        }
-        .table {
-          --bs-table-color: black;
-          --bs-table-border-color: transparent;
-          width: 1000px;
-          display: flex;
-          flex-direction: column;
-          text-align: center;
-        }
-        .table-light {
-          --bs-table-color: white;
-          --bs-table-bg: transparent;
-          --bs-table-border-color: transparent;
-        }
-        .content {
-          font-family: 'Noto Sans KR';
-          font-style: normal;
-          font-weight: 400;
-          font-size: 15px;
-          line-height: 22px;
-          color: black;
-        }
-        .gray {
-          color: #A7A7A7;
-        }
-        tbody {
-          display: flex;
-          flex-direction: column;
-        }
-        tr:after {
-          content: "";
-          display: block;
-          width: 970px;
-          border-bottom: 1px solid #A7A7A7;
-          margin-left: 15px;
-        }
-        tbody > tr {
-          height: 60px;
-        }
-        .title.content {
-          text-align: start;
-        }
+				.table-box {
+					border: 2px solid #A7A7A7;
+					min-height: 850px;
+					overflow: auto;
+				}
+				.table {
+				--bs-table-color: black;
+				--bs-table-border-color: transparent;
+				width: 1000px;
+				display: flex;
+				flex-direction: column;
+				text-align: center;
+				}
+				.table-light {
+				--bs-table-color: white;
+				--bs-table-bg: transparent;
+				--bs-table-border-color: transparent;
+				}
+				.content {
+				font-family: 'Noto Sans KR';
+				font-style: normal;
+				font-weight: 400;
+				font-size: 15px;
+				line-height: 22px;
+				color: black;
+				}
+				.gray {
+				color: #A7A7A7;
+				}
+				tbody {
+				display: flex;
+				flex-direction: column;
+				}
+				tr:after {
+				content: "";
+				display: block;
+				width: 970px;
+				border-bottom: 1px solid #A7A7A7;
+				margin-left: 15px;
+				}
+				tbody > tr {
+				height: 60px;
+				}
+				.title.content {
+				text-align: start;
+				}
 			`}</style>
 		</div>
 	)
