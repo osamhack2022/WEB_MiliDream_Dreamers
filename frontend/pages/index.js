@@ -8,39 +8,54 @@ import Service_2 from "../components/Home/Service_2";
 import BoardCenter from "../components/Home/slideslide";
 import LoginModal from "../components/Login/Modal";
 
-export default function Home() {
+
+import { useEffect, useState } from "react";
+//import { useQuery } from "react-query";
+
+export default function Home({ results }) {
+	const [board, setBoard] = useState();
+	useEffect(() => {
+		(async () => {
+			const results = await (await fetch(`/api/board/1`, { method: 'GET' })).json();
+			setBoard(results);
+		})();
+	}, []);
 	return (
 		<>
-			<div className="Home_home">
-				<div className="FIRST">
-					{/* 가장 위 position으로 전체 위치 조절가능 */}
-					<div style={{ position: "relative", top: "300px", left: "140px" }}>
-						<img className="front" src="/img/home/intro_2.svg" />
-						<div style={{ position: "absolute", top: "-320px", left: "140px" }}>
-							<img className="back" src="/img/home/intro_1.svg" />
-						</div>
-						<div style={{ position: "absolute", top: "170px", left: "-50px" }}>
-							<img className="third" src="/img/home/intro_3.svg" />
-						</div>
+		<div className="Home_home">
+			<div>
+				{/* {!board && <h1>Loading...</h1>}
+				{console.log(board)} */}
+			</div>
+			<div className="FIRST">
+				{/* 가장 위 position으로 전체 위치 조절가능 */}
+				<div style={{ position: "relative", top: "300px", left: "140px" }}>
+					<img className="front" src="/img/home/intro_2.svg" />
+					<div style={{ position: "absolute", top: "-320px", left: "140px" }}>
+						<img className="back" src="/img/home/intro_1.svg" />
 					</div>
-					<div>
-						<h1
-							style={{
-								position: "absolute",
-								top: "330px",
-								left: "350px",
-								fontSize: "90px",
-							}}
-						>
-							MILI-<br></br>DREAM
-						</h1>
+					<div style={{ position: "absolute", top: "170px", left: "-50px" }}>
+						<img className="third" src="/img/home/intro_3.svg" />
 					</div>
-					<div>
-						<p>
-							본인만의 군생활 유형으로 꿈을 설계해보세요.<br></br>군 장병
-							여러분들의 MILI-DREAM을 이루시길 응원합니다!
-						</p>
-					</div>
+				</div>
+				<div>
+					<h1
+						style={{
+							position: "absolute",
+							top: "320px",
+							left: "350px",
+							fontSize: "90px",
+						}}
+					>
+						MILI-<br></br>DREAM
+					</h1>
+				</div>
+				<div>
+					<p>
+						본인만의 군생활 유형으로 꿈을 설계해보세요.<br></br>군 장병
+						여러분들의 MILI-DREAM을 이루시길 응원합니다!
+					</p>
+				</div>
 
 					{/* <Link href="/login"> */}
 					<button type="button" data-bs-toggle="modal" data-bs-target="#loginModal">시작하기</button>
