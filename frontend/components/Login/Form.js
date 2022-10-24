@@ -199,11 +199,9 @@ async function login(event) {
   if (event) event.preventDefault();
   const form = document.querySelector("form.loginForm");
 
-  const data = { id: form?.id.value, password: form?.password.value };
-  const response = await axios.post("/api/accounts/sign", data, {
-    validateStatus: false,
-  });
-  const result = response.data;
+	const data = { id: form?.id.value, passwd: form?.password.value };
+	const response = await axios.post("/api/accounts/sign", data, { validateStatus: false });
+	const result = response.data;
 
   if (response.status == "200") {
     location.href = "/";
