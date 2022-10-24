@@ -8,7 +8,7 @@ export default function LoginModal() {
 					"--bs-modal-width": "830px"
 				}}>
 					<div class="modal-content">
-						<div class="modal-header">
+						<div class="modal-header" style={{ "borderBottom": "none" }}>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
