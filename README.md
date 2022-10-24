@@ -21,13 +21,13 @@
 ## 기술 스택 (Technique Used) 
 ### Server(back-end)
 <img alt="javascript" src ="https://img.shields.io/badge/javascript-F7DF1E.svg?&style=flat&logo=javascript&logoColor=black"/> 
+
 <img alt="nodejs" src ="https://img.shields.io/badge/nodejs%20v16.17.0-339933.svg?&style=flat&logo=Node.js&logoColor=white"/> 
+
 <img alt="mariadb" src ="https://img.shields.io/badge/mariadb-003545.svg?&style=flat&logo=MariaDB&logoColor=white"/> 
+
 <img alt="express" src ="https://img.shields.io/badge/express%20v4.16.1-000000.svg?&style=flat&logo=Express&logoColor=white"/> 
 
- - Node.js v16.17.0
- - express
- - MariaDB
 
 <!--
  - express, laravel, sptring boot 등 사용한 프레임워크 
@@ -38,7 +38,11 @@
  
 ### Front-end
  -  npm v8.15.0
- -  ReactJS 
+
+<img alt="React" src ="https://img.shields.io/badge/React%20v18.2.0-000000.svg?&style=flat&logo=React&logoColor=61DAFB"/> 
+
+<img alt="Next.js" src ="https://img.shields.io/badge/Next.js%20v12.3.1-000000.svg?&style=flat&logo=Next.js&logoColor=white"/> 
+
 
 <!--
  -  UI framework
@@ -46,12 +50,8 @@
 -->
 
 ## 설치 안내 (Installation Process)
-```bash
-$ git clone https://github.com/osamhack2022/WEB_MiliDream_Dreamers.git
-$ npm install
-$ npm run start
-```
 
+이 저장소를 git clone한 후 `/backend`와 `/frontend`의 README.md를 각각 참고해주세요!
 
 ## 프로젝트 사용법 (Getting Started)
 
