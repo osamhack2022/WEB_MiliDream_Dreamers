@@ -17,10 +17,12 @@ function ContentRow({ comment }) {
 	}, []);
 	//console.log(user?.userName)
 	return (
-		<tr>
-			<th scope="row" className="count content">{user?.userName}</th>
-			<td className="content">{comment?.body}</td>
-			<td className="content">{displayedAt(comment?.commentTime)}</td>
+		<tr className="comment">
+			<td className="content1">
+				<div className="content">{user?.userName}</div>
+				<div className="content">{displayedAt(comment?.commentTime)}</div>
+			</td>
+			<td className="content2">{comment?.body}</td>
 			{/* <td className="content">수정</td>
 					<td className="content">삭제</td> */}
 		</tr>
@@ -46,28 +48,29 @@ export default function ArticleWriteView({ post, articleId }) {
 					<tbody>
 						<tr className="mainTitle">
 							<th scope="col count" className="count titleBar">{post?.title}</th>
-							<div>
-								<td scope="col title" className="title titleBar">{user?.userName}</td>
-								<td scope="col writeUser" className="writeUser titleBar">{displayedAt(post?.postTime)}</td>
-								<td scope="col time" className="time titleBar">조회수 {post?.viewCount}</td>
-								<td scope="col viewCount" className="veiwCount titleBar">수정</td>
-								<td scope="col heart" className="heart titleBar">삭제</td>
-								<td scope="col" className="comments">댓글수 [{post?.comments.length}]</td>
-							</div>
+							<td>
+								<div className="title titleBar">{user?.userName}</div>
+								<div className="writeUser titleBar">{displayedAt(post?.postTime)}</div>
+								<div className="time titleBar">조회수 {post?.viewCount}</div>
+								<div className="veiwCount titleBar">수정</div>
+								<div className="heart titleBar">삭제</div>
+								<div className="comments">댓글수 [{post?.comments.length}]</div>
+							</td>
 						</tr>
 						<tr className="mainBody">
-							<th scope="col count" className="count titleBar">{post?.body}//내용이 너무 너무 짧아요 \n 짧다짧아</th>
-							<div className="body">
-								<Image src={`/article/recommendBtn.png`} width="131px" height="50px"/>
-								<Image src={`/article/reportBtn.png`} width="131px" height="50px"/>
-								<td scope="col title" className="title titleBar">{post?.recommend} 공감 버튼</td>
-								<td scope="col writeUser" className="writeUser titleBar">신고 버튼</td>
-							</div>
+							<th scope="col count" className="count titleBar">{post?.body}//내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가 내용추가</th>
+							<td className="body">
+								<Image src={`/article/recommendBtn.png`} width="131px" height="50px" />
+								<Image src={`/article/reportBtn.png`} width="131px" height="50px" />
+							</td>
 							{/* <td scope="col time" className="time titleBar">익명댓글달기 버튼</td> */}
-							<div className="comment">
-								<td scope="col viewCount" className="veiwCount titleBar">댓글입력창</td>
-								<td scope="col heart" className="heart titleBar">등록 버튼</td>
-							</div>
+							<td className="writeComment">
+								<div className="mb-3">
+									{/* <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label> */}
+									<textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="댓글을 입력해 주세요"></textarea>
+									<div className="heart titleBar">등록 버튼</div>
+								</div>
+							</td>
 						</tr>
 						{post?.comments.slice(0).map((comment) => <ContentRow comment={comment} />)}
 					</tbody>
@@ -87,11 +90,11 @@ export default function ArticleWriteView({ post, articleId }) {
 					font-weight: 600;
 					font-size: 20px;
 				}
-				.mainTitle > div {
+				.mainTitle > td {
 					display: flex;
 					height: 40px;
 				}
-				.mainTitle > div > td {
+				.mainTitle > td > div {
 					margin-left : 15px;
 					font-family: 'Noto Sans KR';
 					font-style: normal;
@@ -100,7 +103,7 @@ export default function ArticleWriteView({ post, articleId }) {
 					line-height: 19px;
 					color: rgba(0, 0, 0, 0.5);
 				}
-				.mainTitle > div > td:after {
+				.mainTitle > td > div:after {
 					content: "|";
 					margin-left : 15px;
 				}
@@ -108,6 +111,8 @@ export default function ArticleWriteView({ post, articleId }) {
 				//아래부터 body 내용. 위는 title
 				.mainBody {
 					height: max-content;
+					display: flex;
+					flex-direction: column;
 				}
 				.mainBody > th {
 					min-height : 300px;
@@ -124,10 +129,21 @@ export default function ArticleWriteView({ post, articleId }) {
 				.mainBody > .body {
 					
 				}
-				.mainBody > .comment {
-					height : 100px;
+				//아래는 댓글창 관련
+				.mb-3 {
+					display: flex;
 				}
-
+				.comment {
+					display: flex;
+					flex-direction: column;
+				}
+				.content1 {
+					padding: 0px;
+					display: flex;
+				}
+				.content2 {
+					padding: 0px;
+				}
 				//아래는 table 기본 속성
 				.table-box {
 					border: 2px solid #A7A7A7;
@@ -141,6 +157,8 @@ export default function ArticleWriteView({ post, articleId }) {
 				display: flex;
 				flex-direction: column;
 				text-align: center;
+				min-height: 850px;
+				margin: 0px;
 				}
 				.table-light {
 				--bs-table-color: white;
@@ -161,6 +179,8 @@ export default function ArticleWriteView({ post, articleId }) {
 				tbody {
 				display: flex;
 				flex-direction: column;
+				justify-content: space-between;
+				min-height: 850px;
 				}
 				tr:after {
 				content: "";

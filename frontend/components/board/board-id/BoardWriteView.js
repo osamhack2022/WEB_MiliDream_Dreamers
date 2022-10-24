@@ -44,7 +44,7 @@ export default function BoardWriteView() {
 			const results = await (await fetch(`/api/board?categoryKey=` + router.query["board-id"], { method: 'GET' })).json();
 			setBoard(results);
 		})();
-	});
+	}, []);
 	console.log(board);
 
 	return (

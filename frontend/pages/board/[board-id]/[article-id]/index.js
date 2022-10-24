@@ -24,8 +24,8 @@ export default function article_id(props) {
 			const resultsb = await (await fetch(`/api/board/category`, { method: 'GET' })).json();
 			setCategoryL(resultsb.category);
 		})();
-	});
-	
+	}, []);
+
 	const articlePost = article?.slice(0).find((x) => x.postKey == articleId)
 	console.log(articlePost)
 
