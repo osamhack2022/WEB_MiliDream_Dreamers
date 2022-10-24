@@ -1,19 +1,12 @@
 //id별 네모네모하게 제목이랑 안에 글들 보여주는 것
-import Link from 'next/link';
 
-export default function BoardMiniView({ type, boardId }) {
+export default function BoardMiniView(props) {
   
   return (
     <div className="list-group">
-      <Link href={{
-        pathname: `board/${boardId}`,
-        query: {type: `${type}`},
-        }}
-        as={`board/${boardId}`}>
-        <a className="list-group-item list-group-item-action active" aria-current="true">
-          {`${boardId}`}
-        </a>
-      </Link>
+      <a href="#" className="list-group-item list-group-item-action active" aria-current="true">
+        {`${props.type} 게시판`}
+      </a>
       <div className="list-group-item">
         <ul className="list-group list-group-flush">
           <a href="#" className="list-group-item list-group-item-action">게시글 제목 1</a>

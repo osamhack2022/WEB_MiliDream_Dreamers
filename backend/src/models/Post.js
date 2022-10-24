@@ -63,7 +63,7 @@ async function getRecruitPosts({ postKey, categoryName }, conn) {
 	/** @type {boardType[]} */
 	const result = await conn.query(sql, [postKey]);
 	const posts = await getMainCommentsForAllResult(result, conn);
-	return getRecommendersForAllResult(posts, conn);
+	return posts;
 }
 
 /**
@@ -292,18 +292,9 @@ export default class Post {
 			if (result.affectedRows === 0) {
 				throw new Error("Could not post!");
 			}
-			if (careerPostKey) {
-				await addCareerPost(
-					careerPostKey,
-					Number(result.insertId),
-					conn
-				);
-			}
-			return Number(result.insertId);
+			return { postKey: Number(result.insertId) };
 		} catch (err) {
 			throw err;
-		} finally {
-			await conn.release();
 		}
 	}
 

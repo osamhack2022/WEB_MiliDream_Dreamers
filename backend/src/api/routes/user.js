@@ -22,7 +22,7 @@ router.all(
 	 */
 	(req, res) => {
 		// @ts-ignore
-		return res.redirect(`./user/${req.user?.userKey}`);
+		return res.redirect(`./user/${req.user.userKey}`);
 	}
 );
 

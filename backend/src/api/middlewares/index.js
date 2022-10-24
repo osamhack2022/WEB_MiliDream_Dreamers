@@ -11,7 +11,7 @@
  * @returns
  */
 export function checkUserId(req, res, next) {
-	if (!/^[0-9]+$/.test(req.params.userId ?? "")) {
+	if (/^[0-9]+$/.test(req.params.userId ?? "")) {
 		res.status(400).json({ err: "userId should be integer" });
 		return;
 	}
