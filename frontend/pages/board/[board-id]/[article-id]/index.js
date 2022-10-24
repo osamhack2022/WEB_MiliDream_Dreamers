@@ -12,14 +12,17 @@ export default function article_id(props) {
 	const articleId = router.query["article-id"];
 	const boardId = router.query["board-id"];
 	const type = router.query["type"];
-	const category = props?.boards;
+	//const category = props?.boards;
 
 
 	const [article, setArticle] = useState();
+	const [categoryL, setCategoryL] = useState();
 	useEffect(() => {
 		(async () => {
 			const results = await (await fetch(`/api/board?categoryKey=` + router.query["board-id"], { method: 'GET' })).json();
 			setArticle(results.boards);
+			const resultsb = await (await fetch(`/api/board/category`, { method: 'GET' })).json();
+			setCategoryL(resultsb.category);
 		})();
 	}, []);
 	
@@ -37,7 +40,7 @@ export default function article_id(props) {
 				</div>
 				<div className="navBar">
 					<BoardSearchBar placeHolder="게시판 검색" />
-					<BoardNavBar props={category} />
+					<BoardNavBar props={categoryL} />
 				</div>
 				<div className="BoardMain">
 					<ArticleWriteView post={articlePost} articleId={articleId} />
@@ -77,7 +80,7 @@ export default function article_id(props) {
 
 export const getServerSideProps = async () => {
 	try {
-		const response = await fetch("http://milidream.ml/api/board/category");
+		const response = await fetch(config.API_ENDPOINT + "/api/board/category");
 		if (response.status >= 400) {
 			const response = await fetch("http://20.249.6.135:8080/board/category")
 			const boards = await response.json();

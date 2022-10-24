@@ -59,34 +59,34 @@ export default function ArticleWriteView({ post, articleId }) {
 	return (
 		<div>
 			<div className="table-box">
-			<table className="table">
-				<tbody>
-					<tr className="mainTitle">
-						<th scope="col count" className="count titleBar">{post?.title}</th>
-						<div>
-						<td scope="col title" className="title titleBar">{user?.userName}</td>
-						<td scope="col writeUser" className="writeUser titleBar">{displayedAt(post?.postTime)}</td>
-						<td scope="col time" className="time titleBar">조회수 {post?.viewCount}</td>
-						<td scope="col viewCount" className="veiwCount titleBar">수정</td>
-						<td scope="col heart" className="heart titleBar">삭제</td>
-						<td scope="col" className="comments">댓글수 [{post?.comments.length}]</td>
-						</div>
-					</tr>
-					<tr className="mainBody">
-						<th scope="col count" className="count titleBar">{post?.body}//내용이 너무 너무 짧아요 \n 짧다짧아</th>
-						<div className="body">
-						<td scope="col title" className="title titleBar">{post?.recommend} 공감 버튼</td>
-						<td scope="col writeUser" className="writeUser titleBar">신고 버튼</td>
-						</div>
-						{/* <td scope="col time" className="time titleBar">익명댓글달기 버튼</td> */}
-						<div className="comment">
-						<td scope="col viewCount" className="veiwCount titleBar">댓글입력창</td>
-						<td scope="col heart" className="heart titleBar">등록 버튼</td>
-						</div>
-					</tr>
-					{post?.comments.slice(0).map((comment) => <ContentRow comment={comment} />)}
-				</tbody>
-			</table>
+				<table className="table">
+					<tbody>
+						<tr className="mainTitle">
+							<th scope="col count" className="count titleBar">{post?.title}</th>
+							<div>
+							<td scope="col title" className="title titleBar">{user?.userName}</td>
+							<td scope="col writeUser" className="writeUser titleBar">{displayedAt(post?.postTime)}</td>
+							<td scope="col time" className="time titleBar">조회수 {post?.viewCount}</td>
+							<td scope="col viewCount" className="veiwCount titleBar">수정</td>
+							<td scope="col heart" className="heart titleBar">삭제</td>
+							<td scope="col" className="comments">댓글수 [{post?.comments.length}]</td>
+							</div>
+						</tr>
+						<tr className="mainBody">
+							<th scope="col count" className="count titleBar">{post?.body}//내용이 너무 너무 짧아요 \n 짧다짧아</th>
+							<div className="body">
+							<td scope="col title" className="title titleBar">{post?.recommend} 공감 버튼</td>
+							<td scope="col writeUser" className="writeUser titleBar">신고 버튼</td>
+							</div>
+							{/* <td scope="col time" className="time titleBar">익명댓글달기 버튼</td> */}
+							<div className="comment">
+							<td scope="col viewCount" className="veiwCount titleBar">댓글입력창</td>
+							<td scope="col heart" className="heart titleBar">등록 버튼</td>
+							</div>
+						</tr>
+						{post?.comments.slice(0).map((comment) => <ContentRow comment={comment} />)}
+					</tbody>
+				</table>
 			</div>
 			<style global jsx>{`
 				.mainTitle {

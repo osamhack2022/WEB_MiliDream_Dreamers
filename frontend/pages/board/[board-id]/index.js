@@ -23,15 +23,15 @@ export default function board_id(props) {
 			setArticle(results.category);
 		})();
 	}, []);
-	console.log(article)
-	//const articlePost = article && article.slice(0).find((x) => x.postKey == articleId)
+	//console.log(article)
+	const articlePost = article && article.slice(0).find((x) => x.categoryKey == boardId)
 
 
 	return (
 		<div>
 			<div className="container">
 				<div className="headerB">
-					<BoardHeader type={type} boardId={""} />
+					<BoardHeader type={type} boardId={articlePost?.categoryName} />
 				</div>
 				<div className="userInfo">
 					<BoardUser />
