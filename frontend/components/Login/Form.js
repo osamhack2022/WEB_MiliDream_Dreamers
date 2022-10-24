@@ -54,14 +54,12 @@ export default function LoginForm() {
                 <a>기억이 안나시나요?</a>
               </Link>
             </div>
-            <a
-              onClick={login}
-            >
+            <a onClick={login}>
               <div className="login-btn">
                 <span>로그인</span>
               </div>
             </a>
-            <a onClick={()=>location.href="/signup"}>
+            <a onClick={() => (location.href = "/signup")}>
               <div className="signup-btn">
                 <span>회원가입</span>
               </div>
@@ -199,9 +197,11 @@ async function login(event) {
   if (event) event.preventDefault();
   const form = document.querySelector("form.loginForm");
 
-	const data = { id: form?.id.value, passwd: form?.password.value };
-	const response = await axios.post("/api/accounts/sign", data, { validateStatus: false });
-	const result = response.data;
+  const data = { id: form?.id.value, password: form?.password.value };
+  const response = await axios.post("/api/accounts/sign", data, {
+    validateStatus: false,
+  });
+  const result = response.data;
 
   if (response.status == "200") {
     location.href = "/";
