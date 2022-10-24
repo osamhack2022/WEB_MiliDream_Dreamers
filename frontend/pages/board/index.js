@@ -5,10 +5,21 @@ import BoardCenter from "../../components/board/BoardCenter";
 import BoardMiniView from "../../components/board/BoardMiniView";
 import BoardHeader from "../../components/board/BoardHeader";
 import config from "../../config";
+import { useEffect, useState } from "react";
 
 export default function board(props) {
-	const category = props?.boards;
+	//const category = props?.boards;
 	//console.log(category.category)
+
+	const [article, setArticle] = useState();
+	useEffect(() => {
+		(async () => {
+			const results = await (await fetch(`/api/board/category`, { method: 'GET' })).json();
+			setArticle(results.category);
+		})();
+	}, []);
+	//console.log(article)
+	
 	return (
 		<div>
 			<div className="container">
@@ -20,13 +31,13 @@ export default function board(props) {
 				</div>
 				<div className="navBar">
 					<BoardSearchBar placeHolder="게시판 검색" />
-					<BoardNavBar props={category} />
+					<BoardNavBar props={article} />
 				</div>
 				<div className="banner">
 					<BoardCenter />
 				</div>
 				<div className="BoardMain">
-					{category.category && category.category.slice(0).reverse().map((article) => <BoardMiniView key={article.categoryKey} link={article.categoryKey} article={article} type="원래는 복무지/취미 구분하려던 props" />)}
+					{article && article.slice(0).reverse().map((article) => <BoardMiniView key={article.categoryKey} link={article.categoryKey} article={article} type="원래는 복무지/취미 구분하려던 props" />)}
 					{/* <BoardMiniView type="hobby" boardId="인기 게시판" />
 					<BoardMiniView type="hobby" boardId="자유 게시판" />
 					<BoardMiniView type="hobby" boardId="추천 복무지 게시판" />
@@ -65,16 +76,16 @@ export default function board(props) {
 	)
 }
 
-export const getServerSideProps = async () => {
-	const response = await fetch(config.API_ENDPOINT + "/api/board/category");
-	console.log(response);
-	const boards = await response.json();
-	return {
-		props: {
-			boards
-		}
-	}
-}
+// export const getServerSideProps = async () => {
+// 	const response = await fetch(config.API_ENDPOINT + "/api/board/category");
+// 	console.log(response);
+// 	const boards = await response.json();
+// 	return {
+// 		props: {
+// 			boards
+// 		}
+// 	}
+// }
 
 
 //ISSUE : https://yceffort.kr/2021/10/get-absolute-url-in-nextjs 참고하여 추후 각 실행 환경마다 바뀌는 절대경로에 대한 처리 필요.

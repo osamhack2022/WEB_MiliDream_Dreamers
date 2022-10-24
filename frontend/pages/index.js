@@ -11,27 +11,6 @@ import BoardCenter from "../components/Home/slideslide";
 import { useEffect, useState } from "react";
 //import { useQuery } from "react-query";
 
-
-// export async function getServerSideProps() {
-// 	const results = await fetch(`http://localhost:3000/api/board/1`, { method: 'GET' });
-// 	const data = results.json();
-// 	// if (!data) {
-// 	// 	return {
-// 	// 		redirect: {
-// 	// 			destination: '/',
-// 	// 			permanent: false,
-// 	// 		},
-// 	// 	}
-// 	// }
-// 	console.log(data);
-// 	return {
-// 		props: {
-// 			results,
-// 		},
-// 	};
-// }
-
-
 export default function Home({ results }) {
 	const [board, setBoard] = useState();
 	useEffect(() => {
