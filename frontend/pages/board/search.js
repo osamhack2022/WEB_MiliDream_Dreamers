@@ -17,26 +17,26 @@ export default function BoardFunction({ boards }) {
 	);
 }
 
-export async function getServerSideProps({ query }) {
-	const { content } = query;
+// export async function getServerSideProps({ query }) {
+// 	const { content } = query;
 
-	console.log(content);
-	const response = await fetch(
-		`http://localhost:3000/api/board/query?content=${content}`
-	);
-	if (response.ok) {
-		const data = await response.json();
+// 	console.log(content);
+// 	const response = await fetch(
+// 		`http://localhost:3000/api/board/query?content=${content}`
+// 	);
+// 	if (response.ok) {
+// 		const data = await response.json();
 
-		const { boards } = data;
-		console.log(boards);
-		return {
-			props: { boards },
-		};
-	} else {
-		const err = await response.json();
-		console.log("err", err);
-	}
-	return {
-		props: {},
-	};
-}
+// 		const { boards } = data;
+// 		console.log(boards);
+// 		return {
+// 			props: { boards },
+// 		};
+// 	} else {
+// 		const err = await response.json();
+// 		console.log("err", err);
+// 	}
+// 	return {
+// 		props: {},
+// 	};
+// }
