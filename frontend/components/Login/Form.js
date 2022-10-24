@@ -93,7 +93,7 @@ export default function LoginForm() {
         .login.wrapper {
           position: relative;
           margin: 0 auto;
-		  width: 740px;
+          width: 740px;
         }
         .login.left {
           float: left;
@@ -101,9 +101,9 @@ export default function LoginForm() {
         }
         .login.right {
           display: inline-block;
-		  height: 415px;
+          height: 415px;
         }
-		
+
         .login.right .rect {
           position: relative;
           width: 279px;
@@ -131,7 +131,7 @@ export default function LoginForm() {
           text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         }
         .loginForm {
-			width: 277px;
+          width: 277px;
         }
         .ellipse {
           z-index: 1;
