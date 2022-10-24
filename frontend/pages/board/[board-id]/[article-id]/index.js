@@ -48,31 +48,31 @@ export default function article_id(props) {
 				<div className="footer"></div>
 			</div>
 			<style jsx>{`
-          .BoardMain {
-            display: flex;
-          }
-          .container {
-            display:  grid;
-            grid-template-areas:
-            "userInfo header header"
-            "userInfo miniB  miniB"
-            "navBar   miniB  miniB"
-            "navBar   miniB  miniB"
-            "navBar   miniB  miniB"
-            "navBar   .      .    "
-            "footer   footer  footer";
-            grid-gap: 16px;
-            }
-            .headerB { grid-area: header; }
-            .banner { grid-area: banner; }
-            .userInfo { grid-area: userInfo; }
-            .navBar { grid-area: navBar; }
-            .BoardMain {
-              grid-area: miniB;
-              display: contents;
-            }
-            .footer { grid-area: footer; }
-            `}</style>
+			.BoardMain {
+				display: flex;
+			}
+			.container {
+				display:  grid;
+				grid-template-areas:
+				"userInfo header  header"
+				"userInfo header  header"
+				"navBar   miniB   miniB"
+				"navBar   miniB   miniB"
+				"navBar   miniB   miniB"
+				"navBar   miniB   miniB"
+				"footer   footer  footer";
+				grid-gap: 16px;
+			}
+			.headerB { grid-area: header; }
+			.banner { grid-area: banner; }
+			.userInfo { grid-area: userInfo; }
+			.navBar { grid-area: navBar; }
+			.BoardMain {
+				grid-area: miniB;
+				display: contents;
+			}
+			.footer { grid-area: footer; }
+			`}</style>
 		</div>
 	)
 }
