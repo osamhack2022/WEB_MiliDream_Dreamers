@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 //만약 로그인된 상태라면 로그아웃을 출력해야 함.
+//회원가입은 정보수정 정도로 하면 괜찮을 듯
 export default function NavBar() {
 	//const router = useRouter();
 	const [logon, setLogon] = useState(false);
@@ -86,18 +87,18 @@ export default function NavBar() {
 					</li>
 					<li>
 						<Link href="/career/contest">
-							<a>career_contest</a>
+							<a>공모전</a>
 						</Link>
 					</li>
 					<li>
 						<Link href="/career/survey">
-							<a>career_survey</a>
+							<a>유형 조사</a>
 						</Link>
 					</li>
 
 					<li>
-						<Link href="/user/accounts">
-							<a>user</a>
+						<Link href="/user/$[id]">
+							<a>프로필</a>
 						</Link>
 					</li>
 					<li>
@@ -132,7 +133,7 @@ export default function NavBar() {
               margin: 0px 8px;
               width: 30;
               font-size: 12px;
-              font-weight: 318;
+              font-weight: 400;
               line-height: 100px;
               padding-left: 30px;
             }
@@ -141,13 +142,13 @@ export default function NavBar() {
               list-style: none;
               padding: 0;
               display: flex;
-              padding-right: 60px;
+              padding-right: 150px;
               text-align: center;
               justify-content: center;
               align-items: center;
             }
             .middleboard a {
-              font-weight: 500;
+              font-weight: 600;
               transition: 0.2s;
             }
 
