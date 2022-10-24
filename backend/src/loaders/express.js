@@ -4,7 +4,7 @@ import cors from "cors";
 import methodOverride from "method-override";
 import * as helmet from "helmet";
 import morgan from "morgan";
-import routes from "../api";
+import routes from "../api/index.js";
 
 export default function (app) {
 	app.get("/status", (req, res) => {

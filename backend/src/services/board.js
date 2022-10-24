@@ -1,8 +1,6 @@
-import Post from "../models/Post";
+import Post from "../models/Post.js";
 
 export default class BoardService {
-	constructor() { }
-
 	static getAllBoards(info) {
 		return Post.getAllBoards(info);
 	}
@@ -15,8 +13,8 @@ export default class BoardService {
 		return Post.queryBoard(queryInfo);
 	}
 
-	static getAllTags() {
-		return Post.getAllTags();
+	static getAllCategories() {
+		return Post.getAllCategories();
 	}
 
 	static getbyBoardId(boardId) {

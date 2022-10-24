@@ -1,7 +1,7 @@
-import expressLoader from "./express";
-import mariadb from "./mariadb";
-import Logger from "./logger";
-import passport from "./passport";
+import expressLoader from "./express.js";
+import mariadb from "./mariadb.js";
+import Logger from "./logger.js";
+import passport from "./passport.js";
 
 export default async function (app) {
 	try {
@@ -13,7 +13,6 @@ export default async function (app) {
 
 
 	passport(app);
-
 	expressLoader(app);
 	Logger.info("🚅Express loaded");
 

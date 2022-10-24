@@ -1,5 +1,5 @@
-import mariadb from "../loaders/mariadb";
-import Logger from "../loaders/logger";
+import mariadb from "../loaders/mariadb.js";
+import Logger from "../loaders/logger.js";
 
 export default class User {
 	constructor(user) {
@@ -36,6 +36,13 @@ export default class User {
 		const sql = "UPDATE User SET passwd=? WHERE userKey=?;";
 		const result = await mariadb.query(sql, [new_password, userId]);
 		Logger.info(`Updated user info, successed: ${result.affectedRows === 1}`);
+		return result.affectedRows === 1;
+	}
+
+	static async putUserAvatarInfo(userId, { imageURL}) {
+		const sql = "UPDATE User SET imgUrl=? WHERE userKey=?;";
+		const result = await mariadb.query(sql, [imageURL, userId]);
+
 		return result.affectedRows === 1;
 	}
 }

@@ -1,4 +1,4 @@
-import User from "../models/user";
+import User from "../models/user.js";
 
 export default class UserService {
 	constructor() {
@@ -22,5 +22,9 @@ export default class UserService {
 	 */
 	static putUserInfo(userId, newInfo) {
 		return User.putUserInfo(userId, newInfo);
+	}
+
+	static putUserAvatarInfo(userId, newInfo){
+		return User.putUserAvatarInfo(userId, newInfo);
 	}
 }
