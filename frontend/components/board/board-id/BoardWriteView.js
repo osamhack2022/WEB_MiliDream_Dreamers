@@ -38,13 +38,14 @@ export default function BoardWriteView() {
 	}
 	const [board, setBoard] = useState();
 	const router = useRouter();
+	console.log(router.query)
 	useEffect(() => {
 		(async () => {
 			const results = await (await fetch(`/api/board?categoryKey=` + router.query["board-id"], { method: 'GET' })).json();
-			setBoard(results.boards);
+			setBoard(results);
 		})();
-	}, []);
-	//console.log(board);
+	});
+	console.log(board);
 
 	return (
 		<div className="table-box">
@@ -60,7 +61,7 @@ export default function BoardWriteView() {
 					</tr>
 				</thead>
 				<tbody className="table-group-divider">
-					{board && board.slice(0).reverse().map((article) => <ContentRow key={article.postKey} article={article} />)}
+					{board && board?.boards.slice(0).reverse().map((article) => <ContentRow key={article.postKey} article={article} />)}
 				</tbody>
 			</table>
 			<nav aria-label="Page navigation example">
