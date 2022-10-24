@@ -245,7 +245,7 @@ export default class Post {
 
 		sql += "TRUE;";
 
-		const conn = mariadb.getConnection();
+		const conn = await mariadb.getConnection();
 		try {
 			const result = await conn.query(sql, queryValue);
 			return processAllPosts(result, conn);
