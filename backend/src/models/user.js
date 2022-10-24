@@ -17,7 +17,7 @@ export default class User {
 	 * @returns {Promise<User?>} password를 제외한 User의 정보를 담음
 	 */
 	static async getUserInfo(userId) {
-		const sql = "SELECT userName, id, Class.classContent as classType FROM User, Class WHERE userKey=? AND User.classKey=Class.classKey;";
+		const sql = "SELECT userName, id, classType FROM User, Class WHERE userKey=? AND User.classKey=Class.classKey;";
 		const result = await mariadb.query(sql, [userId]);
 		if (!result)
 			return null;
@@ -39,7 +39,7 @@ export default class User {
 		return result.affectedRows === 1;
 	}
 
-	static async putUserAvatarInfo(userId, { imageURL }) {
+	static async putUserAvatarInfo(userId, { imageURL}) {
 		const sql = "UPDATE User SET imgUrl=? WHERE userKey=?;";
 		const result = await mariadb.query(sql, [imageURL, userId]);
 

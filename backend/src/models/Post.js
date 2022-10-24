@@ -38,7 +38,7 @@ async function getRecruitPosts({ postKey, categoryName }, conn) {
 		`;
 	const result = await conn.query(sql, [postKey]);
 	const posts = await getMainCommentsForAllResult(result, conn);
-	return getRecommendersForAllResult(posts, conn);
+	return posts;
 }
 
 async function getRecommenders({ postKey }, conn) {
@@ -103,22 +103,6 @@ async function processAllPosts(result, conn) {
 	result = await getRecommendersForAllResult(result, conn);
 	return result;
 }
-
-async function addCareerPost(careerPostKey, recruitKey, conn) {
-	const sql =
-		"INSERT INTO CareerPost(competitionKey, recruitKey) VALUES (?, ?);";
-	try {
-		const result = await conn.query(sql, [careerPostKey, recruitKey]);
-		if (result.affectedRows !== 1) {
-			throw Error("could not update career Post!");
-		}
-		return;
-	} catch (err) {
-		const deletesql = `DELETE FROM Post WHERE postKey=?;`;
-		await conn.query(deletesql, [recruitKey]);
-		throw err;
-	}
-}
 export default class Post {
 	static async getAllBoards({ categoryKey }) {
 		let sql = `
@@ -146,17 +130,7 @@ export default class Post {
 		}
 	}
 
-	static async postBoard({
-		categoryKey,
-		title,
-		body,
-		userKey,
-		careerPostKey,
-	}) {
-		if (categoryKey === "2" && !careerPostKey)
-			throw Error("careerPostKey가 세팅되지 않음");
-		else if (categoryKey !== "2" && careerPostKey)
-			throw Error("careerPostKey가 세팅됨");
+	static async postBoard({ categoryKey, title, body, userKey }) {
 		const cleanTitle = sanitizeHTML(title, { allowedTags: [] });
 		const cleanBody = sanitizeHTML(body, {
 			allowedTags: [
@@ -177,9 +151,8 @@ export default class Post {
 			},
 		});
 		const sql = `INSERT INTO Post(userKey, title, body, categoryKey) VALUES (?, ?, ?, ?);`;
-		const conn = await mariadb.getConnection();
 		try {
-			const result = await conn.query(sql, [
+			const result = await mariadb.query(sql, [
 				userKey,
 				cleanTitle,
 				cleanBody,
@@ -188,18 +161,9 @@ export default class Post {
 			if (result.affectedRows === 0) {
 				throw new Error("Could not post!");
 			}
-			if (careerPostKey) {
-				await addCareerPost(
-					careerPostKey,
-					Number(result.insertId),
-					conn
-				);
-			}
-			return Number(result.insertId);
+			return { postKey: Number(result.insertId) };
 		} catch (err) {
 			throw err;
-		} finally {
-			await conn.release();
 		}
 	}
 

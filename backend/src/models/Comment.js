@@ -2,7 +2,7 @@ import mariadb from "../loaders/mariadb.js";
 
 async function getCommentbyCommentKey(commentKey) {
 	const sql = `SELECT commentKey, userKey, body, commentTime FROM Comment WHERE commentKey=?`;
-	const result = await mariadb.query(sql, [commentKey]);
+	const result = mariadb.query(sql, [commentKey]);
 	return result[0];
 }
 

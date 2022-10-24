@@ -30,9 +30,6 @@ export default function BoardSearchBar({ placeHolder }) {
           border-radius: 0px;
           color: #A593E0;
         }
-        .btn:hover {
-          background-color: #a593e045;
-        }
         .navbar {
           display: block;
         }
