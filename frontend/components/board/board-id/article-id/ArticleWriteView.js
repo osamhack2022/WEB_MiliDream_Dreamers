@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { displayedAt } from "../../../../utils/strings";
 import Image from "next/image";
-
 
 function displayedAt(createdAt) {
 	const milliSeconds = Date.parse(new Date()) - Date.parse(createdAt)
@@ -35,13 +35,13 @@ function ContentRow({ comment }) {
 	}, []);
 	//console.log(user?.userName)
 	return (
-				<tr>
-					<th scope="row" className="count content">{user?.userName}</th>
-					<td className="content">{comment?.body}</td>
-					<td className="content">{displayedAt(comment?.commentTime)}</td>
-					{/* <td className="content">수정</td>
+		<tr>
+			<th scope="row" className="count content">{user?.userName}</th>
+			<td className="content">{comment?.body}</td>
+			<td className="content">{displayedAt(comment?.commentTime)}</td>
+			{/* <td className="content">수정</td>
 					<td className="content">삭제</td> */}
-				</tr>
+		</tr>
 
 	)
 }
@@ -78,7 +78,6 @@ export default function ArticleWriteView({ post, articleId }) {
 							<div className="body">
 								<Image src={`/article/recommendBtn.png`} width="131px" height="50px"/>
 								<Image src={`/article/reportBtn.png`} width="131px" height="50px"/>
-
 								<td scope="col title" className="title titleBar">{post?.recommend} 공감 버튼</td>
 								<td scope="col writeUser" className="writeUser titleBar">신고 버튼</td>
 							</div>
