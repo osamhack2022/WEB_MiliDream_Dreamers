@@ -3,27 +3,31 @@ create database milidream_db;
 use milidream_db;
 
 
-create table Class(classKey INT AUTO_INCREMENT PRIMARY KEY,
+create table Class(classKey INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 					classContent TEXT /*CHARACTER SET utf8mb4*/ NOT NULL);
 
-create table User (userKey INT AUTO_INCREMENT PRIMARY KEY, 
+create table User (userKey INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
 				userName VARCHAR(20) UNIQUE KEY NOT NULL, 
 				id VARCHAR(20) UNIQUE KEY NOT NULL, 
 				passwd VARCHAR(64) NOT NULL,
 				imgUrl VARCHAR(200),
+				enlistment DATE,
+				belong TEXT,
+				servant VARCHAR(2),
 				classKey INT NOT NULL,
 				FOREIGN KEY(classKey) REFERENCES Class(classKey));
 
-create table Category(categoryKey INT AUTO_INCREMENT PRIMARY KEY, categoryName TEXT NOT NULL);
+create table Category(categoryKey INT NOT NULL AUTO_INCREMENT PRIMARY KEY, categoryName TEXT NOT NULL);
 
 create table Post (
 	postKey INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	userKey INT NOT NULL,
+	userKey INT,
 	postTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	title TEXT NOT NULL,
 	body TEXT NOT NULL,
 	categoryKey INT NOT NULL,
 	viewCount INT NOT NULL DEFAULT 0,
+	FOREIGN KEY(userKey) REFERENCES User(userKey) ON UPDATE RESTRICT ON DELETE SET NULL
 	FOREIGN KEY(categoryKey) REFERENCES Category(categoryKey) ON UPDATE RESTRICT ON DELETE CASCADE
 );
 
@@ -51,7 +55,8 @@ create table Comment(
 	commentTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	parentKey INT,
 	FOREIGN KEY(userKey) REFERENCES User(userKey) ON UPDATE RESTRICT ON DELETE SET NULL,
-	FOREIGN KEY(postKey) REFERENCES Post(postKey) ON UPDATE RESTRICT ON DELETE CASCADE
+	FOREIGN KEY(postKey) REFERENCES Post(postKey) ON UPDATE RESTRICT ON DELETE CASCADE,
+	FOREIGN KEY(parentKey) REFERENCES Comment(commentKey) ON UPDATE RESTRICT ON DELETE CASCADE
 );
 
 create table Objectives(
