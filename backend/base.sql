@@ -14,6 +14,7 @@ create table User (userKey INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 				enlistment DATE,
 				belong TEXT,
 				servant VARCHAR(2),
+				introduce TEXT,
 				classKey INT NOT NULL,
 				FOREIGN KEY(classKey) REFERENCES Class(classKey));
 
