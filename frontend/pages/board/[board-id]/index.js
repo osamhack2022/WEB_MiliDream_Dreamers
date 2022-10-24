@@ -5,27 +5,40 @@ import BoardCenter from "../../../components/board/BoardCenter";
 import BoardWriteView from "../../../components/board/board-id/BoardWriteView";
 import BoardHeader from "../../../components/board/BoardHeader";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 export default function board_id(props) {
 	//이전 페이지 (BoardMiniView 등)에서 넘어올 때 Link query로 다음 인자를 받아와야 한다. { type, boardId };;
 	const router = useRouter();
 	const boardId = router.query["board-id"];
 	const type = router.query["type"];
-	const category = props?.boards;
-	// console.log("props", props)
+	//const category = props?.boards;
+	console.log("props", props)
 	//console.log("category, query", category, router.query)
+
+	const [article, setArticle] = useState();
+	useEffect(() => {
+		(async () => {
+			const results = await (await fetch(`/api/board/category`, { method: 'GET' })).json();
+			setArticle(results.category);
+		})();
+	}, []);
+	console.log(article)
+	//const articlePost = article && article.slice(0).find((x) => x.postKey == articleId)
+
+
 	return (
 		<div>
 			<div className="container">
 				<div className="headerB">
-					<BoardHeader type={type} boardId={category.category[boardId - 1].categoryName} />
+					<BoardHeader type={type} boardId={""} />
 				</div>
 				<div className="userInfo">
 					<BoardUser />
 				</div>
 				<div className="navBar">
 					<BoardSearchBar placeHolder="게시판 검색" />
-					<BoardNavBar props={category} />
+					<BoardNavBar props={article} />
 				</div>
 				<div className="banner">
 					<BoardCenter />
@@ -67,7 +80,7 @@ export default function board_id(props) {
 
 export const getServerSideProps = async () => {
 	try {
-		const response = await fetch("http://milidream.ml/api/board/category");
+		const response = await fetch(config.API_ENDPOINT + "/api/board/category");		//endpoint는 localhost라 배포 시 오류나는지 확인 필요
 		//ISSUE : https://yceffort.kr/2021/10/get-absolute-url-in-nextjs 참고하여 추후 각 실행 환경마다 바뀌는 절대경로에 대한 처리 필요.
 		if (response.status >= 400) {
 			const response = await fetch("http://20.249.6.135:8080/board/category")
