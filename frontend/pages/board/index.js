@@ -10,7 +10,7 @@ export default function board() {
       <div>
         <div className="container">
           <div className="headerB">
-            <BoardHeader type="main" boardId="MAIN"/>
+            <BoardHeader />
           </div>
           <div className="userInfo">          
             <BoardUser />
@@ -23,11 +23,10 @@ export default function board() {
             <BoardCenter />
           </div>
           <div className="BoardMain">
-            <BoardMiniView type="hobby" boardId="인기 게시판" />
-            <BoardMiniView type="hobby" boardId="자유 게시판" />
-            <BoardMiniView type="hobby" boardId="추천 복무지 게시판" />
-            <BoardMiniView type="hobby" boardId="추천 관심사 게시판" />
-            <BoardMiniView type="place" boardId="56사단" />
+            <BoardMiniView type="popular" />
+            <BoardMiniView type="free" />
+            <BoardMiniView type="recommendPlace" />
+            <BoardMiniView type="recommendHobby" />
           </div>
           <div className="footer"></div>
         </div>

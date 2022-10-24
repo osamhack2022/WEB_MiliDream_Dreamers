@@ -5,25 +5,17 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "export": "next export",
+	"export": "next export",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "rm -rf node_modules/.cache && next build && next export && touch out/.nojekyll && git add out/ && git commit -m \"Deploy Next.js to gh-pages\" && git subtree push --prefix out origin gh-pages"
+	"deploy": "rm -rf node_modules/.cache && next build && next export && touch out/.nojekyll && git add out/ && git commit -m \"Deploy Next.js to gh-pages\" && git subtree push --prefix out origin gh-pages"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.4",
-    "axios": "^1.1.2",
     "next": "12.3.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-quill": "^2.0.0",
-    "react-slick": "^0.29.0",
-    "slick-carousel": "^1.8.1",
-    "styled-components": "^5.3.6"
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@emotion/babel-plugin": "^11.10.2",
     "eslint": "8.24.0",
     "eslint-config-next": "12.3.1"
   }
