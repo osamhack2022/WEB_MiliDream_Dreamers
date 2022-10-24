@@ -1,8 +1,8 @@
 // @ts-check
 
 import mariadb from "../loaders/mariadb.js";
-/** @typedef {{affectedRows: number; insertId: number; warningStatus: number;}} writeResultSet */
-/** @typedef {{commentKey: number; userKey: number; commentTime: string; body: string;}} childComment */
+/** @typedef {{affectedRows: number, insertId: number, warningStatus: number}} writeResultSet */
+/** @typedef {{commentKey: number, userKey: number, commentTime: string, body: string}} childComment */
 
 /**
  * `commentKey`를 이용해 댓글을 반환합니다.
@@ -22,7 +22,7 @@ export default class Comment {
 	 * `commentInfo`를 이용해 댓글을 작성합니다.
 	 *
 	 * @param {number} userKey
-	 * @param {{postKey: number; body: string; parentKey?: number}} commentInfo
+	 * @param {{postKey: number, body: string, parentKey?: number}} commentInfo
 	 * @returns
 	 * @throws {Error}
 	 */

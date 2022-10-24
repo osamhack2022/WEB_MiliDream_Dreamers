@@ -3,12 +3,12 @@
 import mariadb from "../loaders/mariadb.js";
 import Logger from "../loaders/logger.js";
 import sanitizeHTML from "sanitize-html";
-/** @typedef {{affectedRows: number; insertId: number; warningStatus: number;}} writeResultSet */
-/** @typedef {{commentKey: number; userKey: number; commentTime: string; body: string;}} childComment */
+/** @typedef {{affectedRows: number, insertId: number, warningStatus: number}} writeResultSet */
+/** @typedef {{commentKey: number, userKey: number, commentTime: string, body: string}} childComment */
 /** @typedef {childComment & {childComments: childComment[]}} commentType */
-/** @typedef {{postKey: number; userKey: number; categoryKey: number; categoryName: string; postTime: string; title: string; body: string; viewCount: number; recommenderCount?: number; comments: commentType[], recruitPosts: boardType[]}} boardType */
+/** @typedef {{postKey: number, userKey: number, categoryKey: number, categoryName: string, postTime: string, title: string, body: string, viewCount: number, recommenderCount?: number, comments: commentType[], recruitPosts: boardType[]}} boardType */
 /** @typedef {boardType & {didRecommend?: boolean}} boardDetail */
-/** @typedef {{categoryKey: number; categoryName: string}} categoryType */
+/** @typedef {{categoryKey: number, categoryName: string}} categoryType */
 
 const COMPETITION_CATEGORY = "공모전&대회 리스트";
 

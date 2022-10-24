@@ -1,7 +1,7 @@
 // @ts-check
 import mariadb from "../loaders/mariadb.js";
 import Logger from "../loaders/logger.js";
-/** @typedef {{affectedRows: number; insertId: number; warningStatus: number;}} writeResultSet */
+/** @typedef {{affectedRows: number, insertId: number, warningStatus: number}} writeResultSet */
 /**
  * @typedef UserType
  * @property {number} userKey
@@ -15,7 +15,7 @@ export default class User {
 	 * `userKey`인 사용자에 대한 정보를 반환합니다.
 	 *
 	 * @param {number | string} userKey User를 구분하는 key
-	 * @returns {Promise<UserType>} password를 제외한 User의 정보를 담음
+	 * @returns password를 제외한 User의 정보를 담음
 	 * @throws {Error}
 	 */
 	static async getUserInfo(userKey) {

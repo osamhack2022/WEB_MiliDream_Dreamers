@@ -58,6 +58,7 @@ route
 		 */
 		(req, res) => {
 			req.logout(() => {
+				// @ts-ignore
 				req.session.save((err) => {
 					if (err) {
 						Logger.error(err);

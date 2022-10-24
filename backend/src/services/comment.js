@@ -5,7 +5,7 @@ export default class commentService {
 	/**
 	 *
 	 * @param {number} userKey
-	 * @param {{postKey: number; body: string; parentKey?: number}} commentInfo
+	 * @param {{postKey: number, body: string, parentKey?: number}} commentInfo
 	 * @returns
 	 */
 	static postComment(userKey, commentInfo) {

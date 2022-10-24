@@ -4,9 +4,6 @@ import { Router } from "express";
 import UserService from "../../services/user.js";
 import { checkUserExist, checkUserId } from "../middlewares/index.js";
 import url from "url";
-/**
- * @typedef {import("express").Request & {user: {userKey: number}}} RequestWithUser
- */
 
 const router = Router();
 

@@ -4,7 +4,7 @@ import Post from "../models/Post.js";
 export default class BoardService {
 	/**
 	 *
-	 * @param {{categoryKey?:number;}} info
+	 * @param {{categoryKey?:number}} info
 	 * @returns
 	 */
 	static getAllBoards(info) {
@@ -13,11 +13,11 @@ export default class BoardService {
 	/**
 	 *
 	 * @param {{
-	 *    categoryKey: number;
-	 *    title: string;
-	 *    body: string;
-	 *    userKey: number;
-	 *    careerPostKey?: number;
+	 *    categoryKey: number,
+	 *    title: string,
+	 *    body: string,
+	 *    userKey: number,
+	 *    careerPostKey?: number
 	 *}} info
 	 * @returns
 	 */
@@ -27,7 +27,7 @@ export default class BoardService {
 
 	/**
 	 *
-	 * @param {{title?: string;userName?: string;content?: string;tag?: string;}} queryInfo
+	 * @param {{title?: string, userName?: string, content?: string, tag?: string}} queryInfo
 	 * @returns
 	 */
 	static queryBoard(queryInfo) {
@@ -51,7 +51,7 @@ export default class BoardService {
 	/**
 	 *
 	 * @param {number} boardId
-	 * @param {{title: string; body: string; userKey:number;}} newInfo
+	 * @param {{title: string, body: string, userKey:number}} newInfo
 	 * @returns
 	 */
 	static fixbyBoardId(boardId, newInfo) {

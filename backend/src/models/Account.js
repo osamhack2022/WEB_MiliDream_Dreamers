@@ -1,8 +1,8 @@
 // @ts-check
 
 import mariadb from "../loaders/mariadb.js";
-/** @typedef {{affectedRows: number; insertId: number; warningStatus: number;}} writeResultSet */
-/** @typedef {{userName: string, userId: string; passwd: string; classKey: number}} User */
+/** @typedef {{affectedRows: number, insertId: number, warningStatus: number}} writeResultSet */
+/** @typedef {{userName: string, userId: string, passwd: string, classKey: number}} User */
 /**
  * @typedef UserType
  * @property {number} userKey User의 고유숫자
@@ -52,7 +52,7 @@ export default class Account {
 	 *
 	 * @static
 	 * @memberof Account
-	 * @param {{ userId: string; password: string; }} loginInfo
+	 * @param {{ userId: string, password: string; }} loginInfo
 	 * @return 성공시 유저 객체, 실패시 false
 	 * @throws {Error}
 	 */

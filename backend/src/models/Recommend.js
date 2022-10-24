@@ -1,7 +1,7 @@
 // @ts-check
 
 import mariadb from "../loaders/mariadb.js";
-/** @typedef {{affectedRows: number; insertId: number; warningStatus: number;}} writeResultSet */
+/** @typedef {{affectedRows: number, insertId: number, warningStatus: number}} writeResultSet */
 
 /**
  * `postKey`인 게시글의 추천수를 반환합니다.
@@ -14,7 +14,6 @@ async function countRecommenders(postKey, conn) {
 
 	/** @type {{'1': 1}[]} */
 	const result = await conn.query(sql, [postKey]);
-	console.log(result);
 	return result.length;
 }
 

@@ -4,7 +4,7 @@ import crypto from "crypto";
 import accountConfig from "../config/account.js";
 import Account from "../models/Account.js";
 
-/** @type {Map<string, {expires: number; agreements?: string[]}>} */
+/** @type {Map<string, {expires: number, agreements?: string[]}>} */
 let tokenStore = new Map();
 tokenStore.set("DEBUG", { expires: Infinity });
 
@@ -37,7 +37,7 @@ export async function generateSigninToken(agreements = "") {
  * `signupInfo`로 회원가입합니다.
  *
  * @export
- * @param {{userId: string; password: string; userName: string; userClass: number; token: string;}} signupInfo
+ * @param {{userId: string, password: string, userName: string, userClass: number, token: string}} signupInfo
  * @returns
  * @throws {Error}
  */
@@ -80,7 +80,7 @@ export async function attempt({ token, userName, userId }) {
 
 /**
  *
- * @param {{userKey: number;}} userInfo
+ * @param {{userKey: number}} userInfo
  * @returns
  */
 export async function remove(userInfo) {
