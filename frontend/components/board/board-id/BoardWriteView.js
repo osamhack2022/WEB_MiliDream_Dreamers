@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { displayedAt } from "../../../utils/strings";
 
 function ContentRow({ article }) {
-	//console.log(article);
 	const router = useRouter();
 	return (
 		<Link href={{
@@ -38,14 +37,14 @@ export default function BoardWriteView() {
 	}
 	const [board, setBoard] = useState();
 	const router = useRouter();
-	console.log(router.query)
 	useEffect(() => {
-		(async () => {
-			const results = await (await fetch(`/api/board?categoryKey=` + router.query["board-id"], { method: 'GET' })).json();
-			setBoard(results);
-		})();
-	}, []);
-	console.log(board);
+		if (router.isReady) {
+			(async () => {
+				const results = await (await fetch(`/api/board?categoryKey=` + router.query["board-id"], { method: 'GET' })).json();
+				setBoard(results);
+			})();
+		}
+	}, [router.isReady, router.query["board-id"]]);
 
 	return (
 		<div className="table-box">
