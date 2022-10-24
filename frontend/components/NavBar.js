@@ -5,6 +5,7 @@ import Image from "next/image";
 import logo from "../public/logo.svg";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import LoginModal from "./Login/Modal";
 
 //만약 로그인된 상태라면 로그아웃을 출력해야 함.
 //회원가입은 정보수정 정도로 하면 괜찮을 듯
@@ -15,7 +16,7 @@ export default function NavBar() {
 		fetch(`/api/accounts/sign`, { method: 'GET' })
 			.then(resp => { setLogon(resp.ok) });
 	}, []);
-	const logout = async () => { await axios.delete("/api/accounts/sign"); location.reload(); }
+	const logout = async () => { await axios.delete("/api/accounts/sign"); setLogon(false); }
 
 	return (
 		<header>
@@ -41,23 +42,23 @@ export default function NavBar() {
 					{logon ?
 						<>
 							<li>
-								<Link href="#" >
-									<a onClick={logout}>로그아웃</a>
-								</Link>
+								<a style={{ cursor: "pointer" }} onClick={logout}>로그아웃</a>
 							</li>
 						</>
 						:
 						<>
 							<li>
-								<Link href="/login">
+								{/* <Link href="/login">
 									<a>로그인</a>
-								</Link>
+								</Link> */}
+								<a type="button" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</a>
 							</li>
 							<li>
 								<Link href="/signup">
 									<a>회원가입</a>
 								</Link>
 							</li>
+
 						</>
 					}
 					<li>
@@ -179,7 +180,9 @@ export default function NavBar() {
           `}
 				</style>
 			</nav>
+			<LoginModal></LoginModal>
 		</header>
+
 	);
 }
 

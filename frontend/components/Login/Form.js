@@ -24,13 +24,13 @@ export default function LoginForm() {
             밀리드림에서 장병 여러분의 미래를 설계하세요
           </span>
           <form className="loginForm" onSubmit={login}>
-            <div className="text-input-box">
+            <div className="text-input-box my-3">
               <label htmlFor="id" className="form-label">
                 아이디
               </label>
               <input className="form-control" type="text" name="id"></input>
             </div>
-            <div className="text-input-box">
+            <div className="text-input-box my-3">
               <label htmlFor="password" className="form-label">
                 비밀번호
               </label>
@@ -40,18 +40,20 @@ export default function LoginForm() {
                 name="password"
               ></input>
             </div>
-            <div>
+            <div className="my-4 form-etc">
               <input
                 className="form-check-input"
                 type="checkbox"
                 name="saveId"
               />
               <label className="form-check-label" htmlFor="saveId">
-                아이디 기억하기
+                &nbsp;&nbsp;아이디 기억하기
               </label>
               <Link href={"/reset-password"}>
                 {/* TODO: 미구현 */}
-                <a>기억이 안나시나요?</a>
+                <a>
+                  <span className="forget-text">기억이 안나시나요?</span>
+                </a>
               </Link>
             </div>
             <a onClick={login}>
@@ -78,13 +80,20 @@ export default function LoginForm() {
               filter: "brightness(0.65)",
             }}
           ></Image>
+          <div className="rect">
+            <span>
+              MILI-DREAM에서<br></br>
+              여러분의 꿈을 그리고<br></br>
+              도전하세요
+            </span>
+          </div>
         </div>
       </div>
       <style jsx>{`
         .login.wrapper {
-          position: absolute;
-          top: 200px;
-          margin: 0 67px;
+          position: relative;
+          margin: 0 auto;
+		  width: 740px;
         }
         .login.left {
           float: left;
@@ -92,8 +101,37 @@ export default function LoginForm() {
         }
         .login.right {
           display: inline-block;
+		  height: 415px;
+        }
+		
+        .login.right .rect {
+          position: relative;
+          width: 279px;
+          height: 107px;
+          left: 40px;
+          top: -259px;
+          background: rgba(217, 217, 217, 0.25);
+          backdrop-filter: blur(2px);
+          /* Note: backdrop-filter has minimal browser support */
+
+          border-radius: 20px;
+        }
+        .login.right .rect > span {
+          justify-content: center;
+          font-family: "Inter";
+          font-style: normal;
+          font-weight: 500;
+          font-size: 23px;
+          line-height: 35px;
+          display: flex;
+          align-items: center;
+
+          color: #ffffff;
+
+          text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         }
         .loginForm {
+			width: 277px;
         }
         .ellipse {
           z-index: 1;
@@ -141,20 +179,34 @@ export default function LoginForm() {
           font-weight: 400;
           font-size: 12px;
           line-height: 16px;
+          color: black;
         }
         .loginForm .text-input-box {
-          width: 253px;
+          width: 277px;
+        }
+        .loginForm .form-etc {
+          width: 277px;
+        }
+        .loginForm .forget-text {
+          float: right;
+          font-family: "Noto Sans";
+          font-style: normal;
+          font-weight: 400;
+          font-size: 9px;
+          line-height: 12px;
+          text-decoration-line: underline;
+
+          color: #a593e0;
         }
         .login-btn {
           box-sizing: border-box;
 
-          position: absolute;
+          position: relative;
           width: 253px;
           height: 38px;
           line-height: 38px;
           text-align: center;
-          left: 67px;
-          top: 306px;
+          margin: 15px auto;
 
           background: linear-gradient(90deg, #c8f1ff 0%, #a593e0 97.67%);
           border-radius: 50px;
@@ -165,7 +217,8 @@ export default function LoginForm() {
           color: white;
         }
         .signup-btn {
-          position: absolute;
+          position: relative;
+          margin: 15px auto;
           border: 1.5px solid transparent;
           border-radius: 50%;
           background-image: linear-gradient(#fff, #fff),
@@ -176,8 +229,6 @@ export default function LoginForm() {
           height: 38px;
           line-height: 38px;
           text-align: center;
-          left: 67px;
-          top: 359px;
           border-radius: 50px;
           font-family: "Noto Sans";
           font-style: normal;
@@ -204,7 +255,7 @@ async function login(event) {
   const result = response.data;
 
   if (response.status == "200") {
-    location.href = "/";
+    location.reload();
   } else {
     console.log(result);
   }
