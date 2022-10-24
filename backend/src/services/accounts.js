@@ -1,19 +1,24 @@
+// @ts-check
+
 import crypto from "crypto";
 import accountConfig from "../config/account.js";
 import Account from "../models/Account.js";
 
+/** @type {Map<string, {expires: number; agreements?: string[]}>} */
 let tokenStore = new Map();
 tokenStore.set("DEBUG", { expires: Infinity });
+
 /**
  * 회원가입용 join_token을 생성합니다.
  *
  * @export
  * @param {string} agreements
- * @return {Promise<string>} join_token
+ * @returns join_token
  */
 export async function generateSigninToken(agreements = "") {
 	const expireAfter = 30 * 60 * 1000; // 30 minutes
 
+	/** @type {string} */
 	const token = await new Promise((resolve, _) => {
 		crypto.randomBytes(16, function (_, buffer) {
 			resolve(buffer.toString("hex"));
@@ -28,6 +33,14 @@ export async function generateSigninToken(agreements = "") {
 	return token;
 }
 
+/**
+ * `signupInfo`로 회원가입합니다.
+ *
+ * @export
+ * @param {{userId: string; password: string; userName: string; userClass: number; token: string;}} signupInfo
+ * @returns
+ * @throws {Error}
+ */
 export async function signup({ userId, password, userName, userClass, token }) {
 	if (!checkToken(token)) throw Error("Invalid join_token.");
 	if (!(await checkUserId(userId)))
@@ -50,21 +63,26 @@ export async function signup({ userId, password, userName, userClass, token }) {
  * 회원가입 가능한지 여부를 조회합니다.
  *
  * @export
- * @param {{token: string, username:string, userId:string}} { token, username, id, passwd }
- * @return {Promise<void>}
+ * @param {{token: string, userName:string, userId:string}} signupInfo
+ * @return
  */
-export async function attempt({ token, username, userId }) {
+export async function attempt({ token, userName, userId }) {
 	if (!checkToken(token)) throw Error("Invalid join_token.");
 
 	if (userId && !(await checkUserId(userId)))
 		throw Error("UserId Invalid or Duplicates.");
 
-	if (username && !(await checkUsername(username)))
+	if (userName && !(await checkUsername(userName)))
 		throw Error("UserName Invalid or Duplicates.");
 
 	return;
 }
 
+/**
+ *
+ * @param {{userKey: number;}} userInfo
+ * @returns
+ */
 export async function remove(userInfo) {
 	return Account.remove(userInfo);
 }
@@ -73,11 +91,11 @@ export async function remove(userInfo) {
  * join_token이 사용가능한지 확인합니다.
  *
  * @param {string} token join_token
- * @return {boolean}
+ * @return
  */
 function checkToken(token) {
 	const info = tokenStore.get(token);
-	if (info === undefined) return false;
+	if (!info) return false;
 	if (info.expires < Date.now()) {
 		// token expired
 		tokenStore.delete(token);
@@ -90,7 +108,7 @@ function checkToken(token) {
  * 사용가능한 아이디인지 확인합니다.
  *
  * @param {string} userId 아이디
- * @return {Promise<boolean>}
+ * @return
  */
 async function checkUserId(userId) {
 	if (!userId) return false;
@@ -105,7 +123,7 @@ async function checkUserId(userId) {
  * 사용가능한 닉네임인지 확인합니다.
  *
  * @param {string} username 닉네임
- * @return {Promise<boolean>}
+ * @return
  */
 async function checkUsername(username) {
 	if (!username) return false;
@@ -115,6 +133,13 @@ async function checkUsername(username) {
 
 	return !usernameConflicts;
 }
+
+/**
+ * 비밀번호가 사용가능한지 확인합니다.
+ *
+ * @param {string} password
+ * @returns
+ */
 async function checkPassword(password) {
 	if (!password) return false;
 	return accountConfig.userPwRegex.test(password);
