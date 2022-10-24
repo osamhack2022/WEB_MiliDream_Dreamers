@@ -78,31 +78,31 @@ export default function article_id(props) {
 }
 
 
-export const getServerSideProps = async () => {
-	try {
-		const response = await fetch(config.API_ENDPOINT + "/api/board/category");
-		if (response.status >= 400) {
-			const response = await fetch("http://20.249.6.135:8080/board/category")
-			const boards = await response.json();
-			return {
-				props: {
-					boards
-				}
-			}
-		}
-		else {
-			const boards = await response.json();
-			return {
-				props: {
-					boards
-				}
-			}
-		}
-	} catch {
-		return {
-			props: {
-				boards: { category: [] }
-			}
-		}
-	}
-}
+// export const getServerSideProps = async () => {
+// 	try {
+// 		const response = await fetch(config.API_ENDPOINT + "/api/board/category");
+// 		if (response.status >= 400) {
+// 			const response = await fetch("http://20.249.6.135:8080/board/category")
+// 			const boards = await response.json();
+// 			return {
+// 				props: {
+// 					boards
+// 				}
+// 			}
+// 		}
+// 		else {
+// 			const boards = await response.json();
+// 			return {
+// 				props: {
+// 					boards
+// 				}
+// 			}
+// 		}
+// 	} catch {
+// 		return {
+// 			props: {
+// 				boards: { category: [] }
+// 			}
+// 		}
+// 	}
+// }
