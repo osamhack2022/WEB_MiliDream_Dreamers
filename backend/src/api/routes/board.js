@@ -51,7 +51,7 @@ router.get("/category", async (req, res) => {
 // boardId만 주어진 경우
 router
 	.route("/:boardId")
-	.use(checkUserExist)
+	.all(checkUserExist)
 	.get(async (req, res) => {
 		try {
 			const board = await BoardService.getbyBoardId(
