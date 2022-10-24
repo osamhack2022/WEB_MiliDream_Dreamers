@@ -25,6 +25,7 @@
 | enlistment | DATE | 입대한 날짜 |  |
 | belong | TEXT | 소속 부대 |  |
 | servant | VARCHAR(2) | 육/해/공 구분 |  |
+| introduce | TEXT | 소개글 |  |
 | classkey(←Class) | INT | 밀리패스API 등으로 인증 후에 병인지 간부인지 등을 구분 | 밀리패스API를 사용하지 않을 수도 있고, 구분하는 필드가 필요없을 수도 있음, NOT NULL, DEFAULT 0, FOREIGN KEY |
 
 # 3. Category
