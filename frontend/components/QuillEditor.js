@@ -75,13 +75,13 @@ export default function QuillEditor({ body, handleQuillChange, mountBody }) {
 		}
 	}, [isError, mountBody]);
 
-	const toolbar = document.querySelectorAll('.ql-toolbar.ql-snow');
-	//console.log(toolbar)
-	if (toolbar.length != 1) {
+	// const toolbar = document.querySelectorAll('.ql-toolbar.ql-snow');
+	// //console.log(toolbar)
+	// if (toolbar.length != 1) {
 
-	}
-	const editor = document.getElementsByClassName('editor');
-	console.log(editor)
+	// }
+	// const editor = document.getElementsByClassName('editor');
+	// console.log(editor)
 
 
 	return (
