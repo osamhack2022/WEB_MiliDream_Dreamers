@@ -1,30 +1,34 @@
-import User from "../models/user.js";
+// @ts-check
 
-export default class UserService {
-	constructor() {
-		// initialize something
-	}
+import User from "../models/User.js";
 
+export default class userService {
 	/**
 	 *
-	 * @param {number | string} userId
-	 * @returns {Promise<User?>}
-	 */
-	static getUserInfo(userId) {
-		return User.getUserInfo(userId);
-	}
-
-	/**
-	 *
-	 * @param {number | string} userId
-	 * @param {{new_password: string}} newInfo
+	 * @param {number} userKey
 	 * @returns
 	 */
-	static putUserInfo(userId, newInfo) {
-		return User.putUserInfo(userId, newInfo);
+	static getUserInfo(userKey) {
+		return User.getUserInfo(userKey);
 	}
 
-	static putUserAvatarInfo(userId, newInfo){
-		return User.putUserAvatarInfo(userId, newInfo);
+	/**
+	 *
+	 * @param {number} userKey
+	 * @param {{new_password: string}} userInfo
+	 * @returns
+	 */
+	static putUserInfo(userKey, userInfo) {
+		return User.putUserInfo(userKey, userInfo);
+	}
+
+	/**
+	 *
+	 * @param {number} userKey
+	 * @param {{imageURL: string}} avaterInfo
+	 * @returns
+	 */
+	static putUserAvatarInfo(userKey, avaterInfo) {
+		return User.putUserAvatarInfo(userKey, avaterInfo);
 	}
 }
