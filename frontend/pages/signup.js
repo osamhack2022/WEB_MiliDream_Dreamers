@@ -7,13 +7,10 @@ export default function SignUp() {
 	const [token, setToken] = useState("");
 	useEffect(() => {
 		(async () => {
-			const results = await (await fetch(`/api/accounts/signup-token`, { method: 'GET' })).json();
-			if (results.success) setToken(results.join_token);
-			else console.error("getTokenFail");
+			const result = await (await fetch(`/api/accounts/signup-token`, { method: 'GET' })).json();
+			setToken(result?.token);
 		})();
 	}, []);
-
-	console.log(token);
 
 	return (
 		<div>

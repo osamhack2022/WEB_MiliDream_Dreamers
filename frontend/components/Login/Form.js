@@ -21,7 +21,7 @@ async function login(submitEvent) {
 	const form = submitEvent.target;
 	if (!form) return false;
 
-	const data = { id: form?.id.value, password: form?.password.value };
+	const data = { id: form?.id.value, passwd: form?.password.value };
 	const response = await axios.post("/api/accounts/sign", data, { validateStatus: false });
 	const result = response.data;
 
