@@ -57,12 +57,12 @@ export default function LoginForm() {
               </Link>
             </div>
             <a onClick={login}>
-              <div className="login-btn">
+              <div className="login-btn form-btn">
                 <span>로그인</span>
               </div>
             </a>
             <a onClick={() => (location.href = "/signup")}>
-              <div className="signup-btn">
+              <div className="signup-btn form-btn">
                 <span>회원가입</span>
               </div>
             </a>
@@ -95,10 +95,12 @@ export default function LoginForm() {
           margin: 0 auto;
           width: 740px;
         }
+
         .login.left {
           float: left;
           width: 387px;
         }
+
         .login.right {
           display: inline-block;
           height: 415px;
@@ -112,10 +114,9 @@ export default function LoginForm() {
           top: -259px;
           background: rgba(217, 217, 217, 0.25);
           backdrop-filter: blur(2px);
-          /* Note: backdrop-filter has minimal browser support */
-
           border-radius: 20px;
         }
+
         .login.right .rect > span {
           justify-content: center;
           font-family: "Inter";
@@ -125,29 +126,31 @@ export default function LoginForm() {
           line-height: 35px;
           display: flex;
           align-items: center;
-
-          color: #ffffff;
-
-          text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          color: #fff;
+          text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
         }
-        .loginForm {
+
+        .loginForm,
+        .loginForm .form-etc,
+        .loginForm .text-input-box {
           width: 277px;
         }
+
         .ellipse {
           z-index: 1;
           position: absolute;
-          width: 19px;
-          height: 19px;
           left: 0;
           top: 0;
           border-radius: 50%;
-
-          background: linear-gradient(270deg, #a593e0 0%, #c8f1ff 100%);
+          background: linear-gradient(270deg, #a593e0 0, #c8f1ff 100%);
         }
+
+        .ellipse,
         .lock {
           width: 19px;
           height: 19px;
         }
+
         .lock > span {
           width: 10px;
           height: 11px;
@@ -156,6 +159,7 @@ export default function LoginForm() {
           top: -2px;
           z-index: 10;
         }
+
         .login-text {
           font-family: "Noto Sans";
           font-style: normal;
@@ -164,76 +168,61 @@ export default function LoginForm() {
           line-height: 33px;
           display: block;
         }
+
         .login-hint-text {
-          font-family: "Noto Sans";
-          font-style: normal;
-          font-weight: 400;
           font-size: 12px;
           line-height: 16px;
           display: block;
           color: #999;
         }
+
+        .loginForm label {
+          font-size: 12px;
+          line-height: 16px;
+          color: #000;
+        }
+
+        .login-hint-text,
+        .loginForm .forget-text,
+        .loginForm .form-btn,
         .loginForm label {
           font-family: "Noto Sans";
           font-style: normal;
           font-weight: 400;
-          font-size: 12px;
-          line-height: 16px;
-          color: black;
         }
-        .loginForm .text-input-box {
-          width: 277px;
-        }
-        .loginForm .form-etc {
-          width: 277px;
-        }
+
         .loginForm .forget-text {
           float: right;
-          font-family: "Noto Sans";
-          font-style: normal;
-          font-weight: 400;
           font-size: 9px;
           line-height: 24px;
           text-decoration-line: underline;
-
           color: #a593e0;
         }
+
+        .loginForm .form-btn {
+          position: relative;
+          width: 253px;
+          height: 38px;
+          line-height: 38px;
+          text-align: center;
+          border-radius: 50px;
+          font-size: 12px;
+        }
+
         .login-btn {
           box-sizing: border-box;
-
-          position: relative;
-          width: 253px;
-          height: 38px;
-          line-height: 38px;
-          text-align: center;
           margin: 15px auto;
-
-          background: linear-gradient(90deg, #c8f1ff 0%, #a593e0 97.67%);
-          border-radius: 50px;
-          font-family: "Noto Sans";
-          font-style: normal;
-          font-weight: 400;
-          font-size: 12px;
-          color: white;
+          background: linear-gradient(90deg, #c8f1ff 0, #a593e0 97.67%);
+          color: #fff;
         }
+
         .signup-btn {
-          position: relative;
           margin: 15px auto;
           border: 1.5px solid transparent;
-          border-radius: 50%;
           background-image: linear-gradient(#fff, #fff),
-            linear-gradient(90deg, #c8f1ff 0%, #a593e0 97.67%);
+            linear-gradient(90deg, #c8f1ff 0, #a593e0 97.67%);
           background-origin: border-box;
           background-clip: content-box, border-box;
-          width: 253px;
-          height: 38px;
-          line-height: 38px;
-          text-align: center;
-          border-radius: 50px;
-          font-family: "Noto Sans";
-          font-style: normal;
-          font-weight: 400;
-          font-size: 12px;
           color: #b6c2ef;
         }
       `}</style>
