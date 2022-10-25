@@ -66,49 +66,45 @@ export default function RegisterForm({ token }) {
 					</form>
 				</div>
 			</div>
-			<style jsx>
-				{`
+			<style jsx>{`
 				.signup .wrapper {
 					position: relative;
 					margin: 0 auto;
-					width: 640px;
+					width: 640px
 				}
+
 				.signup-text {
 					font-family: "Noto Sans";
 					font-style: normal;
 					font-weight: 600;
 					font-size: 24px;
 					line-height: 33px;
-					display: block;
+					display: block
 				}
-				.signup form  label {
-          font-family: "Noto Sans";
-          font-style: normal;
-          font-weight: 400;
-          font-size: 12px;
-          line-height: 16px;
-          color: black;
-        }
-		.signup-btn {
-			box-sizing: border-box;
-			position: relative;
-			/*width: 253px;*/
-			height: 38px;
-			line-height: 38px;
-			text-align: center;
-			margin: 15px auto;
 
-			background: linear-gradient(90deg, #9ee6ff 0%, #a593e0 97.67%);
-			border-radius: .375rem;
-			font-family: "Noto Sans";
-			font-style: normal;
-			font-weight: 400;
-			font-size: 16px;
-			color: white;
-			cursor: pointer;
-		}
-				`}
-			</style>
+				.signup form label,.signup-btn {
+					font-family: "Noto Sans";
+					font-style: normal;
+					font-weight: 400;
+					font-size: 12px;
+					line-height: 16px;
+					color: #000
+				}
+
+				.signup-btn {
+					box-sizing: border-box;
+					position: relative;
+					height: 38px;
+					line-height: 38px;
+					text-align: center;
+					margin: 15px auto;
+					background: linear-gradient(90deg,#9ee6ff 0,#a593e0 97.67%);
+					border-radius: .375rem;
+					font-size: 16px;
+					color: #fff;
+					cursor: pointer
+				}
+				`}</style>
 		</Fragment >
 	)
 }
@@ -128,7 +124,6 @@ async function register(event) {
 		userClass: form?.userClass.value
 	};
 	const response = await axios.post("/api/accounts/account", data, { validateStatus: false });
-	debugger;
 	if (response.status == 200) {
 		const registeredData = { id: data.userId, password: data.password };
 		await axios.post("/api/accounts/sign", registeredData, { validateStatus: false });

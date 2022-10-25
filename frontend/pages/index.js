@@ -101,8 +101,7 @@ export default function Home({ results }) {
               transition: 1s;
             }
             .FIRST {
-              width: 150vw;
-              height: 80vh;
+              height: 755.19px;
               background-size: cover;
               background-position: center;
               background-repeat: no-repeat;
