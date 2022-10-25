@@ -5,22 +5,18 @@ import Image from "next/image";
 import logo from "../public/logo.svg";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import LoginModal from "./Login/Modal";
 
 //만약 로그인된 상태라면 로그아웃을 출력해야 함.
 //회원가입은 정보수정 정도로 하면 괜찮을 듯
 export default function NavBar() {
-  //const router = useRouter();
-  const [logon, setLogon] = useState(false);
-  useEffect(() => {
-    //fetch session state
-    fetch(`/api/accounts/sign`, { method: "GET" }).then((resp) => {
-      setLogon(resp.ok);
-    });
-  }, []);
-  const logout = async () => {
-    await axios.delete("/api/accounts/sign");
-    location.reload();
-  };
+	//const router = useRouter();
+	const [logon, setLogon] = useState(false);
+	useEffect(() => { //fetch session state
+		fetch(`/api/accounts/sign`, { method: 'GET' })
+			.then(resp => { setLogon(resp.ok) });
+	}, []);
+	const logout = async () => { await axios.delete("/api/accounts/sign"); setLogon(false); }
 
   return (
     <header>
@@ -36,70 +32,70 @@ export default function NavBar() {
           />
         </Link>
 
-        <ul
-          className="rightboard"
-          style={{
-            position: "relative",
-            top: "-20px",
-          }}
-        >
-          {logon ? (
-            <>
-              <li>
-                <Link href="#">
-                  <a onClick={logout}>로그아웃</a>
-                </Link>
-              </li>
-            </>
-          ) : (
-            <>
-              <li>
-                <Link href="/login">
-                  <a>로그인</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/signup">
-                  <a>회원가입</a>
-                </Link>
-              </li>
-            </>
-          )}
-          <li>
-            <Link href="/contact">
-              <a>CONTACT</a>
-            </Link>
-          </li>
-        </ul>
-        <ul
-          className="middleboard"
-          style={{
-            position: "relative",
-            right: "180px",
-            top: "-22px",
-            textAlign: "center",
-          }}
-        >
-          <li>
-            <Link href="/map">
-              <a>진로 설계</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/board">
-              <a>게시판</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/career/contest">
-              <a>공모전</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/career/survey">
-              <a>유형 조사</a>
-            </Link>
-          </li>
+				<ul
+					className="rightboard"
+					style={{
+						position: "relative",
+						top: "-20px",
+					}}
+				>
+					{logon ?
+						<>
+							<li>
+								<a style={{ cursor: "pointer" }} onClick={logout}>로그아웃</a>
+							</li>
+						</>
+						:
+						<>
+							<li>
+								{/* <Link href="/login">
+									<a>로그인</a>
+								</Link> */}
+								<a type="button" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</a>
+							</li>
+							<li>
+								<Link href="/signup">
+									<a>회원가입</a>
+								</Link>
+							</li>
+
+						</>
+					}
+					<li>
+						<Link href="/contact">
+							<a>CONTACT</a>
+						</Link>
+					</li>
+				</ul>
+				<ul
+					className="middleboard"
+					style={{
+						position: "relative",
+						right: "180px",
+						top: "-22px",
+						textAlign: "center",
+					}}
+				>
+					<li>
+						<Link href="/map">
+							<a>진로 설계</a>
+						</Link>
+					</li>
+					<li>
+						<Link href="/board">
+							<a>게시판</a>
+						</Link>
+					</li>
+					<li>
+						<Link href="/career/contest">
+							<a>공모전</a>
+						</Link>
+					</li>
+					<li>
+						<Link href="/career/survey">
+							<a>유형 조사</a>
+						</Link>
+					</li>
 
           <li>
             <Link href="/user/$[id]">
@@ -185,10 +181,12 @@ export default function NavBar() {
               padding-left: 30px;
             }
           `}
-        </style>
-      </nav>
-    </header>
-  );
+				</style>
+			</nav>
+			<LoginModal></LoginModal>
+		</header>
+
+	);
 }
 
 // li의 line-height는 로그인 등 헤더의 txt 부분 높이 조절
