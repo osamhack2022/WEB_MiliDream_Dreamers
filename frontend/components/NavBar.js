@@ -48,9 +48,6 @@ export default function NavBar() {
 						:
 						<>
 							<li>
-								{/* <Link href="/login">
-									<a>로그인</a>
-								</Link> */}
 								<a type="button" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</a>
 							</li>
 							<li>
