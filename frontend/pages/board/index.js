@@ -18,8 +18,8 @@ export default function board(props) {
 			setArticle(results.category);
 		})();
 	}, []);
-	//console.log(article)
-	
+	console.log(article)
+
 	return (
 		<div>
 			<div className="container">
