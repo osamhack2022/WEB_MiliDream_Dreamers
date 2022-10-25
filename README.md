@@ -3,7 +3,18 @@
 
 # Project name and Logo
 ## MiliDream
-![we need image!!]()
+
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbVdFty%2FbtrPAo4cs8y%2F2R14CFKtYcYJHKGTtQJ9V1%2Fimg.png" width="220">
+
+<a href="#">
+	<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FJdGTB%2FbtrPydb1fxX%2Fl1EJAqjLbwg8SmFOjtMLM0%2Fimg.png" width="70">
+</a>
+<a href="https://github.com/osamhack2022-v2/WEB_MiliDream_Dreamers/issues">
+	<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FboMneJ%2FbtrPx1itOgh%2F32zDfdLRtHxVwtnubWuTeK%2Fimg.png" width="70">
+</a>
+<a href="https://milidream.ml/">
+	<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcrygJK%2FbtrPw0qCKJ4%2FSIEBBS531GCrlKk8OsGCD0%2Fimg.png" width="70">
+</a>
 
 <!--프로젝트명 또는 프로젝트 로고 이미지 **(택1)**-->
 
