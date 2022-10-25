@@ -25,8 +25,8 @@ export default function article_id(props) {
 			setCategoryL(resultsb.category);
 		})();
 	}, []);
-	
-	const articlePost = article && article.slice(0).find((x) => x.postKey == articleId)
+
+	const articlePost = article?.slice(0).find((x) => x.postKey == articleId)
 	console.log(articlePost)
 
 	return (

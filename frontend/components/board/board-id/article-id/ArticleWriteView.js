@@ -4,6 +4,30 @@ import { useEffect, useState } from "react";
 import { displayedAt } from "../../../../utils/strings";
 import Image from "next/image";
 
+function reportModal(e) {
+	e.preventDefault();
+	console.log('ggggg');
+	return (
+		<div className="modal fade" id="reportModalDiv" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div className="modal-dialog">
+				<div className="modal-content">
+					<div className="modal-header">
+						<h1 className="modal-title fs-5" id="exampleModalLabel">게시글 신고</h1>
+						<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div className="modal-body">
+						게시글 신고 요청이 접수되었습니다.
+					</div>
+					<div className="modal-footer">
+						<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						<button type="button" className="btn btn-primary">Save changes</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	)
+}
+
 function ContentRow({ comment }) {
 	//const router = useRouter();
 	//console.log(comment)
@@ -17,10 +41,12 @@ function ContentRow({ comment }) {
 	}, []);
 	//console.log(user?.userName)
 	return (
-		<tr>
-			<th scope="row" className="count content">{user?.userName}</th>
-			<td className="content">{comment?.body}</td>
-			<td className="content">{displayedAt(comment?.commentTime)}</td>
+		<tr className="comment">
+			<td className="content1">
+				<div className="name">{user?.userName}</div>
+				<div className="date">{displayedAt(comment?.commentTime)}</div>
+			</td>
+			<td className="content2">{comment?.body}</td>
 			{/* <td className="content">수정</td>
 					<td className="content">삭제</td> */}
 		</tr>
@@ -41,33 +67,91 @@ export default function ArticleWriteView({ post, articleId }) {
 	//console.log(post)
 	return (
 		<div>
+			<div className="modal fade" id="reportModalDiv" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div className="modal-dialog">
+					<div className="modal-content">
+						<div className="modal-header">
+							<h1 className="modal-title fs-5" id="exampleModalLabel">게시글 신고</h1>
+							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div className="modal-body">
+							게시글 신고 요청이 접수되었습니다.
+						</div>
+						<div className="modal-footer">
+							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							{/* <button type="button" className="btn btn-primary">Save changes</button> */}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div className="modal fade" id="recommendModalDiv" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div className="modal-dialog">
+					<div className="modal-content">
+						<div className="modal-header">
+							<h1 className="modal-title fs-5" id="exampleModalLabel">게시글 공감</h1>
+							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div className="modal-body">
+							게시글에 공감하셨습니다!
+						</div>
+						<div className="modal-footer">
+							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							{/* <button type="button" className="btn btn-primary">Save changes</button> */}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div className="modal fade" id="commentModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div className="modal-dialog">
+					<div className="modal-content">
+						<div className="modal-header">
+							<h1 className="modal-title fs-5" id="exampleModalLabel">게시글 댓글</h1>
+							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div className="modal-body">
+							댓글 달기 완료!
+						</div>
+						<div className="modal-footer">
+							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							{/* <button type="button" className="btn btn-primary">Save changes</button> */}
+						</div>
+					</div>
+				</div>
+			</div>
 			<div className="table-box">
 				<table className="table">
 					<tbody>
 						<tr className="mainTitle">
 							<th scope="col count" className="count titleBar">{post?.title}</th>
-							<div>
-								<td scope="col title" className="title titleBar">{user?.userName}</td>
-								<td scope="col writeUser" className="writeUser titleBar">{displayedAt(post?.postTime)}</td>
-								<td scope="col time" className="time titleBar">조회수 {post?.viewCount}</td>
-								<td scope="col viewCount" className="veiwCount titleBar">수정</td>
-								<td scope="col heart" className="heart titleBar">삭제</td>
-								<td scope="col" className="comments">댓글수 [{post?.comments.length}]</td>
-							</div>
+							<td>
+								<div className="title titleBar">{user?.userName}</div>
+								<div className="writeUser titleBar">{displayedAt(post?.postTime)}</div>
+								<div className="time titleBar">조회수 {post?.viewCount}</div>
+								<div className="veiwCount titleBar">수정</div>
+								<div className="heart titleBar">삭제</div>
+								<div className="comments">댓글수 [{post?.comments.length}]</div>
+							</td>
 						</tr>
 						<tr className="mainBody">
-							<th scope="col count" className="count titleBar">{post?.body}//내용이 너무 너무 짧아요 \n 짧다짧아</th>
-							<div className="body">
-								<Image src={`/article/recommendBtn.png`} width="131px" height="50px"/>
-								<Image src={`/article/reportBtn.png`} width="131px" height="50px"/>
-								<td scope="col title" className="title titleBar">{post?.recommend} 공감 버튼</td>
-								<td scope="col writeUser" className="writeUser titleBar">신고 버튼</td>
-							</div>
+							<th scope="col count" className="count titleBar">{post?.body}//Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</th>
+							<td className="body">
+								<a type="button" data-bs-toggle="modal" data-bs-target="#recommendModalDiv">
+									<Image src={`/article/recommendBtn.png`} width="131px" height="50px" />
+								</a>
+								<a type="button" data-bs-toggle="modal" data-bs-target="#reportModalDiv">
+									<Image src={`/article/reportBtn.png`} width="131px" height="50px" />
+								</a>
+							</td>
 							{/* <td scope="col time" className="time titleBar">익명댓글달기 버튼</td> */}
-							<div className="comment">
-								<td scope="col viewCount" className="veiwCount titleBar">댓글입력창</td>
-								<td scope="col heart" className="heart titleBar">등록 버튼</td>
-							</div>
+							<td className="writeComment">
+								<div className="mb-3">
+									{/* <label for="exampleFormControlTextarea1" className="form-label">Example textarea</label> */}
+									<textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="댓글을 입력해 주세요"></textarea>
+									<button type="button" data-bs-toggle="modal" data-bs-target="#commentModal">
+										등록
+									</button>
+								</div>
+							</td>
 						</tr>
 						{post?.comments.slice(0).map((comment) => <ContentRow comment={comment} />)}
 					</tbody>
@@ -87,11 +171,11 @@ export default function ArticleWriteView({ post, articleId }) {
 					font-weight: 600;
 					font-size: 20px;
 				}
-				.mainTitle > div {
+				.mainTitle > td {
 					display: flex;
 					height: 40px;
 				}
-				.mainTitle > div > td {
+				.mainTitle > td > div {
 					margin-left : 15px;
 					font-family: 'Noto Sans KR';
 					font-style: normal;
@@ -100,7 +184,7 @@ export default function ArticleWriteView({ post, articleId }) {
 					line-height: 19px;
 					color: rgba(0, 0, 0, 0.5);
 				}
-				.mainTitle > div > td:after {
+				.mainTitle > td > div:after {
 					content: "|";
 					margin-left : 15px;
 				}
@@ -108,6 +192,8 @@ export default function ArticleWriteView({ post, articleId }) {
 				//아래부터 body 내용. 위는 title
 				.mainBody {
 					height: max-content;
+					display: flex;
+					flex-direction: column;
 				}
 				.mainBody > th {
 					min-height : 300px;
@@ -124,10 +210,64 @@ export default function ArticleWriteView({ post, articleId }) {
 				.mainBody > .body {
 					
 				}
-				.mainBody > .comment {
-					height : 100px;
+				//아래는 댓글창 관련
+				.mb-3 {
+					display: flex;
 				}
-
+				.mb-3 > button {
+					border: transparent;
+					background: #A593E0;
+					box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+					border-radius: 5px;
+					cursor: pointer;
+					font-family: 'Noto Sans KR';
+					font-style: normal;
+					font-weight: 400;
+					font-size: 15px;
+					line-height: 22px;
+					text-align: center;
+					color: #FFFFFF;
+					margin-left: 10px;
+					width: 60px;
+				}
+				.comment {
+					display: flex;
+					flex-direction: column;
+				}
+				.content1 {
+					padding: 0px;
+					display: flex;
+					justify-content: space-between;
+					font-family: 'Noto Sans KR';
+					font-style: normal;
+					font-weight: 500;
+					font-size: 15px;
+					line-height: 22px;
+					display: flex;
+					align-items: center;
+					color: #000000;
+					margin-left: 20px;
+				}
+				.content1 > .date {
+					font-family: 'Noto Sans KR';
+					font-style: normal;
+					font-weight: 500;
+					font-size: 12px;
+					line-height: 17px;
+					align-items: center;
+					color: #A7A7A7;
+					margin-right: 30px;
+				}
+				.content2 {
+					text-align: left;
+					font-family: 'Noto Sans KR';
+					font-style: normal;
+					font-weight: 500;
+					font-size: 12px;
+					line-height: 17px;
+					color: #000000;
+					margin-left: 20px;
+				}
 				//아래는 table 기본 속성
 				.table-box {
 					border: 2px solid #A7A7A7;
@@ -141,6 +281,8 @@ export default function ArticleWriteView({ post, articleId }) {
 				display: flex;
 				flex-direction: column;
 				text-align: center;
+				min-height: 850px;
+				margin: 0px;
 				}
 				.table-light {
 				--bs-table-color: white;
@@ -161,6 +303,8 @@ export default function ArticleWriteView({ post, articleId }) {
 				tbody {
 				display: flex;
 				flex-direction: column;
+				justify-content: space-between;
+				min-height: 850px;
 				}
 				tr:after {
 				content: "";
