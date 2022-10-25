@@ -15,7 +15,7 @@ export default class userService {
 	/**
 	 *
 	 * @param {number} userKey
-	 * @param {{new_password: string}} userInfo
+	 * @param {{new_password?: string, enlistment?: string, belong?: string, servant?: string, introduce?: string}} userInfo
 	 * @returns
 	 */
 	static putUserInfo(userKey, userInfo) {
