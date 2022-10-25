@@ -36,8 +36,9 @@ export default function user_id() {
           style={{
             marginLeft: "150px",
             // marginTop: "20px",
-            marginBottom: "0",
+            marginBottom: "10px",
             fontSize: "34px",
+            fontWeight: "550",
           }}
         >
           유저 프로필 및 정보
@@ -46,7 +47,7 @@ export default function user_id() {
           style={{
             marginLeft: "150px",
             marginBottom: "30px",
-
+            fontWeight: "600px",
             fontSize: "20px",
           }}
         >
@@ -84,7 +85,7 @@ export default function user_id() {
               style={{
                 display: "flex",
                 width: "150px",
-
+                marginLeft: "30px",
                 marginRight: "120px",
               }}
             >
@@ -108,10 +109,10 @@ export default function user_id() {
                     whiteSpace: "nowrap",
                     fontSize: "20px",
                     fontWeight: "520",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
 
                     //줄 기준으로 자르기 style
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
                     whiteSpace: "normal",
                     lineHeight: "1.2",
                     height: "4.8em",
@@ -164,6 +165,7 @@ export default function user_id() {
                   marginTop: "0px",
                   marginLeft: "10px",
                   marginBottom: "20px",
+                  fontWeight: "bold",
                 }}
               >
                 기본 정보
@@ -207,7 +209,55 @@ export default function user_id() {
                           fontWeight: "500",
                         }}
                       >
-                        상병 5호봉 (D-
+                        <select
+                          className="choice"
+                          style={{
+                            width: "124px",
+                            height: "32px",
+                            border: "0px",
+                            backgroundColor: "#ffffff",
+                            color: "#000000",
+                            cursor: "pointer",
+                            fontSize: "20px",
+                            fontWeight: "600",
+                          }}
+                        >
+                          {" "}
+                          <optgroup label="이등병">
+                            <option>이병 1호봉</option>
+                            <option>이병 2호봉</option>
+                            <option>이병 3호봉</option>
+                          </optgroup>
+                          <optgroup label="일등병">
+                            <option>일병 1호봉</option>
+                            <option>일병 2호봉</option>
+                            <option>일병 3호봉</option>
+                            <option>일병 4호봉</option>
+                            <option>일병 5호봉</option>
+                            <option>일병 6호봉</option>
+                            <option>일병 7호봉</option>
+                            <option>일병 8호봉</option>
+                          </optgroup>
+                          <optgroup label="상등병">
+                            <option>상병 1호봉</option>
+                            <option>상병 2호봉</option>
+                            <option>상병 3호봉</option>
+                            <option>상병 4호봉</option>
+                            <option>상병 5호봉</option>
+                            <option>상병 6호봉</option>
+                            <option>상병 7호봉</option>
+                          </optgroup>
+                          <optgroup label="병장">
+                            <option>병장 1호봉</option>
+                            <option>병장 2호봉</option>
+                            <option>병장 3호봉</option>
+                            <option>병장 4호봉</option>
+                            <option>병장 5호봉</option>
+                            <option>병장 6호봉</option>
+                            <option>병장 7호봉</option>
+                          </optgroup>
+                        </select>{" "}
+                        (D-
                         {Math.round(
                           Math.abs((goal - now) / (1000 * 60 * 60 * 24))
                         )}
@@ -249,12 +299,13 @@ export default function user_id() {
                     fontWeight: "400px",
 
                     marginTop: "70px",
-                    marginLeft: "45px",
+                    marginLeft: "25px",
                     textShadow: "0px 4px 4px #A7A7A7",
                   }}
                 >
-                  {`${start_year}.${start_month >= 10 ? start_month : "0" + start_month
-                    }.${start_date >= 10 ? start_date : "0" + start_date}`}
+                  {`${start_year}.${
+                    start_month >= 10 ? start_month : "0" + start_month
+                  }.${start_date >= 10 ? start_date : "0" + start_date}`}
                   <br />
                   입대
                 </div>
@@ -267,12 +318,13 @@ export default function user_id() {
                     fontSize: "16px",
                     fontWeight: "400px",
                     marginTop: "70px",
-                    marginLeft: "1160px",
+                    marginLeft: "1140px",
                     textShadow: "0px 4px 4px #A7A7A7",
                   }}
                 >
-                  {`${goal_year}.${goal_month >= 10 ? goal_month : "0" + goal_month
-                    }.${goal_date >= 10 ? goal_date : "0" + goal_date}`}
+                  {`${goal_year}.${
+                    goal_month >= 10 ? goal_month : "0" + goal_month
+                  }.${goal_date >= 10 ? goal_date : "0" + goal_date}`}
                   <br />
                   <div
                     style={{
@@ -304,6 +356,7 @@ export default function user_id() {
                     marginTop: "30px",
                     marginLeft: "10px",
                     marginBottom: "20px",
+                    fontWeight: "bold",
                   }}
                 >
                   진로 관련 정보
@@ -330,8 +383,22 @@ export default function user_id() {
                         fontWeight: "500",
                       }}
                     >
-                      자기계발
+                      {"자기계발"}형
                     </span>
+                    <a
+                      href="http://www.naver.com"
+                      target={"_blank"}
+                      style={{
+                        fontSize: "18px",
+                        marginLeft: "30px",
+                        color: "#A593E0",
+                        cursor: "pointer",
+                        textDecoration: "underline",
+                        textUnderlinePosition: "under",
+                      }}
+                    >
+                      더 알아보기{">"}
+                    </a>
                   </div>
                   <br></br>
                   <span
@@ -344,26 +411,298 @@ export default function user_id() {
                     설정한 목표 |{" "}
                   </span>{" "}
                   <div className="wrapper">
-                    <div>1</div>
-                    <div>2</div>
-                    <div>3</div>
-                    <div>4</div>
+                    {/** 1번 목표 */}
+                    <div className="bigger">
+                      <img
+                        className="plan_state"
+                        src="/img/user/onGoing.svg"
+                        onClick={{}}
+                        style={{
+                          filter: "drop-shadow(5px 5px 5px #A7A7A7)",
+                        }}
+                      />
+                      <div
+                        style={{
+                          display: "inline-block",
+                          fontSize: "20px",
+                          fontWeight: "Bold",
+                          marginLeft: "16px",
+                          marginTop: "14px",
+                        }}
+                      >
+                        목표 타이틀
+                      </div>
+                      <div
+                        style={{
+                          fontSize: "16px",
+                          marginLeft: "28px",
+                          marginRight: "28px",
+                          marginTop: "6px",
+
+                          //줄 바꿈
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          whiteSpace: "normal",
+                          lineHeight: "1.2",
+                          height: "1.2em",
+                        }}
+                      >
+                        목표에 대한 간단한 소개가 적혀있는 곳입니다.
+                        안녕하세요안녕하세요안녕하세
+                      </div>
+                      <div
+                        style={{
+                          marginLeft: "28px",
+                          marginTop: "3px",
+                        }}
+                      >
+                        <img
+                          style={{
+                            display: "inline",
+                            width: "16px",
+                          }}
+                          src="/img/user/clock.svg"
+                        />
+                        &nbsp;{" "}
+                        <div
+                          style={{
+                            display: "inline-block",
+                            color: "#A7A7A7",
+                          }}
+                        >
+                          {/*날짜.. */}
+                          yyyy.mm.dd ~ yyyy.mm.dd
+                          {/* 날짜 받아오면 활용{`${goal_year}.${
+                            goal_month >= 10 ? goal_month : "0" + goal_month
+                          }.${
+                            goal_date >= 10 ? goal_date : "0" + goal_date
+                          }`}{" "}
+                          ~
+                          {`${goal_year}.${
+                            goal_month >= 10 ? goal_month : "0" + goal_month
+                          }.${goal_date >= 10 ? goal_date : "0" + goal_date}`} */}
+                          {/* 만약 선택해야되면 활용
+						  <p><input type={"date"} /></p>
+							*/}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 2번 목표 */}
+                    <div className="bigger">
+                      <img
+                        className="plan_state"
+                        src="/img/user/complete.svg"
+                        onClick={{}}
+                      />
+                      <div
+                        style={{
+                          display: "inline-block",
+                          fontSize: "20px",
+                          fontWeight: "Bold",
+                          marginLeft: "16px",
+                          marginTop: "14px",
+                        }}
+                      >
+                        목표 타이틀
+                      </div>
+                      <div
+                        style={{
+                          fontSize: "16px",
+                          marginLeft: "28px",
+                          marginRight: "28px",
+                          marginTop: "6px",
+
+                          //줄 바꿈
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          whiteSpace: "normal",
+                          lineHeight: "1.2",
+                          height: "1.2em",
+                        }}
+                      >
+                        목표에 대한 간단한 소개가 적혀있는 곳입니다.
+                        안녕하세요안녕하세요안녕하세
+                      </div>
+                      <div
+                        style={{
+                          marginLeft: "28px",
+                          marginTop: "3px",
+                        }}
+                      >
+                        <img
+                          style={{
+                            display: "inline",
+                            width: "16px",
+                          }}
+                          src="/img/user/clock.svg"
+                        />
+                        &nbsp;{" "}
+                        <div
+                          style={{
+                            display: "inline-block",
+                            color: "#A7A7A7",
+                          }}
+                        >
+                          {/*날짜.. */}
+                          yyyy.mm.dd ~ yyyy.mm.dd
+                        </div>
+                      </div>
+                    </div>
+                    {/* 3번 목표 */}
+                    <div className="bigger">
+                      <img
+                        className="plan_state"
+                        src="/img/user/onGoing.svg"
+                        onClick={{}}
+                      />
+                      <div
+                        style={{
+                          display: "inline-block",
+                          fontSize: "20px",
+                          fontWeight: "Bold",
+                          marginLeft: "16px",
+                          marginTop: "14px",
+                        }}
+                      >
+                        목표 타이틀
+                      </div>
+                      <div
+                        style={{
+                          fontSize: "16px",
+                          marginLeft: "28px",
+                          marginRight: "28px",
+                          marginTop: "6px",
+
+                          //줄 바꿈
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          whiteSpace: "normal",
+                          lineHeight: "1.2",
+                          height: "1.2em",
+                        }}
+                      >
+                        목표에 대한 간단한 소개가 적혀있는 곳입니다.
+                        안녕하세요안녕하세요안녕하세
+                      </div>
+                      <div
+                        style={{
+                          marginLeft: "28px",
+                          marginTop: "3px",
+                        }}
+                      >
+                        <img
+                          style={{
+                            display: "inline",
+                            width: "16px",
+                          }}
+                          src="/img/user/clock.svg"
+                        />
+                        &nbsp;{" "}
+                        <div
+                          style={{
+                            display: "inline-block",
+                            color: "#A7A7A7",
+                          }}
+                        >
+                          {/*날짜.. */}
+                          yyyy.mm.dd ~ yyyy.mm.dd
+                        </div>
+                      </div>
+                    </div>
+                    {/* 4번 목표 */}
+                    <div className="bigger">
+                      <img
+                        className="plan_state"
+                        src="/img/user/beforeOnGoing.svg"
+                        onClick={{}}
+                      />
+                      <div
+                        style={{
+                          display: "inline-block",
+                          fontSize: "20px",
+                          fontWeight: "Bold",
+                          marginLeft: "16px",
+                          marginTop: "14px",
+                        }}
+                      >
+                        목표 타이틀
+                      </div>
+                      <div
+                        style={{
+                          fontSize: "16px",
+                          marginLeft: "28px",
+                          marginRight: "28px",
+                          marginTop: "6px",
+
+                          //줄 바꿈
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          whiteSpace: "normal",
+                          lineHeight: "1.2",
+                          height: "1.2em",
+                        }}
+                      >
+                        목표에 대한 간단한 소개가 적혀있는 곳입니다.
+                        안녕하세요안녕하세요안녕하세
+                      </div>
+                      <div
+                        style={{
+                          marginLeft: "28px",
+                          marginTop: "3px",
+                        }}
+                      >
+                        <img
+                          style={{
+                            display: "inline",
+                            width: "16px",
+                          }}
+                          src="/img/user/clock.svg"
+                        />
+                        &nbsp;{" "}
+                        <div
+                          style={{
+                            display: "inline-block",
+                            color: "#A7A7A7",
+                          }}
+                        >
+                          {/*날짜.. */}
+                          yyyy.mm.dd ~ yyyy.mm.dd
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <style jsx>{`
+                    .bigger {
+                      transition: 0.5s;
+                      cursor: pointer;
+                    }
+                    .bigger:hover {
+                      transform: scale(1.007);
+                    }
+                    .plan_state {
+                      display: inline-block;
+                      margin-left: 26px;
+                      margin-bottom: 4px;
+                    }
+                    option {
+                    }
                     .wrapper > div {
-                      background-color: orange;
-                      border: 1px black solid;
+                      //background-color: orange;
+                      border: 2px #a7a7a7 solid;
+                      border-radius: 20px;
                     }
 
                     .wrapper > div:nth-child(odd) {
-                      background-color: indianred;
+                      //background-color: indianred;
                     }
 
                     .wrapper {
                       margin-top: 20px;
+                      margin-left: 10px;
                       display: grid;
-                      grid-template-columns: 1fr 1fr;
-                      grid-template-rows: 50px 50px;
+                      grid-template-columns: 570px 570px;
+                      grid-template-rows: 120px 120px;
                       grid-column-gap: 20px;
                       grid-row-gap: 20px;
                     }
