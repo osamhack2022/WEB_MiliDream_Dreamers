@@ -5,8 +5,10 @@ import Image from "next/image";
 import logo from "../public/logo.svg";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import LoginModal from "./Login/Modal";
 
 //만약 로그인된 상태라면 로그아웃을 출력해야 함.
+//회원가입은 정보수정 정도로 하면 괜찮을 듯
 export default function NavBar() {
 	//const router = useRouter();
 	const [logon, setLogon] = useState(false);
@@ -14,7 +16,7 @@ export default function NavBar() {
 		fetch(`/api/accounts/sign`, { method: 'GET' })
 			.then(resp => { setLogon(resp.ok) });
 	}, []);
-	const logout = async () => { await axios.delete("/api/accounts/sign"); location.reload(); }
+	const logout = async () => { await axios.delete("/api/accounts/sign"); setLogon(false); }
 
 	return (
 		<header>
@@ -40,23 +42,28 @@ export default function NavBar() {
 					{logon ?
 						<>
 							<li>
-								<Link href="#" >
-									<a onClick={logout}>로그아웃</a>
+								<Link href="/user">
+									<a>프로필</a>
 								</Link>
+							</li>
+							<li>
+								<a style={{ cursor: "pointer" }} onClick={logout}>로그아웃</a>
 							</li>
 						</>
 						:
 						<>
 							<li>
-								<Link href="/login">
+								{/* <Link href="/login">
 									<a>로그인</a>
-								</Link>
+								</Link> */}
+								<a type="button" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</a>
 							</li>
 							<li>
 								<Link href="/signup">
 									<a>회원가입</a>
 								</Link>
 							</li>
+
 						</>
 					}
 					<li>
@@ -86,23 +93,12 @@ export default function NavBar() {
 					</li>
 					<li>
 						<Link href="/career/contest">
-							<a>career_contest</a>
+							<a>공모전</a>
 						</Link>
 					</li>
 					<li>
 						<Link href="/career/survey">
-							<a>career_survey</a>
-						</Link>
-					</li>
-
-					<li>
-						<Link href="/user/accounts">
-							<a>user</a>
-						</Link>
-					</li>
-					<li>
-						<Link href="/popup/0">
-							<a>popup</a>
+							<a>유형 조사</a>
 						</Link>
 					</li>
 				</ul>
@@ -132,7 +128,7 @@ export default function NavBar() {
               margin: 0px 8px;
               width: 30;
               font-size: 12px;
-              font-weight: 318;
+              font-weight: 400;
               line-height: 100px;
               padding-left: 30px;
             }
@@ -141,13 +137,13 @@ export default function NavBar() {
               list-style: none;
               padding: 0;
               display: flex;
-              padding-right: 60px;
+              padding-right: 150px;
               text-align: center;
               justify-content: center;
               align-items: center;
             }
             .middleboard a {
-              font-weight: 500;
+              font-weight: 600;
               transition: 0.2s;
             }
 
@@ -178,7 +174,9 @@ export default function NavBar() {
           `}
 				</style>
 			</nav>
+			<LoginModal></LoginModal>
 		</header>
+
 	);
 }
 

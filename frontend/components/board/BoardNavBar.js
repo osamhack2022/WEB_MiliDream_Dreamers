@@ -2,7 +2,7 @@
 
 
 export default function BoardNavBar({ props }) {
-  const { category } = props;
+  const category = props;
   return (
     <div>
       <div className="flex-shrink-0 p-3 bg-white">
@@ -13,7 +13,7 @@ export default function BoardNavBar({ props }) {
           <li className="mb-1">
             <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
               {
-                category.map(category => (<li key={category.categoryKey}><a href={"/board/" + category.categoryKey} className="link-dark d-inline-flex text-decoration-none rounded">{category.categoryName}</a></li>))
+                category?.map(category => (<li key={category.categoryKey}><a href={"/board/" + category.categoryKey} className="link-dark d-inline-flex text-decoration-none rounded">{category.categoryName}</a></li>))
               }
             </ul>
           </li>

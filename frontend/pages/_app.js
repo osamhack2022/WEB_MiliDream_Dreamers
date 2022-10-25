@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Layout from "../components/Layout";
 import "../styles/globals.css";
+// import "../public/static/font/style.css";
 
 /* 전역적인 component를 추가하는 곳. 
  * 이곳에 추가된 component (예로, NavBar 등)들은 
