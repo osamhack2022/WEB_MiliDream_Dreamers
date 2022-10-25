@@ -1,17 +1,17 @@
 import React from "react";
-import qnaList from './data/newQuestion.js'
-import infoList from './data/newAnswer.js'
-import studyList from './data/newStudy.js'
+import qnaList from '../../../data/newQuestion.js'
+import infoList from '../../../data/newAnswer.js'
+import studyList from '../../../data/newStudy.js'
 
 
 const endPoint = 12;
-const select = [0,0,0,0,0,0,0];
-const subject = [0,0,0,0,0,0,0,0,0,0,0];
+const select = [0, 0, 0, 0, 0, 0, 0];
+const subject = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 
 const cal = (num) => {
   let result = 0;
-  if(num===1){
+  if (num === 1) {
     result = select.indexOf(Math.max(...select));
   } else {
     result = subject.indexOf(Math.max(...subject));
@@ -25,7 +25,7 @@ const setResult = () => {
   let rec = cal(0)
   const resultName = document.querySelector('.resultName');
   resultName.innerHTML = `[ ${infoList[point].name} ]`;
-  
+
   let resultImg = document.createElement('img');
   const imgDiv = document.querySelector('#resultImg');
   let imgURL = `/img_new/image-${point}.png`;
@@ -34,22 +34,22 @@ const setResult = () => {
   resultImg.alt = point;
   resultImg.classList.add('img-fluid');
   imgDiv.appendChild(resultImg);
-  
+
   let int_Name = document.querySelector('.int_Name');
   int_Name.innerHTML = `[ ${studyList[rec].name} ]`;
-  
+
   let int_Desc1 = document.querySelector('.int_Desc1');
   int_Desc1.innerHTML = studyList[rec].desc1;
-  
+
   let int_Desc2 = document.querySelector('.int_Desc2');
   int_Desc2.innerHTML = studyList[rec].desc2;
-  
+
   const resultDesc1 = document.querySelector('.resultDesc1');
   resultDesc1.innerHTML = infoList[point].desc1;
-  
+
   const resultDesc2 = document.querySelector('.resultDesc2');
   resultDesc2.innerHTML = infoList[point].desc2;
-  
+
   const resultDesc3 = document.querySelector('.resultDesc3');
   resultDesc3.innerHTML = infoList[point].desc3;
 }
@@ -82,28 +82,28 @@ const addAnswer = (answerText, qID, index) => {
   answer.classList.add('fadeIn');
   a.appendChild(answer);
   answer.innerHTML = answerText;
-  
+
   answer.addEventListener('click', () => {
     let children = document.querySelectorAll('.answerList');
-    for(let i=0; i<children.length; i++){
+    for (let i = 0; i < children.length; i++) {
       children[i].disabled = true;
       children[i].style.WebkitAnimation = "fadeOut 0.5s"
       children[i].style.animation = "fadeOut 0.5s"
     }
     setTimeout(() => {
       let target = qnaList[qID].a[index].type;
-      for(let i=0; i<target.length; i++){
-        if(target[i]==='6'){
+      for (let i = 0; i < target.length; i++) {
+        if (target[i] === '6') {
           let value = qnaList[qID].a[index].diff;
-          for(let j=0; j<value.length; j++){
+          for (let j = 0; j < value.length; j++) {
             subject[value[j]] += 1
           }
         } else {
           select[target[i]] += 1
         }
       }
-      
-      for(let i=0; i<children.length; i++){
+
+      for (let i = 0; i < children.length; i++) {
         children[i].style.display = "none";
       }
       goNext(++qID);
@@ -113,17 +113,17 @@ const addAnswer = (answerText, qID, index) => {
 
 
 const goNext = (qID) => {
-  if(qID===endPoint){
+  if (qID === endPoint) {
     goResult();
     return;
   }
   let q = document.querySelector(".qBox");
   q.innerHTML = qnaList[qID].q;
-  for(let i in qnaList[qID].a){
+  for (let i in qnaList[qID].a) {
     addAnswer(qnaList[qID].a[i].answer, qID, i);
   }
   let status = document.querySelector(".statusBar");
-  status.style.width = (100/endPoint) * (qID+1) + '%';
+  status.style.width = (100 / endPoint) * (qID + 1) + '%';
 }
 
 
@@ -154,14 +154,14 @@ const Home = () => {
           <img id="logo" src={'/img_new/logo.png'} alt="logoImage" className="img-fluid" />
         </div>
         <p id="intro">
-          Milidream MBTI Test<br/>
+          Milidream MBTI Test<br />
           아래 Start 버튼을 눌러 검사를 시작해주세요.
         </p>
-        <button 
-          type="button" 
+        <button
+          type="button"
           className="btn btn-danger mt-2"
           onClick={() => begin()}
-          >Start!!</button>
+        >Start!!</button>
       </section>
       <section id="qna">
         <div className="status mx-auto mt-5">
