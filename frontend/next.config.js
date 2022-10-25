@@ -1,3 +1,7 @@
+/** next-images module 가져오기 */
+const withImages = require('next-images');
+module.exports = withImages();
+
 const isProduction = process.env.NODE_ENV === 'production';
 const isGhPage = process.env.DEPLOY_METHOD === 'gh-page';
 /** @type {import('next').NextConfig} */
