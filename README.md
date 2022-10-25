@@ -32,31 +32,49 @@
 * 권장: Google Chrome 버젼 77 이상
 
 ## 기술 스택 (Technique Used) 
-### Server(back-end)
-<img alt="javascript" src ="https://img.shields.io/badge/javascript-F7DF1E.svg?&style=flat&logo=javascript&logoColor=black"/> 
-<img alt="nodejs" src ="https://img.shields.io/badge/nodejs%20v16.17.0-339933.svg?&style=flat&logo=Node.js&logoColor=white"/> 
-<img alt="mariadb" src ="https://img.shields.io/badge/mariadb-003545.svg?&style=flat&logo=MariaDB&logoColor=white"/> 
-<img alt="express" src ="https://img.shields.io/badge/express%20v4.16.1-000000.svg?&style=flat&logo=Express&logoColor=white"/> 
 
- - Node.js v16.17.0
- - express
- - MariaDB
+
+### Language
+| <img alt="javascript" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/140px-Unofficial_JavaScript_logo_2.svg.png" height=100>|
+|:-------------------------------------------:|
+|        [Javascript](https://developer.mozilla.org/ko/docs/Web/JavaScript)        |
+### Server Management Tools
+|<img alt="pm2" src="https://pm2.keymetrics.io/assets/pm2-logo-1.png" height=100>|<img alt="nodemon" src="https://user-images.githubusercontent.com/13700/35731649-652807e8-080e-11e8-88fd-1b2f6d553b2d.png" height=100>|
+|:--------------------------------:|--------------------------------:|
+|		[pm2](https://pm2.keymetrics.io/)| [nodemon](https://github.com/remy/nodemon)|
+### Server(back-end)
+ | <img alt="nodejs" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/220px-Node.js_logo.svg.png" height=100> | <img alt="express" src="https://upload.wikimedia.org/wikipedia/commons/6/64/Expressjs.png" height=100> |
+|:-------------------------------------------:|:-------------------------------------------:|
+|        [Nodejs v16.17.0](https://nodejs.org/ko/)       |   [Express v4.16](https://expressjs.com/ko/)  |
+
+
+### Database
+| <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/MariaDB_colour_logo.svg/1200px-MariaDB_colour_logo.svg.png" height=100> |
+|:-------------------------------------------:|
+|       [MariaDB](https://mariadb.org/)       |
+
+### Web Application(Frontend)
+| <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" height=100> | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextjs-logo.svg/1200px-Nextjs-logo.svg.png" height=100> |
+|:-------------------------------------------:|:-------------------------------------------:|
+|        [React](https://reactjs.org/)        |        [Next](https://redux.js.org/)       | 
+
+### Design Tool
+| <img src="https://getbootstrap.kr/docs/5.2/assets/brand/bootstrap-logo-shadow.png" height=100> |
+|:-------------------------------------------:|
+|       [Bootstrap](https://getbootstrap.com/)       | 
+
+
+
+### 사용된 오픈소스
+
 
 <!--
- - express, laravel, sptring boot 등 사용한 프레임워크 
- - DB 등 사용한 다른 프로그램 
-
- => 이미지도 추가하면 좋을 것 같습니다.
+ 사용한 라이브러리 리스트 등을 따로 작성하겠지만
+ 기술 스택을 나열하는 이 구간에서 함께 소개하면 좋을 것 같습니다
+ 메인 기술 스택들처럼 테이블 형식일 필요는 없고 
+ 리스트 형태로 이름만 나열하고 링크걸어두면 될 것 같아요
 -->
  
-### Front-end
- -  npm v8.15.0
- -  ReactJS 
-
-<!--
- -  UI framework
- - 기타 사용한 라이브러리
--->
 
 ## 설치 안내 (Installation Process)
 ```bash
