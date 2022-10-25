@@ -16,7 +16,7 @@ const nextConfig = {
 			},
 		];
 	},
-	assetPrefix: isGhPage ? 'https://osamhack2022.github.io/WEB_MiliDream_Dreamers/' : '',
+	assetPrefix: isGhPage ? 'https://osamhack2022.github.io/WEB_MiliDream_Dreamers/' : undefined,
 
 	images: isGhPage ? {
 		loader: 'imgix',

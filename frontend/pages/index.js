@@ -8,7 +8,6 @@ import Service_2 from "../components/Home/Service_2";
 import BoardCenter from "../components/Home/slideslide";
 import LoginModal from "../components/Login/Modal";
 
-
 import { useEffect, useState } from "react";
 //import { useQuery } from "react-query";
 
@@ -45,6 +44,7 @@ export default function Home({ results }) {
 							top: "320px",
 							left: "350px",
 							fontSize: "90px",
+              fontWeight: "Bold",
 						}}
 					>
 						MILI-<br></br>DREAM
