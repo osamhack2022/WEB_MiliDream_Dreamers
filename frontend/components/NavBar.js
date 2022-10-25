@@ -42,6 +42,11 @@ export default function NavBar() {
 					{logon ?
 						<>
 							<li>
+								<Link href="/user">
+									<a>프로필</a>
+								</Link>
+							</li>
+							<li>
 								<a style={{ cursor: "pointer" }} onClick={logout}>로그아웃</a>
 							</li>
 						</>
@@ -94,17 +99,6 @@ export default function NavBar() {
 					<li>
 						<Link href="/career/survey">
 							<a>유형 조사</a>
-						</Link>
-					</li>
-
-					<li>
-						<Link href="/user/$[id]">
-							<a>프로필</a>
-						</Link>
-					</li>
-					<li>
-						<Link href="/popup/0">
-							<a>popup</a>
 						</Link>
 					</li>
 				</ul>
