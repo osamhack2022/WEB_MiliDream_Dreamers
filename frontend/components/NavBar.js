@@ -42,6 +42,11 @@ export default function NavBar() {
 					{logon ?
 						<>
 							<li>
+								<Link href="/user">
+									<a>프로필</a>
+								</Link>
+							</li>
+							<li>
 								<a style={{ cursor: "pointer" }} onClick={logout}>로그아웃</a>
 							</li>
 						</>
@@ -93,18 +98,7 @@ export default function NavBar() {
 							<a>유형 조사</a>
 						</Link>
 					</li>
-
-          <li>
-            <Link href="/user/$[id]">
-              <a>프로필</a>
-            </Link>
-          </li>
-          {/* <li>
-						<Link href="/popup/0">
-							<a>popup</a>
-						</Link>
-					</li> */}
-        </ul>
+				</ul>
 
         {/*styled jsx 방식 : js 백틱을 이용해 일반 css 코드를 삽입할 수 있다. 하지만 이 css가 적용받는 범위는 함수 내부로 한정된다.*/}
         <style jsx>
