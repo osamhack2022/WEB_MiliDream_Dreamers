@@ -66,10 +66,14 @@ export default function Service_1() {
           display: flex;
           flex-direction: row;
           flex-wrap: wrap;
+          transition: 0.3s;
+
           cursor: pointer;
           padding: 0px;
         }
-
+        .item:hover {
+          transform: scale(1.007);
+        }
         .serviceImg_1 {
           display: flex;
           height: 100px;

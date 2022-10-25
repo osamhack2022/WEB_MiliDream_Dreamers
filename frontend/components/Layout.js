@@ -6,16 +6,21 @@ import { useRouter } from "next/router";
 import { Fragment } from "react";
 
 export default function Layout({ children }) {
-    const router = useRouter();
-    //const routerObj = { '/': 'Home', '/about': 'About' }
-    //console.log(typeof(router.pathname))
-    //{/*<Seo title={routerObj[router.pathname]} /> */}
+  const router = useRouter();
+  //const routerObj = { '/': 'Home', '/about': 'About' }
+  //console.log(typeof(router.pathname))
+  //{/*<Seo title={routerObj[router.pathname]} /> */}
 
-    return (
-        <Fragment>          
-            <Seo title={router.pathname} />
-            <NavBar />
-            <div>{children}</div>
+  return (
+    <div className="wrapper">
+      <div className="contentWrapper">
+        <Fragment>
+          <Seo title={router.pathname} />
+          <NavBar />
+          <div>{children}</div>
         </Fragment>
-    )
+      </div>
+
+    </div>
+  );
 }
