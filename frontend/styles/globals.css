@@ -1,26 +1,39 @@
+/* 전역 style css */
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+@import url(https://fonts.googleapis.com/css2?family=Inter:wght@100;400;500;700;800;900&display=swap);
+
+@font-face {
+	font-family: "Inter";
+	src: url("https://fonts.googleapis.com/css2?family=Inter:wght@100;400;500;700;800;900&display=swap")
+	  format("woff");
+	font-style: normal;
+	unicode-range: U+0041-005A, U+0061-007A;
+  }
+  
+  @font-face {
+	font-family: "Inter";
+	src: url("http://fonts.googleapis.com/earlyaccess/notosanskr.css")
+	  format("woff");
+  
+	font-style: normal;
+	unicode-range: U+1100-11FF, U+3130-318F, U+A960-A97F, U+AC00-D7A3, U+D7B0-D7FF;
+  }
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Inter", "Noto Sans KR", sans-serif;
 }
 
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
 a {
-  color: inherit;
+  color: black;
   text-decoration: none;
 }
-
 * {
   box-sizing: border-box;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+  margin: 0;
 }
