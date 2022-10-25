@@ -43,8 +43,8 @@ function ContentRow({ comment }) {
 	return (
 		<tr className="comment">
 			<td className="content1">
-				<div className="content">{user?.userName}</div>
-				<div className="content">{displayedAt(comment?.commentTime)}</div>
+				<div className="name">{user?.userName}</div>
+				<div className="date">{displayedAt(comment?.commentTime)}</div>
 			</td>
 			<td className="content2">{comment?.body}</td>
 			{/* <td className="content">수정</td>
@@ -235,11 +235,38 @@ export default function ArticleWriteView({ post, articleId }) {
 					flex-direction: column;
 				}
 				.content1 {
+					padding: 0px;
 					display: flex;
 					justify-content: space-between;
+					font-family: 'Noto Sans KR';
+					font-style: normal;
+					font-weight: 500;
+					font-size: 15px;
+					line-height: 22px;
+					display: flex;
+					align-items: center;
+					color: #000000;
+					margin-left: 20px;
+				}
+				.content1 > .date {
+					font-family: 'Noto Sans KR';
+					font-style: normal;
+					font-weight: 500;
+					font-size: 12px;
+					line-height: 17px;
+					align-items: center;
+					color: #A7A7A7;
+					margin-right: 30px;
 				}
 				.content2 {
 					text-align: left;
+					font-family: 'Noto Sans KR';
+					font-style: normal;
+					font-weight: 500;
+					font-size: 12px;
+					line-height: 17px;
+					color: #000000;
+					margin-left: 20px;
 				}
 				//아래는 table 기본 속성
 				.table-box {
