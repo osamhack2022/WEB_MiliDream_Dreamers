@@ -207,6 +207,7 @@ export default function LoginForm() {
           text-align: center;
           border-radius: 50px;
           font-size: 12px;
+		  cursor: pointer;
         }
 
         .login-btn {

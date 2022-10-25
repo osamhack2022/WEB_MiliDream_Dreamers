@@ -124,7 +124,6 @@ async function register(event) {
 		userClass: form?.userClass.value
 	};
 	const response = await axios.post("/api/accounts/account", data, { validateStatus: false });
-	debugger;
 	if (response.status == 200) {
 		const registeredData = { id: data.userId, password: data.password };
 		await axios.post("/api/accounts/sign", registeredData, { validateStatus: false });
