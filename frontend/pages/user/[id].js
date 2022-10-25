@@ -1,5 +1,4 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React, { useEffect, useState } from "react";
 
 import { useRouter } from "next/router";
 import ProgressBar, {
@@ -7,8 +6,6 @@ import ProgressBar, {
   startDate,
   goal,
 } from "../../components/user/Progress_bar";
-import styled, { keyframes } from "styled-components";
-import Slide from "../../components/Home/Home_Slide";
 // import goalDate from "../../components/user/Progress_bar";
 // import now from "../../components/user/Progress_bar";
 
@@ -20,6 +17,14 @@ const goal_year = goalDate.getFullYear();
 const goal_month = goalDate.getMonth() + 1;
 const goal_date = goalDate.getDate();
 export default function user_id() {
+  const routerId = useRouter().query["id"];
+  const [userInfo, setUserInfo] = useState({});
+  useEffect(() => {
+    (async () => {
+      try { setUserInfo(await (await fetch(/*routerId ? `/api/user/${routerId}` : */"/api/user")).json()); } catch { }
+    })();
+  }, [])
+  console.log(userInfo);
   return (
     <div
       style={
@@ -99,7 +104,7 @@ export default function user_id() {
                 marginTop: "25px",
               }}
             >
-              <div style={{ fontWeight: "550" }}>손현진[user id]</div>
+              <div style={{ fontWeight: "550" }}>손현진[{routerId}]</div>
               <div className="wordbox">
                 <div
                   className="word"
@@ -303,9 +308,8 @@ export default function user_id() {
                     textShadow: "0px 4px 4px #A7A7A7",
                   }}
                 >
-                  {`${start_year}.${
-                    start_month >= 10 ? start_month : "0" + start_month
-                  }.${start_date >= 10 ? start_date : "0" + start_date}`}
+                  {`${start_year}.${start_month >= 10 ? start_month : "0" + start_month
+                    }.${start_date >= 10 ? start_date : "0" + start_date}`}
                   <br />
                   입대
                 </div>
@@ -322,9 +326,8 @@ export default function user_id() {
                     textShadow: "0px 4px 4px #A7A7A7",
                   }}
                 >
-                  {`${goal_year}.${
-                    goal_month >= 10 ? goal_month : "0" + goal_month
-                  }.${goal_date >= 10 ? goal_date : "0" + goal_date}`}
+                  {`${goal_year}.${goal_month >= 10 ? goal_month : "0" + goal_month
+                    }.${goal_date >= 10 ? goal_date : "0" + goal_date}`}
                   <br />
                   <div
                     style={{
