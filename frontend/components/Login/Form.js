@@ -27,7 +27,7 @@ export default function LoginForm() {
 							<label htmlFor="id" className="form-label">
 								아이디
 							</label>
-							<input className="form-control" type="text" name="id"></input>
+							<input className="form-control" type="text" name="id" autoComplete="username"></input>
 						</div>
 						<div className="text-input-box my-3">
 							<label htmlFor="password" className="form-label">
@@ -37,6 +37,7 @@ export default function LoginForm() {
 								className="form-control"
 								type="password"
 								name="password"
+								autoComplete="current-password"
 							></input>
 						</div>
 						<div className="my-4 form-etc">

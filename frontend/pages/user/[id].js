@@ -6,7 +6,7 @@ import ProgressBar from "../../components/user/Progress_bar";
 const now = new Date().getTime();
 
 export default function user_id() {
-	const routerId = useRouter().query["id"];
+	const router = useRouter();
 	const [userInfo, setUserInfo] = useState({});
 	const [start_year, set_start_year] = useState("0000");
 	const [start_month, set_start_month] = useState("00");
@@ -17,9 +17,10 @@ export default function user_id() {
 
 	useEffect(() => {
 		(async () => {
-			try { setUserInfo(await (await fetch(routerId ? `/api/user/${routerId}` : "/api/user")).json()); } catch { }
+			if (router.isReady)
+				try { setUserInfo(await (await fetch(router.query?.id ? `/api/user/${router.query.id}` : "/api/user")).json()); } catch { }
 		})();
-	}, []);
+	}, [router.isReady]);
 	useEffect(() => {
 		let getProgress = (startstr) => {
 			const now = new Date().getTime();
