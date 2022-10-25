@@ -1,30 +1,48 @@
 import React, { useEffect, useState } from "react";
 
 import { useRouter } from "next/router";
-import ProgressBar, {
-  goalDate,
-  startDate,
-  goal,
-} from "../../components/user/Progress_bar";
+import ProgressBar from "../../components/user/Progress_bar";
 // import goalDate from "../../components/user/Progress_bar";
 // import now from "../../components/user/Progress_bar";
 
 const now = new Date().getTime();
-const start_year = startDate.getFullYear();
-const start_month = startDate.getMonth() + 1;
-const start_date = startDate.getDate();
-const goal_year = goalDate.getFullYear();
-const goal_month = goalDate.getMonth() + 1;
-const goal_date = goalDate.getDate();
+
 export default function user_id() {
   const routerId = useRouter().query["id"];
   const [userInfo, setUserInfo] = useState({});
+  const [start_year, set_start_year] = useState("0000");
+  const [start_month, set_start_month] = useState("00");
+  const [start_date, set_start_date] = useState("00");
+  const [goal_year, set_goal_year] = useState("0000");
+  const [goal_month, set_goal_month] = useState("00");
+  const [goal_date, set_goal_date] = useState("00");
+
   useEffect(() => {
     (async () => {
       try { setUserInfo(await (await fetch(/*routerId ? `/api/user/${routerId}` : */"/api/user")).json()); } catch { }
     })();
-  }, [])
-  console.log(userInfo);
+  }, []);
+  useEffect(() => {
+    let getProgress = (startstr) => {
+      const now = new Date().getTime();
+      const startTime = new Date(startstr).getTime();
+      const goalTime = startTime + 547 * (1000 * 60 * 60 * 24);
+      const start = new Date(startstr);
+      const goal = new Date(goalTime);
+      set_start_year(start.getFullYear());
+      set_start_month(start.getMonth() + 1);
+      set_start_date(start.getDate());
+      set_goal_year(goal.getFullYear());
+      set_goal_month(goal.getMonth() + 1);
+      set_goal_date(goal.getDate());
+      return Math.round(((now - startTime) / (goalTime - startTime)) * 100);
+    }
+    const progress = getProgress(userInfo.enlistment);
+    document.querySelector(".progressbar-complete").style.width = `${progress}%`;
+    document.querySelector(".progress").innerText = `${progress}%`;
+  }, [userInfo]);
+
+
   return (
     <div
       style={
@@ -104,7 +122,7 @@ export default function user_id() {
                 marginTop: "25px",
               }}
             >
-              <div style={{ fontWeight: "550" }}>손현진[{routerId}]</div>
+              <div style={{ fontWeight: "550" }}>{userInfo.userName}[{userInfo.userId}]</div>
               <div className="wordbox">
                 <div
                   className="word"
@@ -123,15 +141,8 @@ export default function user_id() {
                     height: "4.8em",
                   }}
                 >
-                  <br></br>
-                  시들어 너의 할지니, 듣는다. 위하여 앞이 그들을 풀이 것이다.
-                  우리의 만물은 간에 그것을 품에 갑 아니한 뜨고, 아름다우냐?
-                  거친 뭇 튼튼하며, 것이다. 속에 방황하였으며, 보내는 이상의
-                  피어나는 것이다. 같으며, 속에 이상을 찾아다녀도, 살았으며,
-                  아니한 아름다우냐? 광야에서 무한한 꽃이 곳이 부패뿐이다.
-                  하였으며, 소리다.이것은 두기 내는 그들을 미인을 뼈 놀이 밝은
-                  칼이다. 청춘의 이상의 청춘 약동하다. 없으면 피고 인간의
-                  만천하의 수 어디 것이다. 가치를 눈에 부패를 것이다.
+                  <br />
+                  {userInfo.introduce === null ? "소개를 입력해주세요." : userInfo.introduce}
                 </div>
               </div>
             </div>
@@ -206,7 +217,7 @@ export default function user_id() {
                           fontWeight: "500",
                         }}
                       >
-                        계급 |{" "}
+                        계급 |&nbsp;
                       </span>
                       <span
                         style={{
@@ -214,7 +225,13 @@ export default function user_id() {
                           fontWeight: "500",
                         }}
                       >
-                        <select
+                        <span style={{ fontWeight: "600" }}>{
+                          userInfo.enlistment ? (
+                            getRank(userInfo.enlistment)
+                          ) : "복무일수를 입력해주세요"
+                        }</span>
+
+                        {/* <select
                           className="choice"
                           style={{
                             width: "124px",
@@ -227,7 +244,7 @@ export default function user_id() {
                             fontWeight: "600",
                           }}
                         >
-                          {" "}
+                          &nbsp;
                           <optgroup label="이등병">
                             <option>이병 1호봉</option>
                             <option>이병 2호봉</option>
@@ -261,11 +278,10 @@ export default function user_id() {
                             <option>병장 6호봉</option>
                             <option>병장 7호봉</option>
                           </optgroup>
-                        </select>{" "}
+                        </select> */}
+                        &nbsp;
                         (D-
-                        {Math.round(
-                          Math.abs((goal - now) / (1000 * 60 * 60 * 24))
-                        )}
+                        {calculateDDay(new Date(userInfo.enlistment))}
                         )
                       </span>
                     </div>
@@ -277,15 +293,15 @@ export default function user_id() {
                         fontWeight: "500",
                       }}
                     >
-                      복무지 |{" "}
-                    </span>{" "}
+                      복무지 |&nbsp;
+                    </span>&nbsp;
                     <span
                       style={{
                         fontSize: "20px",
                         fontWeight: "500",
                       }}
                     >
-                      국군지휘통신사령부 57정보통신대대 본부중대{" "}
+                      국군지휘통신사령부 57정보통신대대 본부중대&nbsp;
                     </span>
                   </div>
                 </div>
@@ -378,7 +394,7 @@ export default function user_id() {
                         fontWeight: "500",
                       }}
                     >
-                      진로 유형 |{" "}
+                      진로 유형 |&nbsp;
                     </span>
                     <span
                       style={{
@@ -411,8 +427,8 @@ export default function user_id() {
                       fontWeight: "500",
                     }}
                   >
-                    설정한 목표 |{" "}
-                  </span>{" "}
+                    설정한 목표 |&nbsp;
+                  </span>&nbsp;
                   <div className="wrapper">
                     {/** 1번 목표 */}
                     <div className="bigger">
@@ -466,7 +482,7 @@ export default function user_id() {
                           }}
                           src="/img/user/clock.svg"
                         />
-                        &nbsp;{" "}
+                        &nbsp;&nbsp;
                         <div
                           style={{
                             display: "inline-block",
@@ -479,7 +495,7 @@ export default function user_id() {
                             goal_month >= 10 ? goal_month : "0" + goal_month
                           }.${
                             goal_date >= 10 ? goal_date : "0" + goal_date
-                          }`}{" "}
+                          }`}&nbsp;
                           ~
                           {`${goal_year}.${
                             goal_month >= 10 ? goal_month : "0" + goal_month
@@ -540,7 +556,7 @@ export default function user_id() {
                           }}
                           src="/img/user/clock.svg"
                         />
-                        &nbsp;{" "}
+                        &nbsp;&nbsp;
                         <div
                           style={{
                             display: "inline-block",
@@ -601,7 +617,7 @@ export default function user_id() {
                           }}
                           src="/img/user/clock.svg"
                         />
-                        &nbsp;{" "}
+                        &nbsp;&nbsp;
                         <div
                           style={{
                             display: "inline-block",
@@ -662,7 +678,7 @@ export default function user_id() {
                           }}
                           src="/img/user/clock.svg"
                         />
-                        &nbsp;{" "}
+                        &nbsp;&nbsp;
                         <div
                           style={{
                             display: "inline-block",
@@ -719,4 +735,30 @@ export default function user_id() {
       </div>
     </div>
   );
+}
+
+function calculateDDay(date) {
+  // TODO: 복무형태별 복무일수
+  const DUTYDATES = {
+    "육군": 547,
+    "공군": 638,
+    "해군": 608,
+    "해병대": 547,
+  }
+  const diff = Math.floor((new Date() - new Date(date)) / (1000 * 60 * 60 * 24));
+  return DUTYDATES["육군"] - diff;
+}
+
+function getRank(date) {
+  // TODO: 달 수 차이만 고려해서 구현했음
+  // TODO: 복무형태별은 고려안함
+  const today = new Date();
+  const enlist = new Date(date);
+  const diff = (today.getFullYear() - enlist.getFullYear()) * 12 + today.getMonth() - enlist.getMonth() + 1;
+  if (diff <= 3) return `이병 ${diff}호봉`;
+  else if (diff <= 9) return `일병 ${diff - 3}호봉`;
+  else if (diff <= 15) return `상병 ${diff - 9}호봉`;
+  else if (diff <= 18) return `병장 ${diff - 15}호봉`;
+
+  return "민간인";
 }

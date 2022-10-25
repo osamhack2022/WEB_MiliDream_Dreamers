@@ -1,98 +1,67 @@
-import React, { Component, useState } from "react";
-import { ReactDOM } from "react";
-import styled, { keyframes } from "styled-components";
+import React, { Component } from "react";
 import { css } from "styled-components";
 
 const style = css`
-body {
-  background-color: #fff;
-  color: #000000;
+@keyframes r {
+    0% {
+        transform: rotate(360deg)
+    }
 }
-
-.container_bar {
-  max-width: 1300px;
-  width: 130%;
-  h1 {
-    text-align: center;
-    margin-left : 20px;
-    height: 50px;
-    border: 3px solid #000000;
-    border-radius: 30px;
-    border-color : #A7A7A7;
-    display: block;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-}
-.progressbar-container {
-  position: absolute;
-  width: 1200px;
-  text-align: center;
-  margin-left: 40px;
-  height: 50px;
-  border: 3px solid #000000;
-  border-radius: 30px;
-  border-color: #a7a7a7;
-  display: block;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-.progressbar-complete {
-  position: absolute;
-  left: 0;
-  top: 0px;
-  height: 100%;
-  background-color: #fba58c;
-  border-radius: 10px;
-  animation: g 2500ms infinite ease-in-out;
-  z-index: 2;
-}
-
-.progressbar-liquid {
-  z-index: 3;
-  width: 60px;
-  height: 70px;
-  animation: g 2500ms infinite ease-in-out,
-    r 3000ms infinite cubic-bezier(0.5, 0.5, 0.5, 0.5);
-  position: absolute;
-  right: -5px;
-  top: -10px;
-  background-color: #fba58c;
-  border-radius: 40%;
-}
-
-.progress {
-}
-
 @keyframes g {
 }
 
-@keyframes r {
-  from {
-    transform: rotate(0deg);
-  }
-  from {
-    transform: rotate(360deg);
-  }
+body {
+    background-color: #fff;
+    color: #000
+}
+
+.container_bar {
+    max-width: 1300px;
+    width: 130%
+}
+
+.progressbar-container {
+    position: absolute;
+    width: 1200px;
+    text-align: center;
+    margin-left: 40px;
+    height: 50px;
+    border: 3px solid #000;
+    border-radius: 30px;
+    border-color: #a7a7a7;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden
+}
+
+.progressbar-complete {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background-color: #fba58c;
+    border-radius: 10px;
+    animation: g 2500ms infinite ease-in-out;
+    z-index: 2
+}
+
+.progressbar-liquid {
+    z-index: 3;
+    width: 60px;
+    height: 70px;
+    animation: g 2500ms infinite ease-in-out,r 3000ms infinite cubic-bezier(.5,.5,.5,.5);
+    position: absolute;
+    right: -5px;
+    top: -10px;
+    background-color: #fba58c;
+    border-radius: 40%
 }
 `;
 
-//아래는 입력을 받아와야 됨.
-export const goalDate = new Date("2023-04-11");
-export const startDate = new Date("2021-10-12");
-export const goal = goalDate.getTime();
-export const start = startDate.getTime();
-
+// TODO: 함수형 컴포넌트로 변경
 class ProgressBar extends Component {
-  getProgress() {
-    const now = new Date().getTime();
-    return Math.round(((now - start) / (goal - start)) * 100);
-  }
-
   render() {
-    const progress = this.getProgress();
     return (
       <>
         <div></div>
@@ -104,7 +73,7 @@ class ProgressBar extends Component {
           >
             <div
               className="progressbar-complete"
-              style={{ width: `${progress}%` }}
+              style={{ width: `0%` }}
             >
               <div className="progressbar-liquid"></div>
             </div>
@@ -126,7 +95,7 @@ class ProgressBar extends Component {
                 backgroundColor: "transparent",
               }}
             >
-              {progress}%
+              0%
             </span>
             <style jsx>{style}</style>
           </div>
