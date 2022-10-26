@@ -5,6 +5,14 @@ import { displayedAt } from "../../../utils/strings";
 
 function ContentRow({ article }) {
 	const router = useRouter();
+	const [articleUser, setArticleUser] = useState("");
+	useEffect(() => {
+		(async () => {
+			const response = await fetch(`/api/user/${article.userKey}`);
+			const data = await response.json();
+			setArticleUser(data.userName)
+		})();
+	}, [])
 	return (
 		<Link href={{
 			pathname: `/board/${router.query["board-id"]}/${article.postKey}`,
@@ -13,7 +21,7 @@ function ContentRow({ article }) {
 				<tr>
 					<th scope="row" className="count content">{article.postKey}</th>
 					<td className="title content">{article.title}</td>
-					<td className="writeUser content">{article.userKey}</td>
+					<td className="writeUser content">{articleUser}</td>
 					<td className="time content gray">{displayedAt(article.postTime)}</td>
 					<td className="viewCount content gray">{article.viewCount}</td>
 					<td className="heart content gray">{article.recommend}</td>

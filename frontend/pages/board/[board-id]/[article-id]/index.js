@@ -16,17 +16,39 @@ export default function article_id(props) {
 
 
 	const [article, setArticle] = useState();
+	const [articlePost, setArticlePost] = useState();
 	const [categoryL, setCategoryL] = useState();
+	const [reload, setReload] = useState(false);
+	const [user, setUser] = useState();
+	const doReload = () => setReload(true);
 	useEffect(() => {
 		(async () => {
-			const results = await (await fetch(`/api/board?categoryKey=` + router.query["board-id"], { method: 'GET' })).json();
-			setArticle(results.boards);
-			const resultsb = await (await fetch(`/api/board/category`, { method: 'GET' })).json();
-			setCategoryL(resultsb.category);
+			const response = await fetch("/api/user");
+			if (!response.ok)
+				router.push("/")
+			else {
+				const data = await response.json();
+				setUser(data);
+				setReload(true)
+			}
 		})();
 	}, []);
+	useEffect(() => {
+		// router가 준비되어야, 그리고 유저가 준비되어야 reload가 켜지고 fetch 시작
+		if (router.isReady && reload) {
+			(async () => {
+				// const results = await (await fetch(`/api/board?categoryKey=` + router.query["board-id"], { method: 'GET' })).json();
+				// setArticle(results.boards);
+				const results = await (await fetch(`/api/board/${router.query["article-id"]}`, { method: 'GET' })).json();
+				setArticlePost(results.board);
+				const resultsb = await (await fetch(`/api/board/category`, { method: 'GET' })).json();
+				setCategoryL(resultsb.category);
+				setReload(false);
+			})();
+		}
+	}, [router.isReady, reload]);
 
-	const articlePost = article?.slice(0).find((x) => x.postKey == articleId)
+	// setArticlePost(article?.slice(0).find((x) => x.postKey == articleId));
 	console.log(articlePost)
 
 	return (
@@ -43,7 +65,7 @@ export default function article_id(props) {
 					<BoardNavBar props={categoryL} />
 				</div>
 				<div className="BoardMain">
-					<ArticleWriteView post={articlePost} articleId={articleId} />
+					<ArticleWriteView post={articlePost} articleId={articleId} doReload={doReload} />
 				</div>
 				<div className="footer"></div>
 			</div>

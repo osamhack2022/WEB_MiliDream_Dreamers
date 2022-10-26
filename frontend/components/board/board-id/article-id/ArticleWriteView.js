@@ -54,15 +54,46 @@ function ContentRow({ comment }) {
 	)
 }
 
-export default function ArticleWriteView({ post, articleId }) {
+export default function ArticleWriteView({ post, articleId, doReload }) {
 	const [user, setUser] = useState();
+	const [recommendWord, setRecommendWord] = useState("");
 	const router = useRouter();
 	useEffect(() => {
 		(async () => {
+			console.log(post?.userKey)
 			const results = await (await fetch(`/api/user/${Number(post?.userKey)}`, { method: 'GET' })).json();
+			console.log(results)
 			setUser(results);
 		})();
-	}, []);
+	}, [post?.userKey]);
+
+	const onRecommendClick = async e => {
+		const response = await fetch(`/api/board/${router.query["article-id"]}/recommend`, {
+			method: "POST",
+		})
+		if (response.ok) {
+			setRecommendWord("게시글에 공감하셨습니다!")
+			doReload();
+		} else {
+			setRecommendWord("이미 공감한 게시글입니다!")
+		}
+	}
+
+	const onCommentSubmit = async (e) => {
+		console.log(document.querySelector("#exampleFormControlTextarea1").value)
+		const response = await fetch("/api/comment", {
+			method: "POST",
+			body: JSON.stringify({
+				postKey: articleId,
+				body: document.querySelector("#exampleFormControlTextarea1").value,
+			}),
+			headers: { 'Content-Type': 'application/json' }
+		})
+		if (response.ok) {
+			doReload();
+			document.querySelector("#exampleFormControlTextarea1").value = ""
+		}
+	}
 
 	//console.log(post)
 	return (
@@ -92,7 +123,7 @@ export default function ArticleWriteView({ post, articleId }) {
 							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div className="modal-body">
-							게시글에 공감하셨습니다!
+							{recommendWord}
 						</div>
 						<div className="modal-footer">
 							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -135,7 +166,8 @@ export default function ArticleWriteView({ post, articleId }) {
 						<tr className="mainBody">
 							<th scope="col count" className="count titleBar">{post?.body}//Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</th>
 							<td className="body">
-								<a type="button" data-bs-toggle="modal" data-bs-target="#recommendModalDiv">
+								<p>공감수: {post?.recommenderCount}</p>
+								<a type="button" data-bs-toggle="modal" data-bs-target="#recommendModalDiv" onClick={onRecommendClick}>
 									<Image src={`/article/recommendBtn.png`} width="131px" height="50px" />
 								</a>
 								<a type="button" data-bs-toggle="modal" data-bs-target="#reportModalDiv">
@@ -147,13 +179,13 @@ export default function ArticleWriteView({ post, articleId }) {
 								<div className="mb-3">
 									{/* <label for="exampleFormControlTextarea1" className="form-label">Example textarea</label> */}
 									<textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="댓글을 입력해 주세요"></textarea>
-									<button type="button" data-bs-toggle="modal" data-bs-target="#commentModal">
+									<button type="button" data-bs-toggle="modal" data-bs-target="#commentModal" onClick={onCommentSubmit}>
 										등록
 									</button>
 								</div>
 							</td>
 						</tr>
-						{post?.comments.slice(0).map((comment) => <ContentRow comment={comment} />)}
+						{post?.comments.slice(0).map((comment) => <ContentRow key={comment.commentKey} comment={comment} />)}
 					</tbody>
 				</table>
 			</div>
