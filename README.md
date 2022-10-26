@@ -117,7 +117,7 @@
 <table align="center" width="788">
 <thead>
 <tr>
-<th width="100" align="center">📝성명</th>
+<th width="130" align="center">📝성명</th>
 <th width="150" align="center">🚩역할</th>
 <th width="100" align="center">🐱깃허브</th>
 <th width="175" align="center">📩이메일</th>
@@ -125,7 +125,7 @@
 </thead>
 <tbody>
 <tr>
-<td width="100" align="center">김지환<br/>(팀장)</td>
+<td width="130" align="center">김지환<br/>(팀장)</td>
 <td width="150">프론트 개발<br></td>
 <td width="100" align="center">
 	<a href="https://github.com/Turtle-Hwan">
@@ -139,7 +139,7 @@
 </td>
 </tr>
 <tr>
-<td width="100" align="center">김선우<br/>(백엔드 팀장)</td>
+<td width="130" align="center">김선우<br/>(백엔드 팀장)</td>
 <td width="150">백엔드 개발 </br>디자인</br>아키텍처 설계 </td>
 <td width="100" align="center">
 	<a href="https://github.com/meoraeng">
@@ -153,7 +153,7 @@
 </td>
 </tr>
 <tr>
-<td width="100" align="center">가수연</td>
+<td width="130" align="center">가수연</td>
 <td width="150">백엔드 개발<br></td>
 <td width="100" align="center">
 	<a href="https://github.com/bagger3025">
@@ -167,7 +167,7 @@
 </td>
 </tr>
 <tr>
-<td width="100" align="center">민진홍</td>
+<td width="130" align="center">민진홍</td>
 <td width="150">프론트엔드 개발</td>
 <td width="100" align="center">
 	<a href="https://github.com/jinhongee">
@@ -181,7 +181,7 @@
 </td>
 </tr>
 <tr>
-<td width="100" align="center">추인엽</td>
+<td width="130" align="center">추인엽</td>
 <td width="150">백엔드 개발</td>
 <td width="100" align="center">
 	<a href="https://github.com/inyeoptti">
@@ -196,7 +196,7 @@
 </tr>
 </tr>
 <tr>
-<td width="100" align="center">손현진</td>
+<td width="130" align="center">손현진</td>
 <td width="150">프론트엔드 개발</td>
 <td width="100" align="center">
 	<a href="https://github.com/sonyrainy">
@@ -211,7 +211,7 @@
 </tr>
 </tr>
 <tr>
-<td width="100" align="center">양승모</td>
+<td width="130" align="center">양승모</td>
 <td width="150">디자인</td>
 <td width="100" align="center">
 	<a href="https://github.com/SeungmoYang">
