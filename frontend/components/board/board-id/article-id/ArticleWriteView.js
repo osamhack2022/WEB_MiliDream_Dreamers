@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { displayedAt } from "../../../../utils/strings";
 import Image from "next/image";
+import { GlobalState } from "../../../../states/GlobalState";
 
 function reportModal(e) {
 	e.preventDefault();
@@ -28,7 +29,9 @@ function reportModal(e) {
 	)
 }
 
-function ContentRow({ comment, doReload, user }) {
+function ContentRow({ comment, doReload }) {
+	const user = GlobalState(state => state.user);
+
 	/** 이 댓글의 작성자 저장 */
 	const [commentUser, setCommentUser] = useState();
 
@@ -114,7 +117,7 @@ function ContentRow({ comment, doReload, user }) {
 	)
 }
 
-export default function ArticleWriteView({ post, articleId, doReload, user }) {
+export default function ArticleWriteView({ post, articleId, doReload }) {
 
 	/** 게시글 작성자를 저장 */
 	const [postUser, setPostUser] = useState();
@@ -252,7 +255,7 @@ export default function ArticleWriteView({ post, articleId, doReload, user }) {
 								</div>
 							</td>
 						</tr>
-						{post?.comments.slice(0).map((comment) => <ContentRow key={comment.commentKey} comment={comment} doReload={doReload} user={user} />)}
+						{post?.comments.slice(0).map((comment) => <ContentRow key={comment.commentKey} comment={comment} doReload={doReload} />)}
 					</tbody>
 				</table>
 			</div>
