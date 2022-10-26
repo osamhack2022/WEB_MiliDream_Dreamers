@@ -3,15 +3,92 @@ import qnaList from '../../../data/newQuestion.js'
 import infoList from '../../../data/newAnswer.js'
 import studyList from '../../../data/newStudy.js'
 
-
 const endPoint = 12;
-const select = [0, 0, 0, 0, 0, 0, 0];
-const subject = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+const select = [0,0,0,0,0,0,0];
+const subject = [0,0,0,0,0,0,0,0,0,0,0];
+
+const share = () => {
+  if(window.Kakao){
+    const kakao = window.Kakao;
+    console.log(kakao);
+  
+    if(!kakao.isInitialized()){
+      kakao.init('81cb9931f21feccc1bc06c4f2a46fb69');
+    }
+    console.log(kakao);
+    kakao.Share.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: '오늘의 디저트',
+        description: '아메리카노, 빵, 케익',
+        imageUrl:
+        'https://mud-kage.kakao.com/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg',
+        link: {
+          mobileWebUrl: 'https://developers.kakao.com',
+          webUrl: 'https://developers.kakao.com',
+        },
+      },
+      itemContent: {
+        profileText: 'Kakao',
+        profileImageUrl: 'https://mud-kage.kakao.com/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+        titleImageUrl: 'https://mud-kage.kakao.com/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+        titleImageText: 'Cheese cake',
+        titleImageCategory: 'Cake',
+        items: [
+          {
+            item: 'Cake1',
+            itemOp: '1000원',
+          },
+          {
+            item: 'Cake2',
+            itemOp: '2000원',
+          },
+          {
+            item: 'Cake3',
+            itemOp: '3000원',
+          },
+          {
+            item: 'Cake4',
+            itemOp: '4000원',
+          },
+          {
+            item: 'Cake5',
+            itemOp: '5000원',
+          },
+        ],
+        sum: '총 결제금액',
+        sumOp: '15000원',
+      },
+      social: {
+        likeCount: 10,
+        commentCount: 20,
+        sharedCount: 30,
+      },
+      buttons: [
+        {
+          title: '웹으로 이동',
+          link: {
+            mobileWebUrl: 'https://developers.kakao.com',
+            webUrl: 'https://developers.kakao.com',
+          },
+        },
+        {
+          title: '앱으로 이동',
+          link: {
+            mobileWebUrl: 'https://developers.kakao.com',
+            webUrl: 'https://developers.kakao.com',
+          },
+        },
+      ],
+    });
+  }
+}
+
 
 
 const cal = (num) => {
   let result = 0;
-  if (num === 1) {
+  if(num===1){
     result = select.indexOf(Math.max(...select));
   } else {
     result = subject.indexOf(Math.max(...subject));
@@ -25,7 +102,7 @@ const setResult = () => {
   let rec = cal(0)
   const resultName = document.querySelector('.resultName');
   resultName.innerHTML = `[ ${infoList[point].name} ]`;
-
+  
   let resultImg = document.createElement('img');
   const imgDiv = document.querySelector('#resultImg');
   let imgURL = `/img_new/image-${point}.png`;
@@ -34,22 +111,22 @@ const setResult = () => {
   resultImg.alt = point;
   resultImg.classList.add('img-fluid');
   imgDiv.appendChild(resultImg);
-
+  
   let int_Name = document.querySelector('.int_Name');
   int_Name.innerHTML = `[ ${studyList[rec].name} ]`;
-
+  
   let int_Desc1 = document.querySelector('.int_Desc1');
   int_Desc1.innerHTML = studyList[rec].desc1;
-
+  
   let int_Desc2 = document.querySelector('.int_Desc2');
   int_Desc2.innerHTML = studyList[rec].desc2;
-
+  
   const resultDesc1 = document.querySelector('.resultDesc1');
   resultDesc1.innerHTML = infoList[point].desc1;
-
+  
   const resultDesc2 = document.querySelector('.resultDesc2');
   resultDesc2.innerHTML = infoList[point].desc2;
-
+  
   const resultDesc3 = document.querySelector('.resultDesc3');
   resultDesc3.innerHTML = infoList[point].desc3;
 }
@@ -82,28 +159,28 @@ const addAnswer = (answerText, qID, index) => {
   answer.classList.add('fadeIn');
   a.appendChild(answer);
   answer.innerHTML = answerText;
-
+  
   answer.addEventListener('click', () => {
     let children = document.querySelectorAll('.answerList');
-    for (let i = 0; i < children.length; i++) {
+    for(let i=0; i<children.length; i++){
       children[i].disabled = true;
       children[i].style.WebkitAnimation = "fadeOut 0.5s"
       children[i].style.animation = "fadeOut 0.5s"
     }
     setTimeout(() => {
       let target = qnaList[qID].a[index].type;
-      for (let i = 0; i < target.length; i++) {
-        if (target[i] === '6') {
+      for(let i=0; i<target.length; i++){
+        if(target[i]==='6'){
           let value = qnaList[qID].a[index].diff;
-          for (let j = 0; j < value.length; j++) {
+          for(let j=0; j<value.length; j++){
             subject[value[j]] += 1
           }
         } else {
           select[target[i]] += 1
         }
       }
-
-      for (let i = 0; i < children.length; i++) {
+      
+      for(let i=0; i<children.length; i++){
         children[i].style.display = "none";
       }
       goNext(++qID);
@@ -113,17 +190,17 @@ const addAnswer = (answerText, qID, index) => {
 
 
 const goNext = (qID) => {
-  if (qID === endPoint) {
+  if(qID===endPoint){
     goResult();
     return;
   }
   let q = document.querySelector(".qBox");
   q.innerHTML = qnaList[qID].q;
-  for (let i in qnaList[qID].a) {
+  for(let i in qnaList[qID].a){
     addAnswer(qnaList[qID].a[i].answer, qID, i);
   }
   let status = document.querySelector(".statusBar");
-  status.style.width = (100 / endPoint) * (qID + 1) + '%';
+  status.style.width = (100/endPoint) * (qID+1) + '%';
 }
 
 
@@ -145,23 +222,24 @@ const begin = () => {
 }
 
 
+
 const Home = () => {
   return (
     <div className="container">
       <section id="main" className="mx-auto mt-5 py-5 px-3">
-        <h1>성격유형 알아보기</h1>
+        <h1>나의 자기계발 유형은?</h1>
         <div className="col-lg-6 col-md-8 col-sm-10 col-12 mx-auto">
           <img id="logo" src={'/img_new/logo.png'} alt="logoImage" className="img-fluid" />
         </div>
         <p id="intro">
-          Milidream MBTI Test<br />
+          Milidream MBTI Test<br/>
           아래 Start 버튼을 눌러 검사를 시작해주세요.
         </p>
-        <button
-          type="button"
+        <button 
+          type="button" 
           className="btn btn-danger mt-2"
           onClick={() => begin()}
-        >Start!!</button>
+          >Start!!</button>
       </section>
       <section id="qna">
         <div className="status mx-auto mt-5">
@@ -192,6 +270,7 @@ const Home = () => {
         </div>
         <div className="text int_Desc2">
         </div>
+        <button className="goBack" onClick={() => share()}>공유하기</button>
         <style global jsx>
           {`
             * {
@@ -325,7 +404,133 @@ const Home = () => {
               border-radius: 20px;
             }
             .resultTitle {
+              font-weight: bold;              width: 70%;
+310
+              background-color: #ebe9e8;
+311
+              border-radius: 20px;
+312
+              padding-bottom: 45px;
+313
+            }
+314
+            .statusBar {
+315
+              height: 100%;
+316
+              border-radius: 20px;
+317
+              background-color: #566270;
+318
+              padding-bottom: 45px;
+319
+            }
+320
+            #result {
+321
+              display: none;
+322
+              background-color: white;
+323
+              width: 80%;
+324
+              text-align: center;
+325
+              border-radius: 20px;
+326
+            }
+327
+            .resultTitle {
+328
               font-weight: bold;
+329
+            }
+330
+            .resultName {
+331
+              font-size: 26px;
+332
+              margin-top: 40px;
+333
+              font-weight: bold;
+334
+            }
+335
+            #resultImg {
+336
+              padding-top: 20px;
+337
+              padding-bottom: 25px;
+338
+            }
+339
+            .text,
+340
+            .summary {
+341
+              font-size: 20px;
+342
+              padding: 30px 40px 10px 40px;
+343
+            }
+344
+            .summary {
+345
+              font-weight: bold;
+346
+            }
+347
+            .int_Desc2,
+348
+            .resultDesc3 {
+349
+              padding-bottom: 25px;
+350
+            }
+351
+            .goBack {
+352
+              color: white;
+353
+              background-color: #e1bfff;
+354
+              padding-top: 30px;
+355
+              font-size: 20px;
+356
+              border: 0px;
+357
+              border-radius: 20px;
+358
+            }
+359
+            .goBack:hover,
+360
+            .goBack:focus {
+361
+              background-color: #fba58c;
+362
+              color: black;
+363
+            }
+364
+          `}
+365
+        </style>
+366
+      </section>
+367
+​
+368
+    </div>
+369
+  );
+370
+};
+371
+export default Home;
+372
+
             }
             .resultName {
               font-size: 26px;
@@ -351,7 +556,7 @@ const Home = () => {
             .goBack {
               color: white;
               background-color: #e1bfff;
-              padding-top: 30px;
+              padding: 10px;
               font-size: 20px;
               border: 0px;
               border-radius: 20px;
@@ -364,7 +569,6 @@ const Home = () => {
           `}
         </style>
       </section>
-
     </div>
   );
 };
