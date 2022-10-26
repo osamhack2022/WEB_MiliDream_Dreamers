@@ -1,57 +1,69 @@
 //board 전용 네비게이션 바 / 좌측바 - 네이버 카페 처럼.
 
-export default function BoardNavBar() {
-  return (
-    <div>
-      <div className="flex-shrink-0 p-3 bg-white">
-        <a href="/board" className="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-          <span className="fs-5 fw-semibold">MILI-DREAM community</span>
-        </a>
-        <ul className="list-unstyled ps-0">
-          <li className="mb-1">
-              <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">공지사항</a></li>
-                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">실시간 인기 게시판</a></li>
-                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">자유 게시판</a></li>
-              </ul>
-          </li>
-          <li className="border-top my-3"></li>
-          <li className="mb-1">
-            <button className="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-              복무지 별 커뮤니티
-            </button>
-            <div className="collapse show" id="home-collapse">
-              <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판1</a></li>
-                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판2</a></li>
-                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판3</a></li>
-                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판4</a></li>
-              </ul>
-            </div>
-          </li>
-          <li className="mb-1">
-            <button className="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="true">
-              관심사 별 커뮤니티
-            </button>
-            <div className="collapse show" id="dashboard-collapse">
-              <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판1</a></li>
-                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판2</a></li>
-                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판3</a></li>
-                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판4</a></li>
-              </ul>
-            </div>
-          </li>
-          <li className="border-top my-3"></li>
-          <li className="mb-1">
-              <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">버그 신고하기</a></li>
-                <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">건의사항</a></li>
-              </ul>
-          </li>
-        </ul>
-      </div>
-      <style jsx>{` /*bootstrap에서 제공해준 기본 css*/
+import Link from "next/link";
+
+
+export default function BoardNavBar({ props }) {
+	const category = props;
+	return (
+		<div>
+			<div className="flex-shrink-0 p-3 bg-white">
+				<a href="/board" className="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+					<span className="fs-5 fw-semibold">MILI-DREAM community</span>
+				</a>
+				<ul className="list-unstyled ps-0">
+					<li className="mb-1">
+						<ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+							{
+								category?.map(category => (<li key={category.categoryKey}><Link href={`/board/${category.categoryKey}`}><a className="link-dark d-inline-flex text-decoration-none rounded">{category.categoryName}</a></Link></li>))
+							}
+						</ul>
+					</li>
+					<li className="border-top my-3"></li>
+					<li className="mb-1">
+						<ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+							<li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">공지사항</a></li>
+							<li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">실시간 인기 게시판</a></li>
+							<li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">자유 게시판</a></li>
+						</ul>
+					</li>
+					<li className="border-top my-3"></li>
+					<li className="mb-1">
+						<button className="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+							복무지 별 커뮤니티
+						</button>
+						<div className="collapse show" id="home-collapse">
+							<ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+								<li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판1</a></li>
+								<li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판2</a></li>
+								<li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판3</a></li>
+								<li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판4</a></li>
+							</ul>
+						</div>
+					</li>
+					<li className="mb-1">
+						<button className="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="true">
+							관심사 별 커뮤니티
+						</button>
+						<div className="collapse show" id="dashboard-collapse">
+							<ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+								<li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판1</a></li>
+								<li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판2</a></li>
+								<li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판3</a></li>
+								<li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판4</a></li>
+							</ul>
+						</div>
+					</li>
+					<li className="border-top my-3"></li>
+					<li className="mb-1">
+						<ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+							<li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">버그 신고하기</a></li>
+							<li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">건의사항</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<style jsx>{` /*bootstrap에서 제공해준 기본 css*/
       body {
         min-height: 100vh;
         min-height: -webkit-fill-available;
@@ -102,11 +114,11 @@ export default function BoardNavBar() {
         overflow-y: auto;
       }
       `}</style>
-      <style jsx>{` /* 추가적으로 작성하는 css */
+			<style jsx>{` /* 추가적으로 작성하는 css */
         .flex-shrink-0.p-3.bg-white {
           /*outline: 1px solid #566270;#a593e045*/
         }
         `}</style>
-    </div>
-  )
+		</div>
+	)
 }

@@ -2,46 +2,46 @@ import { Component } from "react";
 import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
 
 export default function Service_1() {
-  return (
-    <div className="flex-container">
-      <div
-        className="container_1"
-        style={{
-          position: "absolute",
-          top: "1800px",
-        }}
-      >
-        <div className="serviceImg_1">
-          <img className="career_service" src="/img/home/career_service.svg" />
-        </div>
-        <div className="ServiceContainer">
-          <div className="item">
-            <img
-              className="serviceButton_1"
-              src="/img/home/serviceButton_1.svg"
-            />
-          </div>
-          <div className="item">
-            <img
-              className="serviceButton_2"
-              src="/img/home/serviceButton_2.svg"
-            />
-          </div>
-          <div className="item">
-            <img
-              className="serviceButton_3"
-              src="/img/home/serviceButton_3.svg"
-            />
-          </div>
-          <div className="item" style={{ cursor: "default" }}>
-            <img
-              className="serviceButton_none"
-              src="/img/home/serviceButton_none.svg"
-            />
-          </div>
-        </div>
-      </div>
-      <style jsx>{`
+	return (
+		<div className="flex-container">
+			<div
+				className="container_1"
+				style={{
+					position: "absolute",
+					top: "1800px",
+				}}
+			>
+				<div className="serviceImg_1">
+					<img className="career_service" src="/img/home/career_service.svg" />
+				</div>
+				<div className="ServiceContainer">
+					<div className="item">
+						<img
+							className="serviceButton_1"
+							src="/img/home/serviceButton_1.svg"
+						/>
+					</div>
+					<div className="item">
+						<img
+							className="serviceButton_2"
+							src="/img/home/serviceButton_2.svg"
+						/>
+					</div>
+					<div className="item">
+						<img
+							className="serviceButton_3"
+							src="/img/home/serviceButton_3.svg"
+						/>
+					</div>
+					<div className="item" style={{ cursor: "default" }}>
+						<img
+							className="serviceButton_none"
+							src="/img/home/serviceButton_none.svg"
+						/>
+					</div>
+				</div>
+			</div>
+			<style jsx>{`
         .container_1 {
           display: flex;
           width: 100%;
@@ -52,7 +52,7 @@ export default function Service_1() {
           flex-direction: row;
         }
         .ServiceContainer {
-          width: 690px;
+          width: 698px;
           background-color: #e4e7df;
           display: flex;
           border: 4px solid;
@@ -66,10 +66,14 @@ export default function Service_1() {
           display: flex;
           flex-direction: row;
           flex-wrap: wrap;
+          transition: 0.3s;
+
           cursor: pointer;
           padding: 0px;
         }
-
+        .item:hover {
+          transform: scale(1.007);
+        }
         .serviceImg_1 {
           display: flex;
           height: 100px;
@@ -89,6 +93,6 @@ export default function Service_1() {
           flex-wrap: wrap;
         }
       `}</style>
-    </div>
-  );
+		</div>
+	);
 }

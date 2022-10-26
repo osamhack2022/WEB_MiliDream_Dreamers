@@ -52,7 +52,7 @@ export default function Service_2() {
           flex-direction: row;
         }
         .ServiceContainer {
-          width: 690px;
+          width: 698px;
           background-color: #ffffff;
           display: flex;
           border: 4px solid;
@@ -66,8 +66,13 @@ export default function Service_2() {
           display: flex;
           flex-direction: row;
           flex-wrap: wrap;
+          transition: 0.3s;
+
           cursor: pointer;
           padding: 0px;
+        }
+        .item:hover {
+          transform: scale(1.007);
         }
 
         .serviceImg_2 {

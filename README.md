@@ -48,6 +48,7 @@
 |        [Nodejs v16.17.0](https://nodejs.org/ko/)       |   [Express v4.16](https://expressjs.com/ko/)  |
 
 
+
 ### Database
 | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/MariaDB_colour_logo.svg/1200px-MariaDB_colour_logo.svg.png" height=100> |
 |:-------------------------------------------:|
@@ -68,6 +69,7 @@
 ### 사용된 오픈소스
 
 
+
 <!--
  사용한 라이브러리 리스트 등을 따로 작성하겠지만
  기술 스택을 나열하는 이 구간에서 함께 소개하면 좋을 것 같습니다
@@ -77,12 +79,8 @@
  
 
 ## 설치 안내 (Installation Process)
-```bash
-$ git clone https://github.com/osamhack2022/WEB_MiliDream_Dreamers.git
-$ npm install
-$ npm run start
-```
 
+이 저장소를 git clone한 후 `/backend`와 `/frontend`의 README.md를 각각 참고해주세요!
 
 ## 프로젝트 사용법 (Getting Started)
 

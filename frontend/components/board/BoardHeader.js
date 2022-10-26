@@ -1,13 +1,13 @@
 import BoardSearchBar from "./BoardSearchBar";
 
 export default function BoardHeader({ type, boardId }) {
-  console.log(type, boardId);
-  if (boardId === "MAIN") {
-    return (
-      <div className="headerB">
-        <h1>커뮤니티 | {boardId}</h1>
-        <BoardSearchBar placeHolder="게시글 검색" />
-        <style jsx>{`
+	//console.log(type, boardId);
+	if (boardId === "MAIN") {
+		return (
+			<div className="headerB">
+				<h1>커뮤니티 | {boardId}</h1>
+				<BoardSearchBar placeHolder="게시글 검색" />
+				<style jsx>{`
         .headerB { 
           border-top: 3px solid #566270;
           border-bottom: 3px solid #566270;
@@ -28,20 +28,20 @@ export default function BoardHeader({ type, boardId }) {
           margin-bottom: 0px;
         }
       `}</style>
-      </div>
-    )
-  }
-  else {
-    return (
-      <div>
-      <div className="headerB">
-        <h1>커뮤니티 | {boardId}</h1>
-        <BoardSearchBar placeHolder="게시글 검색" />
-      </div>
-      <div className="header2">
-        {`장병들을 위한 ${boardId} 커뮤니티입니다. ${boardId} 화이팅!!`}
-      </div>
-        <style jsx>{`
+			</div>
+		)
+	}
+	else {
+		return (
+			<div>
+				<div className="headerB">
+					<h1>커뮤니티 | {boardId}</h1>
+					<BoardSearchBar placeHolder="게시글 검색" />
+				</div>
+				<div className="header2">
+					{`장병들을 위한 ${boardId} 커뮤니티입니다. ${boardId} 화이팅!!`}
+				</div>
+				<style jsx>{`
         .headerB { 
           border-top: 3px solid #566270;
           border-bottom: 3px solid rgba(86, 98, 112, 0.7);
@@ -75,7 +75,7 @@ export default function BoardHeader({ type, boardId }) {
           border-bottom: 3px solid #566270;
         }
       `}</style>
-      </div>
-    )
-  }
+			</div>
+		)
+	}
 }
