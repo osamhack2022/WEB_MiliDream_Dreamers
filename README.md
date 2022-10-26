@@ -2,20 +2,33 @@
 군인들을 위한 진로 도움 및 취미 공유 웹 플랫폼 MiliDream입니다.
 
 # Project name and Logo
-## MiliDream
-
-<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbVdFty%2FbtrPAo4cs8y%2F2R14CFKtYcYJHKGTtQJ9V1%2Fimg.png" width="618">
+## Mili Dream
+<p align="center">
+	<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbVdFty%2FbtrPAo4cs8y%2F2R14CFKtYcYJHKGTtQJ9V1%2Fimg.png" width="618">
+<p/>
 
 <br />
-<a href="#">
-	<img alt="dev doc" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FJdGTB%2FbtrPydb1fxX%2Fl1EJAqjLbwg8SmFOjtMLM0%2Fimg.png" width="200">
-</a>
-<a href="https://github.com/osamhack2022-v2/WEB_MiliDream_Dreamers/issues">
-	<img alt="issue" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FboMneJ%2FbtrPx1itOgh%2F32zDfdLRtHxVwtnubWuTeK%2Fimg.png" width="200">
-</a>
-<a href="https://milidream.ml/">
-	<img alt="deploy" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcrygJK%2FbtrPw0qCKJ4%2FSIEBBS531GCrlKk8OsGCD0%2Fimg.png" width="200">
-</a>
+<p align="center">
+	<a href="#">
+		<img alt="dev doc" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FJdGTB%2FbtrPydb1fxX%2Fl1EJAqjLbwg8SmFOjtMLM0%2Fimg.png" width="200">
+	</a>
+	<a href="https://github.com/osamhack2022-v2/WEB_MiliDream_Dreamers/issues">
+		<img alt="issue" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FboMneJ%2FbtrPx1itOgh%2F32zDfdLRtHxVwtnubWuTeK%2Fimg.png" width="200">
+	</a>
+	<a href="https://milidream.ml/">
+		<img alt="deploy" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcrygJK%2FbtrPw0qCKJ4%2FSIEBBS531GCrlKk8OsGCD0%2Fimg.png" width="200">
+	</a>
+<p/>
+
+<br />
+
+<p align="center">
+	<a href="https://github.com/osamhack2022/WEB_MiliDream_Dreamers/search?l=TSX&type=code"><img alt="GitHub language count" src="https://img.shields.io/github/languages/count/osamhack2022/WEB_MiliDream_Dreamers"></a>
+	<a href="https://github.com/osamhack2022/WEB_MiliDream_Dreamers/graphs/contributors"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/osamhack2022/WEB_MiliDream_Dreamers?color=success"></a>
+	<a href="https://github.com/osamhack2022/WEB_MiliDream_Dreamers/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/osamhack2022/WEB_MiliDream_Dreamers"></a>
+	<a href="https://github.com/osamhack2022/WEB_MiliDream_Dreamers/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/osamhack2022/WEB_MiliDream_Dreamers"></a>
+	<a href="https://github.com/osamhack2022/WEB_MiliDream_Dreamers/blob/master/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/osamhack2022/WEB_MiliDream_Dreamers"></a>
+</p>
 <br />
 
 <!--프로젝트명 또는 프로젝트 로고 이미지 **(택1)**-->
@@ -99,15 +112,121 @@
 ## 팀 정보 (Team Information)
  > 프로젝트 : MiliDream  
  > 팀명: Dreamers  
- >   
- > <팀원>  
- > 김지환, [📩 e-mail](kjhwan0802@naver.com), [@Turtle-Hwan](https://github.com/Turtle-Hwan)  
- > 가수연, [📩 e-mail](bagger3025@gmail.com), [@bagger3025](https://github.com/bagger3025)  
- > 김선우, [📩 e-mail](sunwoo005@naver.com), [@Meoraeng](https://github.com/Meoraeng)  
- > 민진홍, [📩 e-mail](jinhong_min@naver.com), [@jinhongee](https://github.com/jinhongee)  
- > 손현진, [📩 e-mail](thsguswls610@gmail.com), [@sonyrainy](https://github.com/sonyrainy)  
- > 양승모, [📩 e-mail](seungmo2000@gmail.com), [@SeungmoYang](https://github.com/SeungmoYang)  
- > 추인엽, [📩 e-mail](inyeoptti@gmail.com), [@inyeoptti](https://github.com/inyeoptti)  
+ 
+<br>
+<table align="center" width="788">
+<thead>
+<tr>
+<th width="130" align="center">📝성명</th>
+<th width="150" align="center">🚩역할</th>
+<th width="100" align="center">🐱깃허브</th>
+<th width="175" align="center">📩이메일</th>
+</tr> 
+</thead>
+<tbody>
+<tr>
+<td width="130" align="center">김지환<br/>(팀장)</td>
+<td width="150">프론트 개발<br></td>
+<td width="100" align="center">
+	<a href="https://github.com/Turtle-Hwan">
+		<img src="http://img.shields.io/badge/Turtle_Hwan-655ced?style=social&logo=github"/>
+	</a>
+</td>
+<td width="175" align="center">
+	<a href="mailto:kjhwan0802@naver.com">
+                <img src="https://img.shields.io/badge/kjhwan0802-655ced?style=social&logo=naver"/>
+	</a>
+</td>
+</tr>
+<tr>
+<td width="130" align="center">김선우<br/>(백엔드 팀장)</td>
+<td width="150">백엔드 개발 </br>디자인</br>아키텍처 설계 </td>
+<td width="100" align="center">
+	<a href="https://github.com/meoraeng">
+		<img src="http://img.shields.io/badge/meoraeng-655ced?style=social&logo=github"/>
+	</a>
+</td>
+<td width="175" align="center">
+	<a href="mailto:sunwoo005@naver.com">
+                <img src="https://img.shields.io/badge/sunwoo005-655ced?style=social&logo=naver"/>
+	</a>
+</td>
+</tr>
+<tr>
+<td width="130" align="center">가수연</td>
+<td width="150">백엔드 개발<br></td>
+<td width="100" align="center">
+	<a href="https://github.com/bagger3025">
+		<img src="http://img.shields.io/badge/bagger3025-655ced?style=social&logo=github"/>
+	</a>
+</td>
+<td width="175" align="center">
+	<a href="mailto:bagger3025@gmail.com">
+		<img src="http://img.shields.io/badge/bagger3025-655ced?style=social&logo=gmail"/>
+	</a>
+</td>
+</tr>
+<tr>
+<td width="130" align="center">민진홍</td>
+<td width="150">프론트엔드 개발</td>
+<td width="100" align="center">
+	<a href="https://github.com/jinhongee">
+		<img src="http://img.shields.io/badge/jinhongee-655ced?style=social&logo=github"/>
+	</a>
+</td>
+<td width="175" align="center">
+	<a href="mailto:jinhong_min@naver.com">
+		<img src="http://img.shields.io/badge/jinhong_min-655ced?style=social&logo=naver"/>
+	</a>
+</td>
+</tr>
+<tr>
+<td width="130" align="center">추인엽</td>
+<td width="150">백엔드 개발</td>
+<td width="100" align="center">
+	<a href="https://github.com/inyeoptti">
+		<img src="http://img.shields.io/badge/inyeoptti-655ced?style=social&logo=github"/>
+	</a>
+</td>
+<td width="175" align="center">
+	<a href="mailto:inyeoptti@gmail.com">
+                <img src="https://img.shields.io/badge/inyeoptti-655ced?style=social&logo=gmail"/>
+	</a>
+</td>
+</tr>
+</tr>
+<tr>
+<td width="130" align="center">손현진</td>
+<td width="150">프론트엔드 개발</td>
+<td width="100" align="center">
+	<a href="https://github.com/sonyrainy">
+		<img src="http://img.shields.io/badge/sonyrainy-655ced?style=social&logo=github"/>
+	</a>
+</td>
+<td width="175" align="center">
+	<a href="mailto:thsguswls610@gmail.com">
+                <img src="https://img.shields.io/badge/thsguswls61-655ced?style=social&logo=gmail"/>
+	</a>
+</td>
+</tr>
+</tr>
+<tr>
+<td width="130" align="center">양승모</td>
+<td width="150">디자인</td>
+<td width="100" align="center">
+	<a href="https://github.com/SeungmoYang">
+		<img src="http://img.shields.io/badge/SeungmoYang-655ced?style=social&logo=github"/>
+	</a>
+</td>
+<td width="175" align="center">
+	<a href="mailto:seungmo2000@gmail.com">
+                <img src="https://img.shields.io/badge/seungmo2000-655ced?style=social&logo=gmail"/>
+	</a>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
 
 
 ## 저작권 및 사용권 정보 (Copyleft / End User License)
