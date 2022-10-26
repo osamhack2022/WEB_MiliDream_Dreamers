@@ -1,3 +1,5 @@
+// @ts-check
+
 import { Router } from "express";
 import passport from "passport";
 import Logger from "../../loaders/logger.js";
@@ -13,7 +15,12 @@ route
 		/**
 		 * API: GET /accounts/sign
 		 *
-		 * req의 쿠키와 세션으로 user의 정보를 반환함
+		 * 로그인되어 있어야 합니다.
+		 * req의 쿠키와 세션으로 user의 정보를 반환합니다.
+		 * 없다면 401 Unauthorized 에러를 반환합니다.
+		 *
+		 * @param {import("express").Request} req
+		 * @param {import("express").Response} res
 		 */
 		(req, res) => {
 			return res.status(200).json(req.user);
@@ -23,12 +30,16 @@ route
 		passport.authenticate("local"),
 		/**
 		 * API: POST /accounts/sign
+		 *
 		 * body: {id, password}
 		 *
 		 * id와 password를 이용해 유저를 로그인시킴
 		 * 폼 형식 불일치 시 400 코드 반환
 		 * 실패 시 401, 성공 시 200 코드와 유저 정보 반환
 		 * 성공 시 같은 세션 요청하면 req.user에 유저 정보 들어감
+		 *
+		 * @param {import("express").Request} req
+		 * @param {import("express").Response} res
 		 */
 		(req, res) => {
 			return res.status(200).json(req.user);
@@ -38,10 +49,16 @@ route
 		checkUserExist,
 		/**
 		 * API: DELETE /accounts/sign
-		 * 로그아웃함
+		 *
+		 * 로그인되어 있어야 합니다.
+		 * 로그아웃합니다.
+		 *
+		 * @param {import("express").Request} req
+		 * @param {import("express").Response} res
 		 */
 		(req, res) => {
 			req.logout(() => {
+				// @ts-ignore
 				req.session.save((err) => {
 					if (err) {
 						Logger.error(err);
@@ -60,8 +77,13 @@ route
 	.post(
 		/**
 		 * API: POST /accounts/account
-		 * req.body = {userId, password, userName, userClass, token}
+		 *
+		 * body: {userId, password, userName, userClass, token}
+		 *
 		 * 회원가입
+		 *
+		 * @param {import("express").Request} req
+		 * @param {import("express").Response} res
 		 */
 		async (req, res) => {
 			const { userId } = req.body;
@@ -78,10 +100,16 @@ route
 		checkUserExist,
 		/**
 		 * API: DELETE /accounts/account
+		 *
+		 * 로그인되어 있어야 합니다.
 		 * 회원탈퇴
+		 *
+		 * @param {import("express").Request} req
+		 * @param {import("express").Response} res
 		 */
 		async (req, res) => {
 			try {
+				// @ts-ignore
 				await AccountService.remove({ userKey: req.user.userKey });
 			} catch (err) {
 				res.status(400).json({ err: err.message });
@@ -96,30 +124,49 @@ route
 		}
 	);
 
-/**
- * API: GET /accounts/signup-token
- * 회원가입 토큰 발행
- */
-route.get("/signup-token", async (req, res) => {
-	// const agreements = req.query?.agreements;
-	// if (!agreements) return res.status(400).json({ error: "agreements list string(split by comma(,)) required." });
+route.get(
+	"/signup-token",
+	/**
+	 * API: GET /accounts/signup-token
+	 *
+	 * 회원가입 토큰을 발행합니다.
+	 *
+	 * @param {import("express").Request} req
+	 * @param {import("express").Response} res
+	 * @returns
+	 */
+	async (req, res) => {
+		// const agreements = req.query?.agreements;
+		// if (!agreements) return res.status(400).json({ error: "agreements list string(split by comma(,)) required." });
 
-	const token = await AccountService.generateSigninToken();
-	return res.status(200).json({ token });
-});
-
-/**
- * API: POST /accounts/attempt
- * 회원가입 폼 입력값 확인
- */
-route.post("/attempt", async (req, res) => {
-	const { token, userName, userId } = req.body;
-	try {
-		await AccountService.attempt({ token, userName, userId });
-		return res.status(200).end();
-	} catch (err) {
-		res.status(400).json({ err: err.message });
+		const token = await AccountService.generateSigninToken();
+		return res.status(200).json({ token });
 	}
-});
+);
+
+route.post(
+	"/attempt",
+	/**
+	 * API: POST /accounts/attempt
+	 *
+	 * body: {token, userName, userId}
+	 *
+	 * 회원가입할 때 입력한 값이 올바른지 확인합니다.
+	 *
+	 * @param {import("express").Request} req
+	 * @param {import("express").Response} res
+	 * @returns
+	 */
+	async (req, res) => {
+		/** @type {{token: string; userName: string; userId: string}} */
+		const { token, userName, userId } = req.body;
+		try {
+			await AccountService.attempt({ token, userName, userId });
+			return res.status(200).end();
+		} catch (err) {
+			res.status(400).json({ err: err.message });
+		}
+	}
+);
 
 export default route;
