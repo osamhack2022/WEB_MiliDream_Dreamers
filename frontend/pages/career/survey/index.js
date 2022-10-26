@@ -226,7 +226,7 @@ const begin = () => {
 const Home = () => {
   return (
     <div className="container">
-      <section id="main" className="mx-auto mt-5 py-5 px-3">
+      <section id="main" className="mx-auto py-5 px-3">
         <h1>나의 자기계발 유형은?</h1>
         <div className="col-lg-6 col-md-8 col-sm-10 col-12 mx-auto">
           <img id="logo" src={'/img_new/logo.png'} alt="logoImage" className="img-fluid" />
@@ -284,6 +284,7 @@ const Home = () => {
               width: 80%;
               text-align: center;
               border-radius: 20px;
+              margin-bottom: 50px;
             }
             #logo {
               width: 75%;
