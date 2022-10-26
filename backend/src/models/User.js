@@ -30,7 +30,7 @@ export default class User {
 		try {
 			/** @type {UserType[]} */
 			const result = await mariadb.query(sql, [userKey]);
-			if (!result) throw Error(`userKey="${userKey}"인 유저 없음`);
+			if (result.length === 0) throw Error(`userKey="${userKey}"인 유저 없음`);
 			return result[0];
 		} catch (err) {
 			throw err;

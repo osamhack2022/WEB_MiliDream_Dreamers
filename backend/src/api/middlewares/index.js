@@ -28,6 +28,7 @@ export function checkUserId(req, res, next) {
  * @returns
  */
 export function checkUserExist(req, res, next) {
+	// @ts-ignore
 	if (!req.user) {
 		res.status(401).json({ err: "Unauthorized!" });
 		return;
