@@ -6,7 +6,7 @@ import Slide from "../components/Home/Home_Slide";
 import Service_1 from "../components/Home/Service_1";
 import Service_2 from "../components/Home/Service_2";
 import BoardCenter from "../components/Home/slideslide";
-
+import LoginModal from "../components/Login/Modal";
 
 import { useEffect, useState } from "react";
 //import { useQuery } from "react-query";
@@ -20,6 +20,7 @@ export default function Home({ results }) {
 		})();
 	}, []);
 	return (
+		<>
 		<div className="Home_home">
 			<div>
 				{/* {!board && <h1>Loading...</h1>}
@@ -43,6 +44,7 @@ export default function Home({ results }) {
 							top: "320px",
 							left: "350px",
 							fontSize: "90px",
+              fontWeight: "Bold",
 						}}
 					>
 						MILI-<br></br>DREAM
@@ -55,11 +57,11 @@ export default function Home({ results }) {
 					</p>
 				</div>
 
-				<Link href="/login">
-					<button>시작하기</button>
-				</Link>
-				<style jsx>
-					{`
+					{/* <Link href="/login"> */}
+					<button type="button" data-bs-toggle="modal" data-bs-target="#loginModal">시작하기</button>
+					{/* </Link> */}
+					<style jsx>
+						{`
             .FIRST {
               opacity: 0.9;
             }
@@ -99,8 +101,7 @@ export default function Home({ results }) {
               transition: 1s;
             }
             .FIRST {
-              width: 150vw;
-              height: 80vh;
+              height: 755.19px;
               background-size: cover;
               background-position: center;
               background-repeat: no-repeat;
@@ -127,63 +128,63 @@ export default function Home({ results }) {
               opacity: 1;
             }
           `}
-				</style>
-			</div>
+					</style>
+				</div>
 
-			<div className="SECOND">
-				{
-					<div>
-						<Slide></Slide>
-					</div>
-				}
-			</div>
+				<div className="SECOND">
+					{
+						<div>
+							<Slide></Slide>
+						</div>
+					}
+				</div>
 
-			<div className="THIRD">
-				{
+				<div className="THIRD">
+					{
+						<div
+							style={{
+								position: "absolute",
+								top: "100px",
+								width: "100%",
+							}}
+						>
+							<Service_1></Service_1>
+						</div>
+					}
+					{
+						<div
+							style={{
+								position: "absolute",
+								top: "500px",
+								width: "100%",
+							}}
+						>
+							<Service_2></Service_2>
+						</div>
+					}
+				</div>
+
+				<footer className="footer">
 					<div
 						style={{
 							position: "absolute",
-							top: "100px",
+							top: "3000px",
 							width: "100%",
-						}}
-					>
-						<Service_1></Service_1>
-					</div>
-				}
-				{
-					<div
-						style={{
-							position: "absolute",
-							top: "500px",
-							width: "100%",
-						}}
-					>
-						<Service_2></Service_2>
-					</div>
-				}
-			</div>
-
-			<footer className="footer">
-				<div
-					style={{
-						position: "absolute",
-						top: "3000px",
-						width: "100%",
-						backgroundColor: "#566270",
-						height: "96px",
-					}}
-				>
-					<img
-						src="/img/Footer/Footer(Simply).svg"
-						style={{
 							backgroundColor: "#566270",
+							height: "96px",
 						}}
-					/>
-					{/* <a>
+					>
+						<img
+							src="/img/Footer/Footer(Simply).svg"
+							style={{
+								backgroundColor: "#566270",
+							}}
+						/>
+						{/* <a>
             <br /> Copyrightⓒ 2022, Dreamers. All right reserved
           </a> */}
-				</div>
-				<style jsx>{`
+					</div>
+					<style jsx>{`
           .footer {
           }
           div {
@@ -198,8 +199,9 @@ export default function Home({ results }) {
             border: 0;
           }
         `}</style>
-			</footer>
-		</div>
+				</footer>
+			</div>
+		</>
 	);
 }
 
