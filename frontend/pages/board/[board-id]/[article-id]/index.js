@@ -48,9 +48,6 @@ export default function article_id(props) {
 		}
 	}, [router.isReady, reload]);
 
-	// setArticlePost(article?.slice(0).find((x) => x.postKey == articleId));
-	console.log(articlePost)
-
 	return (
 		<div>
 			<div className="container">
@@ -65,7 +62,7 @@ export default function article_id(props) {
 					<BoardNavBar props={categoryL} />
 				</div>
 				<div className="BoardMain">
-					<ArticleWriteView post={articlePost} articleId={articleId} doReload={doReload} />
+					<ArticleWriteView post={articlePost} articleId={articleId} doReload={doReload} user={user} />
 				</div>
 				<div className="footer"></div>
 			</div>

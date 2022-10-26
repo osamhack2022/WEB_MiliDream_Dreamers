@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { displayedAt } from "../../../../utils/strings";
 import Image from "next/image";
 
@@ -28,45 +28,113 @@ function reportModal(e) {
 	)
 }
 
-function ContentRow({ comment }) {
-	//const router = useRouter();
-	//console.log(comment)
-	const [user, setUser] = useState();
-	const router = useRouter();
+function ContentRow({ comment, doReload, user }) {
+	/** 이 댓글의 작성자 저장 */
+	const [commentUser, setCommentUser] = useState();
+
+	/** 댓글의 수정 버튼을 누르면 수정 모드로 전환됨, 상태를 저장함 */
+	const [isFixOn, setFixOn] = useState(false)
+
+	/** 댓글 수정하는 부분 값을 얻어오기 위한 Ref */
+	const commentFixTextarea = useRef();
+
+	// 댓글을 단 사용자의 닉네임을 받아옴
 	useEffect(() => {
 		(async () => {
 			const results = await (await fetch(`/api/user/${Number(comment?.userKey)}`, { method: 'GET' })).json();
-			setUser(results);
+			setCommentUser(results);
 		})();
-	}, []);
-	//console.log(user?.userName)
+	}, [comment.userKey]);	// comment.userKey는 없을 때, 생길 때 최대 두 번 바뀜
+
+	// 댓글 삭제 버튼을 눌렀을 때 실행
+	const deleteCommentSubmit = async (e) => {
+		const response = await fetch(`/api/comment/${comment.commentKey}`, {
+			method: "DELETE"
+		})
+		if (response.ok) {
+			doReload();
+		} else {
+			const data = await response.json();
+			console.log("err", data);
+		}
+	}
+
+	// 댓글 수정 버튼을 눌렀을 때, 수정 창과 수정 취소/확인 버튼을 띄울 때 사용
+	const fixCommentSubmit = (e) => {
+		setFixOn(true);
+	}
+
+	// 수정 취소를 누르고 다시 돌아갈 때 사용
+	const fixCommentCancel = (e) => {
+		setFixOn(false);
+		commentFixTextarea.current.value = comment?.body;
+	}
+
+	// 수정 완료를 누르고 수정된 내용을 반영할 버튼을 누를 때 사용
+	const fixCommentFin = async (e) => {
+		const response = await fetch(`/api/comment/${comment.commentKey}`, {
+			method: "PUT",
+			body: JSON.stringify({ body: commentFixTextarea.current.value }),
+			headers: { 'Content-Type': 'application/json' }
+		})
+		if (response.ok) {
+			doReload();
+			setFixOn(false)
+		} else {
+			const data = await response.json();
+			console.log("err", data);
+		}
+	}
+
 	return (
 		<tr className="comment">
 			<td className="content1">
-				<div className="name">{user?.userName}</div>
+				<div className="name">{commentUser?.userName}</div>
 				<div className="date">{displayedAt(comment?.commentTime)}</div>
 			</td>
-			<td className="content2">{comment?.body}</td>
-			{/* <td className="content">수정</td>
-					<td className="content">삭제</td> */}
+			{/* 댓글을 단 사람이 본인일 경우 삭제, 수정 버튼 띄우기 */}
+			{comment.userKey === user.userKey ? <>
+				{isFixOn ?
+					<td>
+						<textarea defaultValue={comment?.body} ref={commentFixTextarea}></textarea>
+						<button onClick={fixCommentCancel}>수정 취소</button>
+						<button onClick={fixCommentFin}>수정 완료</button>
+					</td>
+					:
+					<>
+						<td className="content2">{comment?.body}</td>
+						<td><button onClick={fixCommentSubmit}>수정</button></td>
+					</>
+				}<td><button onClick={deleteCommentSubmit}>삭제</button></td></>
+				: <td className="content2">{comment.userKey} {user.userKey} {comment?.body}</td>
+			}
+
 		</tr>
 
 	)
 }
 
-export default function ArticleWriteView({ post, articleId, doReload }) {
-	const [user, setUser] = useState();
+export default function ArticleWriteView({ post, articleId, doReload, user }) {
+
+	/** 게시글 작성자를 저장 */
+	const [postUser, setPostUser] = useState();
+
+	/** 공감 성공 시와 실패 시에 나타나는 글을 저장하는 state */
 	const [recommendWord, setRecommendWord] = useState("");
 	const router = useRouter();
-	useEffect(() => {
-		(async () => {
-			console.log(post?.userKey)
-			const results = await (await fetch(`/api/user/${Number(post?.userKey)}`, { method: 'GET' })).json();
-			console.log(results)
-			setUser(results);
-		})();
-	}, [post?.userKey]);
 
+	/** 이 게시글을 쓴 사용자 조회 */
+	useEffect(() => {
+		if (router.isReady && post) {
+			(async () => {
+				const response = await fetch(`/api/user/${Number(post?.userKey)}`, { method: 'GET' });
+				const results = await (response).json();
+				setPostUser(results);
+			})();
+		}
+	}, [router.isReady, post?.userKey]);
+
+	/** 공감을 누르면 나타나는 글을 정한다. */
 	const onRecommendClick = async e => {
 		const response = await fetch(`/api/board/${router.query["article-id"]}/recommend`, {
 			method: "POST",
@@ -79,8 +147,8 @@ export default function ArticleWriteView({ post, articleId, doReload }) {
 		}
 	}
 
+	/** 댓글을 제출하면 작동함, 제대로 작동하면 리로드하고 댓글 필드의 값 초기화 */
 	const onCommentSubmit = async (e) => {
-		console.log(document.querySelector("#exampleFormControlTextarea1").value)
 		const response = await fetch("/api/comment", {
 			method: "POST",
 			body: JSON.stringify({
@@ -95,7 +163,6 @@ export default function ArticleWriteView({ post, articleId, doReload }) {
 		}
 	}
 
-	//console.log(post)
 	return (
 		<div>
 			<div className="modal fade" id="reportModalDiv" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -155,7 +222,7 @@ export default function ArticleWriteView({ post, articleId, doReload }) {
 						<tr className="mainTitle">
 							<th scope="col count" className="count titleBar">{post?.title}</th>
 							<td>
-								<div className="title titleBar">{user?.userName}</div>
+								<div className="title titleBar">{postUser?.userName}</div>
 								<div className="writeUser titleBar">{displayedAt(post?.postTime)}</div>
 								<div className="time titleBar">조회수 {post?.viewCount}</div>
 								<div className="veiwCount titleBar">수정</div>
@@ -185,7 +252,7 @@ export default function ArticleWriteView({ post, articleId, doReload }) {
 								</div>
 							</td>
 						</tr>
-						{post?.comments.slice(0).map((comment) => <ContentRow key={comment.commentKey} comment={comment} />)}
+						{post?.comments.slice(0).map((comment) => <ContentRow key={comment.commentKey} comment={comment} doReload={doReload} user={user} />)}
 					</tbody>
 				</table>
 			</div>
@@ -346,7 +413,7 @@ export default function ArticleWriteView({ post, articleId, doReload }) {
 				margin-left: 15px;
 				}
 				tbody > tr {
-				height: 60px;
+				height: 180px;
 				}
 				.title.content {
 				text-align: start;
