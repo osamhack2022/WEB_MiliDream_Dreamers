@@ -212,7 +212,7 @@
 	</a>
 </td>
 <td width="175" align="center">
-	<a href="mailto:thsguswls610@gmail.com">
+	<a href="mailto:thsguswls610 @gmail.com">
                 <img src="https://img.shields.io/badge/thsguswls61-655ced?style=social&logo=gmail"/>
 	</a>
 </td>
