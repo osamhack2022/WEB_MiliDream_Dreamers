@@ -205,7 +205,7 @@
 </tr>
 <tr>
 <td width="130" align="center">손현진</td>
-<td width="150">프론트엔드 개발</td>
+<td width="150">프론트엔드 개발 </br> 발표 </td>
 <td width="100" align="center">
 	<a href="https://github.com/sonyrainy">
 		<img src="http://img.shields.io/badge/sonyrainy-655ced?style=social&logo=github"/>
@@ -213,7 +213,7 @@
 </td>
 <td width="175" align="center">
 	<a href="mailto:thsguswls610@gmail.com">
-                <img src="https://img.shields.io/badge/thsguswls61-655ced?style=social&logo=gmail"/>
+                <img src="https://img.shields.io/badge/thsguswls610-655ced?style=social&logo=gmail"/>
 	</a>
 </td>
 </tr>
