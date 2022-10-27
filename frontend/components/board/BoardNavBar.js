@@ -1,10 +1,11 @@
 //board 전용 네비게이션 바 / 좌측바 - 네이버 카페 처럼.
 
 import Link from "next/link";
+import { GlobalState } from "../../states/GlobalState";
 
 
-export default function BoardNavBar({ props }) {
-	const category = props;
+export default function BoardNavBar() {
+	const categoryList = GlobalState(state => state.categoryList);
 	return (
 		<div>
 			<div className="flex-shrink-0 p-3 bg-white">
@@ -15,7 +16,7 @@ export default function BoardNavBar({ props }) {
 					<li className="mb-1">
 						<ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
 							{
-								category?.map(category => (<li key={category.categoryKey}><Link href={`/board/${category.categoryKey}`}><a className="link-dark d-inline-flex text-decoration-none rounded">{category.categoryName}</a></Link></li>))
+								categoryList?.map(category => (<li key={category.categoryKey}><Link href={`/board/${category.categoryKey}`}><a className="link-dark d-inline-flex text-decoration-none rounded">{category.categoryName}</a></Link></li>))
 							}
 						</ul>
 					</li>
