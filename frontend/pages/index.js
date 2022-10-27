@@ -12,7 +12,7 @@ import BoardCenter2 from "../components/board/BoardCenter";
 export default function Home({ results }) {
 
 	return (
-		<>
+		<div>
 			<div className="Home_home">
 				<div className="FIRST">
 					{/* 가장 위 position으로 전체 위치 조절가능 */}
@@ -202,7 +202,7 @@ export default function Home({ results }) {
         `}</style>
 				</footer>
 			</div>
-		</>
+		</div>
 	);
 }
 
