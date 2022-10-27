@@ -7,7 +7,6 @@
 	<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbVdFty%2FbtrPAo4cs8y%2F2R14CFKtYcYJHKGTtQJ9V1%2Fimg.png" width="618">
 <p/>
 
-<br />
 <p align="center">
 	<a href="#">
 		<img alt="dev doc" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FJdGTB%2FbtrPydb1fxX%2Fl1EJAqjLbwg8SmFOjtMLM0%2Fimg.png" width="200">
@@ -19,8 +18,6 @@
 		<img alt="deploy" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcrygJK%2FbtrPw0qCKJ4%2FSIEBBS531GCrlKk8OsGCD0%2Fimg.png" width="200">
 	</a>
 <p/>
-
-<br />
 
 <p align="center">
 	<a href="https://github.com/osamhack2022/WEB_MiliDream_Dreamers/search?l=TSX&type=code"><img alt="GitHub language count" src="https://img.shields.io/github/languages/count/osamhack2022/WEB_MiliDream_Dreamers"></a>
