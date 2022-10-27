@@ -20,22 +20,57 @@ export default function NavBar() {
 		<header>
 			<nav>
 				<Link href="/">
-					<img
-						style={{
-							position: "relative",
-							top: "-16px",
-							left: "-30px",
-						}}
-						src="/img/NavBar/logo.svg"
-					/>
+					<div className="img">
+						<Image
+							width="230px"
+							height="31.45px"
+							style={{
+								position: "relative",
+								top: "-16px",
+								left: "-30px",
+							}}
+							src="/img/NavBar/logo.svg"
+						/>
+					</div>
 				</Link>
 
 				<ul
+					className="middleboard"
+					// style={{
+					// 	position: "relative",
+					// 	right: "180px",
+					// 	top: "-22px",
+					// 	textAlign: "center",
+					// }}
+				>
+					<li>
+						<Link href="/map">
+							<a>진로 설계</a>
+						</Link>
+					</li>
+					<li>
+						<Link href="/board">
+							<a>게시판</a>
+						</Link>
+					</li>
+					<li>
+						<Link href="/career/contest">
+							<a>공모전</a>
+						</Link>
+					</li>
+					<li>
+						<Link href="/career/survey">
+							<a>유형 조사</a>
+						</Link>
+					</li>
+				</ul>
+
+				<ul
 					className="rightboard"
-					style={{
-						position: "relative",
-						top: "-20px",
-					}}
+					// style={{
+					// 	position: "relative",
+					// 	top: "-20px",
+					// }}
 				>
 					{userExist ?
 						<>
@@ -67,36 +102,6 @@ export default function NavBar() {
 						</Link>
 					</li>
 				</ul>
-				<ul
-					className="middleboard"
-					style={{
-						position: "relative",
-						right: "180px",
-						top: "-22px",
-						textAlign: "center",
-					}}
-				>
-					<li>
-						<Link href="/map">
-							<a>진로 설계</a>
-						</Link>
-					</li>
-					<li>
-						<Link href="/board">
-							<a>게시판</a>
-						</Link>
-					</li>
-					<li>
-						<Link href="/career/contest">
-							<a>공모전</a>
-						</Link>
-					</li>
-					<li>
-						<Link href="/career/survey">
-							<a>유형 조사</a>
-						</Link>
-					</li>
-				</ul>
 
 				{/*styled jsx 방식 : js 백틱을 이용해 일반 css 코드를 삽입할 수 있다. 하지만 이 css가 적용받는 범위는 함수 내부로 한정된다.*/}
 				<style jsx>
@@ -104,20 +109,22 @@ export default function NavBar() {
             nav {
               height: 107px;
               line-height: 110px;
-              text-align: centor;
+              text-align: center;
+			  display: flex;
+			  justify-content: space-between;
             }
-            img {
+            .img {
               width: 230px;
               cursor: pointer;
-              padding-left: 50px;
+              //padding-left: 50px;
             }
             .rightboard {
               float: right;
               list-style: none;
               padding: 0;
               display: flex;
-              margin-top: 11px;
-
+              //margin-top: 11px;
+			  align-items: flex-start;
               padding-right: 60px;
               transition: 0.2s;
             }
@@ -133,12 +140,12 @@ export default function NavBar() {
               float: right;
               list-style: none;
               padding: 0;
-              margin-top: 11px;
+              //margin-top: 11px;
               display: flex;
               padding-right: 134px;
               text-align: center;
               justify-content: center;
-              align-items: center;
+              align-items: flex-start;
             }
             .middleboard a {
               font-weight: 600;

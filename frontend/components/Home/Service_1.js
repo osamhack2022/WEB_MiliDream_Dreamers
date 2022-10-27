@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
+import Image from "next/image";
 
 export default function Service_1() {
 	return (
@@ -12,29 +13,39 @@ export default function Service_1() {
 				}}
 			>
 				<div className="serviceImg_1">
-					<img className="career_service" src="/img/home/career_service.svg" />
+					<Image width="296px" height="319px" className="career_service" src="/img/home/career_service.svg" />
 				</div>
 				<div className="ServiceContainer">
-					<div className="item">
-						<img
-							className="serviceButton_1"
-							src="/img/home/serviceButton_1.svg"
-						/>
+					<div className='nowrap-content'>
+						<div className="item">
+							<Image
+								width="345px"
+								height="160px"
+								className="serviceButton_1"
+								src="/img/home/serviceButton_1.svg"
+							/>
+						</div>
+						<div className="item">
+							<Image
+								width="345px"
+								height="160px"
+								className="serviceButton_2"
+								src="/img/home/serviceButton_2.svg"
+							/>
+						</div>
 					</div>
 					<div className="item">
-						<img
-							className="serviceButton_2"
-							src="/img/home/serviceButton_2.svg"
-						/>
-					</div>
-					<div className="item">
-						<img
+						<Image
+							width="345px"
+							height="160px"
 							className="serviceButton_3"
 							src="/img/home/serviceButton_3.svg"
 						/>
 					</div>
 					<div className="item" style={{ cursor: "default" }}>
-						<img
+						<Image
+							width="345px"
+							height="160px"
 							className="serviceButton_none"
 							src="/img/home/serviceButton_none.svg"
 						/>
@@ -42,6 +53,10 @@ export default function Service_1() {
 				</div>
 			</div>
 			<style jsx>{`
+				.nowrap-content {
+					display: flex;
+					flex-wrap: nowrap;
+				}
         .container_1 {
           display: flex;
           width: 100%;

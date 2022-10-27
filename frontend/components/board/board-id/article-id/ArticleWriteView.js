@@ -7,7 +7,7 @@ import { GlobalState } from "../../../../states/GlobalState";
 
 function reportModal(e) {
 	e.preventDefault();
-	console.log('ggggg');
+	//console.log('ggggg');
 	return (
 		<div className="modal fade" id="reportModalDiv" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div className="modal-dialog">
@@ -98,24 +98,43 @@ function ContentRow({ comment, doReload }) {
 			{/* 댓글을 단 사람이 본인일 경우 삭제, 수정 버튼 띄우기 */}
 			{comment.userKey === user.userKey ? <>
 				{isFixOn ?
-					<td>
+					<td className="reWrite-box">
 						<textarea defaultValue={comment?.body} ref={commentFixTextarea}></textarea>
 						<button onClick={fixCommentCancel}>수정 취소</button>
 						<button onClick={fixCommentFin}>수정 완료</button>
 					</td>
 					:
 					<>
-						<td className="content2">{comment?.body}</td>
-						<td><button onClick={fixCommentSubmit}>수정</button></td>
+						<td className="content2">{comment?.body}
+							<div>
+								<button onClick={fixCommentSubmit}>수정</button>
+								<button onClick={deleteCommentSubmit}>삭제</button>
+							</div>
+						</td>
 					</>
-				}<td><button onClick={deleteCommentSubmit}>삭제</button></td></>
+				}</>
 				: <td className="content2">{comment.userKey} {user.userKey} {comment?.body}</td>
 			}
-
+			<style jsx>{`
+				.content2 {
+					display: flex;
+					justify-content: space-between;
+				}
+				.reWrite-box {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+				}
+				.reWrite-box > button {
+					width: 80px;
+					height: 40px;
+				}
+			`}</style>
 		</tr>
 
 	)
 }
+
 
 export default function ArticleWriteView({ post, articleId, doReload }) {
 
@@ -231,8 +250,8 @@ export default function ArticleWriteView({ post, articleId, doReload }) {
 								<div className="writeUser titleBar">{displayedAt(post?.postTime)}</div>
 								<div className="time titleBar">조회수 {post?.viewCount}</div>
 								{post?.userKey === user.userKey &&
-									<>
-										<div className="veiwCount titleBar"><button onClick={async e => {
+									<div>
+										<div className="retouch"><button onClick={async e => {
 											const response = await fetch(`/api/board/${post?.postKey}`, {
 												method: "PUT",
 												body: JSON.stringify({
@@ -246,19 +265,20 @@ export default function ArticleWriteView({ post, articleId, doReload }) {
 												doReload(); /** @todo 만약 페이지를 새로 만들었다면 reload도 하고 페이지도 원래 페이지로 이동 */
 											}
 										}}>수정</button></div>
-										<div className="heart titleBar"><button onClick={async e => {
+										<div className="delete"><button onClick={async e => {
 											const response = await fetch(`/api/board/${post?.postKey}`, { method: "DELETE" });
 											if (response.ok) {
 												router.push("/board")
 											}
-										}}>삭제</button></div></>
+										}}>삭제</button></div>
+									</div>
 								}<div className="comments">댓글수 [{post?.comments.length}]</div>
 							</td>
 						</tr>
 						<tr className="mainBody">
 							<th scope="col count" className="count titleBar">{post?.body}//Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</th>
 							<td className="body">
-								<p>공감수: {post?.recommenderCount}</p>
+								<p className="recommenderCount">{` ${post?.recommenderCount}`}</p>
 								<a type="button" data-bs-toggle="modal" data-bs-target="#recommendModalDiv" onClick={onRecommendClick}>
 									<Image src={`/article/recommendBtn.png`} width="131px" height="50px" />
 								</a>
@@ -282,6 +302,31 @@ export default function ArticleWriteView({ post, articleId, doReload }) {
 				</table>
 			</div>
 			<style global jsx>{`
+				button {
+					border: transparent;
+					background: #A593E0;
+					box-shadow: 0px 2px 2px rgb(0 0 0 / 25%);
+					border-radius: 5px;
+					cursor: pointer;
+					font-family: 'Noto Sans KR';
+					font-style: normal;
+					font-weight: 400;
+					font-size: 15px;
+					line-height: 22px;
+					text-align: center;
+					color: #FFFFFF;
+					margin-left: 10px;
+					width: 60px;
+				}
+				.recommenderCount {
+					margin: 0px;
+					padding: 0px;
+					position: relative;
+					left: -15px;
+					z-index: 5;
+					top: 36px;
+					color: white;
+				}
 				.mainTitle {
 					height: 80px;		
 				}
