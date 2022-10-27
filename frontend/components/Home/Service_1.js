@@ -15,17 +15,19 @@ export default function Service_1() {
 					<img className="career_service" src="/img/home/career_service.svg" />
 				</div>
 				<div className="ServiceContainer">
-					<div className="item">
-						<img
-							className="serviceButton_1"
-							src="/img/home/serviceButton_1.svg"
-						/>
-					</div>
-					<div className="item">
-						<img
-							className="serviceButton_2"
-							src="/img/home/serviceButton_2.svg"
-						/>
+					<div className='nowrap-content'>
+						<div className="item">
+							<img
+								className="serviceButton_1"
+								src="/img/home/serviceButton_1.svg"
+							/>
+						</div>
+						<div className="item">
+							<img
+								className="serviceButton_2"
+								src="/img/home/serviceButton_2.svg"
+							/>
+						</div>
 					</div>
 					<div className="item">
 						<img
@@ -42,6 +44,10 @@ export default function Service_1() {
 				</div>
 			</div>
 			<style jsx>{`
+				.nowrap-content {
+					display: flex;
+					flex-wrap: nowrap;
+				}
         .container_1 {
           display: flex;
           width: 100%;
