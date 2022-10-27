@@ -61,21 +61,21 @@ $ sudo mysql -u test -p < backend/base.sql
     |   ├──📄express.js
     |   ├──📄index.js
     |   ├──📄logger.js
-	|	├──📄mariadb.js
-	|	├──📄multer.js
-	|	└──📄passport.js
+    |	├──📄mariadb.js
+    |	├──📄multer.js
+    |	└──📄passport.js
     ├── 📂models
-	|	├──📄Account.js
-	|	├──📄Comment.js
-	|	├──📄Post.js
-	|	├──📄Recommend.js
-	|	└──📄User.js
+    |	├──📄Account.js
+    |	├──📄Comment.js
+    |	├──📄Post.js
+    |	├──📄Recommend.js
+    |	└──📄User.js
     ├── 📂services
-	|	├──📄accounts.js
-	|	├──📄board.js
-	|	├──📄comment.js
-	|	├──📄recommend.js
-	|	└──📄user.js
+    |	├──📄accounts.js
+    |	├──📄board.js
+    |	├──📄comment.js
+    |	├──📄recommend.js
+    |	└──📄user.js
     └── 📄app.js
     📄 .env.example
     📄 .eslintrc.js
