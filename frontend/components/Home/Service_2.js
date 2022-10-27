@@ -1,47 +1,62 @@
 import { Component } from "react";
 import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
+import Image from "next/image";
 
 export default function Service_2() {
-  return (
-    <div className="flex-container">
-      <div
-        className="container_2"
-        style={{
-          position: "absolute",
-          top: "1800px",
-        }}
-      >
-        <div className="serviceImg_2">
-          <img className="career_service" src="/img/home/community.svg" />
-        </div>
-        <div className="ServiceContainer">
-          <div className="item">
-            <img
-              className="serviceButton_4"
-              src="/img/home/serviceButton_4.png"
-            />
-          </div>
-          <div className="item">
-            <img
-              className="serviceButton_5"
-              src="/img/home/serviceButton_5.png"
-            />
-          </div>
-          <div className="item">
-            <img
-              className="serviceButton_6"
-              src="/img/home/serviceButton_6.png"
-            />
-          </div>
-          <div className="item" style={{ cursor: "default" }}>
-            <img
-              className="serviceButton_none"
-              src="/img/home/serviceButton_none.png"
-            />
-          </div>
-        </div>
-      </div>
-      <style jsx>{`
+	return (
+		<div className="flex-container">
+			<div
+				className="container_2"
+				style={{
+					position: "absolute",
+					top: "1800px",
+				}}
+			>
+				<div className="serviceImg_2">
+					<Image width="296px" height="319px" className="career_service" src="/img/home/community.svg" />
+				</div>
+				<div className="ServiceContainer">
+					<div className='nowrap-content'>
+						<div className="item">
+							<Image
+								width="345px"
+								height="160px"
+								className="serviceButton_4"
+								src="/img/home/serviceButton_4.png"
+							/>
+						</div>
+						<div className="item">
+							<Image
+								width="345px"
+								height="160px"
+								className="serviceButton_5"
+								src="/img/home/serviceButton_5.png"
+							/>
+						</div>
+					</div>
+					<div className="item">
+						<Image
+								width="345px"
+								height="160px"
+							className="serviceButton_6"
+							src="/img/home/serviceButton_6.png"
+						/>
+					</div>
+					<div className="item" style={{ cursor: "default" }}>
+						<Image
+								width="345px"
+								height="160px"
+							className="serviceButton_none"
+							src="/img/home/serviceButton_none.png"
+						/>
+					</div>
+				</div>
+			</div>
+			<style jsx>{`
+	  	.nowrap-content {
+			display: flex;
+			flex-wrap: nowrap;
+		}
         .container_2 {
           display: flex;
           width: 100%;
@@ -94,6 +109,6 @@ export default function Service_2() {
           flex-wrap: wrap;
         }
       `}</style>
-    </div>
-  );
+		</div>
+	);
 }

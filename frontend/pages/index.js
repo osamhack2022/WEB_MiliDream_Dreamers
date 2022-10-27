@@ -7,21 +7,22 @@ import Service_1 from "../components/Home/Service_1";
 import Service_2 from "../components/Home/Service_2";
 import BoardCenter from "../components/Home/slideslide";
 import LoginModal from "../components/Login/Modal";
+import BoardCenter2 from "../components/board/BoardCenter";
 
 export default function Home({ results }) {
 
 	return (
-		<>
+		<div>
 			<div className="Home_home">
 				<div className="FIRST">
 					{/* 가장 위 position으로 전체 위치 조절가능 */}
 					<div style={{ position: "relative", top: "300px", left: "140px" }}>
-						<img className="front" src="/img/home/intro_2.svg" />
-						<div style={{ position: "absolute", top: "-320px", left: "140px" }}>
-							<img className="back" src="/img/home/intro_1.svg" />
+						<Image width="269px" height="370px" className="front" src="/img/home/intro_2.svg" />
+						<div style={{ position: "absolute", top: "-310px", left: "140px" }}>
+							<Image width="598px" height="456px" className="back" src="/img/home/intro_1.svg" />
 						</div>
-						<div style={{ position: "absolute", top: "170px", left: "-50px" }}>
-							<img className="third" src="/img/home/intro_3.svg" />
+						<div style={{ position: "absolute", top: "170px", left: "350px" }}>
+							<Image width="329px" height="331px" className="third" src="/img/home/intro_3.svg" />
 						</div>
 					</div>
 					<div>
@@ -44,7 +45,7 @@ export default function Home({ results }) {
 						</p>
 					</div>
 					<button type="button" data-bs-toggle="modal" data-bs-target="#loginModal">시작하기</button>
-					
+
 					<style jsx>
 						{`
             .FIRST {
@@ -117,11 +118,24 @@ export default function Home({ results }) {
 				</div>
 
 				<div className="SECOND">
-					{
+					<div className="slide-board">
+						<BoardCenter2 />
+						<style global jsx>{`
+							#carousel-box {
+								display: flex;
+								justify-content: center;
+								margin-top: 300px;
+							}
+							.slide-board {
+								background-color: #e4e7df;
+							}
+						`}</style>
+					</div>
+					{/* {
 						<div>
 							<Slide></Slide>
 						</div>
-					}
+					} */}
 				</div>
 
 				<div className="THIRD">
@@ -159,7 +173,9 @@ export default function Home({ results }) {
 							height: "96px",
 						}}
 					>
-						<img
+						<Image
+							width="1505px"
+							height="96px"
 							src="/img/Footer/Footer(Simply).svg"
 							style={{
 								backgroundColor: "#566270",
@@ -180,13 +196,13 @@ export default function Home({ results }) {
             font-size: 13px;
             color: #ffffff;
           }
-          img {
+          Image {
             border: 0;
           }
         `}</style>
 				</footer>
 			</div>
-		</>
+		</div>
 	);
 }
 
