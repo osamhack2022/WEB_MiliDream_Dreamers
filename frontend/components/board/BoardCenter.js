@@ -17,7 +17,7 @@ export default function BoardCenter() {
   //console.log(imageComponentList);
 
   return (
-    <div>
+    <div id="carousel-box">
       {/*imageComponentList*/}
       <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="true">
         <div className="carousel-indicators">
