@@ -79,9 +79,17 @@
 
 
 
-### 사용된 오픈소스
-
-
+### 사용된 오픈소스(Used Open Source)
+- [slick](https://kenwheeler.github.io/slick/)
+- [axios](https://github.com/axios/axios)
+- [winston](https://github.com/winstonjs/winston)
+- [cors](https://github.com/expressjs/cors)
+- []()
+- []()
+- []()
+- []()
+- []()
+- []()
 
 <!--
  사용한 라이브러리 리스트 등을 따로 작성하겠지만
