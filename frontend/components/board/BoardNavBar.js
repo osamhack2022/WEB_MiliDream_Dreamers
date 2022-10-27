@@ -16,7 +16,7 @@ export default function BoardNavBar() {
 					<li className="mb-1">
 						<ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
 							{
-								categoryList?.map(category => (<li key={categoryList.categoryKey}><Link href={`/board/${categoryList.categoryKey}`}><a className="link-dark d-inline-flex text-decoration-none rounded">{category.categoryName}</a></Link></li>))
+								categoryList?.map(category => (<li key={category.categoryKey}><Link href={`/board/${category.categoryKey}`}><a className="link-dark d-inline-flex text-decoration-none rounded">{category.categoryName}</a></Link></li>))
 							}
 						</ul>
 					</li>

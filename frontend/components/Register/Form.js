@@ -17,7 +17,7 @@ export default function RegisterForm({ token }) {
 								className="form-control"
 								type="text"
 								name="id"
-								autocomplete="username"
+								autoComplete="username"
 								required
 								onKeyUp={validateId}
 								onBlur={validateIdSS}
@@ -49,8 +49,8 @@ export default function RegisterForm({ token }) {
 							<label htmlFor="userClass" className="form-label">
 								군 구분
 							</label>
-							<select className="form-select" name="userClass">
-								<option value="1" selected>군 구분을 선택해주세요</option>
+							<select className="form-select" name="userClass" defaultValue="1">
+								<option value="1">군 구분을 선택해주세요</option>
 								<option value="1">미정</option>
 								<option value="2">병사</option>
 								<option value="3">간부</option>

@@ -292,7 +292,7 @@ export default class Post {
 			if (result.affectedRows === 0) {
 				throw new Error("Could not post!");
 			}
-			return { postKey: Number(result.insertId) };
+			return Number(result.insertId);
 		} catch (err) {
 			throw err;
 		}
