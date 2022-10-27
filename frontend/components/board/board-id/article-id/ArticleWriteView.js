@@ -119,6 +119,8 @@ function ContentRow({ comment, doReload }) {
 
 export default function ArticleWriteView({ post, articleId, doReload }) {
 
+	const user = GlobalState(state => state.user);
+
 	/** 게시글 작성자를 저장 */
 	const [postUser, setPostUser] = useState();
 
@@ -228,9 +230,29 @@ export default function ArticleWriteView({ post, articleId, doReload }) {
 								<div className="title titleBar">{postUser?.userName}</div>
 								<div className="writeUser titleBar">{displayedAt(post?.postTime)}</div>
 								<div className="time titleBar">조회수 {post?.viewCount}</div>
-								<div className="veiwCount titleBar">수정</div>
-								<div className="heart titleBar">삭제</div>
-								<div className="comments">댓글수 [{post?.comments.length}]</div>
+								{post?.userKey === user.userKey &&
+									<>
+										<div className="veiwCount titleBar"><button onClick={async e => {
+											const response = await fetch(`/api/board/${post?.postKey}`, {
+												method: "PUT",
+												body: JSON.stringify({
+													title: "바뀐제목1", /** @todo 바꾸고 싶은 제목과 게시글로 바꿀 수 있도록 새로운 페이지를 만들거나 textarea 등으로 고치기 */
+													body: "바뀐게시글"
+												}),
+												headers: { 'Content-Type': 'application/json' }
+											})
+
+											if (response.ok) {
+												doReload(); /** @todo 만약 페이지를 새로 만들었다면 reload도 하고 페이지도 원래 페이지로 이동 */
+											}
+										}}>수정</button></div>
+										<div className="heart titleBar"><button onClick={async e => {
+											const response = await fetch(`/api/board/${post?.postKey}`, { method: "DELETE" });
+											if (response.ok) {
+												router.push("/board")
+											}
+										}}>삭제</button></div></>
+								}<div className="comments">댓글수 [{post?.comments.length}]</div>
 							</td>
 						</tr>
 						<tr className="mainBody">

@@ -57,8 +57,8 @@ export default function Write() {
 		console.log(content);
 	}
 
-	const onSubmitClick = async e => {
-		console.log(quillRef.current.value);
+	/** 게시글 등록 버튼 누르면 작동함 */
+	const onSubmitClick = async () => {
 		const response = await fetch("/api/board", {
 			method: "POST",
 			body: JSON.stringify
