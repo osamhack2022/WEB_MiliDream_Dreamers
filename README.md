@@ -128,7 +128,7 @@
 <th width="130" align="center">📝성명</th>
 <th width="150" align="center">🚩역할</th>
 <th width="100" align="center">🐱깃허브</th>
-<th width="175" align="center">📩이메일</th>
+<th width="180" align="center">📩이메일</th>
 </tr> 
 </thead>
 <tbody>
@@ -211,7 +211,7 @@
 		<img src="http://img.shields.io/badge/sonyrainy-655ced?style=social&logo=github"/>
 	</a>
 </td>
-<td width="180" align="center">
+<td width="175" align="center">
 	<a href="mailto:thsguswls610@gmail.com">
                 <img src="https://img.shields.io/badge/thsguswls61-655ced?style=social&logo=gmail"/>
 	</a>
