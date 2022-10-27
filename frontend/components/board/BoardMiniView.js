@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useEffect, useState } from "react";
 
 export default function BoardMiniView({ link, article, type }) {
-	//console.log(article)
+
 	const [articleTitle, setarticleTitle] = useState();
 	useEffect(() => {
 		(async () => {
@@ -11,7 +11,7 @@ export default function BoardMiniView({ link, article, type }) {
 			setarticleTitle(results.boards);
 		})();
 	}, []);
-	//console.log(articleTitle)
+	
 	return (
 		<div className="list-group">
 			<Link href={{

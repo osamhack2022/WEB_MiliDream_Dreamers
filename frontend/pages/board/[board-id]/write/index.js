@@ -2,10 +2,12 @@ import { useMemo, useRef, useState } from "react";
 import axios from "axios";
 import dynamic from "next/dynamic";
 import 'react-quill/dist/quill.snow.css';
+import { useRouter } from "next/router";
 
 export default function Write() {
 	const [text, setText] = useState('');
 	const quillRef = useRef();
+	const router = useRouter();
 
 	const imageHandler = () => {
 		const input = document.createElement('input');
@@ -55,15 +57,36 @@ export default function Write() {
 		console.log(content);
 	}
 
+	const onSubmitClick = async e => {
+		console.log(quillRef.current.value);
+		const response = await fetch("/api/board", {
+			method: "POST",
+			body: JSON.stringify
+				({
+					categoryKey: router.query["board-id"],
+					title: document.querySelector("#titleInput").value,
+					body: quillRef.current.value,
+				}),
+			headers: { 'Content-Type': 'application/json' }
+		})
+		const data = await response.json();
+		if (response.ok) {
+			router.push(`/board/${router.query["board-id"]}/${data.postKey}`)
+		} else {
+			console.log("err,", data);
+		}
+	}
+
 
 	return <div>
-		<input type="text" name="title"></input>
+		<input type="text" name="title" id="titleInput"></input>
 		<QuillWrapper
 			forwardedRef={quillRef}
 			theme="snow"
 			modules={modules}
 			formats={formats}
 			onChange={handleText} />
+		<button onClick={onSubmitClick}>Submit</button>
 	</div>
 }
 

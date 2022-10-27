@@ -5,29 +5,42 @@ import ArticleWriteView from "../../../../components/board/board-id/article-id/A
 import BoardHeader from "../../../../components/board/BoardHeader";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { GlobalState } from "../../../../states/GlobalState";
 
-export default function article_id(props) {
+export default function article_id() {
 	//이전 페이지 (BoardMiniView 등)에서 넘어올 때 Link query로 다음 인자를 받아와야 한다. { type, boardId };;
 	const router = useRouter();
 	const articleId = router.query["article-id"];
 	const boardId = router.query["board-id"];
 	const type = router.query["type"];
-	//const category = props?.boards;
 
+	const [articlePost, setArticlePost] = useState();
+	const getCategoryList = GlobalState(state => state.getCategoryList);
+	const [reload, setReload] = useState(true);
+	const user = GlobalState(state => state.user);
 
-	const [article, setArticle] = useState();
-	const [categoryL, setCategoryL] = useState();
+	const doReload = () => setReload(true);
+
+	/** 로그인되어 있지 않다면 메인페이지로 이동 */
 	useEffect(() => {
-		(async () => {
-			const results = await (await fetch(`/api/board?categoryKey=` + router.query["board-id"], { method: 'GET' })).json();
-			setArticle(results.boards);
-			const resultsb = await (await fetch(`/api/board/category`, { method: 'GET' })).json();
-			setCategoryL(resultsb.category);
-		})();
-	}, []);
+		if (!user)
+			router.push("/")
+	}, [user]);
 
-	const articlePost = article?.slice(0).find((x) => x.postKey == articleId)
-	console.log(articlePost)
+	useEffect(() => {
+		getCategoryList();
+	}, [])
+
+	useEffect(() => {
+		// router가 준비되어야, 그리고 reload가 켜질 때 fetch 시작
+		if (router.isReady && reload) {
+			(async () => {
+				const results = await (await fetch(`/api/board/${router.query["article-id"]}`, { method: 'GET' })).json();
+				setArticlePost(results.board);
+			})();
+			setReload(false);
+		}
+	}, [router.isReady, reload]);
 
 	return (
 		<div>
@@ -40,10 +53,10 @@ export default function article_id(props) {
 				</div>
 				<div className="navBar">
 					<BoardSearchBar placeHolder="게시판 검색" />
-					<BoardNavBar props={categoryL} />
+					<BoardNavBar />
 				</div>
 				<div className="BoardMain">
-					<ArticleWriteView post={articlePost} articleId={articleId} />
+					<ArticleWriteView post={articlePost} articleId={articleId} doReload={doReload} />
 				</div>
 				<div className="footer"></div>
 			</div>

@@ -4,33 +4,31 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import logo from "../public/logo.svg";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import LoginModal from "./Login/Modal";
+import { GlobalState } from "../states/GlobalState";
+import shallow from "zustand/shallow"
 
 //만약 로그인된 상태라면 로그아웃을 출력해야 함.
 //회원가입은 정보수정 정도로 하면 괜찮을 듯
 export default function NavBar() {
-	//const router = useRouter();
-	const [logon, setLogon] = useState(false);
-	useEffect(() => { //fetch session state
-		fetch(`/api/accounts/sign`, { method: 'GET' })
-			.then(resp => { setLogon(resp.ok) });
-	}, []);
-	const logout = async () => { await axios.delete("/api/accounts/sign"); setLogon(false); }
+	const { userExist, fetchUser, logOut } = GlobalState(state => {
+		return { userExist: state.user && !state.userLoading, fetchUser: state.fetchUser, logOut: state.logOut }
+	}, shallow)
+	useEffect(() => { fetchUser(); }, []);
 
-  return (
-    <header>
-      <nav>
-        <Link href="/">
-          <img
-            style={{
-              position: "relative",
-              top: "-16px",
-              left: "-30px",
-            }}
-            src="/img/NavBar/logo.svg"
-          />
-        </Link>
+	return (
+		<header>
+			<nav>
+				<Link href="/">
+					<img
+						style={{
+							position: "relative",
+							top: "-16px",
+							left: "-30px",
+						}}
+						src="/img/NavBar/logo.svg"
+					/>
+				</Link>
 
 				<ul
 					className="rightboard"
@@ -39,7 +37,7 @@ export default function NavBar() {
 						top: "-20px",
 					}}
 				>
-					{logon ?
+					{userExist ?
 						<>
 							<li>
 								<Link href="/user">
@@ -47,7 +45,7 @@ export default function NavBar() {
 								</Link>
 							</li>
 							<li>
-								<a style={{ cursor: "pointer" }} onClick={logout}>로그아웃</a>
+								<a style={{ cursor: "pointer" }} onClick={logOut}>로그아웃</a>
 							</li>
 						</>
 						:
@@ -100,9 +98,9 @@ export default function NavBar() {
 					</li>
 				</ul>
 
-        {/*styled jsx 방식 : js 백틱을 이용해 일반 css 코드를 삽입할 수 있다. 하지만 이 css가 적용받는 범위는 함수 내부로 한정된다.*/}
-        <style jsx>
-          {`
+				{/*styled jsx 방식 : js 백틱을 이용해 일반 css 코드를 삽입할 수 있다. 하지만 이 css가 적용받는 범위는 함수 내부로 한정된다.*/}
+				<style jsx>
+					{`
             nav {
               height: 107px;
               line-height: 110px;
