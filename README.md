@@ -211,8 +211,8 @@
 		<img src="http://img.shields.io/badge/sonyrainy-655ced?style=social&logo=github"/>
 	</a>
 </td>
-<td width="175" align="center">
-	<a href="mailto:thsguswls610 @gmail.com">
+<td width="180" align="center">
+	<a href="mailto:thsguswls610@gmail.com">
                 <img src="https://img.shields.io/badge/thsguswls61-655ced?style=social&logo=gmail"/>
 	</a>
 </td>
