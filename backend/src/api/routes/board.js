@@ -127,7 +127,7 @@ router
 				const board = await BoardService.getbyBoardId(
 					Number(req.params.boardId),
 					// @ts-ignore
-					req.user.userKey
+					req.user?.userKey
 				);
 				res.status(200).json({ board });
 			} catch (err) {
