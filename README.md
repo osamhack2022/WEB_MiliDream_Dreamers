@@ -84,16 +84,32 @@
 
 
 ### 사용된 오픈소스(Used Open Source)
-- [slick](https://kenwheeler.github.io/slick/)
 - [axios](https://github.com/axios/axios)
-- [winston](https://github.com/winstonjs/winston)
-- [cors](https://github.com/expressjs/cors)
-- []()
-- []()
-- []()
-- []()
-- []()
-- []()
+- [eslint](https://github.com/eslint/eslint)
+- frontend
+	- [next-images](https://github.com/twopluszero/next-images)
+	- [quill](https://github.com/zenoamaro/react-quill)
+	- [slick](https://github.com/kenwheeler/slick)
+	- [styled-components](https://github.com/styled-components/styled-components)
+	- [zustand](https://github.com/pmndrs/zustand)
+- backend
+	- [cookie-parser](https://github.com/expressjs/cookie-parser)
+	- [cors](https://github.com/expressjs/cors)
+	- [debug](https://github.com/debug-js/debug)
+	- [dotenv](https://github.com/motdotla/dotenv)
+	- [express-session](https://github.com/expressjs/session)
+	- [helmet](https://github.com/helmetjs/helmet)
+	- [http-errors](https://github.com/jshttp/http-errors)
+	- [jade](http://jade-lang.com)
+	- [method-override](https://github.com/expressjs/method-override)
+	- [morgan](https://github.com/expressjs/morgan)
+	- [multer](https://github.com/expressjs/multer)
+	- [passport](https://www.passportjs.org/)
+	- [sanitize-html](https://github.com/apostrophecms/sanitize-html)
+	- [winston](https://github.com/winstonjs/winston)
+	- [cors](https://github.com/expressjs/cors)
+	- [jsdoc](https://github.com/jsdoc/jsdoc)
+	- [prettier](https://github.com/prettier/prettier)
 
 <!--
  사용한 라이브러리 리스트 등을 따로 작성하겠지만
@@ -105,9 +121,16 @@
 
 ## 설치 안내 (Installation Process)
 
-이 저장소를 git clone한 후 `/backend`와 `/frontend`의 README.md를 각각 참고해주세요!
+```shell
+git clone https://github.com/osamhack2022/WEB_MiliDream_Dreamers.git
+cd WEB_MiliDream_Dreamers
+```
+
+이후 `/backend`와 `/frontend`의 README.md를 각각 참고해주세요!
 
 ## 프로젝트 사용법 (Getting Started)
+
+
 
 
 <!--
