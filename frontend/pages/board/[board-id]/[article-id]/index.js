@@ -6,6 +6,7 @@ import BoardHeader from "../../../../components/board/BoardHeader";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { GlobalState } from "../../../../states/GlobalState";
+import LoginModal from "../../../../components/Login/Modal";
 
 export default function article_id() {
 	//이전 페이지 (BoardMiniView 등)에서 넘어올 때 Link query로 다음 인자를 받아와야 한다. { type, boardId };;
@@ -23,8 +24,13 @@ export default function article_id() {
 
 	/** 로그인되어 있지 않다면 메인페이지로 이동 */
 	useEffect(() => {
-		if (!user)
-			router.push("/")
+		if (!user) {
+			router.push("/");
+			alert("로그인이 필요합니다.")
+			//return (
+			//	<button type="button" data-bs-toggle="modal" data-bs-target="#loginModal">시작하기</button>
+			//)
+		}
 	}, [user]);
 
 	useEffect(() => {
