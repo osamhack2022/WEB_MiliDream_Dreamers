@@ -200,7 +200,7 @@ export default function ArticleWriteView({ post, articleId, doReload }) {
 							게시글 신고 요청이 접수되었습니다.
 						</div>
 						<div className="modal-footer">
-							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">확인</button>
 							{/* <button type="button" className="btn btn-primary">Save changes</button> */}
 						</div>
 					</div>
@@ -217,7 +217,7 @@ export default function ArticleWriteView({ post, articleId, doReload }) {
 							{recommendWord}
 						</div>
 						<div className="modal-footer">
-							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">확인</button>
 							{/* <button type="button" className="btn btn-primary">Save changes</button> */}
 						</div>
 					</div>
@@ -234,7 +234,7 @@ export default function ArticleWriteView({ post, articleId, doReload }) {
 							댓글 달기 완료!
 						</div>
 						<div className="modal-footer">
-							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">확인</button>
 							{/* <button type="button" className="btn btn-primary">Save changes</button> */}
 						</div>
 					</div>
