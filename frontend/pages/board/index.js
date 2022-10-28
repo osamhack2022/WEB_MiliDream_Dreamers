@@ -61,6 +61,7 @@ export default function board(props) {
               "navBar   .      .    "
               "footer   footer  footer";
             grid-gap: 16px;
+			justify-content: center;
           }
           .headerB { grid-area: header; }
           .banner { grid-area: banner; }
