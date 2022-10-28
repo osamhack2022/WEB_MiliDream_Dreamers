@@ -8,7 +8,7 @@ import { useEffect } from 'react';
  * 이곳에 추가된 component (예로, NavBar 등)들은 
   모든 하위 페이지들이 로딩되기 이전에 먼저 로딩되어 실행된다. */
 export default function App({ Component, pageProps }) {
-	
+
 	useEffect(() => {
 		const script = document.createElement("script");
 		script.src = "https://t1.kakaocdn.net/kakao_js_sdk/2.0.0/kakao.min.js";
@@ -18,7 +18,7 @@ export default function App({ Component, pageProps }) {
 		document.body.appendChild(script);
 		return () => document.body.removeChild(script);
 	}, []);
-	
+
 	return (
 		<>
 			<Head>
@@ -27,6 +27,11 @@ export default function App({ Component, pageProps }) {
 			<Layout>
 				<Component {...pageProps} />
 			</Layout>
+			<style global jsx>{`
+			body {
+				overflow-x: visible;
+				width: 1920px;
+			}`}</style>
 		</>
 	);
 }

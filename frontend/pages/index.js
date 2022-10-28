@@ -45,7 +45,7 @@ export default function Home({ results }) {
 						</p>
 					</div>
 					<button type="button" data-bs-toggle="modal" data-bs-target="#loginModal">시작하기</button>
-
+					<button type="button" data-bs-toggle="modal" data-bs-target="#loginModal">시작하기</button>
 					<style jsx>
 						{`
             .FIRST {
@@ -110,8 +110,9 @@ export default function Home({ results }) {
               font-size: 22px;
               font-weight: Bold;
               text-shadow: 2px 2px 2px gray;
-
               opacity: 1;
+			  width: 600px;
+
             }
           `}
 					</style>

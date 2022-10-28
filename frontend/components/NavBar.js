@@ -139,7 +139,7 @@ export default function NavBar() {
             .middleboard {
               float: right;
               list-style: none;
-              padding: 0;
+              padding: 0 230px;
               //margin-top: 11px;
               display: flex;
               padding-right: 134px;
