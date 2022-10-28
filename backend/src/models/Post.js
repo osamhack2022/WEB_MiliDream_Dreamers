@@ -395,6 +395,12 @@ export default class Post {
 					`postKey="${postKey}"에 해당하는 게시글이 없습니다`
 				);
 			result = await processAllPosts(result, conn, userKey);
+			for (let i = 0; i < result.length; i++) {
+				if (!("didRecommend" in result[i])) {
+					// @ts-ignore
+					result[i]["didRecommend"] = false;
+				}
+			}
 			await updateViewCount(postKey, conn);
 			return result[0];
 		} catch (err) {

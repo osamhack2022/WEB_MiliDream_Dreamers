@@ -113,7 +113,6 @@ router.get(
 // boardId만 주어진 경우
 router
 	.route("/:boardId")
-	.all(checkUserExist)
 	.get(
 		/**
 		 * API : GET /board/:boardId
@@ -136,6 +135,7 @@ router
 			}
 		}
 	)
+	.all(checkUserExist)
 	.put(
 		/**
 		 * API: PUT /board/:boardId
