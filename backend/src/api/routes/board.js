@@ -113,7 +113,6 @@ router.get(
 // boardId만 주어진 경우
 router
 	.route("/:boardId")
-	.all(checkUserExist)
 	.get(
 		/**
 		 * API : GET /board/:boardId
@@ -128,7 +127,7 @@ router
 				const board = await BoardService.getbyBoardId(
 					Number(req.params.boardId),
 					// @ts-ignore
-					req.user.userKey
+					req.user?.userKey
 				);
 				res.status(200).json({ board });
 			} catch (err) {
@@ -136,6 +135,7 @@ router
 			}
 		}
 	)
+	.all(checkUserExist)
 	.put(
 		/**
 		 * API: PUT /board/:boardId
