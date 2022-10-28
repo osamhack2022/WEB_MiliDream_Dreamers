@@ -38,6 +38,7 @@ export default function LoginForm() {
 								type="password"
 								name="password"
 								autoComplete="current-password"
+								onKeyPress={(e) => { if (e.charCode == 13) login() }}
 							></input>
 						</div>
 						<div className="my-4 form-etc">
@@ -88,7 +89,7 @@ export default function LoginForm() {
 						</span>
 					</div>
 				</div>
-			</div>
+			</div >
 			<style jsx>{`
         .login.wrapper {
           position: relative;
@@ -227,7 +228,7 @@ export default function LoginForm() {
           color: #b6c2ef;
         }
       `}</style>
-		</Fragment>
+		</Fragment >
 	);
 }
 

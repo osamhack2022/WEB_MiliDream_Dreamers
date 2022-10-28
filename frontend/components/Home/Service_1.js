@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Service_1() {
 	return (
@@ -18,37 +19,45 @@ export default function Service_1() {
 				<div className="ServiceContainer">
 					<div className='nowrap-content'>
 						<div className="item">
-							<Image
-								width="345px"
-								height="160px"
-								className="serviceButton_1"
-								src="/img/home/serviceButton_1.svg"
-							/>
+							<Link href="/career/survey">
+								<Image
+									width="345px"
+									height="160px"
+									className="serviceButton_1"
+									src="/img/home/serviceButton_1.svg"
+								/>
+							</Link>
 						</div>
 						<div className="item">
+							<Link href="/map">
+								<Image
+									width="345px"
+									height="160px"
+									className="serviceButton_2"
+									src="/img/home/serviceButton_2.svg"
+								/>
+							</Link>
+						</div>
+					</div>
+					<div className='nowrap-content'>
+						<div className="item">
+							<Link href="/board">
+								<Image
+									width="345px"
+									height="160px"
+									className="serviceButton_3"
+									src="/img/home/serviceButton_3.svg"
+								/>
+							</Link>
+						</div>
+						<div className="item" style={{ cursor: "default" }}>
 							<Image
 								width="345px"
 								height="160px"
-								className="serviceButton_2"
-								src="/img/home/serviceButton_2.svg"
+								className="serviceButton_none"
+								src="/img/home/serviceButton_none.svg"
 							/>
 						</div>
-					</div>
-					<div className="item">
-						<Image
-							width="345px"
-							height="160px"
-							className="serviceButton_3"
-							src="/img/home/serviceButton_3.svg"
-						/>
-					</div>
-					<div className="item" style={{ cursor: "default" }}>
-						<Image
-							width="345px"
-							height="160px"
-							className="serviceButton_none"
-							src="/img/home/serviceButton_none.svg"
-						/>
 					</div>
 				</div>
 			</div>
