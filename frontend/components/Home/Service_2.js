@@ -18,35 +18,41 @@ export default function Service_2() {
 				<div className="ServiceContainer">
 					<div className='nowrap-content'>
 						<div className="item">
-							<Image
-								width="345px"
-								height="160px"
-								className="serviceButton_4"
-								src="/img/home/serviceButton_4.png"
-							/>
+							<Link href="/user">
+								<Image
+									width="345px"
+									height="160px"
+									className="serviceButton_4"
+									src="/img/home/serviceButton_4.png"
+								/>
+							</Link>
 						</div>
 						<div className="item">
-							<Image
-								width="345px"
-								height="160px"
-								className="serviceButton_5"
-								src="/img/home/serviceButton_5.png"
-							/>
+							<Link href="/board">
+								<Image
+									width="345px"
+									height="160px"
+									className="serviceButton_5"
+									src="/img/home/serviceButton_5.png"
+								/>
+							</Link>
 						</div>
 					</div>
 					<div className='nowrap-content'>
 						<div className="item">
-							<Image
+							<Link href="/board">
+								<Image
 									width="345px"
 									height="160px"
-								className="serviceButton_6"
-								src="/img/home/serviceButton_6.png"
-							/>
+									className="serviceButton_6"
+									src="/img/home/serviceButton_6.png"
+								/>
+							</Link>
 						</div>
 						<div className="item" style={{ cursor: "default" }}>
 							<Image
-									width="345px"
-									height="160px"
+								width="345px"
+								height="160px"
 								className="serviceButton_none"
 								src="/img/home/serviceButton_none.png"
 							/>

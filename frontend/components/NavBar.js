@@ -60,7 +60,7 @@ export default function NavBar() {
 					</li>
 					<li>
 						<Link href="/career/survey">
-							<a>유형 조사</a>
+							<a>유형 검사</a>
 						</Link>
 					</li>
 				</ul>
