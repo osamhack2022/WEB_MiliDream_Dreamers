@@ -8,6 +8,7 @@ import Service_2 from "../components/Home/Service_2";
 import BoardCenter from "../components/Home/slideslide";
 import LoginModal from "../components/Login/Modal";
 import BoardCenter2 from "../components/board/BoardCenter";
+import Footer from "../components/Footer"
 
 export default function Home({ results }) {
 
@@ -16,7 +17,7 @@ export default function Home({ results }) {
 			<div className="Home_home">
 				<div className="FIRST">
 					{/* 가장 위 position으로 전체 위치 조절가능 */}
-					<div style={{ position: "relative", top: "300px", left: "140px" }}>
+					<div style={{ position: "relative", top: "300px", left: "140px", width: "700px" }}>
 						<Image width="269px" height="370px" className="front" src="/img/home/intro_2.svg" />
 						<div style={{ position: "absolute", top: "-310px", left: "140px" }}>
 							<Image width="598px" height="456px" className="back" src="/img/home/intro_1.svg" />
@@ -45,7 +46,7 @@ export default function Home({ results }) {
 						</p>
 					</div>
 					<button type="button" data-bs-toggle="modal" data-bs-target="#loginModal">시작하기</button>
-					<button type="button" data-bs-toggle="modal" data-bs-target="#loginModal">시작하기</button>
+					{/* <button className="no-login-" type="button">로그인 없이 유형검사</button> */}
 					<style jsx>
 						{`
             .FIRST {
@@ -164,44 +165,7 @@ export default function Home({ results }) {
 					}
 				</div>
 
-				<footer className="footer">
-					<div
-						style={{
-							position: "absolute",
-							top: "3000px",
-							width: "100%",
-							backgroundColor: "#566270",
-							height: "96px",
-						}}
-					>
-						<Image
-							width="1505px"
-							height="96px"
-							src="/img/Footer/Footer(Simply).svg"
-							style={{
-								backgroundColor: "#566270",
-							}}
-						/>
-						{/* <a>
-            <br /> Copyrightⓒ 2022, Dreamers. All right reserved
-          </a> */}
-					</div>
-					<style jsx>{`
-          .footer {
-          }
-          div {
-            text-align: center;
-            justify-content: center;
-          }
-          a {
-            font-size: 13px;
-            color: #ffffff;
-          }
-          Image {
-            border: 0;
-          }
-        `}</style>
-				</footer>
+				{/* <Footer /> */}
 			</div>
 		</div>
 	);
