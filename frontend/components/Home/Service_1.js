@@ -34,21 +34,23 @@ export default function Service_1() {
 							/>
 						</div>
 					</div>
-					<div className="item">
-						<Image
-							width="345px"
-							height="160px"
-							className="serviceButton_3"
-							src="/img/home/serviceButton_3.svg"
-						/>
-					</div>
-					<div className="item" style={{ cursor: "default" }}>
-						<Image
-							width="345px"
-							height="160px"
-							className="serviceButton_none"
-							src="/img/home/serviceButton_none.svg"
-						/>
+					<div className='nowrap-content'>
+						<div className="item">
+							<Image
+								width="345px"
+								height="160px"
+								className="serviceButton_3"
+								src="/img/home/serviceButton_3.svg"
+							/>
+						</div>
+						<div className="item" style={{ cursor: "default" }}>
+							<Image
+								width="345px"
+								height="160px"
+								className="serviceButton_none"
+								src="/img/home/serviceButton_none.svg"
+							/>
+						</div>
 					</div>
 				</div>
 			</div>
