@@ -36,12 +36,12 @@ export default function NavBar() {
 
 				<ul
 					className="middleboard"
-					// style={{
-					// 	position: "relative",
-					// 	right: "180px",
-					// 	top: "-22px",
-					// 	textAlign: "center",
-					// }}
+				// style={{
+				// 	position: "relative",
+				// 	right: "180px",
+				// 	top: "-22px",
+				// 	textAlign: "center",
+				// }}
 				>
 					<li>
 						<Link href="/map">
@@ -67,10 +67,10 @@ export default function NavBar() {
 
 				<ul
 					className="rightboard"
-					// style={{
-					// 	position: "relative",
-					// 	top: "-20px",
-					// }}
+				// style={{
+				// 	position: "relative",
+				// 	top: "-20px",
+				// }}
 				>
 					{userExist ?
 						<>
@@ -97,7 +97,7 @@ export default function NavBar() {
 						</>
 					}
 					<li>
-						<Link href="/contact">
+						<Link href="https://github.com/osamhack2022-v2/WEB_MiliDream_Dreamers">
 							<a>CONTACT</a>
 						</Link>
 					</li>
@@ -131,7 +131,7 @@ export default function NavBar() {
             .rightboard li {
               margin: 0px 8px;
               width: 30;
-              font-size: 12px;
+              font-size: 14px;
               font-weight: 400;
               line-height: 100px;
               padding-left: 30px;
