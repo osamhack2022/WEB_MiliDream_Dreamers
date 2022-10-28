@@ -278,8 +278,8 @@ export default function ArticleWriteView({ post, articleId, doReload }) {
 						<tr className="mainBody">
 							<th scope="col count" className="count titleBar">{post?.body}//Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</th>
 							<td className="body">
-								<p className="recommenderCount">{` ${post?.recommenderCount}`}</p>
 								<a type="button" data-bs-toggle="modal" data-bs-target="#recommendModalDiv" onClick={onRecommendClick}>
+									<p className="recommenderCount">{` ${post?.recommenderCount}`}</p>
 									<Image src={`/article/recommendBtn.png`} width="131px" height="50px" />
 								</a>
 								<a type="button" data-bs-toggle="modal" data-bs-target="#reportModalDiv">
@@ -322,7 +322,7 @@ export default function ArticleWriteView({ post, articleId, doReload }) {
 					margin: 0px;
 					padding: 0px;
 					position: relative;
-					left: -15px;
+					left: 45px;
 					z-index: 5;
 					top: 36px;
 					color: white;
