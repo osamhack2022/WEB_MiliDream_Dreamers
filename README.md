@@ -5,7 +5,7 @@
 ## Mili Dream
 <p align="center">
 	<img src="https://user-images.githubusercontent.com/91364766/198310031-503c47eb-bc55-4af6-8562-1e8e589671cc.png" width="618">
-<p/>
+</p>
 <p align="center">
 	<a href="#">
 		<img alt="dev doc" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FJdGTB%2FbtrPydb1fxX%2Fl1EJAqjLbwg8SmFOjtMLM0%2Fimg.png" width="200">
@@ -16,7 +16,7 @@
 	<a href="https://milidream.ml/">
 		<img alt="deploy" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcrygJK%2FbtrPw0qCKJ4%2FSIEBBS531GCrlKk8OsGCD0%2Fimg.png" width="200">
 	</a>
-<p/>
+</p>
 
 <p align="center">
 	<a href="https://github.com/osamhack2022/WEB_MiliDream_Dreamers/search?l=TSX&type=code"><img alt="GitHub language count" src="https://img.shields.io/github/languages/count/osamhack2022/WEB_MiliDream_Dreamers"></a>
