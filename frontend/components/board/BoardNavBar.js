@@ -13,19 +13,20 @@ export default function BoardNavBar() {
 					<span className="fs-5 fw-semibold">MILI-DREAM community</span>
 				</a>
 				<ul className="list-unstyled ps-0">
-					<li className="mb-1">
+					{/* <li className="mb-1">
 						<ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
 							{
 								categoryList?.map(category => (<li key={category.categoryKey}><Link href={`/board/${category.categoryKey}`}><a className="link-dark d-inline-flex text-decoration-none rounded">{category.categoryName}</a></Link></li>))
 							}
 						</ul>
 					</li>
-					<li className="border-top my-3"></li>
+					<li className="border-top my-3"></li> */}
 					<li className="mb-1">
 						<ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
 							<li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">공지사항</a></li>
-							<li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">실시간 인기 게시판</a></li>
-							<li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">자유 게시판</a></li>
+							<li><a href="/board/1" className="link-dark d-inline-flex text-decoration-none rounded">공모전&대회 리스트</a></li>
+							<li><a href="/board/2" className="link-dark d-inline-flex text-decoration-none rounded">자유 게시판</a></li>
+							<li><a href="/board/7" className="link-dark d-inline-flex text-decoration-none rounded">자유 게시판</a></li>
 						</ul>
 					</li>
 					<li className="border-top my-3"></li>
@@ -35,10 +36,10 @@ export default function BoardNavBar() {
 						</button>
 						<div className="collapse show" id="home-collapse">
 							<ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-								<li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판1</a></li>
-								<li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판2</a></li>
-								<li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판3</a></li>
-								<li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판4</a></li>
+								<li><a href="/board/4" className="link-dark d-inline-flex text-decoration-none rounded">육군</a></li>
+								<li><a href="/board/5" className="link-dark d-inline-flex text-decoration-none rounded">해군</a></li>
+								<li><a href="/board/6" className="link-dark d-inline-flex text-decoration-none rounded">공군</a></li>
+								{/* <li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판4</a></li> */}
 							</ul>
 						</div>
 					</li>
@@ -48,10 +49,10 @@ export default function BoardNavBar() {
 						</button>
 						<div className="collapse show" id="dashboard-collapse">
 							<ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-								<li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판1</a></li>
-								<li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판2</a></li>
-								<li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판3</a></li>
-								<li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">게시판4</a></li>
+								<li><a href="/board/3" className="link-dark d-inline-flex text-decoration-none rounded">코딩</a></li>
+								<li><a href="/board/8" className="link-dark d-inline-flex text-decoration-none rounded">운동게시판</a></li>
+								<li><a href="/board/10" className="link-dark d-inline-flex text-decoration-none rounded">독서게시판</a></li>
+								<li><a href="/board/9" className="link-dark d-inline-flex text-decoration-none rounded">게임게시판</a></li>
 							</ul>
 						</div>
 					</li>
