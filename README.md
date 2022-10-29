@@ -217,7 +217,7 @@ cd WEB_MiliDream_Dreamers
 </tr>
 <tr>
 <td width="130" align="center">추인엽</td>
-<td width="150">백엔드 개발</td>
+<td width="150">백엔드/프론트엔드 개발</td>
 <td width="100" align="center">
 	<a href="https://github.com/inyeoptti">
 		<img src="http://img.shields.io/badge/inyeoptti-655ced?style=social&logo=github"/>
