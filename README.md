@@ -4,10 +4,8 @@
 # Project name and Logo
 ## Mili Dream
 <p align="center">
-	<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbVdFty%2FbtrPAo4cs8y%2F2R14CFKtYcYJHKGTtQJ9V1%2Fimg.png" width="618">
-<p/>
-
-<br />
+	<img src="https://user-images.githubusercontent.com/91364766/198310031-503c47eb-bc55-4af6-8562-1e8e589671cc.png" width="618">
+</p>
 <p align="center">
 	<a href="#">
 		<img alt="dev doc" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FJdGTB%2FbtrPydb1fxX%2Fl1EJAqjLbwg8SmFOjtMLM0%2Fimg.png" width="200">
@@ -18,9 +16,7 @@
 	<a href="https://milidream.ml/">
 		<img alt="deploy" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcrygJK%2FbtrPw0qCKJ4%2FSIEBBS531GCrlKk8OsGCD0%2Fimg.png" width="200">
 	</a>
-<p/>
-
-<br />
+</p>
 
 <p align="center">
 	<a href="https://github.com/osamhack2022/WEB_MiliDream_Dreamers/search?l=TSX&type=code"><img alt="GitHub language count" src="https://img.shields.io/github/languages/count/osamhack2022/WEB_MiliDream_Dreamers"></a>
@@ -34,11 +30,19 @@
 <!--프로젝트명 또는 프로젝트 로고 이미지 **(택1)**-->
 
 ## 프로젝트 소개
-- 설명 기입
+- 국방의 의무를 지기 위해 들어온 군인 누구나 군대에 있는 동안, 군대를 나온 후에 무엇을 할지 막막해한다. 군대에 있는 기간 동안 군대에서 할 수 있는 대회/공모전 활동이 많은데 몰라서, 그리고 같이 할 사람이 없어서 하지 못하는 경우가 많다. 따라서 진로를 고민하고 여러 대회/공모전에 참여할 수 있도록 `MiliDream`이라는 커뮤니티를 만들었다.
 
 
 ## 기능 설명
- - 설명 기입
+- 군 장병 누구나 여러 유형이 있는 검사를 통해 목표를 구체화하고 설계할 수 있다.
+	- 검사는 추상적이지 않도록 구체화하여 결과를 제공한다.
+	- 검사 결과를 카카오톡으로 공유할 수 있게 하였다.
+- 군장병 대회/공모전 파악에 용이하고 커뮤니티 활용하여 같이 대회/공모전에 나갈 사람을 모집할 수 있다.
+	- 여러 곳에 흩어져 찾아보기 어려웠던 대회/공모전 정보를 모아 볼 수 있다.
+	- 혼자서 나가기 어려웠지만 같이 나갈 사람을 모집할 수 있으므로 여러 대회/공모전에 참여할 수 있다.
+- 여러 커뮤니티를 통해 여러 사람들과 다양한 주제로 이야기를 나누어볼 수 있다.
+	- 관심사 별로 나누어져 있는 게시판을 통해 이야기도 할 수 있고 관련한 궁금증도 해결할 수 있다.
+	- 다양한 사람들의 이야기를 통해 자신의 생각을 정리하고 진로에 관해 도움받을 수 있다.
 
 ## 컴퓨터 구성 / 필수 조건 안내 (Prerequisites)
 * ECMAScript 6 지원 브라우저 사용
@@ -80,16 +84,32 @@
 
 
 ### 사용된 오픈소스(Used Open Source)
-- [slick](https://kenwheeler.github.io/slick/)
 - [axios](https://github.com/axios/axios)
-- [winston](https://github.com/winstonjs/winston)
-- [cors](https://github.com/expressjs/cors)
-- []()
-- []()
-- []()
-- []()
-- []()
-- []()
+- [eslint](https://github.com/eslint/eslint)
+- frontend
+	- [next-images](https://github.com/twopluszero/next-images)
+	- [quill](https://github.com/zenoamaro/react-quill)
+	- [slick](https://github.com/kenwheeler/slick)
+	- [styled-components](https://github.com/styled-components/styled-components)
+	- [zustand](https://github.com/pmndrs/zustand)
+- backend
+	- [cookie-parser](https://github.com/expressjs/cookie-parser)
+	- [cors](https://github.com/expressjs/cors)
+	- [debug](https://github.com/debug-js/debug)
+	- [dotenv](https://github.com/motdotla/dotenv)
+	- [express-session](https://github.com/expressjs/session)
+	- [helmet](https://github.com/helmetjs/helmet)
+	- [http-errors](https://github.com/jshttp/http-errors)
+	- [jade](http://jade-lang.com)
+	- [method-override](https://github.com/expressjs/method-override)
+	- [morgan](https://github.com/expressjs/morgan)
+	- [multer](https://github.com/expressjs/multer)
+	- [passport](https://www.passportjs.org/)
+	- [sanitize-html](https://github.com/apostrophecms/sanitize-html)
+	- [winston](https://github.com/winstonjs/winston)
+	- [cors](https://github.com/expressjs/cors)
+	- [jsdoc](https://github.com/jsdoc/jsdoc)
+	- [prettier](https://github.com/prettier/prettier)
 
 <!--
  사용한 라이브러리 리스트 등을 따로 작성하겠지만
@@ -101,9 +121,16 @@
 
 ## 설치 안내 (Installation Process)
 
-이 저장소를 git clone한 후 `/backend`와 `/frontend`의 README.md를 각각 참고해주세요!
+```shell
+git clone https://github.com/osamhack2022/WEB_MiliDream_Dreamers.git
+cd WEB_MiliDream_Dreamers
+```
+
+이후 `/backend`와 `/frontend`의 README.md를 각각 참고해주세요!
 
 ## 프로젝트 사용법 (Getting Started)
+
+
 
 
 <!--
@@ -128,7 +155,7 @@
 <th width="130" align="center">📝성명</th>
 <th width="150" align="center">🚩역할</th>
 <th width="100" align="center">🐱깃허브</th>
-<th width="175" align="center">📩이메일</th>
+<th width="180" align="center">📩이메일</th>
 </tr> 
 </thead>
 <tbody>
@@ -190,7 +217,7 @@
 </tr>
 <tr>
 <td width="130" align="center">추인엽</td>
-<td width="150">백엔드 개발</td>
+<td width="150">백엔드/프론트엔드 개발</td>
 <td width="100" align="center">
 	<a href="https://github.com/inyeoptti">
 		<img src="http://img.shields.io/badge/inyeoptti-655ced?style=social&logo=github"/>
@@ -205,7 +232,7 @@
 </tr>
 <tr>
 <td width="130" align="center">손현진</td>
-<td width="150">프론트엔드 개발</td>
+<td width="150">프론트엔드 개발 </br> 발표 </td>
 <td width="100" align="center">
 	<a href="https://github.com/sonyrainy">
 		<img src="http://img.shields.io/badge/sonyrainy-655ced?style=social&logo=github"/>
@@ -213,7 +240,7 @@
 </td>
 <td width="175" align="center">
 	<a href="mailto:thsguswls610@gmail.com">
-                <img src="https://img.shields.io/badge/thsguswls61-655ced?style=social&logo=gmail"/>
+                <img src="https://img.shields.io/badge/thsguswls610-655ced?style=social&logo=gmail"/>
 	</a>
 </td>
 </tr>

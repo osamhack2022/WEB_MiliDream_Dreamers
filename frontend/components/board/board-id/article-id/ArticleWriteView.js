@@ -100,15 +100,15 @@ function ContentRow({ comment, doReload }) {
 				{isFixOn ?
 					<td className="reWrite-box">
 						<textarea defaultValue={comment?.body} ref={commentFixTextarea}></textarea>
-						<button onClick={fixCommentCancel}>수정 취소</button>
-						<button onClick={fixCommentFin}>수정 완료</button>
+						<button className="button cancel" onClick={fixCommentCancel}>수정 취소</button>
+						<button className="button ok" onClick={fixCommentFin}>수정 완료</button>
 					</td>
 					:
 					<>
 						<td className="content2">{comment?.body}
 							<div>
-								<button onClick={fixCommentSubmit}>수정</button>
-								<button onClick={deleteCommentSubmit}>삭제</button>
+								<button className="button retouch" onClick={fixCommentSubmit}>수정</button>
+								<button className="button delete" onClick={deleteCommentSubmit}>삭제</button>
 							</div>
 						</td>
 					</>
@@ -200,7 +200,7 @@ export default function ArticleWriteView({ post, articleId, doReload }) {
 							게시글 신고 요청이 접수되었습니다.
 						</div>
 						<div className="modal-footer">
-							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">확인</button>
 							{/* <button type="button" className="btn btn-primary">Save changes</button> */}
 						</div>
 					</div>
@@ -217,7 +217,7 @@ export default function ArticleWriteView({ post, articleId, doReload }) {
 							{recommendWord}
 						</div>
 						<div className="modal-footer">
-							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">확인</button>
 							{/* <button type="button" className="btn btn-primary">Save changes</button> */}
 						</div>
 					</div>
@@ -234,7 +234,7 @@ export default function ArticleWriteView({ post, articleId, doReload }) {
 							댓글 달기 완료!
 						</div>
 						<div className="modal-footer">
-							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">확인</button>
 							{/* <button type="button" className="btn btn-primary">Save changes</button> */}
 						</div>
 					</div>
@@ -251,7 +251,7 @@ export default function ArticleWriteView({ post, articleId, doReload }) {
 								<div className="time titleBar">조회수 {post?.viewCount}</div>
 								{post?.userKey === user.userKey &&
 									<div>
-										<div className="retouch"><button onClick={async e => {
+										<div className="button retouch"><button onClick={async e => {
 											const response = await fetch(`/api/board/${post?.postKey}`, {
 												method: "PUT",
 												body: JSON.stringify({
@@ -265,7 +265,7 @@ export default function ArticleWriteView({ post, articleId, doReload }) {
 												doReload(); /** @todo 만약 페이지를 새로 만들었다면 reload도 하고 페이지도 원래 페이지로 이동 */
 											}
 										}}>수정</button></div>
-										<div className="delete"><button onClick={async e => {
+										<div className="button delete"><button onClick={async e => {
 											const response = await fetch(`/api/board/${post?.postKey}`, { method: "DELETE" });
 											if (response.ok) {
 												router.push("/board")
@@ -278,8 +278,8 @@ export default function ArticleWriteView({ post, articleId, doReload }) {
 						<tr className="mainBody">
 							<th scope="col count" className="count titleBar" dangerouslySetInnerHTML={{ __html: post?.body }}></th>
 							<td className="body">
-								<p className="recommenderCount">{` ${post?.recommenderCount}`}</p>
 								<a type="button" data-bs-toggle="modal" data-bs-target="#recommendModalDiv" onClick={onRecommendClick}>
+									<p className="recommenderCount">{` ${post?.recommenderCount}`}</p>
 									<Image src={`/article/recommendBtn.png`} width="131px" height="50px" />
 								</a>
 								<a type="button" data-bs-toggle="modal" data-bs-target="#reportModalDiv">
@@ -291,7 +291,7 @@ export default function ArticleWriteView({ post, articleId, doReload }) {
 								<div className="mb-3">
 									{/* <label for="exampleFormControlTextarea1" className="form-label">Example textarea</label> */}
 									<textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="댓글을 입력해 주세요"></textarea>
-									<button type="button" data-bs-toggle="modal" data-bs-target="#commentModal" onClick={onCommentSubmit}>
+									<button className="button" type="button" data-bs-toggle="modal" data-bs-target="#commentModal" onClick={onCommentSubmit}>
 										등록
 									</button>
 								</div>
@@ -302,7 +302,7 @@ export default function ArticleWriteView({ post, articleId, doReload }) {
 				</table>
 			</div>
 			<style global jsx>{`
-				button {
+				.button {
 					border: transparent;
 					background: #A593E0;
 					box-shadow: 0px 2px 2px rgb(0 0 0 / 25%);
@@ -322,7 +322,7 @@ export default function ArticleWriteView({ post, articleId, doReload }) {
 					margin: 0px;
 					padding: 0px;
 					position: relative;
-					left: -15px;
+					left: 45px;
 					z-index: 5;
 					top: 36px;
 					color: white;

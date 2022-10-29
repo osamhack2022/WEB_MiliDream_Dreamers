@@ -24,7 +24,7 @@ function ContentRow({ article }) {
 					<td className="writeUser content">{articleUser}</td>
 					<td className="time content gray">{displayedAt(article.postTime)}</td>
 					<td className="viewCount content gray">{article.viewCount}</td>
-					<td className="heart content gray">{article.recommend}</td>
+					<td className="heart content gray">{article.recommenderCount}</td>
 					<style jsx>{`
 					.title.content:after {
 						content: "[${article.comments.length}]";
@@ -63,7 +63,7 @@ export default function BoardWriteView() {
 						<th scope="col title" className="title titleBar">글 제목</th>
 						<th scope="col writeUser" className="writeUser titleBar">작성자</th>
 						<th scope="col time" className="time titleBar">시간</th>
-						<th scope="col viewCount" className="veiwCount titleBar">조회수</th>
+						<th scope="col viewCount" className="viewCount titleBar">조회수</th>
 						<th scope="col heart" className="heart titleBar">공감</th>
 					</tr>
 				</thead>
@@ -74,7 +74,7 @@ export default function BoardWriteView() {
 			<div className="row write-btn">
 				<a className="btn btn-secondary" onClick={() => { router.push(`/board/${router.query["board-id"]}/write`) }}>글 작성</a>
 			</div>
-			<nav aria-label="Page navigation example" className="page">
+			{/* <nav aria-label="Page navigation example">
 				<ul className="pagination">
 					<li className="page-item">
 						<a className="page-link" href="#" aria-label="Previous">
@@ -92,7 +92,7 @@ export default function BoardWriteView() {
 						</a>
 					</li>
 				</ul>
-			</nav>
+			</nav> */}
 			<style global jsx>{`
 		a {
 			color: transparent;

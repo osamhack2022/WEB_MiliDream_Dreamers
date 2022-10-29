@@ -58,8 +58,8 @@ export default function BoardNavBar() {
 					<li className="border-top my-3"></li>
 					<li className="mb-1">
 						<ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-							<li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">버그 신고하기</a></li>
-							<li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">건의사항</a></li>
+							<li><a href="https://github.com/osamhack2022-v2/WEB_MiliDream_Dreamers/issues" className="link-dark d-inline-flex text-decoration-none rounded">버그 신고하기</a></li>
+							<li><a href="https://github.com/osamhack2022-v2/WEB_MiliDream_Dreamers/discussions" className="link-dark d-inline-flex text-decoration-none rounded">건의사항</a></li>
 						</ul>
 					</li>
 				</ul>

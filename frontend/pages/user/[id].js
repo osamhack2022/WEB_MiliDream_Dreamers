@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 
 import { useRouter } from "next/router";
 import ProgressBar from "../../components/user/Progress_bar";
+import { GlobalState } from "../../states/GlobalState";
+
 
 const now = new Date().getTime();
 
 export default function user_id() {
+	const user = GlobalState(state => state.user);
 	const router = useRouter();
-	const [userInfo, setUserInfo] = useState({});
 	const [start_year, set_start_year] = useState("0000");
 	const [start_month, set_start_month] = useState("00");
 	const [start_date, set_start_date] = useState("00");
@@ -16,14 +18,10 @@ export default function user_id() {
 	const [goal_date, set_goal_date] = useState("00");
 
 	useEffect(() => {
-		(async () => {
-			if (router.isReady)
-				try { setUserInfo(await (await fetch(router.query?.id ? `/api/user/${router.query.id}` : "/api/user")).json()); } catch { }
-		})();
-	}, [router.isReady]);
-	useEffect(() => {
 		let getProgress = (startstr) => {
 			const now = new Date().getTime();
+			/** undefined or null */
+			if (!startstr) return 0;
 			const startTime = new Date(startstr).getTime();
 			const goalTime = startTime + 547 * (1000 * 60 * 60 * 24);
 			const start = new Date(startstr);
@@ -36,11 +34,19 @@ export default function user_id() {
 			set_goal_date(goal.getDate());
 			return Math.round(((now - startTime) / (goalTime - startTime)) * 100);
 		}
-		const progress = getProgress(userInfo.enlistment);
+		const progress = getProgress(user.enlistment);
 		document.querySelector(".progressbar-complete").style.width = `${progress}%`;
 		document.querySelector(".progress").innerText = `${progress}%`;
-	}, [userInfo]);
+	}, [user]);
 
+
+	/** 로그인되어 있지 않다면 메인페이지로 이동 */
+	useEffect(() => {
+		if (!user) {
+			router.push("/");
+			alert("로그인이 필요합니다.")
+		}
+	}, [user]);
 
 	return (
 		<div
@@ -121,7 +127,7 @@ export default function user_id() {
 								marginTop: "25px",
 							}}
 						>
-							<div style={{ fontWeight: "550" }}>{userInfo.userName}[{userInfo.userId}]</div>
+							<div style={{ fontWeight: "550" }}>{user.userName}[{user.userId}]</div>
 							<div className="wordbox">
 								<div
 									className="word"
@@ -141,7 +147,7 @@ export default function user_id() {
 									}}
 								>
 									<br />
-									{userInfo.introduce === null ? "소개를 입력해주세요." : userInfo.introduce}
+									{user.introduce === null ? "소개를 입력해주세요." : user.introduce}
 								</div>
 							</div>
 						</div>
@@ -225,8 +231,8 @@ export default function user_id() {
 												}}
 											>
 												<span style={{ fontWeight: "600" }}>{
-													userInfo.enlistment ? (
-														getRank(userInfo.enlistment)
+													user.enlistment ? (
+														getRank(user.enlistment)
 													) : "복무일수를 입력해주세요"
 												}</span>
 
@@ -280,7 +286,7 @@ export default function user_id() {
                         </select> */}
 												&nbsp;
 												(D-
-												{calculateDDay(new Date(userInfo.enlistment))}
+												{calculateDDay(user.enlistment)}
 												)
 											</span>
 										</div>
@@ -300,7 +306,8 @@ export default function user_id() {
 												fontWeight: "500",
 											}}
 										>
-											국군지휘통신사령부 57정보통신대대 본부중대&nbsp;
+											{/*국군지휘통신사령부 57정보통신대대 본부중대&nbsp;*/}
+											{user.belong ? user.belong : "복무지를 입력해주세요"}
 										</span>
 									</div>
 								</div>
@@ -323,8 +330,8 @@ export default function user_id() {
 										textShadow: "0px 4px 4px #A7A7A7",
 									}}
 								>
-									{`${start_year}.${start_month >= 10 ? start_month : "0" + start_month
-										}.${start_date >= 10 ? start_date : "0" + start_date}`}
+									{user?.enlistment ? `${start_year}.${start_month >= 10 ? start_month : "0" + start_month
+										}.${start_date >= 10 ? start_date : "0" + start_date}` : ""}
 									<br />
 									입대
 								</div>
@@ -341,8 +348,8 @@ export default function user_id() {
 										textShadow: "0px 4px 4px #A7A7A7",
 									}}
 								>
-									{`${goal_year}.${goal_month >= 10 ? goal_month : "0" + goal_month
-										}.${goal_date >= 10 ? goal_date : "0" + goal_date}`}
+									{user?.enlistment ? `${goal_year}.${goal_month >= 10 ? goal_month : "0" + goal_month
+										}.${goal_date >= 10 ? goal_date : "0" + goal_date}` : ""}
 									<br />
 									<div
 										style={{
@@ -737,6 +744,7 @@ export default function user_id() {
 }
 
 function calculateDDay(date) {
+	if (!date) return 0;
 	// TODO: 복무형태별 복무일수
 	const DUTYDATES = {
 		"육군": 547,

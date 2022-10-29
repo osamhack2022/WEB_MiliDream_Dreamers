@@ -1,13 +1,23 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import axios from "axios";
 import dynamic from "next/dynamic";
 import 'react-quill/dist/quill.snow.css';
 import { useRouter } from "next/router";
+import { GlobalState } from "../../../../states/GlobalState";
 
 export default function Write() {
 	const [text, setText] = useState('');
 	const quillRef = useRef();
 	const router = useRouter();
+	const user = GlobalState(state => state.user);
+
+	/** 로그아웃된 상태에서는 /board로 리다이렉트 */
+	useEffect(() => {
+		if (!user) {
+			router.push("/board");
+			alert("로그인한 상태에서만 글을 쓸 수 있습니다.")
+		}
+	}, [user]);
 
 	const imageHandler = () => {
 		const input = document.createElement('input');

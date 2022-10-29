@@ -209,7 +209,7 @@ export default class Post {
 	 */
 	static async getAllBoards({ categoryKey }) {
 		let sql = `
-			SELECT p.postKey, p.userKey, p.categoryKey, c.categoryName, p.postTime, p.title, p.body, p.viewCount, count(*) as recommend
+			SELECT p.postKey, p.userKey, p.categoryKey, c.categoryName, p.postTime, p.title, p.body, p.viewCount
 			FROM Post as p
 			LEFT JOIN Category as c ON c.categoryKey=p.categoryKey
 			LEFT OUTER JOIN Recommenders as r ON r.postkey=p.postKey
@@ -331,6 +331,7 @@ export default class Post {
 			sql +=
 				"(title LIKE CONCAT('%', ? '%') OR body LIKE CONCAT('%', ? '%')) AND ";
 			queryValue.push(content);
+			queryValue.push(content);
 		}
 
 		// if (tag){
@@ -395,6 +396,12 @@ export default class Post {
 					`postKey="${postKey}"에 해당하는 게시글이 없습니다`
 				);
 			result = await processAllPosts(result, conn, userKey);
+			for (let i = 0; i < result.length; i++) {
+				if (!("didRecommend" in result[i])) {
+					// @ts-ignore
+					result[i]["didRecommend"] = false;
+				}
+			}
 			await updateViewCount(postKey, conn);
 			return result[0];
 		} catch (err) {
