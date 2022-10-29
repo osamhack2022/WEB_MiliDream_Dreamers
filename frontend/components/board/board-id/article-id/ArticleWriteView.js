@@ -276,7 +276,7 @@ export default function ArticleWriteView({ post, articleId, doReload }) {
 							</td>
 						</tr>
 						<tr className="mainBody">
-							<th scope="col count" className="count titleBar">{post?.body}</th>
+							<th scope="col count" className="count titleBar" dangerouslySetInnerHTML={{ __html: post?.body }}></th>
 							<td className="body">
 								<p className="recommenderCount">{` ${post?.recommenderCount}`}</p>
 								<a type="button" data-bs-toggle="modal" data-bs-target="#recommendModalDiv" onClick={onRecommendClick}>
