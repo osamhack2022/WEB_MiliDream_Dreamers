@@ -1,4 +1,4 @@
-import mariadb from "../loaders/mariadb";
+import mariadb from "../loaders/mariadb.js";
 
 export default class Objective {
 	static async getAllobjective(userKey) {
