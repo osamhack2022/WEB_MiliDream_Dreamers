@@ -41,3 +41,5 @@ router.route("/:objectiveId").get(async (req, res) => {
 		res.status(400).json({ err: err.message })
 	}
 })
+
+export default router;
