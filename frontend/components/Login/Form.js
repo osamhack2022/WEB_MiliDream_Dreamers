@@ -50,7 +50,7 @@ export default function LoginForm() {
 							<label className="form-check-label" htmlFor="saveId">
 								&nbsp;&nbsp;아이디 기억하기
 							</label>
-							<Link href={"/reset-password"}>
+							<Link href={"#"}>
 								{/* TODO: 미구현 */}
 								<a>
 									<span className="forget-text">기억이 안나시나요?</span>
@@ -62,11 +62,13 @@ export default function LoginForm() {
 								<span>로그인</span>
 							</div>
 						</a>
-						<a onClick={() => (location.href = "/signup")}>
-							<div className="signup-btn form-btn">
-								<span>회원가입</span>
-							</div>
-						</a>
+						<Link href={"/signup"}>
+							<a>
+								<div className="signup-btn form-btn">
+									<span>회원가입</span>
+								</div>
+							</a>
+						</Link>
 						{/* <button>회원가입</button> */}
 						{/* SSO 로그인?? */}
 					</form>
@@ -249,6 +251,7 @@ async function login(event) {
 		location.reload();
 	} else {
 		console.log(result);
+		alert("ID 또는 비밀번호를 틀렸습니다!");
 	}
 	// TODO: login
 }
