@@ -71,6 +71,9 @@ export default function BoardWriteView() {
 					{board && board?.boards.slice(0).reverse().map((article) => <ContentRow key={article.postKey} article={article} />)}
 				</tbody>
 			</table>
+			<div className="row write-btn">
+				<a className="btn btn-secondary" onClick={() => { router.push(`/board/${router.query["board-id"]}/write`) }}>글 작성</a>
+			</div>
 			<nav aria-label="Page navigation example" className="page">
 				<ul className="pagination">
 					<li className="page-item">
@@ -157,6 +160,10 @@ export default function BoardWriteView() {
 		.title.content:after {
 			content: "[5]";
 			margin-left: .5em;
+		  }
+		  .write-btn{
+			width: 1000px;
+			margin: auto;
 		  }
         /*위까지는 table 관련 css 작업 // 아래부터는 pagenation botton css 작업*/
         nav.page {

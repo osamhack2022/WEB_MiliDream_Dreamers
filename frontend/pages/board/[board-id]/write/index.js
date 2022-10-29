@@ -54,7 +54,7 @@ export default function Write() {
 		}
 	});
 	const handleText = (content, d, s, editor) => {
-		console.log(content);
+		//console.log(content);
 	}
 
 	/** 게시글 등록 버튼 누르면 작동함 */
@@ -70,8 +70,9 @@ export default function Write() {
 			headers: { 'Content-Type': 'application/json' }
 		})
 		const data = await response.json();
+		//console.log(data);
 		if (response.ok) {
-			router.push(`/board/${router.query["board-id"]}/${data.postKey}`)
+			router.push(`/board/${router.query["board-id"]}/${data.postKey.postKey}`)
 		} else {
 			console.log("err,", data);
 		}
@@ -86,7 +87,7 @@ export default function Write() {
 			modules={modules}
 			formats={formats}
 			onChange={handleText} />
-		<button onClick={onSubmitClick}>Submit</button>
+		<button className="btn btn-secondary" onClick={onSubmitClick}>Submit</button>
 	</div>
 }
 
