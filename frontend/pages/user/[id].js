@@ -41,7 +41,6 @@ export default function user_id() {
 
 
 	/** 로그인되어 있지 않다면 메인페이지로 이동 */
-	const user = GlobalState(state => state.user);
 	useEffect(() => {
 		if (!user) {
 			router.push("/");
