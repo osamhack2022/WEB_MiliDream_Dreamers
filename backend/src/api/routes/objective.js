@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { checkUserExist } from "../middlewares";
+import { checkUserExist } from "../middlewares/index.js";
 import ObjectiveService from "../../services/objective.js";
 
 const router = Router();
