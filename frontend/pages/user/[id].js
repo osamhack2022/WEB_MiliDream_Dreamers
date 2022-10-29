@@ -411,8 +411,8 @@ export default function user_id() {
 											{"자기계발"}형
 										</span>
 										<a
-											href="http://www.naver.com"
-											target={"_blank"}
+											href="#"
+											//target={"_blank"}
 											style={{
 												fontSize: "18px",
 												marginLeft: "30px",
@@ -455,7 +455,7 @@ export default function user_id() {
 													marginTop: "14px",
 												}}
 											>
-												목표 타이틀
+												공모전 & 대회 나가기
 											</div>
 											<div
 												style={{
@@ -472,8 +472,7 @@ export default function user_id() {
 													height: "1.2em",
 												}}
 											>
-												목표에 대한 간단한 소개가 적혀있는 곳입니다.
-												안녕하세요안녕하세요안녕하세
+												군 생활 중 공모전 & 대회 3회 출전!!
 											</div>
 											<div
 												style={{
@@ -529,7 +528,7 @@ export default function user_id() {
 													marginTop: "14px",
 												}}
 											>
-												목표 타이틀
+												백준 골드 올라가기!
 											</div>
 											<div
 												style={{
@@ -546,8 +545,7 @@ export default function user_id() {
 													height: "1.2em",
 												}}
 											>
-												목표에 대한 간단한 소개가 적혀있는 곳입니다.
-												안녕하세요안녕하세요안녕하세
+												Solve.ac 랭크 기준 백준 골드 티어 만들기!
 											</div>
 											<div
 												style={{
@@ -590,7 +588,7 @@ export default function user_id() {
 													marginTop: "14px",
 												}}
 											>
-												목표 타이틀
+												근육량 3kg 늘리기!
 											</div>
 											<div
 												style={{
@@ -607,8 +605,7 @@ export default function user_id() {
 													height: "1.2em",
 												}}
 											>
-												목표에 대한 간단한 소개가 적혀있는 곳입니다.
-												안녕하세요안녕하세요안녕하세
+												인바디 기준 골격근량 3kg 늘리기!
 											</div>
 											<div
 												style={{
@@ -651,7 +648,7 @@ export default function user_id() {
 													marginTop: "14px",
 												}}
 											>
-												목표 타이틀
+												전공 공부하기
 											</div>
 											<div
 												style={{
@@ -668,8 +665,7 @@ export default function user_id() {
 													height: "1.2em",
 												}}
 											>
-												목표에 대한 간단한 소개가 적혀있는 곳입니다.
-												안녕하세요안녕하세요안녕하세
+												운영체제 (OS), 알고리즘, 네트워크 공부하기!
 											</div>
 											<div
 												style={{
