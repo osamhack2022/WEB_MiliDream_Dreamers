@@ -6,56 +6,56 @@ export default function Career() {
 	return (
 		<div className="container">
 			<div className="img-background">
-				<Image width="1920px" height="765px" src={`/career/0. 배경.png`} />
+				<Image width="1920px" height="765px" src={`/career/0.png`} />
 			</div>
 			<div className="position-absol">
 				<div className="big-title-flex">
 					<div className="big-title">
-						<Image width="1200px" height="353px" src={`/career/1. 진로 유형 분석하기.png`} />
+						<Image width="1200px" height="353px" src={`/career/1.png`} />
 					</div>
 					<div className="mini-title">
 						<div className="one">
 							<Link href="/career/survey">
-								<Image width="550px" height="183px" src={`/career/1-1. 진로 유형 검사.png`} />
+								<Image width="550px" height="183px" src={`/career/1-1.png`} />
 							</Link>
 						</div>
 						<div className="two">
 							<Link href="/career/survey">
-								<Image width="550px" height="183px" src={`/career/1-2. 검사 결과 확인하기.png`} />
+								<Image width="550px" height="183px" src={`/career/1-2.png`} />
 							</Link>
 						</div>
 					</div>
 				</div>
 				<div className="big-title-flex">
 					<div className="big-title">
-						<Image width="1200px" height="353px" src={`/career/2. 자신만의 진로 설계하기.png`} />
+						<Image width="1200px" height="353px" src={`/career/2.png`} />
 					</div>
 					<div className="mini-title">
 						<div className="one">
 							<Link href="/career/survey">
-								<Image width="550px" height="183px" src={`/career/2-1. 진로 설계하기.png`} />
+								<Image width="550px" height="183px" src={`/career/2-1.png`} />
 							</Link>
 						</div>
 						<div className="two">
 							<Link href="/career/contest">
-								<Image width="550px" height="183px" src={`/career/2-2.공모전 및 대회 정보.png`} />
+								<Image width="550px" height="183px" src={`/career/2-2.png`} />
 							</Link>
 						</div>
 					</div>
 				</div>
 				<div className="big-title-flex">
 					<div className="big-title">
-						<Image width="1200px" height="353px" src={`/career/3. 진로 계획 공유하기.png`} />
+						<Image width="1200px" height="353px" src={`/career/3.png`} />
 					</div>
 					<div className="mini-title">
 						<div className="one">
 							<Link href="/board">
-								<Image width="550px" height="183px" src={`/career/3-1. 커뮤니티.png`} />
+								<Image width="550px" height="183px" src={`/career/3-1.png`} />
 							</Link>
 						</div>
 						<div className="two">
 							<Link href="/board">
-								<Image width="550px" height="183px" src={`/career/3-2. 진로 계획 공유하기.png`} />
+								<Image width="550px" height="183px" src={`/career/3-2.png`} />
 							</Link>
 						</div>
 					</div>
