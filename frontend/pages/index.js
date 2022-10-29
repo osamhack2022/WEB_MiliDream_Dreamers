@@ -46,9 +46,15 @@ export default function Home({ results }) {
 						</p>
 					</div>
 					<button type="button" data-bs-toggle="modal" data-bs-target="#loginModal">시작하기</button>
-					{/* <button className="no-login-" type="button">로그인 없이 유형검사</button> */}
+					<Link href="/career/survey">
+						<button className="rightNowStart" type="button" >바로 유형검사!</button>
+					</Link>
 					<style jsx>
 						{`
+						.rightNowStart {
+							margin-left: 200px;
+							width: 230px;
+						}
             .FIRST {
               opacity: 0.9;
             }

@@ -30,7 +30,7 @@ export default function board(props) {
 					<BoardUser />
 				</div>
 				<div className="navBar">
-					<BoardSearchBar placeHolder="게시판 검색" />
+					<BoardSearchBar placeHolder="게시글 검색" />
 					<BoardNavBar props={article} />
 				</div>
 				<div className="banner">
@@ -44,7 +44,7 @@ export default function board(props) {
 					<BoardMiniView type="hobby" boardId="추천 관심사 게시판" />
 					<BoardMiniView type="place" boardId="56사단" /> */}
 				</div>
-				<div className="footer"></div>
+				
 			</div>
 			<style jsx>{`
           .BoardMain {
@@ -58,8 +58,19 @@ export default function board(props) {
               "navBar   banner banner"
               "navBar   miniB  miniB"
               "navBar   miniB  miniB"
-              "navBar   .      .    "
-              "footer   footer  footer";
+              "navBar   miniB  miniB"
+			  "navBar   miniB  miniB"
+			  "navBar   miniB  miniB"
+			  "navBar   miniB  miniB"
+			  "navBar   miniB  miniB"
+			  "navBar   miniB  miniB"
+			  "navBar   miniB  miniB"
+			  "navBar   miniB  miniB"
+			  "navBar   miniB  miniB"
+			  "navBar   miniB  miniB"
+			  "navBar   miniB  miniB"
+			  "navBar   miniB  miniB"
+			  "navBar   miniB  miniB";
             grid-gap: 16px;
 			justify-content: center;
           }
@@ -71,7 +82,7 @@ export default function board(props) {
             grid-area: miniB; 
             display: contents;
           }
-          .footer { grid-area: footer; }
+          
         `}</style>
 		</div>
 	)
