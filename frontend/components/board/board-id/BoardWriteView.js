@@ -71,7 +71,7 @@ export default function BoardWriteView() {
 					{board && board?.boards.slice(0).reverse().map((article) => <ContentRow key={article.postKey} article={article} />)}
 				</tbody>
 			</table>
-			<nav aria-label="Page navigation example">
+			<nav aria-label="Page navigation example" className="page">
 				<ul className="pagination">
 					<li className="page-item">
 						<a className="page-link" href="#" aria-label="Previous">
@@ -159,8 +159,8 @@ export default function BoardWriteView() {
 			margin-left: .5em;
 		  }
         /*위까지는 table 관련 css 작업 // 아래부터는 pagenation botton css 작업*/
-        nav {
-          display: flex;
+        nav.page {
+          display: none;
           justify-content: center;
         }
         ul {
