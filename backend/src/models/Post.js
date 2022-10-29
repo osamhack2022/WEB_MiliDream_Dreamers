@@ -331,6 +331,7 @@ export default class Post {
 			sql +=
 				"(title LIKE CONCAT('%', ? '%') OR body LIKE CONCAT('%', ? '%')) AND ";
 			queryValue.push(content);
+			queryValue.push(content);
 		}
 
 		// if (tag){
