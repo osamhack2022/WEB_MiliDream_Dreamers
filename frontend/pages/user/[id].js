@@ -4,6 +4,9 @@ import { useRouter } from "next/router";
 import ProgressBar from "../../components/user/Progress_bar";
 import { GlobalState } from "../../states/GlobalState";
 
+
+const now = new Date().getTime();
+
 export default function user_id() {
 	const user = GlobalState(state => state.user);
 	const router = useRouter();
@@ -36,6 +39,15 @@ export default function user_id() {
 		document.querySelector(".progress").innerText = `${progress}%`;
 	}, [user]);
 
+
+	/** 로그인되어 있지 않다면 메인페이지로 이동 */
+	const user = GlobalState(state => state.user);
+	useEffect(() => {
+		if (!user) {
+			router.push("/");
+			alert("로그인이 필요합니다.")
+		}
+	}, [user]);
 
 	return (
 		<div

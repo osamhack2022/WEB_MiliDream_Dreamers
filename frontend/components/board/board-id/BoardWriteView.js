@@ -63,7 +63,7 @@ export default function BoardWriteView() {
 						<th scope="col title" className="title titleBar">글 제목</th>
 						<th scope="col writeUser" className="writeUser titleBar">작성자</th>
 						<th scope="col time" className="time titleBar">시간</th>
-						<th scope="col viewCount" className="veiwCount titleBar">조회수</th>
+						<th scope="col viewCount" className="viewCount titleBar">조회수</th>
 						<th scope="col heart" className="heart titleBar">공감</th>
 					</tr>
 				</thead>
@@ -71,7 +71,7 @@ export default function BoardWriteView() {
 					{board && board?.boards.slice(0).reverse().map((article) => <ContentRow key={article.postKey} article={article} />)}
 				</tbody>
 			</table>
-			<nav aria-label="Page navigation example">
+			{/* <nav aria-label="Page navigation example">
 				<ul className="pagination">
 					<li className="page-item">
 						<a className="page-link" href="#" aria-label="Previous">
@@ -89,7 +89,7 @@ export default function BoardWriteView() {
 						</a>
 					</li>
 				</ul>
-			</nav>
+			</nav> */}
 			<style global jsx>{`
 		a {
 			color: transparent;
