@@ -209,7 +209,7 @@ export default class Post {
 	 */
 	static async getAllBoards({ categoryKey }) {
 		let sql = `
-			SELECT p.postKey, p.userKey, p.categoryKey, c.categoryName, p.postTime, p.title, p.body, p.viewCount, count(*) as recommend
+			SELECT p.postKey, p.userKey, p.categoryKey, c.categoryName, p.postTime, p.title, p.body, p.viewCount
 			FROM Post as p
 			LEFT JOIN Category as c ON c.categoryKey=p.categoryKey
 			LEFT OUTER JOIN Recommenders as r ON r.postkey=p.postKey
