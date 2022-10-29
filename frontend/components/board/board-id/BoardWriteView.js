@@ -24,7 +24,7 @@ function ContentRow({ article }) {
 					<td className="writeUser content">{articleUser}</td>
 					<td className="time content gray">{displayedAt(article.postTime)}</td>
 					<td className="viewCount content gray">{article.viewCount}</td>
-					<td className="heart content gray">{article.recommend}</td>
+					<td className="heart content gray">{article.recommenderCount}</td>
 					<style jsx>{`
 					.title.content:after {
 						content: "[${article.comments.length}]";
