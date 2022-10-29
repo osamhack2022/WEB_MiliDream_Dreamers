@@ -28,8 +28,14 @@
 	1. [POST /comment](#post-comment)
 	2. [PUT /comment/:commentId](#put-commentcommentid)
 	3. [DELETE /comment/:commentId](#delete-commentcommentid)
-
-
+6. [이미지](#이미지)
+	1. []
+7. [목표](#목표)
+	1. [GET /objective](#get-objective)
+	2. [POST /objective](#post-objective)
+	3. [GET /objective/:objectiveId](#get-objectiveobjectiveid)
+	4. [PUT /objective/:objectiveId](#put-objectiveobjectiveid)
+	5. [DELETE /objective/:objectiveId](#delete-objectiveobjectiveid)
 
 
 # 로그인 관련
@@ -588,3 +594,78 @@ commentId인 댓글을 삭제
 | --- | --- | --- | --- |
 | 성공 | 200 | NULL |  |
 | 실패 | 400, 401 | JSON |  |
+
+# 이미지
+
+## POST /image/upload
+
+파일을 올립니다.
+
+Content-Type: multipart/form-data
+
+```html
+<form action="/api/image/upload" method="post" enctype="multipart/form-data">
+  <input type="file" name="img" />
+</form>
+```
+
+### JSON Body Parameters
+
+| 키 | 필수인가? | 타입 | 설명 |
+| --- | --- | --- | --- |
+| img | O | file | 이미지 파일 |
+
+### Return
+
+| 키 | 타입 | 설명 |
+| --- | --- | --- |
+| path | string | 파일을 올린 경로를 반환합니다. |
+
+### Status Code
+
+|  | Status Code | 형식 | 설명 |
+| --- | --- | --- | --- |
+| 성공 | 200 | JSON |  |
+| 실패 | 400 | JSON |  |
+
+# 목표
+
+## GET /objective
+
+로그인되어 있어야 합니다.
+
+본인의 모든 목표를 가져옵니다.
+
+## POST /objective
+
+로그인되어 있어야 합니다.
+
+목표를 생성합니다.
+
+| 키 | 필수인가? | 타입 | 설명 |
+| --- | --- | --- | --- |
+| title | O | string |  |
+| progress | O | string |  |
+| explain | O | string |  |
+
+## GET /objective/:objectiveId
+
+objectiveId에 해당하는 목표만 반환합니다.
+
+## PUT /objective/:objectiveId
+
+로그인되어 있어야 합니다.
+
+objectiveId에 해당하는 목표의 progress를 수정합니다.
+
+| 키 | 필수인가? | 타입 | 설명 |
+| --- | --- | --- | --- |
+| title | O | string |  |
+| progress | O | string |  |
+| explain | O | string |  |
+
+## DELETE /objective/:objectiveId
+
+로그인되어 있어야 합니다.
+
+objectiveId에 해당하는 목표를 삭제합니다.
