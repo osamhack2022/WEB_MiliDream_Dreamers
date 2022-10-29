@@ -11,7 +11,6 @@ export default function BoardFunction() {
 		if (router.isReady) {
 			(async () => {
 				const { content } = router.query;
-				console.log("content", content)
 				const response = await fetch(
 					`/api/board/query?content=${content}`
 				);
