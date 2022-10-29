@@ -30,7 +30,7 @@ export default function board(props) {
 					<BoardUser />
 				</div>
 				<div className="navBar">
-					<BoardSearchBar placeHolder="게시판 검색" />
+					<BoardSearchBar placeHolder="게시글 검색" />
 					<BoardNavBar props={article} />
 				</div>
 				<div className="banner">
