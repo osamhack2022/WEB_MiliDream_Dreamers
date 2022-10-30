@@ -4,6 +4,8 @@ import dynamic from "next/dynamic";
 import 'react-quill/dist/quill.snow.css';
 import { useRouter } from "next/router";
 import { GlobalState } from "../../../../states/GlobalState";
+import('react-quill');
+//import ReactQuill from "react-quill";
 
 export default function Write() {
 	const [text, setText] = useState('');
@@ -20,7 +22,9 @@ export default function Write() {
 	}, [user]);
 
 	const imageHandler = () => {
+		//if (typeof window !== 'undefined') {
 		const input = document.createElement('input');
+
 		input.setAttribute('type', 'file');
 		input.setAttribute('accept', 'image/*');
 		input.click();
@@ -37,6 +41,7 @@ export default function Write() {
 				editor.insertEmbed(range.index, 'image', url);
 			} catch (ex) { console.error(ex); }
 		});
+		//}
 		return;
 	}
 
