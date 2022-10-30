@@ -6,6 +6,12 @@ import { useRouter } from "next/router";
 import { GlobalState } from "../../../../states/GlobalState";
 import('react-quill');
 //import ReactQuill from "react-quill";
+import BoardUser from "../../../../components/board/BoardUser";
+import BoardSearchBar from "../../../../components/board/BoardSearchBar";
+import BoardNavBar from "../../../../components/board/BoardNavBar";
+import BoardCenter from "../../../../components/board/BoardCenter";
+import BoardHeader from "../../../../components/board/BoardHeader";
+
 
 export default function Write() {
 	const [text, setText] = useState('');
@@ -94,26 +100,98 @@ export default function Write() {
 	}
 
 
-	return <div>
-		<input type="text" name="title" id="titleInput"></input>
-		<QuillWrapper
-			forwardedRef={quillRef}
-			theme="snow"
-			modules={modules}
-			formats={formats}
-			onChange={handleText} />
-		<button className="btn btn-secondary" onClick={onSubmitClick}>Submit</button>
-	</div>
+	const boardId = router.query["board-id"];
+	const [article, setArticle] = useState();
+	useEffect(() => {
+		(async () => {
+			const results = await (await fetch(`/api/board/category`, { method: 'GET' })).json();
+			setArticle(results.category);
+		})();
+	}, []);
+	const articlePost = article && article.slice(0).find((x) => x.categoryKey == boardId)
+
+	const QuillWrapper = dynamic(
+		async () => {
+			const { default: RQ } = await import('react-quill');
+			return ({ forwardedRef, ...props }) => <RQ ref={forwardedRef} {...props} />;
+		}, {
+		ssr: false,
+		loading: () => <p>Loading...</p>
+	});
+
+	return (
+		<div>
+			<div className="container">
+				<div className="headerB">
+					<BoardHeader boardId={articlePost?.categoryName} />
+				</div>
+				<div className="userInfo">
+					<BoardUser />
+				</div>
+				<div className="navBar">
+					<BoardSearchBar placeHolder="게시판 검색" />
+					<BoardNavBar props={article} />
+				</div>
+				<div className="banner">
+					<BoardCenter />
+				</div>
+				<div className="BoardMain">
+					<div className="editorBox">
+						<input type="text" name="title" id="titleInput" placeholder="제목을 입력해 주세요"></input>
+						<QuillWrapper
+							forwardedRef={quillRef}
+							theme="snow"
+							modules={modules}
+							formats={formats}
+							onChange={handleText} />
+						<button className="btn btn-secondary" onClick={onSubmitClick}>작성 완료!</button>
+					</div>
+				</div>
+				<div className="footer"></div>
+			</div>
+			<style jsx>{`
+				.btn-secondary {
+					background-color: #a593e0;
+					border-color: #a593e0;
+				}
+				.editorBox {
+					width: 1000px;
+				}
+				.editorBox > input {
+					margin-bottom: 20px;
+					width: 1000px;
+				}
+				.editorBox > button {
+					width: 1000px;
+					margin-top: 20px;
+				}
+          .container {
+            display:  grid;
+            grid-template-areas:
+            "userInfo header header"
+            "userInfo banner banner"
+            "navBar   banner banner"
+            "navBar   miniB  miniB"
+            "navBar   miniB  miniB"
+            "navBar   miniB  miniB";
+            grid-gap: 16px;
+            }
+            .headerB { grid-area: header; }
+            .banner { grid-area: banner; }
+            .userInfo { grid-area: userInfo; }
+            .navBar { grid-area: navBar; }
+            .BoardMain {
+              grid-area: miniB;
+              //display: contents;
+			  display: flex;
+            }
+            .footer { grid-area: footer; }
+            `}</style>
+		</div>
+	)
 }
 
-const QuillWrapper = dynamic(
-	async () => {
-		const { default: RQ } = await import('react-quill');
-		return ({ forwardedRef, ...props }) => <RQ ref={forwardedRef} {...props} />;
-	}, {
-	ssr: false,
-	loading: () => <p>Loading...</p>
-});
+
 
 
 
