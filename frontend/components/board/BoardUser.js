@@ -1,39 +1,42 @@
 //게시판 안에 각 유저별 로그인 정보 보여주는거.
 import Image from "next/image";
+import { GlobalState } from "../../states/GlobalState";
 
 export default function BoardUser(props) {
-  return (
-    <div>
-      <div className={"box"}>
-        <div className={"image"}>
-          <Image     
-            className="user-image"
-            alt={`user image`}
-            src={`/board-user/user.svg`}
-            width="90px" height="90px"
-            placeholder="user main img..."
-            priority={true} />
-          <div className="detail">
-            <div className={"userId"}>유저아이디</div>
-            <a className={"profile"} href="#">프로필 상세보기</a>
-          </div>
-        </div>
-        <div className="detail">
-          <div className={"rank"}>
-            <div className="header">계급 | </div>
-            <div className="content"> 상병 2호봉</div>
-          </div>
-          <div className={"place"}>
-            <div className="header">복무지 | </div>
-            <div className="content">{`수도방위사령부 제56보병사단 정보통신대대`}</div>
-          </div>
-          <div className={"career-type"}>
-            <div className="header">진로유형 | </div>
-            <div className="content"> 자기계발</div>
-          </div>
-        </div>
-      </div>
-      <style jsx>{`
+	const user = GlobalState(state => state.user);
+
+	return (
+		<div>
+			<div className={"box"}>
+				<div className={"image"}>
+					<Image
+						className="user-image"
+						alt={`user image`}
+						src={`/board-user/user.svg`}
+						width="90px" height="90px"
+						placeholder="user main img..."
+						priority={true} />
+					<div className="detail">
+						<div className={"userId"}>{!user ? `유저아이디` : `${user.userName}[${user.userId}]`}</div>
+						<a className={"profile"} href="/user">프로필 상세보기</a>
+					</div>
+				</div>
+				<div className="detail">
+					<div className={"rank"}>
+						<div className="header">계급 | </div>
+						<div className="content">{!user ? `정보 없음` : `상병 2호봉`}</div>
+					</div>
+					<div className={"place"}>
+						<div className="header">복무지 | </div>
+						<div className="content">{!user ? `정보 없음` : `제2작전사령부 제37보병사단 정보통신대대`}</div>
+					</div>
+					<div className={"career-type"}>
+						<div className="header">진로유형 | </div>
+						<div className="content">{!user ? `정보 없음` : `자기계발`}</div>
+					</div>
+				</div>
+			</div>
+			<style jsx>{`
         .box {
           /* margin: 20px; */
           border: 1px solid gray;
@@ -90,6 +93,6 @@ export default function BoardUser(props) {
           font-style: normal;
         }
       `}</style>
-    </div>
-  )
+		</div>
+	)
 }
