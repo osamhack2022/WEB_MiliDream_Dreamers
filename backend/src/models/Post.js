@@ -256,10 +256,10 @@ export default class Post {
 		userKey,
 		careerPostKey,
 	}) {
-		if (categoryKey === 2 && !careerPostKey)
-			throw Error("careerPostKey가 세팅되지 않음");
-		else if (categoryKey !== 2 && careerPostKey)
-			throw Error("careerPostKey가 세팅됨");
+		// if (categoryKey === 2 && !careerPostKey)
+		// 	throw Error("careerPostKey가 세팅되지 않음");
+		// else if (categoryKey !== 2 && careerPostKey)
+		// 	throw Error("careerPostKey가 세팅됨");
 		const cleanTitle = sanitizeHTML(title, { allowedTags: [] });
 		const cleanBody = sanitizeHTML(body, {
 			allowedTags: [
