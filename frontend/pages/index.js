@@ -9,8 +9,11 @@ import BoardCenter from "../components/Home/slideslide";
 import LoginModal from "../components/Login/Modal";
 import BoardCenter2 from "../components/board/BoardCenter";
 import Footer from "../components/Footer"
+import { GlobalState } from "../states/GlobalState";
+
 
 export default function Home({ results }) {
+	const user = GlobalState(state => state.user);
 
 	return (
 		<div>
@@ -45,7 +48,9 @@ export default function Home({ results }) {
 							여러분들의 MILI-DREAM을 이루시길 응원합니다!
 						</p>
 					</div>
-					<button type="button" data-bs-toggle="modal" data-bs-target="#loginModal">시작하기</button>
+					{!user
+						? <button type="button" data-bs-toggle="modal" data-bs-target="#loginModal">시작하기</button>
+						: <Link href="/board"><button type="button">시작하기</button></Link>}
 					<Link href="/career/survey">
 						<button className="rightNowStart" type="button" >바로 유형검사!</button>
 					</Link>
