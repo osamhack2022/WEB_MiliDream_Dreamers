@@ -25,7 +25,7 @@ export default function BoardNavBar() {
 						<ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
 							<li><a href="#" className="link-dark d-inline-flex text-decoration-none rounded">공지사항</a></li>
 							<li><a href="/board/1" className="link-dark d-inline-flex text-decoration-none rounded">공모전&대회 리스트</a></li>
-							<li><a href="/board/2" className="link-dark d-inline-flex text-decoration-none rounded">자유 게시판</a></li>
+							<li><a href="/board/2" className="link-dark d-inline-flex text-decoration-none rounded">사람모집 게시판</a></li>
 							<li><a href="/board/7" className="link-dark d-inline-flex text-decoration-none rounded">자유 게시판</a></li>
 						</ul>
 					</li>
