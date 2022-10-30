@@ -59,7 +59,10 @@ export default function user_id() {
 			}
 		>
 			{/* <h1>[id]에 따른 각 유저 정보/프로필 페이지</h1> */}
-			<div>
+			<div
+				style={{
+					marginLeft: "200px",
+				}}>
 				<h1
 					style={{
 						marginLeft: "150px",
