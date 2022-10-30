@@ -19,7 +19,7 @@ export default function BoardSearchBar({ placeHolder }) {
 					<input
 						className="form-control mr-sm-2"
 						type="search"
-						placeholder={placeHolder}
+						placeholder="게시글 검색" //{placeHolder}
 						aria-label="Search"
 						ref={searchBody}
 					/>

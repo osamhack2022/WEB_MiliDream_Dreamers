@@ -91,7 +91,7 @@ export default function Write() {
 			headers: { 'Content-Type': 'application/json' }
 		})
 		const data = await response.json();
-		//console.log(data);
+		console.log(data);
 		if (response.ok) {
 			router.push(`/board/${router.query["board-id"]}/${data.postKey.postKey}`)
 		} else {
