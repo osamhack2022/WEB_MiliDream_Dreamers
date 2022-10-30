@@ -164,6 +164,7 @@ $ cd WEB_MiliDream_Dreamers
 <thead>
 <tr>
 <th width="130" align="center">📝성명</th>
+<th width="270" align="center">🎖️소속</th>
 <th width="150" align="center">🚩역할</th>
 <th width="100" align="center">🐱깃허브</th>
 <th width="180" align="center">📩이메일</th>
@@ -172,6 +173,7 @@ $ cd WEB_MiliDream_Dreamers
 <tbody>
 <tr>
 <td width="130" align="center">김지환<br/>(팀장)</td>
+<td width="270" align="center">육군 제37보병사단 정보통신대대 전산과</td>
 <td width="150">프론엔드 개발</br>기획</td>
 <td width="100" align="center">
 	<a href="https://github.com/Turtle-Hwan">
@@ -186,6 +188,7 @@ $ cd WEB_MiliDream_Dreamers
 </tr>
 <tr>
 <td width="130" align="center">김선우<br/>(백엔드 팀장)</td>
+<td width="270" align="center">공군 작전정보통신단 체계개발실 감시정찰체계팀</td>
 <td width="150">백엔드 개발 </br>디자인</br>아키텍처 설계 </td>
 <td width="100" align="center">
 	<a href="https://github.com/meoraeng">
@@ -200,6 +203,7 @@ $ cd WEB_MiliDream_Dreamers
 </tr>
 <tr>
 <td width="130" align="center">가수연</td>
+<td width="270" align="center">육군 육군사관학교 사이버방호실</td>
 <td width="150">백엔드/프론트엔드 개발</br>DB 설계</td>
 <td width="100" align="center">
 	<a href="https://github.com/bagger3025">
@@ -214,6 +218,7 @@ $ cd WEB_MiliDream_Dreamers
 </tr>
 <tr>
 <td width="130" align="center">민진홍</td>
+<td width="270" align="center">해군 작전사령부 잠수함사령부 제909교육훈련전대 제1훈련대대</td>
 <td width="150">프론트엔드 개발</td>
 <td width="100" align="center">
 	<a href="https://github.com/jinhongee">
@@ -228,6 +233,7 @@ $ cd WEB_MiliDream_Dreamers
 </tr>
 <tr>
 <td width="130" align="center">추인엽</td>
+<td width="270" align="center">육군 제7공병여단 572공병대대</td>
 <td width="150">백엔드/프론트엔드 개발</td>
 <td width="100" align="center">
 	<a href="https://github.com/inyeoptti">
@@ -243,6 +249,7 @@ $ cd WEB_MiliDream_Dreamers
 </tr>
 <tr>
 <td width="130" align="center">손현진</td>
+<td width="270" align="center">국방부 국군지휘통신사령부 57정보통신대대</td>
 <td width="150">프론트엔드 개발 </br> 발표 자료 제작</br>발표 영상 제작 </td>
 <td width="100" align="center">
 	<a href="https://github.com/sonyrainy">
@@ -258,6 +265,7 @@ $ cd WEB_MiliDream_Dreamers
 </tr>
 <tr>
 <td width="130" align="center">양승모</td>
+<td width="270" align="center">육군 수도방위사령부 56사단 기동대대</td>
 <td width="150">디자인</br> 발표 자료 제작</td>
 <td width="100" align="center">
 	<a href="https://github.com/SeungmoYang">
