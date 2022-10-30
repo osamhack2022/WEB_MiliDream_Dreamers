@@ -157,9 +157,10 @@ $ git clone https://github.com/osamhack2022/WEB_MiliDream_Dreamers.git
 $ cd WEB_MiliDream_Dreamers
 ```
 
-이후 [`/backend`](https://github.com/osamhack2022-v2/WEB_MiliDream_Dreamers/tree/main/backend#readme)와 [`/frontend`](https://github.com/osamhack2022-v2/WEB_MiliDream_Dreamers/tree/main/frontend#readme)의 README.md를 각각 참고해주세요!
+이후 [`/backend`](https://github.com/osamhack2022-v2/WEB_MiliDream_Dreamers/tree/main/backend#readme)와 [`/frontend`](https://github.com/osamhack2022-v2/WEB_MiliDream_Dreamers/tree/main/frontend#readme)의 README.md를 각각 참고해주세요!  
 
-//## 프로젝트 사용법 (Getting Started)
+* 추가적인 backend API, page route, Git Flow, Commit Convention, Directory Structure 등은 저희 [Wiki](https://github.com/osamhack2022/WEB_MiliDream_Dreamers/wiki)를 참고해 주세요!
+<!--## 프로젝트 사용법 (Getting Started)-->
 
 ## 협업 과정
 <div>
