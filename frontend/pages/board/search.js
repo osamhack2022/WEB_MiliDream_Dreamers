@@ -1,12 +1,17 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+//
+import BoardUser from "../../components/board/BoardUser";
+import BoardSearchBar from "../../components/board/BoardSearchBar";
+import BoardNavBar from "../../components/board/BoardNavBar";
+import BoardCenter from "../../components/board/BoardCenter";
+import BoardHeader from "../../components/board/BoardHeader";
 
-export default function BoardFunction() {
 
+function SearchResult() {
 	const router = useRouter();
 	const [boards, setBoards] = useState([])
-
 	useEffect(() => {
 		if (router.isReady) {
 			(async () => {
@@ -39,6 +44,68 @@ export default function BoardFunction() {
 					</Link>
 				))}
 		</ul>
+	)
+}
+
+
+
+export default function BoardFunction() {
+
+	const router = useRouter();
+	const boardId = router.query["board-id"];
+	const [article, setArticle] = useState();
+	useEffect(() => {
+		(async () => {
+			const results = await (await fetch(`/api/board/category`, { method: 'GET' })).json();
+			setArticle(results.category);
+		})();
+	}, []);
+	const articlePost = article && article.slice(0).find((x) => x.categoryKey == boardId)
+
+	return (
+		<div>
+			<div className="container">
+				<div className="headerB">
+					<BoardHeader boardId={articlePost?.categoryName} />
+				</div>
+				<div className="userInfo">
+					<BoardUser />
+				</div>
+				<div className="navBar">
+					<BoardSearchBar placeHolder="게시판 검색" />
+					<BoardNavBar props={article} />
+				</div>
+				<div className="banner">
+					<BoardCenter />
+				</div>
+				<div className="BoardMain">
+					<SearchResult />
+				</div>
+
+			</div>
+			<style jsx>{`
+				.container {
+					display:  grid;
+					grid-template-areas:
+					"userInfo header header"
+					"userInfo banner banner"
+					"navBar   banner banner"
+					"navBar   miniB  miniB"
+					"navBar   miniB  miniB"
+					"navBar   miniB  miniB";
+					grid-gap: 16px;
+					}
+					.headerB { grid-area: header; }
+					.banner { grid-area: banner; }
+					.userInfo { grid-area: userInfo; }
+					.navBar { grid-area: navBar; }
+					.BoardMain {.
+						display: flex;
+						grid-area: miniB;
+					}
+			`}</style>
+		</div>
+
 	);
 }
 
