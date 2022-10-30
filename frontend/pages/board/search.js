@@ -104,7 +104,7 @@ export default function BoardFunction() {
 		<div>
 			<div className="container">
 				<div className="headerB">
-					<BoardHeader boardId={articlePost?.categoryName} />
+					<BoardHeader boardId={`검색 결과`} />
 				</div>
 				<div className="userInfo">
 					<BoardUser />
