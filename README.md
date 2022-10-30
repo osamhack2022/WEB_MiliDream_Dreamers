@@ -69,7 +69,7 @@
 	- 취미/관심사/부대 별로 나누어져 있는 게시판을 통해 정보도 공유할 수 있고 관련 궁금증도 해결할 수 있습니다.
 	- 다양한 사람들의 이야기를 통해 자신이 군 내에서 해야할 일을 정리해보고 진로 설계에 도움받을 수 있습니다.
 
-> 이러한 기능을 통해 `MiliDream`은 이전에 없던 군 장병 대상의 진로 설계 서비스를 커뮤니티와 융합하여 더욱 효과적으로 장병들에게 다가갈 수 있습니다.
+> **이러한 기능을 통해 `MiliDream`은 이전에 없던 군 장병 대상의 진로 설계 서비스를 커뮤니티와 융합하여 더욱 효과적으로 장병들에게 다가갈 수 있습니다.**
 
 ## 컴퓨터 구성 / 필수 조건 안내 (Prerequisites)
 * ECMAScript 2020 (ES11) 지원 브라우저 사용 권장
@@ -155,10 +155,17 @@ $ cd WEB_MiliDream_Dreamers
 
 이후 [`/backend`](https://github.com/osamhack2022-v2/WEB_MiliDream_Dreamers/tree/main/backend#readme)와 [`/frontend`](https://github.com/osamhack2022-v2/WEB_MiliDream_Dreamers/tree/main/frontend#readme)의 README.md를 각각 참고해주세요!
 
-## 프로젝트 사용법 (Getting Started)
+//## 프로젝트 사용법 (Getting Started)
 
-
-
+## 협업 과정
+<div>
+	<img width="500px" src="/image/coding1.png">
+	<img width="500px" src="/image/coding2.png">
+</div>
+<p>저희는 모두가 다른 부대 소속이고, 직접 만날 수가 없었기 때문에 협업은 전부 온라인으로 진행되었습니다.</br>
+<a href="https://turtlehwan.notion.site/4-Front-end-1be7e0768ed0477d81698bc063fb128e">[Notion]</a> 을 통해 문서화 작업을 진행했으며, Discord를 통해 실시간 소통을 했고, Figme를 통해 디자인 작업을 함께 진행하고 확인했습니다. </p>
+<img src="/image/coding3_github.png">
+<img src="/image/coding4_github.png">
 
 <!--
 **마크다운 문법을 이용하여 자유롭게 기재**
