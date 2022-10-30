@@ -1,9 +1,14 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import { displayedAt } from "../../../../utils/strings";
 import Image from "next/image";
 import { GlobalState } from "../../../../states/GlobalState";
+//게시글 수정 위한 quill 등
+import('react-quill');
+import 'react-quill/dist/quill.snow.css';
+import axios from "axios";
+import dynamic from "next/dynamic";
 
 function reportModal(e) {
 	e.preventDefault();
@@ -187,121 +192,234 @@ export default function ArticleWriteView({ post, articleId, doReload }) {
 		}
 	}
 
-	return (
-		<div>
-			<div className="modal fade" id="reportModalDiv" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div className="modal-dialog">
-					<div className="modal-content">
-						<div className="modal-header">
-							<h1 className="modal-title fs-5" id="exampleModalLabel">게시글 신고</h1>
-							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div className="modal-body">
-							게시글 신고 요청이 접수되었습니다.
-						</div>
-						<div className="modal-footer">
-							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">확인</button>
-							{/* <button type="button" className="btn btn-primary">Save changes</button> */}
-						</div>
-					</div>
-				</div>
-			</div>
-			<div className="modal fade" id="recommendModalDiv" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div className="modal-dialog">
-					<div className="modal-content">
-						<div className="modal-header">
-							<h1 className="modal-title fs-5" id="exampleModalLabel">게시글 공감</h1>
-							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div className="modal-body">
-							{recommendWord}
-						</div>
-						<div className="modal-footer">
-							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">확인</button>
-							{/* <button type="button" className="btn btn-primary">Save changes</button> */}
-						</div>
-					</div>
-				</div>
-			</div>
-			<div className="modal fade" id="commentModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div className="modal-dialog">
-					<div className="modal-content">
-						<div className="modal-header">
-							<h1 className="modal-title fs-5" id="exampleModalLabel">게시글 댓글</h1>
-							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div className="modal-body">
-							댓글 달기 완료!
-						</div>
-						<div className="modal-footer">
-							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">확인</button>
-							{/* <button type="button" className="btn btn-primary">Save changes</button> */}
-						</div>
-					</div>
-				</div>
-			</div>
-			<div className="table-box">
-				<table className="table">
-					<tbody>
-						<tr className="mainTitle">
-							<th scope="col count" className="count titleBar">{post?.title}</th>
-							<td>
-								<div className="title titleBar">{postUser?.userName}</div>
-								<div className="writeUser titleBar">{displayedAt(post?.postTime)}</div>
-								<div className="time titleBar">조회수 {post?.viewCount}</div>
-								{post?.userKey === user.userKey &&
-									<div className="write-retouch-delete">
-										<div className="retouch"><button className="button" onClick={async e => {
-											const response = await fetch(`/api/board/${post?.postKey}`, {
-												method: "PUT",
-												body: JSON.stringify({
-													title: "바뀐제목1", /** @todo 바꾸고 싶은 제목과 게시글로 바꿀 수 있도록 새로운 페이지를 만들거나 textarea 등으로 고치기 */
-													body: "바뀐게시글"
-												}),
-												headers: { 'Content-Type': 'application/json' }
-											})
 
-											if (response.ok) {
-												doReload(); /** @todo 만약 페이지를 새로 만들었다면 reload도 하고 페이지도 원래 페이지로 이동 */
-											}
-										}}>수정</button></div>
-										<div className="delete"><button className="button" onClick={async e => {
-											const response = await fetch(`/api/board/${post?.postKey}`, { method: "DELETE" });
-											if (response.ok) {
-												router.push("/board")
-											}
-										}}>삭제</button></div>
-									</div>
-								}<div className="comments">댓글수 [{post?.comments.length}]</div>
-							</td>
-						</tr>
-						<tr className="mainBody">
-							<th scope="col count" className="count titleBar" dangerouslySetInnerHTML={{ __html: post?.body }}></th>
-							<td className="body">
-								<a type="button" data-bs-toggle="modal" data-bs-target="#recommendModalDiv" onClick={onRecommendClick}>
-									<p className="recommenderCount">{` ${post?.recommenderCount}`}</p>
-									<Image src={`/article/recommendBtn.png`} width="131px" height="50px" />
-								</a>
-								<a type="button" data-bs-toggle="modal" data-bs-target="#reportModalDiv">
-									<Image src={`/article/reportBtn.png`} width="131px" height="50px" />
-								</a>
-							</td>
-							{/* <td scope="col time" className="time titleBar">익명댓글달기 버튼</td> */}
-							<td className="writeComment">
-								<div className="mb-3">
-									{/* <label for="exampleFormControlTextarea1" className="form-label">Example textarea</label> */}
-									<textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="댓글을 입력해 주세요"></textarea>
-									<button className="button" type="button" data-bs-toggle="modal" data-bs-target="#commentModal" onClick={onCommentSubmit}>
-										등록
-									</button>
-								</div>
-							</td>
-						</tr>
-						{post?.comments.slice(0).map((comment) => <ContentRow key={comment.commentKey} comment={comment} doReload={doReload} />)}
-					</tbody>
-				</table>
+	//게시글 수정 여부를 저장하는 state
+	/** 게시글 수정 버튼을 누르면 수정 모드로 전환됨, 상태를 저장함 */
+	const [isArticleFixOn, setArticleFixOn] = useState(false)
+
+	/** 게시글 수정하는 부분 값을 얻어오기 위한 Ref */
+	const articleFixTitleArea = useRef();
+	const articleFixTextArea = useRef();
+
+	//quill editor 관련
+	const [text, setText] = useState('');
+	const quillRef = useRef();
+	const handleText = (content, d, s, editor) => {
+		//console.log(content);
+	}
+	const imageHandler = () => {
+		//if (typeof window !== 'undefined') {
+		const input = document.createElement('input');
+
+		input.setAttribute('type', 'file');
+		input.setAttribute('accept', 'image/*');
+		input.click();
+
+		input.addEventListener('change', async (ev) => {
+			const file = input.files[0];
+			const formData = new FormData();
+			formData.append('img', file);
+			try {
+				const result = await axios.post('/api/image/upload', formData);
+				const url = '/api' + result.data.path;
+				const editor = quillRef.current.getEditor();
+				const range = editor.getSelection();
+				editor.insertEmbed(range.index, 'image', url);
+			} catch (ex) { console.error(ex); }
+		});
+		//}
+		return;
+	}
+
+	const formats = [ /** @todo 추가시 백엔드 post 받는 부분에도 허용 테그 추가해야함 */
+		'header',
+		'bold',
+		'italic',
+		'underline',
+		'strike',
+		'blockquote',
+		'image',
+	];
+	const modules = useMemo(() => {
+		return {
+			toolbar: {
+				container: [
+					['image'],
+					[{ header: [1, 2, 3, false] }],
+					['bold', 'italic', 'underline', 'strike', 'blockquote'],
+				],
+				handlers: {
+					image: imageHandler,
+				},
+			},
+		}
+	});
+	const QuillWrapper = dynamic(
+		async () => {
+			const { default: RQ } = await import('react-quill');
+			return ({ forwardedRef, ...props }) => <RQ ref={forwardedRef} {...props} />;
+		}, {
+		ssr: false,
+		loading: () => <p>Loading...</p>
+	});
+	//quill 끝
+	//게시글 수정 버튼 누르면.
+	const onSubmitClick = async (e) => {
+		const response = await fetch(`/api/board/${post?.postKey}`, {
+			method: "PUT",
+			body: JSON.stringify({
+				title: document.querySelector("#titleInput").value,  //@todo 될지 테스트 필요
+				body: quillRef.current.value,
+			}),
+			headers: { 'Content-Type': 'application/json' }
+		})
+
+		if (response.ok) {
+			doReload(); /** @todo 만약 페이지를 새로 만들었다면 reload도 하고 페이지도 원래 페이지로 이동 */
+		}
+	}
+
+	if (isArticleFixOn) {
+		//console.log(isArticleFixOn);
+
+		return (
+			<div className="editorBox">
+				<input type="text" name="title" id="titleInput" placeholder="제목을 입력해 주세요" defaultValue={post?.title}></input>
+				<QuillWrapper
+					value={post?.body}
+					forwardedRef={quillRef}
+					theme="snow"
+					modules={modules}
+					formats={formats}
+					onChange={handleText} />
+				<button className="btn btn-secondary" onClick={() => { onSubmitClick(); setArticleFixOn(false); }}>수정 완료!</button>
+				<style jsx>{`
+				.btn-secondary {
+					background-color: #a593e0;
+					border-color: #a593e0;
+				}
+				.editorBox {
+					width: 1000px;
+				}
+				.editorBox > input {
+					margin-bottom: 20px;
+					width: 1000px;
+				}
+				.editorBox > button {
+					width: 1000px;
+					margin-top: 20px;
+				}
+				`}</style>
 			</div>
-			<style global jsx>{`
+		)
+	}
+	else {
+		return (
+			<div>
+				<div className="modal fade" id="reportModalDiv" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div className="modal-dialog">
+						<div className="modal-content">
+							<div className="modal-header">
+								<h1 className="modal-title fs-5" id="exampleModalLabel">게시글 신고</h1>
+								<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div className="modal-body">
+								게시글 신고 요청이 접수되었습니다.
+							</div>
+							<div className="modal-footer">
+								<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">확인</button>
+								{/* <button type="button" className="btn btn-primary">Save changes</button> */}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div className="modal fade" id="recommendModalDiv" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div className="modal-dialog">
+						<div className="modal-content">
+							<div className="modal-header">
+								<h1 className="modal-title fs-5" id="exampleModalLabel">게시글 공감</h1>
+								<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div className="modal-body">
+								{recommendWord}
+							</div>
+							<div className="modal-footer">
+								<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">확인</button>
+								{/* <button type="button" className="btn btn-primary">Save changes</button> */}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div className="modal fade" id="commentModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div className="modal-dialog">
+						<div className="modal-content">
+							<div className="modal-header">
+								<h1 className="modal-title fs-5" id="exampleModalLabel">게시글 댓글</h1>
+								<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div className="modal-body">
+								댓글 달기 완료!
+							</div>
+							<div className="modal-footer">
+								<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">확인</button>
+								{/* <button type="button" className="btn btn-primary">Save changes</button> */}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div className="table-box">
+					<table className="table">
+						<tbody>
+							<tr className="mainTitle">
+								<th scope="col count" className="count titleBar">{post?.title}</th>
+								<td>
+									<div className="title titleBar">{postUser?.userName}</div>
+									<div className="writeUser titleBar">{displayedAt(post?.postTime)}</div>
+									<div className="time titleBar">조회수 {post?.viewCount}</div>
+									{post?.userKey === user.userKey &&
+										<div className="write-retouch-delete">
+											<div className="retouch">
+												<button className="button" onClick={() => { setArticleFixOn(true); }}>수정</button>
+											</div>
+											<div className="delete">
+												<button className="button" onClick={async e => {
+													const response = await fetch(`/api/board/${post?.postKey}`, { method: "DELETE" });
+													if (response.ok) {
+														router.push("/board")
+													}
+												}}>삭제</button>
+											</div>
+										</div>
+									}<div className="comments">댓글수 [{post?.comments.length}]</div>
+								</td>
+							</tr>
+							<tr className="mainBody">
+								<th scope="col count" className="count titleBar" dangerouslySetInnerHTML={{ __html: post?.body }}></th>
+								<td className="body">
+									<a type="button" data-bs-toggle="modal" data-bs-target="#recommendModalDiv" onClick={onRecommendClick}>
+										<p className="recommenderCount">{` ${post?.recommenderCount}`}</p>
+										<Image src={`/article/recommendBtn.png`} width="131px" height="50px" />
+									</a>
+									<a type="button" data-bs-toggle="modal" data-bs-target="#reportModalDiv">
+										<Image src={`/article/reportBtn.png`} width="131px" height="50px" />
+									</a>
+								</td>
+								{/* <td scope="col time" className="time titleBar">익명댓글달기 버튼</td> */}
+								<td className="writeComment">
+									<div className="mb-3">
+										{/* <label for="exampleFormControlTextarea1" className="form-label">Example textarea</label> */}
+										<textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="댓글을 입력해 주세요"></textarea>
+										<button className="button" type="button" data-bs-toggle="modal" data-bs-target="#commentModal" onClick={onCommentSubmit}>
+											등록
+										</button>
+									</div>
+								</td>
+							</tr>
+							{post?.comments.slice(0).map((comment) => <ContentRow key={comment.commentKey} comment={comment} doReload={doReload} />)}
+						</tbody>
+					</table>
+				</div>
+				<style global jsx>{`
 				.write-retouch-delete {
 					display: flex;
     				flex-direction: row;
@@ -493,6 +611,7 @@ export default function ArticleWriteView({ post, articleId, doReload }) {
 				text-align: start;
 				}
 			`}</style>
-		</div>
-	)
+			</div>
+		)
+	}
 }

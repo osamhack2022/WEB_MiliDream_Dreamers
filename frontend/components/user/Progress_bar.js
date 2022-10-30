@@ -59,50 +59,46 @@ body {
 }
 `;
 
-// TODO: 함수형 컴포넌트로 변경
-class ProgressBar extends Component {
-  render() {
-    return (
-      <>
-        <div></div>
-        <div className="container_bar">
-          {/*<h1 style={{ textAlign: "center" }}>Year progress</h1>*/}
-          <div
-            className="progressbar-container"
-            style={{ boxShadow: "1px 3px 4px 2px #BEBEBE" }}
-          >
-            <div
-              className="progressbar-complete"
-              style={{ width: `0%` }}
-            >
-              <div className="progressbar-liquid"></div>
-            </div>
 
-            <span
-              className="progress"
-              style={{
-                display: "inline-block",
-                position: "absolute",
-                height: "30px",
-                marginTop: "10px",
-                zIndex: "100",
-                textAlign: "center",
-                color: "#000000",
-                fontSize: "17px",
-                fontWeight: "Bold",
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "transparent",
-              }}
-            >
-              0%
-            </span>
-            <style jsx>{style}</style>
-          </div>
-        </div>
-      </>
-    );
-  }
+export default function ProgressBar() {
+	let percent = 0;
+	return (
+		<div className="container_bar">
+			{/*<h1 style={{ textAlign: "center" }}>Year progress</h1>*/}
+			<div
+				className="progressbar-container"
+				style={{ boxShadow: "1px 3px 4px 2px #BEBEBE" }}
+			>
+				<div
+					className="progressbar-complete"
+					style={{ width: `${percent}%` }}
+				>
+					<div className="progressbar-liquid"></div>
+				</div>
+
+				<span
+					className="progress"
+					style={{
+						display: "inline-block",
+						position: "absolute",
+						height: "30px",
+						marginTop: "10px",
+						zIndex: "100",
+						textAlign: "center",
+						color: "#000000",
+						fontSize: "17px",
+						fontWeight: "Bold",
+						justifyContent: "center",
+						alignItems: "center",
+						backgroundColor: "transparent",
+					}}
+				>
+					{percent}%
+				</span>
+				<style jsx>{style}</style>
+			</div>
+		</div>
+	);
 }
 
-export default ProgressBar;
+
