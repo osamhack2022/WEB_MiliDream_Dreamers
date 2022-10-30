@@ -131,8 +131,8 @@
 ## 설치 안내 (Installation Process)
 
 ```shell
-git clone https://github.com/osamhack2022/WEB_MiliDream_Dreamers.git
-cd WEB_MiliDream_Dreamers
+$ git clone https://github.com/osamhack2022/WEB_MiliDream_Dreamers.git
+$ cd WEB_MiliDream_Dreamers
 ```
 
 이후 [`/backend`](https://github.com/osamhack2022-v2/WEB_MiliDream_Dreamers/tree/main/backend#readme)와 [`/frontend`](https://github.com/osamhack2022-v2/WEB_MiliDream_Dreamers/tree/main/frontend#readme)의 README.md를 각각 참고해주세요!
@@ -170,7 +170,7 @@ cd WEB_MiliDream_Dreamers
 <tbody>
 <tr>
 <td width="130" align="center">김지환<br/>(팀장)</td>
-<td width="150">프론트 개발<br></td>
+<td width="150">프론엔드 개발</br>기획</td>
 <td width="100" align="center">
 	<a href="https://github.com/Turtle-Hwan">
 		<img src="http://img.shields.io/badge/Turtle_Hwan-655ced?style=social&logo=github"/>
@@ -198,7 +198,7 @@ cd WEB_MiliDream_Dreamers
 </tr>
 <tr>
 <td width="130" align="center">가수연</td>
-<td width="150">백엔드 개발<br></td>
+<td width="150">백엔드/프론트엔드 개발</br>DB 설계</td>
 <td width="100" align="center">
 	<a href="https://github.com/bagger3025">
 		<img src="http://img.shields.io/badge/bagger3025-655ced?style=social&logo=github"/>
@@ -241,7 +241,7 @@ cd WEB_MiliDream_Dreamers
 </tr>
 <tr>
 <td width="130" align="center">손현진</td>
-<td width="150">프론트엔드 개발 </br> 발표 </td>
+<td width="150">프론트엔드 개발 </br> 발표 자료 제작</br>발표 영상 제작 </td>
 <td width="100" align="center">
 	<a href="https://github.com/sonyrainy">
 		<img src="http://img.shields.io/badge/sonyrainy-655ced?style=social&logo=github"/>
@@ -256,7 +256,7 @@ cd WEB_MiliDream_Dreamers
 </tr>
 <tr>
 <td width="130" align="center">양승모</td>
-<td width="150">디자인</td>
+<td width="150">디자인</br> 발표 자료 제작</td>
 <td width="100" align="center">
 	<a href="https://github.com/SeungmoYang">
 		<img src="http://img.shields.io/badge/SeungmoYang-655ced?style=social&logo=github"/>
@@ -276,7 +276,9 @@ cd WEB_MiliDream_Dreamers
 ## 저작권 및 사용권 정보 (Copyleft / End User License)
  * [MIT](https://github.com/osamhack2022/WEB_MiliDream_Dreamers/blob/main/LICENSE)
 
-This project is licensed under the terms of the MIT license.
+This project is licensed under the terms of the MIT license.  
+ 
+이 프로젝트는 MIT 라이센스를 따릅니다.  
 
 
 <!--
