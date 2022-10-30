@@ -250,8 +250,8 @@ export default function ArticleWriteView({ post, articleId, doReload }) {
 								<div className="writeUser titleBar">{displayedAt(post?.postTime)}</div>
 								<div className="time titleBar">조회수 {post?.viewCount}</div>
 								{post?.userKey === user.userKey &&
-									<div>
-										<div className="button retouch"><button onClick={async e => {
+									<div className="write-retouch-delete">
+										<div className="retouch"><button className="button" onClick={async e => {
 											const response = await fetch(`/api/board/${post?.postKey}`, {
 												method: "PUT",
 												body: JSON.stringify({
@@ -265,7 +265,7 @@ export default function ArticleWriteView({ post, articleId, doReload }) {
 												doReload(); /** @todo 만약 페이지를 새로 만들었다면 reload도 하고 페이지도 원래 페이지로 이동 */
 											}
 										}}>수정</button></div>
-										<div className="button delete"><button onClick={async e => {
+										<div className="delete"><button className="button" onClick={async e => {
 											const response = await fetch(`/api/board/${post?.postKey}`, { method: "DELETE" });
 											if (response.ok) {
 												router.push("/board")
@@ -302,6 +302,10 @@ export default function ArticleWriteView({ post, articleId, doReload }) {
 				</table>
 			</div>
 			<style global jsx>{`
+				.write-retouch-delete {
+					display: flex;
+    				flex-direction: row;
+				}
 				.button {
 					border: transparent;
 					background: #A593E0;

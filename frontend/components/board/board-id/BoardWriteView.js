@@ -55,125 +55,138 @@ export default function BoardWriteView() {
 	}, [router.isReady, router.query["board-id"]]);
 
 	return (
-		<div className="table-box">
-			<table className="table">
-				<thead className="table-light">
-					<tr>
-						<th scope="col count" className="count titleBar"></th>
-						<th scope="col title" className="title titleBar">글 제목</th>
-						<th scope="col writeUser" className="writeUser titleBar">작성자</th>
-						<th scope="col time" className="time titleBar">시간</th>
-						<th scope="col viewCount" className="viewCount titleBar">조회수</th>
-						<th scope="col heart" className="heart titleBar">공감</th>
-					</tr>
-				</thead>
-				<tbody className="table-group-divider">
-					{board && board?.boards.slice(0).reverse().map((article) => <ContentRow key={article.postKey} article={article} />)}
-				</tbody>
-			</table>
+		<div>
+			<div className="table-box">
+				<table className="table">
+					<thead className="table-light">
+						<tr>
+							<th scope="col count" className="count titleBar"></th>
+							<th scope="col title" className="title titleBar">글 제목</th>
+							<th scope="col writeUser" className="writeUser titleBar">작성자</th>
+							<th scope="col time" className="time titleBar">시간</th>
+							<th scope="col viewCount" className="viewCount titleBar">조회수</th>
+							<th scope="col heart" className="heart titleBar">공감</th>
+						</tr>
+					</thead>
+					<tbody className="table-group-divider">
+						{board && board?.boards.slice(0).reverse().map((article) => <ContentRow key={article.postKey} article={article} />)}
+					</tbody>
+				</table>
+
+				{/* <nav aria-label="Page navigation example">
+					<ul className="pagination">
+						<li className="page-item">
+							<a className="page-link" href="#" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+						<li className="page-item"><a className="page-link" href="#">1</a></li>
+						<li className="page-item active" aria-current="page"><a className="page-link" href="#">2</a></li>
+						<li className="page-item"><a className="page-link" href="#">3</a></li>
+						<li className="page-item"><a className="page-link" href="#">4</a></li>
+						<li className="page-item"><a className="page-link" href="#">5</a></li>
+						<li className="page-item">
+							<a className="page-link" onClick={pagenation} aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					</ul>
+				</nav> */}
+
+			</div>
 			<div className="row write-btn">
 				<a className="btn btn-secondary" onClick={() => { router.push(`/board/${router.query["board-id"]}/write`) }}>글 작성</a>
 			</div>
-			{/* <nav aria-label="Page navigation example">
-				<ul className="pagination">
-					<li className="page-item">
-						<a className="page-link" href="#" aria-label="Previous">
-							<span aria-hidden="true">&laquo;</span>
-						</a>
-					</li>
-					<li className="page-item"><a className="page-link" href="#">1</a></li>
-					<li className="page-item active" aria-current="page"><a className="page-link" href="#">2</a></li>
-					<li className="page-item"><a className="page-link" href="#">3</a></li>
-					<li className="page-item"><a className="page-link" href="#">4</a></li>
-					<li className="page-item"><a className="page-link" href="#">5</a></li>
-					<li className="page-item">
-						<a className="page-link" onClick={pagenation} aria-label="Next">
-							<span aria-hidden="true">&raquo;</span>
-						</a>
-					</li>
-				</ul>
-			</nav> */}
 			<style global jsx>{`
-		a {
-			color: transparent;
-		}
-		a:hover {
-			color: transparent;
-		}
-        .table-box {
-          border: 1px solid #A593E0;
-        }
-        .table {
-          --bs-table-color: #A593E0;
-          --bs-table-border-color: transparent;
-          width: 1000px;
-          display: flex;
-          flex-direction: column;
-          text-align: center;
-        }
-        .table-light {
-          --bs-table-color: white;
-          --bs-table-bg: #A593E0;
-          --bs-table-border-color: #A593E0;
-        }
-        .content {
-          font-family: 'Noto Sans KR';
-          font-style: normal;
-          font-weight: 400;
-          font-size: 15px;
-          line-height: 22px;
-          color: black;
-        }
-        .gray {
-          color: #A7A7A7;
-        }
-        tbody > a {
-          display: flex;
-          flex-direction: column;
-        }
-        tbody > a:after {
-          content: "";
-          display: block;
-          width: 970px;
-          border-bottom: 1px solid #A593E0;
-          margin-left: 15px;
-        }
-        thead > tr {
-          height: 45px;
-        }
-        tbody > a {
-          height: 40px;
-        }
-        .count { width: 95px; }
-        .title { width: 540px; }
-        .writeUser { width: 125px; }
-        .time { width: 85px; }
-        .viewCount { width: 70px; }
-        .heart { width: 85px; }
-        .title.content {
-          text-align: start;
-        }
-        .title.content:after {
-          content: "[5]";
-          margin-left: .5em;
-        }
-		.title.content:after {
+			a {
+				color: transparent;
+			}
+			a:hover {
+				color: transparent;
+			}
+			.table-box {
+			border: 1px solid #A593E0;
+			}
+			.table {
+			--bs-table-color: #A593E0;
+			--bs-table-border-color: transparent;
+			width: 1000px;
+			display: flex;
+			flex-direction: column;
+			text-align: center;
+			}
+			.table-light {
+			--bs-table-color: white;
+			--bs-table-bg: #A593E0;
+			--bs-table-border-color: #A593E0;
+			}
+			.content {
+			font-family: 'Noto Sans KR';
+			font-style: normal;
+			font-weight: 400;
+			font-size: 15px;
+			line-height: 22px;
+			color: black;
+			}
+			.gray {
+			color: #A7A7A7;
+			}
+			tbody > a {
+			display: flex;
+			flex-direction: column;
+			}
+			tbody > a:after {
+			content: "";
+			display: block;
+			width: 970px;
+			border-bottom: 1px solid #A593E0;
+			margin-left: 15px;
+			}
+			thead > tr {
+			height: 45px;
+			}
+			tbody > a {
+			height: 40px;
+			}
+			.count { width: 95px; }
+			.title { width: 540px; }
+			.writeUser { width: 125px; }
+			.time { width: 85px; }
+			.viewCount { width: 70px; }
+			.heart { width: 85px; }
+			.title.content {
+			text-align: start;
+			}
+			.title.content:after {
 			content: "[5]";
 			margin-left: .5em;
-		  }
-		  .write-btn{
-			width: 1000px;
-			margin: auto;
-		  }
-        /*위까지는 table 관련 css 작업 // 아래부터는 pagenation botton css 작업*/
-        nav.page {
-          display: none;
-          justify-content: center;
-        }
-        ul {
-          cursor: pointer;
-        }
-      `}</style>
+			}
+			.title.content:after {
+				content: "[5]";
+				margin-left: .5em;
+			}
+
+			/* 글 작성 버튼 관련*/
+			
+			.write-btn{
+				width: 1000px;
+				margin: auto;
+				margin-top: 15px;
+				
+			}
+			.btn-secondary {
+				background-color: #a593e0;
+				border-color: #a593e0;
+			}
+			/*위까지는 table 관련 css 작업 // 아래부터는 pagenation botton css 작업*/
+			nav.page {
+			display: none;
+			justify-content: center;
+			}
+			ul {
+			cursor: pointer;
+			}
+		`}</style>
 		</div>
 
 		// <div className="list-group">
