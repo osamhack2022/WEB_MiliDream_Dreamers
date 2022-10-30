@@ -4,10 +4,10 @@
 <table>
 	<tr>
 		<td>
-			<a href="https://github.com/osamhack2022-v2/WEB_MiliDream_Dreamers/blob/main/MILI-DREAM.pdf"><img src="/image/table_youtube.png"></a>
+			<a href="https://github.com/osamhack2022-v2/WEB_MiliDream_Dreamers/blob/main/MILI-DREAM.pdf"><img src="/image/table_pdf.png"></a>
 		</td>
 		<td>
-			<a href="https://www.youtube.com/watch?v=VCauOHsoK-c"><img src="/image/table_pdf.png"></a>
+			<a href="https://www.youtube.com/watch?v=VCauOHsoK-c"><img width="712px" height="300px" src="/image/table_youtube.png"></a>
 		</td>
 	</tr>
 	<tr>
