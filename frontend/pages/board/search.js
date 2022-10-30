@@ -23,6 +23,9 @@ function SearchResult() {
 					const data = await response.json();
 					const { boards } = data;
 					console.log(boards);
+					if (boards.length === 0) { //검색결과가 아무것도 없을 때
+						//alert('검색 결과가 없습니다!');
+					}
 					setBoards(boards);
 				} else {
 					const err = await response.text();
@@ -34,16 +37,51 @@ function SearchResult() {
 	}, [router.isReady, router.query?.content]);
 
 	return (
-		<ul>
-			{boards &&
-				boards.map((ele) => (
-					<Link key={ele.postKey} href={`/board/${ele.categoryKey}/${ele.postKey}`}>
-						<a>
-							<li>{ele.title}</li>
-						</a>
-					</Link>
-				))}
-		</ul>
+		<div className="list-group">
+			<a className="list-group-item list-group-item-action active" aria-current="true">
+				{`검색 결과`}
+			</a>
+			<div className="list-group-item">
+				<ul className="list-group list-group-flush">
+					{boards &&
+						boards.map((ele) => (
+							<Link key={ele.postKey} href={`/board/${ele.categoryKey}/${ele.postKey}`}>
+								<a className="list-group-item list-group-item-action">{ele.title}</a>
+							</Link>
+						))}
+				</ul>
+			</div>
+			<style jsx>{`
+        .list-group {
+          width: 1000px;
+          --bs-list-group-border-color: #A593E0;
+          --bs-list-group-active-border-color: #A593E0;
+        }
+        .list-group-item.list-group-item-action.active {
+          background-color: #A593E0;
+          font-family: 'Noto Sans KR';
+          font-style: normal;
+          font-weight: 600;
+          font-size: 20px;
+          align-items: center;
+        }
+        .list-group-item {
+          padding-left: 13px;
+          padding-right: 13px;
+
+        }
+        .list-group.list-group-flush {
+          display: contents;
+          font-family: 'Noto Sans KR';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 15px;
+          line-height: 22px;
+          align-items: center;
+          color: #000000;
+        }
+      `}</style>
+		</div>
 	)
 }
 
