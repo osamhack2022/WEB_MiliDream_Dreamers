@@ -1,8 +1,8 @@
 # WEB_MiliDream_Dreamers
 군인들을 위한 진로 설계 및 취미 공유 웹 플랫폼 MiliDream(밀리드림)입니다.
 
-[시연영상](https://www.youtube.com/watch?v=VCauOHsoK-c)
-[발표자료](https://github.com/osamhack2022-v2/WEB_MiliDream_Dreamers/blob/main/MILI-DREAM.pdf)
+[시연영상](https://www.youtube.com/watch?v=VCauOHsoK-c)  
+[발표자료](https://github.com/osamhack2022-v2/WEB_MiliDream_Dreamers/blob/main/MILI-DREAM.pdf)  
 
 # Project name and Logo
 ## Mili Dream
