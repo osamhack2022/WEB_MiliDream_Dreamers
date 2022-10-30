@@ -11,9 +11,15 @@ export default function Contact() {
 				<Image width="1237px" height="38px" src={`/contest/searchResult.png`} />
 			</div>
 			<div className="list">
-				<Image width="1242px" height="219px" src={`/contest/WHITEHAT.png`} />
-				<Image width="1242px" height="219px" src={`/contest/MAICON.png`} />
-				<Image width="1242px" height="219px" src={`/contest/OSAM.png`} />
+				<Link href={`https://whitehatcontest.com/`}>
+					<Image width="1242px" height="219px" src={`/contest/WHITEHAT.png`} />
+				</Link>
+				<Link href={`https://maicon.kr/`}>
+					<Image width="1242px" height="219px" src={`/contest/MAICON.png`} />
+				</Link>
+				<Link href={`https://osam.kr/`}>
+					<Image width="1242px" height="219px" src={`/contest/OSAM.png`} />
+				</Link>
 			</div>
 			<style jsx>{`
 				.container {
