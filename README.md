@@ -266,6 +266,70 @@ $ cd WEB_MiliDream_Dreamers
 		</tr>
 	</table>
     <li> ᐅ 게시판 (board) </li>
+    	<table align="center">
+		<tr>
+			<td align="center"><b>게시판 메인화면<b></td>
+		</tr>
+		<tr>
+			<td align="center">
+				<img src="/image/guide_board.png">
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				게시판 메인 화면에서는 유저 개인 프로필, 검색, 공지사항, 부대별/취미별 게시판 등 다양한 세부 페이지로 가는 버튼을 넣었습니다.				 </br> 가운데 이미지 carousel을 통해 추후 추천 공모전, 광고, 공지사항 등을 띄울 수 있습니다.
+				</br> 중앙에는 각 게시판을 격자 배열한 후 게시판들에서 몇 개의 글만 추려서 빠른 접근이 가능하도록 디자인하였습니다.
+			</td>
+		</tr>
+	</table>
+	<table align="center">
+		<tr>
+			<td align="center"><b>게시글 검색<b></td>
+		</tr>
+		<tr>
+			<td align="center">
+				<img src="/image/guide_board_search.png">
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				게시글을 원하는 단어로 검색하면 최대한 비슷한 글들까지 뜨도록 개발하였습니다.  
+				</br> 이를 통해 사용자는 원하는 정보를 쉽고 빠르게 찾아낼 수 있습니다.
+			</td>
+		</tr>
+	</table>
+	<table align="center">
+		<tr>
+			<td align="center"><b>게시글 화면<b></td>
+		</tr>
+		<tr>
+			<td align="center">
+				<img src="/image/guide_board_article.png">
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				게시글을 누르면 해당 게시글 화면으로 넘어갑니다. 작성자와 시간, 댓글 정보를 볼 수 있습니다. 
+				</br> 추천, 신고 버튼이 있으며 댓글을 달아 자신의 의견을 표현하고 소통할 수 있습니다.
+			</td>
+		</tr>
+	</table>
+	<table align="center">
+		<tr>
+			<td align="center"><b>게시글 수정<b></td>
+		</tr>
+		<tr>
+			<td align="center">
+				<img src="/image/guide_board_article_retouch.png">
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				게시글 작성 기능과 함께 오픈소스인 Quill-editor 기반으로 제작하였습니다.
+				</br> 이미지, 링크 등 다양한 것들을 추가한 글을 작성할 수 있습니다.
+			</td>
+		</tr>
+	</table>
     <li> ᐅ 공모전 (contest) </li>
     	<table align="center">
 		<tr>
@@ -284,6 +348,52 @@ $ cd WEB_MiliDream_Dreamers
 		</tr>
 	</table>
     <li> ᐅ 유형 검사 (career/survey) </li>
+    	<table align="center">
+		<tr>
+			<td align="center"><b>진로 유형 검사 메인 화면b></td>
+		</tr>
+		<tr>
+			<td align="center">
+				<img src="/image/guide_career_survey.png">
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				 설문을 통해 자신만의 진로 유형을 검사할 수 있는 기능입니다.
+			</td>
+		</tr>
+	</table>
+	<table align="center">
+		<tr>
+			<td align="center"><b>진로 유형 검사 진행 화면b></td>
+		</tr>
+		<tr>
+			<td align="center">
+				<img src="/image/guide_career_survey_in.png">
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				 병영생활 도중 흔히 맞닥뜨리는 상황에서 자신은 어떻게 행동할 것인지에 대한 질문으로 이루어져 있습니다.
+			</td>
+		</tr>
+	</table>
+	<table align="center">
+		<tr>
+			<td align="center"><b>진로 유형 검사 완료 화면b></td>
+		</tr>
+		<tr>
+			<td align="center">
+				<img src="/image/guide_career_survey_result.png">
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				 설문을 완료하면 각각의 가중치에 따라 나만의 진로 유형을 보여줍니다. 
+				</br>구체적으로 작성하려고 노력했으며, 이러한 유형을 가진 사람은 어떤 진로가 좋을지도 추천받을 수 있습니다.
+			</td>
+		</tr>
+	</table>
   </ol>
 </details>
 
