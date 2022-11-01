@@ -12,10 +12,10 @@
 	</tr>
 	<tr>
 		<td align="center">
-			<b>발표자료</b>
+			<b><a href="https://github.com/osamhack2022-v2/WEB_MiliDream_Dreamers/blob/main/MILI-DREAM.pdf">발표자료</a></b>
 		</td>
 		<td align="center">
-			<b>시연영상</b>
+			<b><a href="https://www.youtube.com/watch?v=VCauOHsoK-c">시연영상</a></b>
 		</td>
 	</tr>
 </table>
@@ -168,7 +168,11 @@ $ cd WEB_MiliDream_Dreamers
 	<img width="500px" src="/image/coding2.png">
 </div>
 <p>저희는 모두가 다른 부대 소속이고, 직접 만날 수가 없었기 때문에 협업은 전부 온라인으로 진행되었습니다.</br>
-<a href="https://turtlehwan.notion.site/4-Front-end-1be7e0768ed0477d81698bc063fb128e">[Notion]</a> 을 통해 문서화 작업을 진행했으며, Discord를 통해 실시간 소통을 했고, Figme를 통해 디자인 작업을 함께 진행하고 확인했습니다. </p>
+<a href="https://turtlehwan.notion.site/turtlehwan/OSAM-4701eec77dcb44838844afaa07b9af3d">[Notion]</a> 을 통해 문서화 작업을 진행했으며, Discord를 통해 실시간 소통을 했고, Figma를 통해 디자인 작업을 함께 진행하고 확인했습니다. </p>
+
+<img src="/image/notion.png">
+<img src="/image/figma.png">
+
 <img src="/image/coding3_github.png">
 <img src="/image/coding4_github.png">
 
