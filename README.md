@@ -160,7 +160,132 @@ $ cd WEB_MiliDream_Dreamers
 이후 [`/backend`](https://github.com/osamhack2022-v2/WEB_MiliDream_Dreamers/tree/main/backend#readme)와 [`/frontend`](https://github.com/osamhack2022-v2/WEB_MiliDream_Dreamers/tree/main/frontend#readme)의 README.md를 각각 참고해주세요!  
 
 * 추가적인 backend API, page route, Git Flow, Commit Convention, Directory Structure 등은 저희 [Wiki](https://github.com/osamhack2022/WEB_MiliDream_Dreamers/wiki)를 참고해 주세요!
-<!--## 프로젝트 사용법 (Getting Started)-->
+
+
+## 프로젝트 사용법 (Getting Started)
+<details open="open">
+  <ol>
+    <li> ᐅ 메인 화면 소개 (main) </li>
+	<table align="center">
+		<tr>
+			<td align="center"><b>첫 화면 상단<b></td>
+		</tr>
+		<tr>
+			<td align="center">
+				<img src="/image/guide_main.png">
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				첫 화면 상단에서는 상단 네비게이션 바를 통해 원하는 페이지로 이동할 수 있고, 
+				</br> [바로 유형검사] 버튼을 통해 로그인 없이 검사부터 진행해 볼 수 있습니다.
+			</td>
+		</tr>
+	</table>
+	<table align="center">
+		<tr>
+			<td align="center"><b>첫 화면 하단<b></td>
+		</tr>
+		<tr>
+			<td align="center">
+				<img src="/image/guide_main_btn.png">
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				첫 화면 하단에서는 각 이미지 버튼을 통해 원하는 세부 기능 페이지로 바로 이동할 수 있습니다.
+			</td>
+		</tr>
+	</table>
+    <li> ᐅ 로그인 및 회원가입 (login / signup) </li>
+	<table align="center">
+		<tr>
+			<td align="center"><b>로그인<b></td>
+		</tr>
+		<tr>
+			<td align="center">
+				<img src="/image/guide_login.png">
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				[시작하기] 버튼 혹은 상단 바의 [로그인] 버튼을 누르면 로그인 모달 창을 띄워, 
+				</br>따로 페이지 이동 없이 편히 로그인 가능하게 UI 디자인 했습니다.
+			</td>
+		</tr>
+	</table>
+	<table align="center">
+		<tr>
+			<td align="center"><b>회원가입<b></td>
+		</tr>
+		<tr>
+			<td align="center">
+				<img src="/image/guide_signup.png">
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				[회원가입] 버튼을 눌렀을 때 이동되는 페이지입니다.
+				</br> 사용자의 기본적인 정보를 받으며, 최소한의 정보로 계정을 만들 수 있도록 했습니다. 
+				</br> 로그인이 안 된 상태면 회원가입을 먼저 해 달라는 안내가 뜹니다.
+			</td>
+		</tr>
+	</table>
+    <li> ᐅ 진로 설계 (map) </li>
+	<table align="center">
+		<tr>
+			<td align="center"><b>진로 설계<b></td>
+		</tr>
+		<tr>
+			<td align="center">
+				<img src="/image/guide_map.png">
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				진로 설계 페이지에서는 사용자가 현재 필요한 진로 수준에 대한 정보를 얻을 수 있도록,
+				</br> 3 단계로 나누어 각각의 상세 서비스로 연결하였습니다. 
+				</br> 먼저 자신의 진로 유형을 분석한 후, 진로를 설계하며, 이를 다른 사람들과 공유하며 발전시킬 수 있도록 기획하였습니다.
+			</td>
+		</tr>
+	</table>
+	<table align="center">
+		<tr>
+			<td align="center"><b>유저 프로필<b></td>
+		</tr>
+		<tr>
+			<td align="center">
+				<img src="/image/guide_user.png">
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				상단 바의 [프로필] 버튼으로 자신만의 프로필을 만들고, 정보를 추가하고, 조회할 수 있게 하였습니다.
+				</br> 유형 검사에서 나온 자신의 유형을 바탕으로, 자신만의 진로 세부 목표를 설정하고 칸반 보드 형식으로 관리할 수 있습니다.
+			</td>
+		</tr>
+	</table>
+    <li> ᐅ 게시판 (board) </li>
+    <li> ᐅ 공모전 (contest) </li>
+    	<table align="center">
+		<tr>
+			<td align="center"><b>공모전<b></td>
+		</tr>
+		<tr>
+			<td align="center">
+				<img src="/image/guide_career_contest.png">
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				공모전 페이지에서는 특히 군에서 진행하는 공모전을 중심으로 정보를 모아서 보여주는 것으로 기획하였습니다.
+				</br> 이 공모전들을 보고 게시판에서 함께 나갈 팀원도 구인할 수 있습니다.
+			</td>
+		</tr>
+	</table>
+    <li> ᐅ 유형 검사 (career/survey) </li>
+  </ol>
+</details>
 
 ## 협업 과정
 <div>
