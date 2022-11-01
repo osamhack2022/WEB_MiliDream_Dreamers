@@ -6,8 +6,10 @@
 
 ```bash
 $ cd frontend
+$ npm install
 $ npm run dev
 # or
+$ yarn install
 $ yarn dev
 ```
 
