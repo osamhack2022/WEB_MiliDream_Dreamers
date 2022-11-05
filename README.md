@@ -188,7 +188,7 @@ $ yarn dev
     <li> ᐅ 메인 화면 소개 (main) </li>
 	<table align="center">
 		<tr>
-			<td align="center"><b>첫 화면 상단<b></td>
+			<td align="center"><b>첫 화면 상단</b></td>
 		</tr>
 		<tr>
 			<td align="center">
@@ -204,7 +204,7 @@ $ yarn dev
 	</table>
 	<table align="center">
 		<tr>
-			<td align="center"><b>첫 화면 하단<b></td>
+			<td align="center"><b>첫 화면 하단</b></td>
 		</tr>
 		<tr>
 			<td align="center">
@@ -220,7 +220,7 @@ $ yarn dev
     <li> ᐅ 로그인 및 회원가입 (login / signup) </li>
 	<table align="center">
 		<tr>
-			<td align="center"><b>로그인<b></td>
+			<td align="center"><b>로그인</b></td>
 		</tr>
 		<tr>
 			<td align="center">
@@ -236,7 +236,7 @@ $ yarn dev
 	</table>
 	<table align="center">
 		<tr>
-			<td align="center"><b>회원가입<b></td>
+			<td align="center"><b>회원가입</b></td>
 		</tr>
 		<tr>
 			<td align="center">
@@ -254,7 +254,7 @@ $ yarn dev
     <li> ᐅ 진로 설계 (map) </li>
 	<table align="center">
 		<tr>
-			<td align="center"><b>진로 설계<b></td>
+			<td align="center"><b>진로 설계</b></td>
 		</tr>
 		<tr>
 			<td align="center">
@@ -271,7 +271,7 @@ $ yarn dev
 	</table>
 	<table align="center">
 		<tr>
-			<td align="center"><b>유저 프로필<b></td>
+			<td align="center"><b>유저 프로필</b></td>
 		</tr>
 		<tr>
 			<td align="center">
@@ -288,7 +288,7 @@ $ yarn dev
     <li> ᐅ 게시판 (board) </li>
     	<table align="center">
 		<tr>
-			<td align="center"><b>게시판 메인화면<b></td>
+			<td align="center"><b>게시판 메인화면</b></td>
 		</tr>
 		<tr>
 			<td align="center">
@@ -304,7 +304,7 @@ $ yarn dev
 	</table>
 	<table align="center">
 		<tr>
-			<td align="center"><b>게시글 검색<b></td>
+			<td align="center"><b>게시글 검색</b></td>
 		</tr>
 		<tr>
 			<td align="center">
@@ -320,7 +320,7 @@ $ yarn dev
 	</table>
 	<table align="center">
 		<tr>
-			<td align="center"><b>게시글 화면<b></td>
+			<td align="center"><b>게시글 화면</b></td>
 		</tr>
 		<tr>
 			<td align="center">
@@ -336,7 +336,7 @@ $ yarn dev
 	</table>
 	<table align="center">
 		<tr>
-			<td align="center"><b>게시글 수정<b></td>
+			<td align="center"><b>게시글 수정</b></td>
 		</tr>
 		<tr>
 			<td align="center">
@@ -353,7 +353,7 @@ $ yarn dev
     <li> ᐅ 공모전 (contest) </li>
     	<table align="center">
 		<tr>
-			<td align="center"><b>공모전<b></td>
+			<td align="center"><b>공모전</b></td>
 		</tr>
 		<tr>
 			<td align="center">
@@ -370,7 +370,7 @@ $ yarn dev
     <li> ᐅ 유형 검사 (career/survey) </li>
     	<table align="center">
 		<tr>
-			<td align="center"><b>진로 유형 검사 메인 화면b></td>
+			<td align="center"><b>진로 유형 검사 메인 화면</b></td>
 		</tr>
 		<tr>
 			<td align="center">
@@ -385,7 +385,7 @@ $ yarn dev
 	</table>
 	<table align="center">
 		<tr>
-			<td align="center"><b>진로 유형 검사 진행 화면b></td>
+			<td align="center"><b>진로 유형 검사 진행 화면</b></td>
 		</tr>
 		<tr>
 			<td align="center">
@@ -400,7 +400,7 @@ $ yarn dev
 	</table>
 	<table align="center">
 		<tr>
-			<td align="center"><b>진로 유형 검사 완료 화면b></td>
+			<td align="center"><b>진로 유형 검사 완료 화면</b></td>
 		</tr>
 		<tr>
 			<td align="center">
@@ -461,7 +461,7 @@ $ yarn dev
 <tr>
 <td width="130" align="center">김지환<br/>(팀장)</td>
 <td width="270" align="center">육군 제37보병사단 정보통신대대 전산과</td>
-<td width="150">프론엔드 개발</br>기획</td>
+<td width="150">프론트엔드 개발</br>기획</td>
 <td width="100" align="center">
 	<a href="https://github.com/Turtle-Hwan">
 		<img src="http://img.shields.io/badge/Turtle_Hwan-655ced?style=social&logo=github"/>
